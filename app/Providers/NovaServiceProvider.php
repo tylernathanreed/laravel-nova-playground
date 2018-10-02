@@ -71,6 +71,16 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     }
 
     /**
+     * Register the application's Nova resources.
+     *
+     * @return void
+     */
+    protected function resources()
+    {
+        Nova::resourcesIn(app_path('Nova\\Resources'));
+    }
+
+    /**
      * Register any application services.
      *
      * @return void

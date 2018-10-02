@@ -10,7 +10,7 @@
     @foreach(Nova::groupedResources(request()) as $group => $resources)
         @if (count($resources) > 0)
             @if (count(Nova::groups(request())) > 1)
-                <h4 class="ml-8 mb-4 text-xs text-white-50% uppercase tracking-wide">{{ $group }}</h4>
+                <h4 class="ml-3 mb-4 text-xs text-white-50% uppercase tracking-wide">{{ $group }}</h4>
             @endif
 
             <ul class="list-reset mb-8">
@@ -19,7 +19,7 @@
                         @continue
                     @endif
 
-                    <li class="leading-tight mb-4 ml-8 text-sm">
+                    <li class="leading-tight mb-4 ml-3 text-sm">
                         <router-link :to="{
                             name: 'index',
                             params: {
@@ -29,7 +29,7 @@
                             @if(method_exists($resource, 'icon'))
                                 {!! $resource::icon() !!}
                             @endif
-                            {{ $resource::label() }}
+                            <span class="sidebar-label">{{ $resource::label() }}</span>
                         </router-link>
                     </li>
                 @endforeach

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Nova;
+namespace App\Nova\Resources;
 
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Textarea;
 use Illuminate\Support\HtmlString;
 use Laravel\Nova\Fields\BelongsTo;
@@ -36,7 +37,7 @@ class Post extends Resource
      */
     public static function icon()
     {
-        return '<i class="far fa-newspaper"></i>';
+        return '<i class="far fa-newspaper sidebar-icon mr-0"></i>';
     }
 
     /**
@@ -60,10 +61,11 @@ class Post extends Resource
         return [
             ID::make('ID', 'id')->sortable(),
 
-            BelongsTo::make('User', 'user')->display('name'),
+            BelongsTo::make('User', 'user')->display('name')->rules('required'),
 
-            Text::make('Title', 'title')->sortable(),
-            Textarea::make('Body', 'body'),
+            Text::make('Title', 'title')->sortable()->rules('required'),
+            Boolean::make('Active', 'active'),
+            Textarea::make('Body', 'body')->rules('required'),
 
             // MorphMany::make('Comments', 'comments'),
 
@@ -108,7 +110,7 @@ class Post extends Resource
     public function actions(Request $request)
     {
         return [
-            // new Actions\MarkAsActive,
+            new \App\Nova\Actions\MarkAsActive,
         ];
     }
 
@@ -120,6 +122,8 @@ class Post extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new \App\Nova\Filters\Active
+        ];
     }
 }

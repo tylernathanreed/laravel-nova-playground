@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Nova;
+namespace App\Nova\Resources;
 
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
@@ -32,6 +32,16 @@ class User extends Resource
     public static $search = [
         'id', 'name', 'email',
     ];
+
+    /**
+     * Returns the displayable icon of the resource.
+     *
+     * @return string
+     */
+    public static function icon()
+    {
+        return '<i class="fas fa-user sidebar-icon mr-0"></i>';
+    }
 
     /**
      * Get the fields displayed by the resource.

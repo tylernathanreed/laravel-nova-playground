@@ -25,10 +25,6 @@
         {
             "type": "composer",
             "url": "https://nova.laravel.com"
-        },
-        {
-            "type": "path",
-            "url": "packages/reedware/laravel-blueprints"
         }
     ],
     "autoload": {
