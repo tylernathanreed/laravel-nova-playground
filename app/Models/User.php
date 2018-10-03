@@ -66,4 +66,14 @@ class User extends Authenticatable
         return ! empty($this->blocked_from) &&
                array_key_exists($action, $this->blocked_from);
     }
+
+    /**
+     * Returns the roles associated to this role.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'user_roles', 'user_id', 'role_id')->withPivot('notes');
+    }
 }

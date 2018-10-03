@@ -35,7 +35,9 @@ return [
 
         'sqlite' => [
             'driver' => 'sqlite',
-            'database' => env('DB_DATABASE', database_path('database.sqlite')),
+            'database' => env('APP_ENV') === 'testing'
+                ? database_path('testing.sqlite')
+                : env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
         ],
 

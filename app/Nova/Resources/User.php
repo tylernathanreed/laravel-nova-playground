@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\Password;
+use Laravel\Nova\Fields\BelongsToMany;
 
 class User extends Resource
 {
@@ -70,6 +71,8 @@ class User extends Resource
                 ->onlyOnForms()
                 ->creationRules('required', 'string', 'min:6')
                 ->updateRules('nullable', 'string', 'min:6'),
+
+            \App\Nova\Pivots\UserRole::make('Roles', 'roles', Role::class)->display('display_name')
         ];
     }
 
