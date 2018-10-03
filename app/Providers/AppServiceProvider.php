@@ -23,6 +23,23 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // Register the dusk service provider in appropriate environments
+        $this->registerDuskServiceProvider();
+    }
+
+    /**
+     * Registers the dusk service provider in appropriate environments.
+     *
+     * @return void
+     */
+    protected function registerDuskServiceProvider()
+    {
+        // Make sure the environment is appropriate
+        if(!$this->app->environment('local', 'testing')) {
+            return;
+        }
+
+        // Register the dusk service provider
+        $this->app->register(\Laravel\Dusk\DuskServiceProvider::class);
     }
 }

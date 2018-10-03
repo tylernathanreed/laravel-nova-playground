@@ -14,13 +14,15 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    // /**
-    //  * Get all of the post's comments.
-    //  */
-    // public function comments()
-    // {
-    //     return $this->morphMany(Comment::class, 'commentable');
-    // }
+    /**
+     * Returns the comments that belong to this post.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 
     // /**
     //  * Get all of the tags for the post.

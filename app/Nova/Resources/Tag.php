@@ -5,21 +5,16 @@ namespace App\Nova\Resources;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\Textarea;
-use Illuminate\Support\HtmlString;
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\MorphMany;
 use Laravel\Nova\Fields\MorphToMany;
 
-class Post extends Resource
+class Tag extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Post::class;
+    public static $model = \App\Models\Tag::class;
 
     /**
      * The columns that should be searched.
@@ -28,6 +23,8 @@ class Post extends Resource
      */
     public static $search = [
         'id',
+        'display_name',
+        'system_name'
     ];
 
     /**
@@ -37,17 +34,7 @@ class Post extends Resource
      */
     public static function icon()
     {
-        return '<i class="far fa-newspaper sidebar-icon mr-0"></i>';
-    }
-
-    /**
-     * Returns the displayable label of the resource.
-     *
-     * @return string
-     */
-    public static function label()
-    {
-        return 'Posts';
+        return '<i class="fas fa-tag sidebar-icon mr-0"></i>';
     }
 
     /**
@@ -60,22 +47,16 @@ class Post extends Resource
     {
         return [
             ID::make('ID', 'id')->sortable(),
+            Text::make('Display Name', 'display_name')->sortable(),
+            Text::make('System Name', 'system_name')->sortable(),
 
-            BelongsTo::make('User', 'user')->display('name')->rules('required'),
-
-            Text::make('Title', 'title')->sortable()->rules('required'),
-            Boolean::make('Active', 'active'),
-            Textarea::make('Body', 'body')->rules('required'),
-
-            MorphMany::make('Comments', 'comments'),
-
-            // MorphToMany::make('Tags', 'tags')
-            //         ->display('name')
-            //         ->fields(function () {
-            //             return [
-            //                 Text::make('Notes', 'notes')->rules('max:20'),
-            //             ];
-            //         })->searchable(file_exists(base_path('.searchable'))),
+            MorphToMany::make('Posts', 'posts')
+                        ->display('title')
+                        ->fields(function () {
+                            return [
+                                Text::make('Notes', 'notes')->rules('max:20'),
+                            ];
+                        }),
         ];
     }
 
@@ -109,9 +90,7 @@ class Post extends Resource
      */
     public function actions(Request $request)
     {
-        return [
-            new \App\Nova\Actions\MarkAsActive,
-        ];
+        return [];
     }
 
     /**
@@ -122,8 +101,6 @@ class Post extends Resource
      */
     public function filters(Request $request)
     {
-        return [
-            new \App\Nova\Filters\Active
-        ];
+        return [];
     }
 }

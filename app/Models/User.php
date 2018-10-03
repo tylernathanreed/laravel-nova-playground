@@ -68,12 +68,22 @@ class User extends Authenticatable
     }
 
     /**
-     * Returns the roles associated to this role.
+     * Returns the roles associated to this user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'user_roles', 'user_id', 'role_id')->withPivot('notes');
+    }
+
+    /**
+     * Returns the comments created by this user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'user_id');
     }
 }

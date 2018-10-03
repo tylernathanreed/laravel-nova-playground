@@ -5,21 +5,17 @@ namespace App\Nova\Resources;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\Textarea;
-use Illuminate\Support\HtmlString;
+use Laravel\Nova\Fields\MorphTo;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\MorphMany;
-use Laravel\Nova\Fields\MorphToMany;
 
-class Post extends Resource
+class Comment extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Post::class;
+    public static $model = \App\Models\Comment::class;
 
     /**
      * The columns that should be searched.
@@ -28,6 +24,7 @@ class Post extends Resource
      */
     public static $search = [
         'id',
+        'body'
     ];
 
     /**
@@ -37,17 +34,7 @@ class Post extends Resource
      */
     public static function icon()
     {
-        return '<i class="far fa-newspaper sidebar-icon mr-0"></i>';
-    }
-
-    /**
-     * Returns the displayable label of the resource.
-     *
-     * @return string
-     */
-    public static function label()
-    {
-        return 'Posts';
+        return '<i class="far fa-comment sidebar-icon mr-0"></i>';
     }
 
     /**
@@ -60,23 +47,30 @@ class Post extends Resource
     {
         return [
             ID::make('ID', 'id')->sortable(),
-
-            BelongsTo::make('User', 'user')->display('name')->rules('required'),
-
-            Text::make('Title', 'title')->sortable()->rules('required'),
-            Boolean::make('Active', 'active'),
-            Textarea::make('Body', 'body')->rules('required'),
-
-            MorphMany::make('Comments', 'comments'),
-
-            // MorphToMany::make('Tags', 'tags')
-            //         ->display('name')
-            //         ->fields(function () {
-            //             return [
-            //                 Text::make('Notes', 'notes')->rules('max:20'),
-            //             ];
-            //         })->searchable(file_exists(base_path('.searchable'))),
+            BelongsTo::make('User', 'user'),
+            $this->commentable(),
+            Text::make('Body', 'body'),
         ];
+    }
+
+    /**
+     * Returns the commentable field definition.
+     *
+     * @return \Laravel\Nova\Fields\MorphTo
+     */
+    protected function commentable()
+    {
+        return MorphTo::make('Commentable', 'commentable')->display([
+                Post::class => function ($resource) {
+                    return $resource->title;
+                },
+                // Video::class => function ($resource) {
+                //     return $resource->title;
+                // },
+            ])->types([
+                Post::class => 'Post',
+                // Video::class => 'Video',
+            ])->searchable(file_exists(base_path('.searchable')));
     }
 
     /**
@@ -109,9 +103,7 @@ class Post extends Resource
      */
     public function actions(Request $request)
     {
-        return [
-            new \App\Nova\Actions\MarkAsActive,
-        ];
+        return [];
     }
 
     /**
@@ -122,8 +114,6 @@ class Post extends Resource
      */
     public function filters(Request $request)
     {
-        return [
-            new \App\Nova\Filters\Active
-        ];
+        return [];
     }
 }
