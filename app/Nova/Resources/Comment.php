@@ -64,12 +64,12 @@ class Comment extends Resource
                 Post::class => function ($resource) {
                     return $resource->title;
                 },
-                // Video::class => function ($resource) {
-                //     return $resource->title;
-                // },
+                Video::class => function ($resource) {
+                    return $resource->title;
+                },
             ])->types([
                 Post::class => 'Post',
-                // Video::class => 'Video',
+                Video::class => 'Video',
             ])->searchable(file_exists(base_path('.searchable')));
     }
 

@@ -2,20 +2,20 @@
 
 namespace App\Nova\Resources;
 
+use Laravel\Nova\Panel;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\Place;
 
-class Role extends Resource
+class Address extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Role::class;
+    public static $model = \App\Models\Address::class;
 
     /**
      * The columns that should be searched.
@@ -23,24 +23,8 @@ class Role extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'display_name', 'system_name'
+        'id',
     ];
-
-    /**
-     * The relationship counts that should be eager loaded when performing an index query.
-     *
-     * @var array
-     */
-    public static $withCount = [
-        'users'
-    ];
-
-    /**
-     * The logical group associated with the resource.
-     *
-     * @var string
-     */
-    public static $group = 'System Settings';
 
     /**
      * Returns the displayable icon of the resource.
@@ -49,28 +33,28 @@ class Role extends Resource
      */
     public static function icon()
     {
-        return '<i class="fas fa-lock sidebar-icon mr-0"></i>';
+        return '<i class="fas fa-address-book sidebar-icon mr-0"></i>';
     }
 
     /**
-     * Returns the fields displayed by the resource.
+     * Get the fields displayed by the resource.
      *
      * @param  \Illuminate\Http\Request  $request
-     *
      * @return array
      */
     public function fields(Request $request)
     {
         return [
-            ID::make('ID', 'id')->sortable(),
-            Text::make('Display Name', 'display_name')->sortable(),
-            Text::make('System Name', 'system_name')->sortable(),
+            ID::make()->sortable(),
+            Place::make('Address', 'address_line_1'),
+            Text::make('Address Line 2', 'address_line_2'),
 
-            Number::make('Users', function() {
-                return $this->users_count;
-            }),
-
-            \App\Nova\Pivots\UserRole::make('Users', 'users', User::class)->display('name')
+            new Panel('More Address Details', [
+                Text::make('City'),
+                Text::make('State'),
+                Text::make('Postal Code'),
+                Text::make('Country'),
+            ]),
         ];
     }
 

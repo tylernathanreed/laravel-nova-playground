@@ -36,6 +36,13 @@ class User extends Resource
     ];
 
     /**
+     * The logical group associated with the resource.
+     *
+     * @var string
+     */
+    public static $group = 'System Settings';
+
+    /**
      * Returns the displayable icon of the resource.
      *
      * @return string

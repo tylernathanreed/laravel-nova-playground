@@ -4,30 +4,23 @@ namespace App\Nova\Filters;
 
 use Illuminate\Http\Request;
 
-class Active extends Filter
+class SelectFirst extends Filter
 {
     /**
      * Apply the filter to the given query.
      *
-     * @param  \Illuminate\Http\Request               $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  mixed                                  $value
-     *
+     * @param  mixed  $value
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function apply(Request $request, $query, $value)
     {
-        if($value === 'active') {
-            return $query->where('active', '=', 1);
-        }
-
-        return $query->where(function($query) {
-            $query->where('active', '=', 0)->orWhereNull('active');
-        });
+        return $query->where('id', $value);
     }
 
     /**
-     * Returns the filter's available options.
+     * Get the filter's available options.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array
@@ -35,8 +28,9 @@ class Active extends Filter
     public function options(Request $request)
     {
         return array_flip([
-            'active' => 'Active',
-            'inactive' => 'Inactive'
+            '1' => 'First User',
+            '2' => 'Second User',
+            '3' => 'Third User',
         ]);
     }
 }
