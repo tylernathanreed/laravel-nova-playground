@@ -80,10 +80,20 @@ class User extends Authenticatable
     /**
      * Returns the comments created by this user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function comments()
     {
         return $this->hasMany(Comment::class, 'user_id');
+    }
+
+    /**
+     * Returns the posts created by this user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'user_id');
     }
 }
