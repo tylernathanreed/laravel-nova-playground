@@ -26,7 +26,7 @@ class TagPolicy extends ResourcePolicy
      * @param  \App\Tag  $tag
      * @return mixed
      */
-    public function view(User $user, Tag $tag)
+    public function view(User $user, $tag)
     {
         return ! $user->isBlockedFrom('tag.view.'.$tag->id);
     }
@@ -49,7 +49,7 @@ class TagPolicy extends ResourcePolicy
      * @param  \App\Tag  $tag
      * @return mixed
      */
-    public function update(User $user, Tag $tag)
+    public function update(User $user, $tag)
     {
         return ! $user->isBlockedFrom('tag.update.'.$tag->id);
     }
@@ -98,7 +98,7 @@ class TagPolicy extends ResourcePolicy
      * @param  \App\Tag  $tag
      * @return mixed
      */
-    public function delete(User $user, Tag $tag)
+    public function delete(User $user, $tag)
     {
         return ! $user->isBlockedFrom('tag.delete.'.$tag->id);
     }
@@ -110,7 +110,7 @@ class TagPolicy extends ResourcePolicy
      * @param  \App\Tag  $tag
      * @return mixed
      */
-    public function restore(User $user, Tag $tag)
+    public function restore(User $user, $tag)
     {
         return ! $user->isBlockedFrom('tag.restore.'.$tag->id);
     }
@@ -122,7 +122,7 @@ class TagPolicy extends ResourcePolicy
      * @param  \App\Tag  $tag
      * @return mixed
      */
-    public function forceDelete(User $user, Tag $tag)
+    public function forceDelete(User $user, $tag)
     {
         return ! $user->isBlockedFrom('tag.forceDelete.'.$tag->id);
     }

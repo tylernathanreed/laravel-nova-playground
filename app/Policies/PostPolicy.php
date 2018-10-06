@@ -28,7 +28,7 @@ class PostPolicy extends ResourcePolicy
      *
      * @return mixed
      */
-    public function view(User $user, Post $post)
+    public function view(User $user, $post)
     {
         return ! $user->isBlockedFrom('post.view.'.$post->id);
     }
@@ -53,7 +53,7 @@ class PostPolicy extends ResourcePolicy
      *
      * @return mixed
      */
-    public function update(User $user, Post $post)
+    public function update(User $user, $post)
     {
         return ! $user->isBlockedFrom('post.update.'.$post->id);
     }
@@ -66,7 +66,7 @@ class PostPolicy extends ResourcePolicy
      *
      * @return mixed
      */
-    public function addComment(User $user, Post $post)
+    public function addComment(User $user, $post)
     {
         return ! $user->isBlockedFrom('post.addComment.'.$post->id);
     }
@@ -106,7 +106,7 @@ class PostPolicy extends ResourcePolicy
      *
      * @return mixed
      */
-    public function delete(User $user, Post $post)
+    public function delete(User $user, $post)
     {
         return ! $user->isBlockedFrom('post.delete.'.$post->id);
     }
@@ -119,7 +119,7 @@ class PostPolicy extends ResourcePolicy
      *
      * @return mixed
      */
-    public function restore(User $user, Post $post)
+    public function restore(User $user, $post)
     {
         return ! $user->isBlockedFrom('post.restore.'.$post->id);
     }
@@ -132,7 +132,7 @@ class PostPolicy extends ResourcePolicy
      *
      * @return mixed
      */
-    public function forceDelete(User $user, Post $post)
+    public function forceDelete(User $user, $post)
     {
         return ! $user->isBlockedFrom('post.forceDelete.'.$post->id);
     }
