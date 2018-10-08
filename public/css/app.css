@@ -3854,6 +3854,10 @@ textarea.form-input:read-only,
   padding: 3.125rem;
 }
 
+.p-header {
+  padding: 3.75rem;
+}
+
 .py-0 {
   padding-top: 0;
   padding-bottom: 0;
@@ -3952,6 +3956,16 @@ textarea.form-input:read-only,
 .px-view {
   padding-left: 3.125rem;
   padding-right: 3.125rem;
+}
+
+.py-header {
+  padding-top: 3.75rem;
+  padding-bottom: 3.75rem;
+}
+
+.px-header {
+  padding-left: 3.75rem;
+  padding-right: 3.75rem;
 }
 
 .pt-0 {
@@ -4112,6 +4126,22 @@ textarea.form-input:read-only,
 
 .pl-view {
   padding-left: 3.125rem;
+}
+
+.pt-header {
+  padding-top: 3.75rem;
+}
+
+.pr-header {
+  padding-right: 3.75rem;
+}
+
+.pb-header {
+  padding-bottom: 3.75rem;
+}
+
+.pl-header {
+  padding-left: 3.75rem;
 }
 
 .pointer-events-none {
@@ -7094,6 +7124,10 @@ textarea.form-input:read-only,
     padding: 3.125rem;
   }
 
+  .sm\:p-header {
+    padding: 3.75rem;
+  }
+
   .sm\:py-0 {
     padding-top: 0;
     padding-bottom: 0;
@@ -7192,6 +7226,16 @@ textarea.form-input:read-only,
   .sm\:px-view {
     padding-left: 3.125rem;
     padding-right: 3.125rem;
+  }
+
+  .sm\:py-header {
+    padding-top: 3.75rem;
+    padding-bottom: 3.75rem;
+  }
+
+  .sm\:px-header {
+    padding-left: 3.75rem;
+    padding-right: 3.75rem;
   }
 
   .sm\:pt-0 {
@@ -7352,6 +7396,22 @@ textarea.form-input:read-only,
 
   .sm\:pl-view {
     padding-left: 3.125rem;
+  }
+
+  .sm\:pt-header {
+    padding-top: 3.75rem;
+  }
+
+  .sm\:pr-header {
+    padding-right: 3.75rem;
+  }
+
+  .sm\:pb-header {
+    padding-bottom: 3.75rem;
+  }
+
+  .sm\:pl-header {
+    padding-left: 3.75rem;
   }
 
   .sm\:pointer-events-none {
@@ -10199,6 +10259,10 @@ textarea.form-input:read-only,
     padding: 3.125rem;
   }
 
+  .md\:p-header {
+    padding: 3.75rem;
+  }
+
   .md\:py-0 {
     padding-top: 0;
     padding-bottom: 0;
@@ -10297,6 +10361,16 @@ textarea.form-input:read-only,
   .md\:px-view {
     padding-left: 3.125rem;
     padding-right: 3.125rem;
+  }
+
+  .md\:py-header {
+    padding-top: 3.75rem;
+    padding-bottom: 3.75rem;
+  }
+
+  .md\:px-header {
+    padding-left: 3.75rem;
+    padding-right: 3.75rem;
   }
 
   .md\:pt-0 {
@@ -10457,6 +10531,22 @@ textarea.form-input:read-only,
 
   .md\:pl-view {
     padding-left: 3.125rem;
+  }
+
+  .md\:pt-header {
+    padding-top: 3.75rem;
+  }
+
+  .md\:pr-header {
+    padding-right: 3.75rem;
+  }
+
+  .md\:pb-header {
+    padding-bottom: 3.75rem;
+  }
+
+  .md\:pl-header {
+    padding-left: 3.75rem;
   }
 
   .md\:pointer-events-none {
@@ -13304,6 +13394,10 @@ textarea.form-input:read-only,
     padding: 3.125rem;
   }
 
+  .lg\:p-header {
+    padding: 3.75rem;
+  }
+
   .lg\:py-0 {
     padding-top: 0;
     padding-bottom: 0;
@@ -13402,6 +13496,16 @@ textarea.form-input:read-only,
   .lg\:px-view {
     padding-left: 3.125rem;
     padding-right: 3.125rem;
+  }
+
+  .lg\:py-header {
+    padding-top: 3.75rem;
+    padding-bottom: 3.75rem;
+  }
+
+  .lg\:px-header {
+    padding-left: 3.75rem;
+    padding-right: 3.75rem;
   }
 
   .lg\:pt-0 {
@@ -13562,6 +13666,22 @@ textarea.form-input:read-only,
 
   .lg\:pl-view {
     padding-left: 3.125rem;
+  }
+
+  .lg\:pt-header {
+    padding-top: 3.75rem;
+  }
+
+  .lg\:pr-header {
+    padding-right: 3.75rem;
+  }
+
+  .lg\:pb-header {
+    padding-bottom: 3.75rem;
+  }
+
+  .lg\:pl-header {
+    padding-left: 3.75rem;
   }
 
   .lg\:pointer-events-none {
@@ -16409,6 +16529,10 @@ textarea.form-input:read-only,
     padding: 3.125rem;
   }
 
+  .xl\:p-header {
+    padding: 3.75rem;
+  }
+
   .xl\:py-0 {
     padding-top: 0;
     padding-bottom: 0;
@@ -16507,6 +16631,16 @@ textarea.form-input:read-only,
   .xl\:px-view {
     padding-left: 3.125rem;
     padding-right: 3.125rem;
+  }
+
+  .xl\:py-header {
+    padding-top: 3.75rem;
+    padding-bottom: 3.75rem;
+  }
+
+  .xl\:px-header {
+    padding-left: 3.75rem;
+    padding-right: 3.75rem;
   }
 
   .xl\:pt-0 {
@@ -16667,6 +16801,22 @@ textarea.form-input:read-only,
 
   .xl\:pl-view {
     padding-left: 3.125rem;
+  }
+
+  .xl\:pt-header {
+    padding-top: 3.75rem;
+  }
+
+  .xl\:pr-header {
+    padding-right: 3.75rem;
+  }
+
+  .xl\:pb-header {
+    padding-bottom: 3.75rem;
+  }
+
+  .xl\:pl-header {
+    padding-left: 3.75rem;
   }
 
   .xl\:pointer-events-none {
@@ -17425,6 +17575,8 @@ textarea.form-input:read-only,
  * building robust, powerful web applications using Laravel Nova.
  */
 
+/*! Nova */
+
 :root {
   --transparent: transparent;
   --black: rgb(34, 41, 47);
@@ -17465,6 +17617,8 @@ textarea.form-input:read-only,
  * we can customize our frontend without sacrificing the integrity of
  * the vendor files. Tailwind is already prepared for us. Awesome!
  */
+
+/*! Bootstrap */
 
 /*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
@@ -18052,8 +18206,103 @@ textarea.form-input:read-only,
   color: var(--white);
 }
 
+/*! Admin LTE */
+
+/*!
+ *   AdminLTE v2.4.8
+ *   Author: Almsaeed Studio
+ *	 Website: Almsaeed Studio <https://adminlte.io>
+ *   License: Open source - MIT
+ *           Please visit http://opensource.org/licenses/MIT for more information
+ */
+
+/*
+ * Component: Sidebar
+ * ------------------
+ */
+
+.main-sidebar {
+  position: absolute;
+  width: 13.75rem;
+  top: 0;
+  left: 0;
+  padding-top: 50px;
+  min-height: 100%;
+  z-index: 810;
+}
+
+.sidebar {
+  padding-bottom: 10px;
+}
+
+.sidebar-form input:focus {
+  border-color: transparent;
+}
+
+.sidebar-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-menu > li {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-menu > li > a {
+  padding: 12px 5px 12px 15px;
+  display: block;
+}
+
+.sidebar-menu > li > a > .fa,
+.sidebar-menu > li > a > .glyphicon,
+.sidebar-menu > li > a > .ion {
+  width: 20px;
+}
+
+.sidebar-menu > li .label,
+.sidebar-menu > li .badge {
+  margin-right: 5px;
+}
+
+.sidebar-menu > li .badge {
+  margin-top: 3px;
+}
+
+.sidebar-menu li.header {
+  padding: 10px 25px 10px 15px;
+  font-size: 12px;
+}
+
+.sidebar-menu li > a > .fa-angle-left,
+.sidebar-menu li > a > .pull-right-container > .fa-angle-left {
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin-right: 10px;
+}
+
+.sidebar-menu li > a > .fa-angle-left {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  margin-top: -8px;
+}
+
+.sidebar-menu .active > .treeview-menu {
+  display: block;
+}
+
+/*! Overrides */
+
 .navbar-laravel {
   background-color: #fff;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
           box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
+}
+
+.pt-header {
+  padding-top: 3.75rem;
 }

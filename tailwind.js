@@ -246,6 +246,7 @@ module.exports = {
         '8': '2rem', // 32px
         search: '2.75rem',
         view: '3.125rem', // 50px
+        header: '3.75rem'
     },
 
     margin: {

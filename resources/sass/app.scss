@@ -4,6 +4,7 @@
  * building robust, powerful web applications using Laravel Nova.
  */
 
+/*! Nova */
 @import './../../vendor/laravel/nova/resources/css/app.css';
 
 :root {
@@ -47,9 +48,18 @@
  * the vendor files. Tailwind is already prepared for us. Awesome!
  */
 
+/*! Bootstrap */
 @import './bootstrap/bootstrap.scss';
 
+/*! Admin LTE */
+@import './admin-lte/AdminLte.scss';
+
+/*! Overrides */
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.pt-header {
+  padding-top: 3.75rem;
 }
