@@ -1,6 +1,63 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
+/**
+ * First we will load all of this project's css / sass dependencies which
+ * includes Nova and other libraries. It's a good starting point when
+ * building robust, powerful web applications using Laravel Nova.
+ */
+
+/*! Nova */
+@import './../../vendor/laravel/nova/resources/css/app.css';
+
+:root {
+  --transparent: transparent;
+  --black: rgb(34, 41, 47);
+  --black-10: rgba(34, 41, 47, 0.1);
+  --black-30: rgba(34, 41, 47, 0.3);
+  --black-50: rgba(34, 41, 47, 0.5);
+  --black-70: rgba(34, 41, 47, 0.7);
+  --white: white;
+  --white-10: rgba(255, 255, 255, 0.1);
+  --white-25: rgba(255, 255, 255, 0.25);
+  --white-50: rgba(255, 255, 255, 0.5);
+  --white-75: rgba(255, 255, 255, 0.75);
+  --danger: #e74444;
+  --success: #21b978;
+  --warning: #ffeb3b;
+  --info: #03a9f4;
+  --primary: #4099de;
+  --primary-dark: #297ec0;
+  --primary-70: rgba(64, 153, 222, 0.7);
+  --primary-50: rgba(64, 153, 222, 0.5);
+  --primary-30: rgba(64, 153, 222, 0.3);
+  --primary-10: rgba(64, 153, 222, 0.1);
+  --logo: #252d37;
+  --sidebar-icon: #b3c1d1;
+  #{'--20'}: #f6fbff;
+  #{'--30'}: #f4f7fa;
+  #{'--40'}: #eef1f4;
+  #{'--50'}: #e3e7eb;
+  #{'--60'}: #bacad6;
+  #{'--70'}: #b3b9bf;
+  #{'--80'}: #7c858e;
+  #{'--90'}: #252d37;
+  #{'--90-half'}: rgba(40, 54, 61, 0.5);
+}
+
+/**
+ * Next, we will apply any overrides specific to this application so that
+ * we can customize our frontend without sacrificing the integrity of
+ * the vendor files. Tailwind is already prepared for us. Awesome!
+ */
+
+/*! Bootstrap */
+@import './bootstrap/bootstrap.scss';
+
+/*! Admin LTE */
+@import './admin-lte/AdminLte.scss';
+
+/*! Overrides */
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -8,4 +65,8 @@
 
 .sidebar-link {
 	@apply .pt-3;
+}
+
+.pt-header {
+  padding-top: 3.75rem;
 }

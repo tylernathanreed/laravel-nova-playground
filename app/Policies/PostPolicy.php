@@ -66,7 +66,7 @@ class PostPolicy extends ResourcePolicy
      *
      * @return mixed
      */
-    public function addComment(User $user, Post $post)
+    public function addComment(User $user, $post)
     {
         return ! $user->isBlockedFrom('post.addComment.'.$post->id);
     }
