@@ -15,7 +15,8 @@
         "laravel/nova": "~1.0",
         "laravel/tinker": "^1.0",
         "reedware/laravel-blueprints": "*",
-        "otwell/custom-field": "*"
+        "otwell/custom-field": "*",
+        "otwell/sidebar-tool": "*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
@@ -34,6 +35,10 @@
         {
             "type": "path",
             "url": "./nova-components/CustomField"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/SidebarTool"
         }
     ],
     "autoload": {
@@ -43,7 +48,10 @@
         ],
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "files": [
+            "app\\Support\\helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

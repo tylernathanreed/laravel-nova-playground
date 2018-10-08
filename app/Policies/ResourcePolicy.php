@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 
 abstract class ResourcePolicy extends Policy
 {
@@ -27,7 +26,7 @@ abstract class ResourcePolicy extends Policy
      *
      * @return mixed
      */
-    public function view(User $user, Model $model)
+    public function view(User $user, $model)
     {
         return true;
     }
@@ -52,7 +51,7 @@ abstract class ResourcePolicy extends Policy
      *
      * @return mixed
      */
-    public function update(User $user, Model $model)
+    public function update(User $user, $model)
     {
         return true;
     }
@@ -65,7 +64,7 @@ abstract class ResourcePolicy extends Policy
      *
      * @return mixed
      */
-    public function delete(User $user, Model $model)
+    public function delete(User $user, $model)
     {
         return true;
     }
@@ -78,7 +77,7 @@ abstract class ResourcePolicy extends Policy
      *
      * @return mixed
      */
-    public function restore(User $user, Model $model)
+    public function restore(User $user, $model)
     {
         return true;
     }
@@ -91,7 +90,7 @@ abstract class ResourcePolicy extends Policy
      *
      * @return mixed
      */
-    public function forceDelete(User $user, Model $model)
+    public function forceDelete(User $user, $model)
     {
         return true;
     }

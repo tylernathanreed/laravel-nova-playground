@@ -18,22 +18,18 @@
     @foreach(Nova::availableStyles(request()) as $name => $path)
         <link rel="stylesheet" href="/nova-api/styles/{{ $name }}">
     @endforeach
+
+    <style>
+        .pt-header {
+            padding-top: 3.75rem;
+        }
+    </style>
+
 </head>
 <body class="min-w-site bg-40 text-black min-h-full">
     <div id="nova">
         <div v-cloak class="flex min-h-screen">
-            <!-- Sidebar -->
-            <div class="min-h-screen flex-none pt-header min-h-screen w-sidebar bg-grad-sidebar px-6">
-                <a href="{{ Nova::path() }}">
-                    <div class="absolute pin-t pin-l pin-r bg-logo flex items-center w-sidebar h-header px-6 text-white">
-                       @include('nova::partials.logo')
-                    </div>
-                </a>
-
-                @foreach (Nova::availableTools(request()) as $tool)
-                    {!! $tool->renderNavigation() !!}
-                @endforeach
-            </div>
+            @include('nova::partials.sidebar')
 
             <!-- Content -->
             <div class="content">

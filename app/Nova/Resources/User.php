@@ -107,7 +107,7 @@ class User extends Resource
     public function cards(Request $request)
     {
         return [
-            // (new \App\Nova\Metrics\PostCount)->onlyOnDetail(),
+            (new \App\Nova\Metrics\PostCount)->onlyOnDetail(),
         ];
     }
 
