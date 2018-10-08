@@ -5,12 +5,13 @@
 // Main Sidebar
 .main-sidebar {
 
-    @apply .absolute .w-sidebar;
-    top: 0;
-    left: 0;
-    padding-top: 50px;
-    min-height: 100%;
-    z-index: 810;
+    @apply .min-h-screen .flex-none .pt-header .min-h-screen .w-sidebar;
+
+    // top: 0;
+    // left: 0;
+    // padding-top: 50px;
+    // min-height: 100%;
+    // z-index: 810;
 
     // Using disposable variable to join statements with a comma
     // @transition-rule: @transition-speed @transition-fn, width @transition-speed @transition-fn;

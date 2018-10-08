@@ -64,7 +64,7 @@
 }
 
 .sidebar-link {
-	@apply .pt-3;
+  @apply .py-4 .px-6 .cursor-pointer .flex .items-center .font-normal .text-white .text-base .no-underline;
 }
 
 .pt-header {

@@ -91,6 +91,8 @@
 //     el: '#app'
 // });
 
+// require('./vendor/admin-lte/Tree.js');
+
 /***/ }),
 
 /***/ "./resources/sass/app.scss":

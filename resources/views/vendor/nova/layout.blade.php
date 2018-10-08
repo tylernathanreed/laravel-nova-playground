@@ -12,18 +12,12 @@
     <link href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ mix('app.css', 'vendor/nova') }}">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
     <!-- Tool Styles -->
     @foreach(Nova::availableStyles(request()) as $name => $path)
         <link rel="stylesheet" href="/nova-api/styles/{{ $name }}">
     @endforeach
-
-    <style>
-        .pt-header {
-            padding-top: 3.75rem;
-        }
-    </style>
 
 </head>
 <body class="min-w-site bg-40 text-black min-h-full">
