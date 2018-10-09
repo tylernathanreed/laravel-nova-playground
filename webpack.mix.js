@@ -12,10 +12,37 @@ const tailwindcss = require('tailwindcss');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css')
-   .options({
+mix
+	.js('resources/js/app.js', 'public/js')
+    .extract([
+        'codemirror',
+        'chartist',
+        'chartist-plugin-tooltips',
+        'flatpickr',
+        'form-backend-validation',
+        'inflector-js',
+        'markdown-it',
+        'marked',
+        'moment',
+        'numeral',
+        'pikaday',
+        'places.js',
+        'popper.js',
+        'vue-async-computed',
+        'vue-clickaway',
+        'vue-toasted',
+        'trix',
+        'vue',
+        'vue-router',
+        'portal-vue',
+        'lodash',
+        'moment-timezone',
+        'axios',
+        'laravel-nova',
+    ])
+	.sass('resources/sass/app.scss', 'public/css')
+	.options({
 		processCssUrls: false,
 		postCss: [ tailwindcss('tailwind.js') ],
-   })
-   .version()
+	})
+	.version()

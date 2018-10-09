@@ -5,9 +5,9 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-// require('./bootstrap');
+require('./bootstrap');
 
-// window.Vue = require('vue');
+window.Vue = require('vue');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -15,10 +15,58 @@
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-// Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('treeview', require('./components/Treeview.vue'));
+Vue.component('treeview-item', require('./components/TreeviewItem.vue'));
 
-// const app = new Vue({
-//     el: '#app'
-// });
+// demo data
+var tree = {
 
-// require('./vendor/admin-lte/Tree.js');
+  items: [
+    { name: 'Dashboard' },
+    {
+      name: 'Resources',
+      children: [
+        {
+          name: 'Other',
+          children: [
+            { name: 'Addresses' },
+            { name: 'Comments' },
+            { name: 'Flights' },
+            { name: 'Client Invoice' },
+            { name: 'Invoice Item' },
+            { name: 'Posts' },
+            { name: 'Tags' },
+            { name: 'Videos' }
+          ]
+        },
+        {
+          name: 'Seafaring',
+          children: [
+            { name: 'Captains' },
+            { name: 'Docks' },
+            { name: 'Sails' },
+            { name: 'Stips' }
+          ]
+        },
+        {
+          name: 'System Settings',
+          children: [
+            { name: 'Roles' },
+            { name: 'Users' }
+          ]
+        }
+      ]
+    }
+  ]
+
+}
+
+
+const app = new Vue({
+
+    el: '#app',
+	data: {
+		tree: tree
+	}
+
+});

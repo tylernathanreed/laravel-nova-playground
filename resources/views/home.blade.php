@@ -22,4 +22,10 @@
         </div>
     </div>
 
+    <!-- item template -->
+    <p>(You can double click on an item to turn it into a folder.)</p>
+
+    <!-- the demo root element -->
+    <treeview tag="ul" class="treeview" :items="tree.items"></treeview>
+
 @endsection
