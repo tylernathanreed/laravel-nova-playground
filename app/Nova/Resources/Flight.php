@@ -31,7 +31,7 @@ class Flight extends Resource
      */
     public static function icon()
     {
-        return '<i class="fas fa-plane-departure sidebar-icon mr-0"></i>';
+        return '<i class="fas fa-plane-departure sidebar-icon"></i>';
     }
 
     /**

@@ -49,7 +49,7 @@ class Role extends Resource
      */
     public static function icon()
     {
-        return '<i class="fas fa-lock sidebar-icon mr-0"></i>';
+        return '<i class="fas fa-lock sidebar-icon"></i>';
     }
 
     /**

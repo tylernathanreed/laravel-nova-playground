@@ -64,9 +64,25 @@
 }
 
 .sidebar-link {
-  @apply .py-4 .px-6 .cursor-pointer .flex .items-center .font-normal .text-white .text-base .no-underline;
+  @apply .py-3 .px-6 .cursor-pointer .flex .items-center .font-normal .text-white .text-base .no-underline .select-none;
+}
+
+.sidebar-label {
+  @apply .select-none;
+}
+
+.sidebar-item-menu {
+  @apply .list-reset .pl-3 .bg-black-30%;
+}
+
+.sidebar-item-menu .sidebar-item-menu {
+  @apply .pl-6 .-ml-3;
 }
 
 .pt-header {
   padding-top: 3.75rem;
+}
+
+html {
+  font-size: 14px;
 }

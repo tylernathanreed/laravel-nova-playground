@@ -11,35 +11,57 @@
             {{ __('Resources') }}
         @endslot
 
-        @foreach(Nova::groupedResources(request()) as $group => $resources)
-            @if(count($resources) > 0)
-                @if(count(Nova::groups(request())) > 1)
-                    <h4 class="ml-3 mb-4 text-xs text-white-50% uppercase tracking-wide px-6">{{ $group }}</h4>
-                @endif
+        <?php $showGroups = count(Nova::groups(request())) > 1; ?>
 
-                <ul class="list-reset mb-8">
-                    @foreach($resources as $resource)
-                        @if(!$resource::$displayInNavigation)
-                            @continue
-                        @endif
+        @if($showGroups)
+            <ul class="sidebar-item-menu">
+        @endif
 
-                        <li class="leading-tight mb-4 ml-3 text-sm px-6">
-                            <router-link :to="{
-                                name: 'index',
-                                params: {
-                                    resourceName: '{{ $resource::uriKey() }}'
-                                }
-                            }" class="text-white text-justify no-underline dim">
-                                @if(method_exists($resource, 'icon'))
-                                    {!! $resource::icon() !!}
-                                @endif
-                                <span class="sidebar-label">{{ $resource::label() }}</span>
-                            </router-link>
+            @foreach(Nova::groupedResources(request()) as $group => $resources)
+                @if(count($resources) > 0)
+
+                    @if($showGroups)
+                        <li class="sidebar-item">
+                            <h4 class="sidebar-link dim">
+                                <i class="far fa-object-group sidebar-icon"></i>
+                                <span class="sidebar-label">{{ $group }}</span>
+                            </h4>
                         </li>
-                    @endforeach
-                </ul>
-            @endif
-        @endforeach
+                    @endif
+
+                            <ul class="sidebar-item-menu">
+                                @foreach($resources as $resource)
+                                    @if(!$resource::$displayInNavigation)
+                                        @continue
+                                    @endif
+
+                                    <li class="sidebar-item">
+                                        <router-link :to="{
+                                            name: 'index',
+                                            params: {
+                                                resourceName: '{{ $resource::uriKey() }}'
+                                            }
+                                        }" class="sidebar-link dim">
+                                            @if(method_exists($resource, 'icon'))
+                                                {!! $resource::icon() !!}
+                                            @endif
+                                            <span class="sidebar-label">{{ $resource::label() }}</span>
+                                        </router-link>
+                                    </li>
+                                @endforeach
+                            </ul>
+
+                    @if($showGroups)
+                        </li>
+                    @endif
+
+                @endif
+            @endforeach
+
+        @if($showGroups)
+            </ul>
+        @endif
+
     @endcomponent
 @endif
 

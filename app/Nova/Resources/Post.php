@@ -37,7 +37,7 @@ class Post extends Resource
      */
     public static function icon()
     {
-        return '<i class="far fa-newspaper sidebar-icon mr-0"></i>';
+        return '<i class="far fa-newspaper sidebar-icon"></i>';
     }
 
     /**

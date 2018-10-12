@@ -32,7 +32,7 @@ class Video extends Resource
      */
     public static function icon()
     {
-        return '<i class="fab fa-youtube sidebar-icon mr-0"></i>';
+        return '<i class="fab fa-youtube sidebar-icon"></i>';
     }
 
 
