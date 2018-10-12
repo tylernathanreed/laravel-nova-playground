@@ -39,7 +39,7 @@ class Dock extends Resource
      */
     public static function icon()
     {
-        return '<i class="fab fa-fort-awesome sidebar-icon mr-0"></i>';
+        return '<i class="fab fa-fort-awesome sidebar-icon"></i>';
     }
 
     /**

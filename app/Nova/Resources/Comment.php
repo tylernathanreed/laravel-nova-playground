@@ -34,7 +34,7 @@ class Comment extends Resource
      */
     public static function icon()
     {
-        return '<i class="far fa-comment sidebar-icon mr-0"></i>';
+        return '<i class="far fa-comment sidebar-icon"></i>';
     }
 
     /**

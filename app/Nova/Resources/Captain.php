@@ -41,7 +41,7 @@ class Captain extends Resource
      */
     public static function icon()
     {
-        return '<i class="fab fa-pied-piper-hat sidebar-icon mr-0"></i>';
+        return '<i class="fab fa-pied-piper-hat sidebar-icon"></i>';
     }
 
     /**

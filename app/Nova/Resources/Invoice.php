@@ -38,7 +38,7 @@ class Invoice extends Resource
      */
     public static function icon()
     {
-        return '<i class="fas fa-receipt sidebar-icon mr-0"></i>';
+        return '<i class="fas fa-receipt sidebar-icon"></i>';
     }
 
     /**

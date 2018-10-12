@@ -6,9 +6,6 @@
         </div>
     </a>
 
-{{--     <treeview>
-    </treeview> --}}
-
     <section class="sidebar">
     	<ul class="sidebar-menu list-reset">
 		    @foreach(Nova::availableTools(request()) as $tool)

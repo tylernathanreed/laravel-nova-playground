@@ -50,7 +50,7 @@ class User extends Resource
      */
     public static function icon()
     {
-        return '<i class="fas fa-user sidebar-icon mr-0"></i>';
+        return '<i class="fas fa-user sidebar-icon"></i>';
     }
 
     /**

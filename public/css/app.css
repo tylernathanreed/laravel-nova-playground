@@ -18338,8 +18338,8 @@ textarea.form-input:read-only,
 }
 
 .sidebar-link {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: .75rem;
+  padding-bottom: .75rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   cursor: pointer;
@@ -18353,8 +18353,35 @@ textarea.form-input:read-only,
   color: var(--white);
   font-size: 1rem;
   text-decoration: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.sidebar-label {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.sidebar-item-menu {
+  list-style: none;
+  padding: 0;
+  padding-left: .75rem;
+  background-color: var(--black-30);
+}
+
+.sidebar-item-menu .sidebar-item-menu {
+  padding-left: 1.5rem;
+  margin-left: -0.75rem;
 }
 
 .pt-header {
   padding-top: 3.75rem;
+}
+
+html {
+  font-size: 14px;
 }

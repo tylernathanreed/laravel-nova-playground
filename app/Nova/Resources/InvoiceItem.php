@@ -48,7 +48,7 @@ class InvoiceItem extends Resource
      */
     public static function icon()
     {
-        return '<i class="fas fa-clipboard-list sidebar-icon mr-0"></i>';
+        return '<i class="fas fa-clipboard-list sidebar-icon"></i>';
     }
 
     /**
