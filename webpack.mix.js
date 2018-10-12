@@ -31,7 +31,7 @@ mix
         'vue-async-computed',
         'vue-clickaway',
         'vue-toasted',
-        'trix',
+        // 'trix',
         'vue',
         'vue-router',
         'portal-vue',

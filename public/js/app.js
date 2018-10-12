@@ -43,81 +43,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/TreeviewItem.vue":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-
-    props: {
-
-        tag: {
-            type: String,
-            default: 'li'
-        },
-
-        item: {
-            type: Object,
-            default: {
-                name: '',
-                children: []
-            }
-        }
-
-    },
-
-    data: function data() {
-
-        return {
-            open: false
-        };
-    },
-
-    computed: {
-
-        isFolder: function isFolder() {
-            return typeof this.item.children !== 'undefined' && this.item.children.length > 0;
-        }
-
-    },
-
-    methods: {
-
-        toggle: function toggle() {
-
-            if (this.isFolder) {
-                this.open = !this.open;
-            }
-        }
-
-    }
-});
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/component-normalizer.js":
 /***/ (function(module, exports) {
 
@@ -254,104 +179,13 @@ if (false) {
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-0f4e4de1\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/TreeviewItem.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(_vm.tag, { tag: "component" }, [
-    _c(
-      "div",
-      { on: { click: _vm.toggle } },
-      [
-        _vm._t(
-          "label",
-          [
-            _c("span", { class: { "font-bold": _vm.item.isFolder } }, [
-              _vm._v(_vm._s(_vm.item.label))
-            ]),
-            _vm._v(" "),
-            _vm.item.isFolder
-              ? _c("span", [
-                  _vm._v("[" + _vm._s(_vm.item.open ? "-" : "+") + "]")
-                ])
-              : _vm._e()
-          ],
-          {
-            label: _vm.item.name,
-            children: _vm.item.children,
-            isFolder: this.isFolder,
-            open: this.open
-          }
-        )
-      ],
-      2
-    ),
-    _vm._v(" "),
-    _vm.open
-      ? _c(
-          "ul",
-          { staticClass: "treeview-menu" },
-          _vm._l(_vm.item.children, function(child, index) {
-            return _c("treeview-item", {
-              key: index,
-              attrs: { item: child },
-              scopedSlots: _vm._u([
-                {
-                  key: "label",
-                  fn: function(item) {
-                    return [
-                      _vm._t(
-                        "label",
-                        [
-                          _c(
-                            "span",
-                            { class: { "font-bold": item.isFolder } },
-                            [_vm._v(_vm._s(item.label))]
-                          ),
-                          _vm._v(" "),
-                          item.isFolder
-                            ? _c("span", [
-                                _vm._v(
-                                  "[" + _vm._s(item.open ? "-" : "+") + "]"
-                                )
-                              ])
-                            : _vm._e()
-                        ],
-                        {
-                          label: item.name,
-                          children: item.children,
-                          isFolder: this.isFolder,
-                          open: this.open
-                        }
-                      )
-                    ]
-                  }
-                }
-              ])
-            })
-          })
-        )
-      : _vm._e()
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0f4e4de1", module.exports)
-  }
-}
-
-/***/ }),
-
 /***/ "./resources/js/app.js":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__("./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -361,7 +195,7 @@ if (false) {
 
 __webpack_require__("./resources/js/bootstrap.js");
 
-window.Vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -369,35 +203,15 @@ window.Vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('treeview', __webpack_require__("./resources/js/components/Treeview.vue"));
-Vue.component('treeview-item', __webpack_require__("./resources/js/components/TreeviewItem.vue"));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('treeview', __webpack_require__("./resources/js/components/Treeview.vue"));
 
-// demo data
-var tree = {
+window.addEventListener('load', function () {
 
-  items: [{ name: 'Dashboard' }, {
-    name: 'Resources',
-    children: [{
-      name: 'Other',
-      children: [{ name: 'Addresses' }, { name: 'Comments' }, { name: 'Flights' }, { name: 'Client Invoice' }, { name: 'Invoice Item' }, { name: 'Posts' }, { name: 'Tags' }, { name: 'Videos' }]
-    }, {
-      name: 'Seafaring',
-      children: [{ name: 'Captains' }, { name: 'Docks' }, { name: 'Sails' }, { name: 'Stips' }]
-    }, {
-      name: 'System Settings',
-      children: [{ name: 'Roles' }, { name: 'Users' }]
-    }]
-  }]
+  var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
-};
+    el: '#nova'
 
-var app = new Vue({
-
-  el: '#app',
-  data: {
-    tree: tree
-  }
-
+  });
 });
 
 /***/ }),
@@ -501,54 +315,6 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-0bc66b2e", Component.options)
   } else {
     hotAPI.reload("data-v-0bc66b2e", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ "./resources/js/components/TreeviewItem.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
-/* script */
-var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/TreeviewItem.vue")
-/* template */
-var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-0f4e4de1\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/TreeviewItem.vue")
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/TreeviewItem.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0f4e4de1", Component.options)
-  } else {
-    hotAPI.reload("data-v-0f4e4de1", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

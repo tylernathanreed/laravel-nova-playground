@@ -7,7 +7,7 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+import Vue from 'vue';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -16,57 +16,13 @@ window.Vue = require('vue');
  */
 
 Vue.component('treeview', require('./components/Treeview.vue'));
-Vue.component('treeview-item', require('./components/TreeviewItem.vue'));
 
-// demo data
-var tree = {
+window.addEventListener('load', function() {
 
-  items: [
-    { name: 'Dashboard' },
-    {
-      name: 'Resources',
-      children: [
-        {
-          name: 'Other',
-          children: [
-            { name: 'Addresses' },
-            { name: 'Comments' },
-            { name: 'Flights' },
-            { name: 'Client Invoice' },
-            { name: 'Invoice Item' },
-            { name: 'Posts' },
-            { name: 'Tags' },
-            { name: 'Videos' }
-          ]
-        },
-        {
-          name: 'Seafaring',
-          children: [
-            { name: 'Captains' },
-            { name: 'Docks' },
-            { name: 'Sails' },
-            { name: 'Stips' }
-          ]
-        },
-        {
-          name: 'System Settings',
-          children: [
-            { name: 'Roles' },
-            { name: 'Users' }
-          ]
-        }
-      ]
-    }
-  ]
+    const app = new Vue({
 
-}
+        el: '#nova'
 
-
-const app = new Vue({
-
-    el: '#app',
-	data: {
-		tree: tree
-	}
+    });
 
 });
