@@ -18227,7 +18227,6 @@ textarea.form-input:read-only,
       -ms-flex: none;
           flex: none;
   padding-top: 3.75rem;
-  min-height: 100vh;
   width: 13.75rem;
 }
 

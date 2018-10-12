@@ -11,18 +11,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
     props: {
+
         tag: {
             type: String,
             default: 'ul'
         },
+
+        'itemTag': {
+            type: String,
+            default: 'li'
+
+        },
+
         items: {
             type: Array,
             default: []
         }
+
     }
 
 });
@@ -46,14 +60,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
     props: {
 
+        tag: {
+            type: String,
+            default: 'li'
+        },
+
         item: {
-            label: '',
-            children: {}
+            type: Object,
+            default: {
+                name: '',
+                children: []
+            }
         }
 
     },
@@ -68,7 +99,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     computed: {
 
         isFolder: function isFolder() {
-            return this.item.children && this.item.children.length > 0;
+            return typeof this.item.children !== 'undefined' && this.item.children.length > 0;
         }
 
     },
@@ -210,8 +241,25 @@ var render = function() {
     _vm._l(_vm.items, function(item, index) {
       return _c("treeview-item", {
         key: index,
-        staticClass: "treeview-item",
-        attrs: { item: item }
+        attrs: { tag: _vm.itemTag, item: item },
+        scopedSlots: _vm._u([
+          {
+            key: "label",
+            fn: function(item) {
+              return [
+                _c("span", { class: { "font-bold": item.isFolder } }, [
+                  _vm._v(_vm._s(item.label))
+                ]),
+                _vm._v(" "),
+                item.isFolder
+                  ? _c("span", [
+                      _vm._v("[" + _vm._s(item.open ? "-" : "+") + "]")
+                    ])
+                  : _vm._e()
+              ]
+            }
+          }
+        ])
       })
     })
   )
@@ -235,16 +283,33 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("li", { staticClass: "treeview-item" }, [
+  return _c(_vm.tag, { tag: "component" }, [
     _c(
       "div",
-      { class: { "font-bold": _vm.isFolder }, on: { click: _vm.toggle } },
+      { on: { click: _vm.toggle } },
       [
-        _vm._v("\n        " + _vm._s(_vm.item.name) + "\n        "),
-        _vm.isFolder
-          ? _c("span", [_vm._v("[" + _vm._s(_vm.open ? "-" : "+") + "]")])
-          : _vm._e()
-      ]
+        _vm._t(
+          "label",
+          [
+            _c("span", { class: { "font-bold": _vm.item.isFolder } }, [
+              _vm._v(_vm._s(_vm.item.label))
+            ]),
+            _vm._v(" "),
+            _vm.item.isFolder
+              ? _c("span", [
+                  _vm._v("[" + _vm._s(_vm.item.open ? "-" : "+") + "]")
+                ])
+              : _vm._e()
+          ],
+          {
+            label: _vm.item.name,
+            children: _vm.item.children,
+            isFolder: this.isFolder,
+            open: this.open
+          }
+        )
+      ],
+      2
     ),
     _vm._v(" "),
     _vm.open
@@ -252,7 +317,43 @@ var render = function() {
           "ul",
           { staticClass: "treeview-menu" },
           _vm._l(_vm.item.children, function(child, index) {
-            return _c("treeview-item", { key: index, attrs: { item: child } })
+            return _c("treeview-item", {
+              key: index,
+              attrs: { item: child },
+              scopedSlots: _vm._u([
+                {
+                  key: "label",
+                  fn: function(item) {
+                    return [
+                      _vm._t(
+                        "label",
+                        [
+                          _c(
+                            "span",
+                            { class: { "font-bold": item.isFolder } },
+                            [_vm._v(_vm._s(item.label))]
+                          ),
+                          _vm._v(" "),
+                          item.isFolder
+                            ? _c("span", [
+                                _vm._v(
+                                  "[" + _vm._s(item.open ? "-" : "+") + "]"
+                                )
+                              ])
+                            : _vm._e()
+                        ],
+                        {
+                          label: item.name,
+                          children: item.children,
+                          isFolder: this.isFolder,
+                          open: this.open
+                        }
+                      )
+                    ]
+                  }
+                }
+              ])
+            })
           })
         )
       : _vm._e()

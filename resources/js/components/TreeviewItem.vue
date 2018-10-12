@@ -1,13 +1,22 @@
 <template>
-    <li class="treeview-item">
-        <div :class="{'font-bold': isFolder}" @click="toggle">
-            {{ item.name }}
-            <span v-if="isFolder">[{{ open ? '-' : '+' }}]</span>
+    <component :is="tag">
+        <div @click="toggle">
+            <slot name="label" :label="item.name" :children="item.children" :isFolder="this.isFolder" :open="this.open">
+                <span :class="{'font-bold': item.isFolder}">{{ item.label }}</span>
+                <span v-if="item.isFolder">[{{ item.open ? '-' : '+' }}]</span>
+            </slot>
         </div>
         <ul class="treeview-menu" v-if="open">
-            <treeview-item v-for="(child, index) in item.children" :key="index" :item="child"></treeview-item>
+            <treeview-item v-for="(child, index) in item.children" :key="index" :item="child">
+                <template slot="label" slot-scope="item">
+                    <slot name="label" :label="item.name" :children="item.children" :isFolder="this.isFolder" :open="this.open">
+                        <span :class="{'font-bold': item.isFolder}">{{ item.label }}</span>
+                        <span v-if="item.isFolder">[{{ item.open ? '-' : '+' }}]</span>
+                    </slot>
+                </template>
+            </treeview-item>
         </ul>
-    </li>
+    </component>
 </template>
 
 <script>
@@ -15,9 +24,17 @@
 
         props: {
 
+            tag: {
+                type: String,
+                default: 'li'
+            },
+
             item: {
-                label: '',
-                children: {}
+                type: Object,
+                default: {
+                    name: '',
+                    children: []
+                }
             }
 
         },
@@ -33,7 +50,7 @@
         computed: {
 
             isFolder: function () {
-                return this.item.children && this.item.children.length > 0;
+                return (typeof this.item.children !== 'undefined') && (this.item.children.length > 0);
             }
 
         },

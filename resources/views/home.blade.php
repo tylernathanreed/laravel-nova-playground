@@ -26,6 +26,7 @@
     <p>(You can double click on an item to turn it into a folder.)</p>
 
     <!-- the demo root element -->
-    <treeview tag="ul" class="treeview" :items="tree.items"></treeview>
+    <treeview tag="aside" class="main-sidebar bg-grad-sidebar" :items="tree.items" item-tag="div">
+    </treeview>
 
 @endsection
