@@ -46,6 +46,7 @@
         "marked": "^0.3.19",
         "moment": "^2.22.2",
         "moment-timezone": "^0.5.21",
+        "npm": "^6.4.1",
         "numeral": "^2.0.6",
         "pikaday": "^1.7.0",
         "places.js": "^1.7.3",
