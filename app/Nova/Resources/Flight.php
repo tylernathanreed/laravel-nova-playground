@@ -4,7 +4,10 @@ namespace App\Nova\Resources;
 
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Otwell\CustomField\CustomField;
+use NovaComponents\ValueToggle\ValueToggle;
 
 class Flight extends Resource
 {
@@ -45,6 +48,15 @@ class Flight extends Resource
         return [
             ID::make('ID', 'id')->sortable(),
             CustomField::make('Name', 'name')->sortable()->rules('required'),
+            Select::make('Lands On', 'lands_on')->options([
+                'land' => 'Land',
+                'water' => 'Water'
+            ]),
+            // Number::make('Wheel Count', 'wheel_count')->min(1)->max(1000)->step(1)
+            ValueToggle::make(Number::make('Wheel Count', 'wheel_count')->min(1)->max(1000)->step(1), 'lands_on == "land"')
+            // Number::make('Wheel Count', 'wheel_count')->min(1)->max(1000)->step(1)->valueToggle(function() {
+            //     return false;
+            // })
         ];
     }
 

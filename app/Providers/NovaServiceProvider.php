@@ -17,6 +17,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function boot()
     {
         parent::boot();
+
+        Nova::remoteScript(url('js/manifest.js'));
+        Nova::remoteScript(url('js/vendor.js'));
+        Nova::remoteScript(url('js/app.js'));
+
     }
 
     /**
