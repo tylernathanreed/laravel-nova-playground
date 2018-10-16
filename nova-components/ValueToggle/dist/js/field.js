@@ -185,9 +185,9 @@ module.exports = __webpack_require__(13);
 /***/ (function(module, exports, __webpack_require__) {
 
 Nova.booting(function (Vue, router) {
-    Vue.component('index-ValueToggle', __webpack_require__(3));
-    Vue.component('detail-ValueToggle', __webpack_require__(6));
-    Vue.component('form-ValueToggle', __webpack_require__(9));
+    Vue.component('index-value-toggle', __webpack_require__(3));
+    Vue.component('detail-value-toggle', __webpack_require__(6));
+    Vue.component('form-value-toggle', __webpack_require__(9));
 });
 
 /***/ }),
@@ -329,6 +329,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['resource', 'resourceName', 'resourceId', 'field']
@@ -342,7 +347,14 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("panel-item", { attrs: { field: _vm.field } })
+  return _c("detail-" + _vm.field.field.component, {
+    tag: "component",
+    attrs: {
+      "resource-id": _vm.resourceId,
+      "resource-name": _vm.resourceName,
+      field: _vm.field.field
+    }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -409,6 +421,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 //
 //
 //
@@ -458,7 +472,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          *
          * @return {object|null}
          */
-        getNodeContainingFields: function getNodeContainingFields() {
+        getFormComponent: function getFormComponent() {
 
             // Start with the parent
             var node = this.$parent;
@@ -490,7 +504,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getField: function getField(key) {
 
             // Determine the node containing the fields
-            var node = this.getNodeContainingFields() || {};
+            var node = this.getFormComponent() || {};
 
             // Determine the fields
             var fields = node.fields || [];
@@ -538,12 +552,104 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          */
         attr: function attr(key) {
             return this.getFieldValue(key);
+        },
+
+
+        /**
+         * Returns all of the form field components.
+         *
+         * @return {Array}
+         */
+        getFormFieldComponents: function getFormFieldComponents() {
+
+            // Determine the form descendants
+            var descendants = this.getFormDescendants();
+
+            // Return the form field components
+            return descendants.filter(function (component) {
+
+                // All of the form field elements are forced to begin with "form".
+                // If a Vue Component doesn't have name, or it doesn't use the
+                // correct convention, we can immediately exclude it here.
+
+                // Make sure the component name begins with "form-"
+                if (component.$options.name.substring(0, 5) !== 'form-') {
+                    return false;
+                }
+
+                // We're only interested in fields that contain a value. Since
+                // labels used the "form-" convention, this will knock them
+                // out, as well as anything else without a known value.
+
+                // Make sure the component can provide a value
+                if (!component.hasOwnProperty('value')) {
+                    return false;
+                }
+
+                // Just in case something both follows the condition, and has
+                // a value, we'll also make sure that a field attribute is
+                // provided, since we'll need to know that eventually.
+
+                // Make sure the component has a field attribute
+                if (typeof component.fieldAttribute === 'undefined' || component.fieldAttribute === '') {
+                    return false;
+                }
+
+                // Component is a form field
+                return true;
+            });
+        },
+
+
+        /**
+         * Returns all of the descendants for the form.
+         *
+         * @return {Array}
+         */
+        getFormDescendants: function getFormDescendants() {
+            return this.getComponentDescendants(this.getFormComponent());
+        },
+
+
+        /**
+         * Returns all of the descendants for the specified component.
+         *
+         * @param  {VueComponent}  component
+         *
+         * @return {Array}
+         */
+        getComponentDescendants: function getComponentDescendants(component) {
+
+            // Initialize the list of descendants
+            var descendants = [];
+
+            // Determine the direct children of the component
+            var children = component.$children;
+
+            // Iterate through each child
+            for (var i = 0; i < children.length; i++) {
+
+                // Determine the current child
+                var child = children[i];
+
+                // Add the child to the list of descendants
+                descendants.push(child);
+
+                // Determine the grandchildren
+                var grandchildren = this.getComponentDescendants(child);
+
+                // Push the grandchildren to the list of descendants
+                descendants.push.apply(descendants, _toConsumableArray(grandchildren));
+            }
+
+            // Return the descendants
+            return descendants;
         }
     },
 
     computed: {
         form: function form() {
-            return this.getNodeContainingFields();
+            return this.getFormComponent();
         }
     }
 

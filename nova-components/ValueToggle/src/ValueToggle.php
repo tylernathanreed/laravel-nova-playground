@@ -12,7 +12,7 @@ class ValueToggle extends Field implements JsonSerializable
      *
      * @var string
      */
-    public $component = 'ValueToggle';
+    public $component = 'value-toggle';
 
     /**
 	 * The field being toggled.
@@ -53,6 +53,8 @@ class ValueToggle extends Field implements JsonSerializable
             'component' => $this->component,
             'field' => $this->field,
             'condition' => $this->condition,
+            'prefixComponent' => true,
+            'panel' => $this->panel
         ];
     }
 }

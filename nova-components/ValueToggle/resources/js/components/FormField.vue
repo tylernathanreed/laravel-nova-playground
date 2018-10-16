@@ -44,7 +44,7 @@ export default {
          *
          * @return {object|null}
          */
-        getNodeContainingFields() {
+        getFormComponent() {
 
             // Start with the parent
             let node = this.$parent;
@@ -77,7 +77,7 @@ export default {
         getField(key) {
 
             // Determine the node containing the fields
-            let node = this.getNodeContainingFields() || {};
+            let node = this.getFormComponent() || {};
 
             // Determine the fields
             let fields = node.fields || [];
@@ -126,6 +126,99 @@ export default {
          */
         attr(key) {
             return this.getFieldValue(key);
+        },
+
+        /**
+         * Returns all of the form field components.
+         *
+         * @return {Array}
+         */
+         getFormFieldComponents() {
+
+            // Determine the form descendants
+            let descendants = this.getFormDescendants();
+
+            // Return the form field components
+            return descendants.filter(function(component) {
+
+                // All of the form field elements are forced to begin with "form".
+                // If a Vue Component doesn't have name, or it doesn't use the
+                // correct convention, we can immediately exclude it here.
+
+                // Make sure the component name begins with "form-"
+                if(component.$options.name.substring(0, 5) !== 'form-') {
+                    return false;
+                }
+
+                // We're only interested in fields that contain a value. Since
+                // labels used the "form-" convention, this will knock them
+                // out, as well as anything else without a known value.
+
+                // Make sure the component can provide a value
+                if(!component.hasOwnProperty('value')) {
+                    return false;
+                }
+
+                // Just in case something both follows the condition, and has
+                // a value, we'll also make sure that a field attribute is
+                // provided, since we'll need to know that eventually.
+
+                // Make sure the component has a field attribute
+                if(typeof component.fieldAttribute === 'undefined' || component.fieldAttribute === '') {
+                    return false;
+                }
+
+                // Component is a form field
+                return true;
+
+            });
+
+         },
+
+        /**
+         * Returns all of the descendants for the form.
+         *
+         * @return {Array}
+         */
+        getFormDescendants() {
+            return this.getComponentDescendants(this.getFormComponent());
+        },
+
+        /**
+         * Returns all of the descendants for the specified component.
+         *
+         * @param  {VueComponent}  component
+         *
+         * @return {Array}
+         */
+        getComponentDescendants(component) {
+
+            // Initialize the list of descendants
+            let descendants = [];
+
+            // Determine the direct children of the component
+            let children = component.$children;
+
+            // Iterate through each child
+            for(let i = 0; i < children.length; i++) {
+
+                // Determine the current child
+                let child = children[i];
+
+                // Add the child to the list of descendants
+                descendants.push(child);
+
+                // Determine the grandchildren
+                let grandchildren = this.getComponentDescendants(child);
+
+                // Push the grandchildren to the list of descendants
+                descendants.push(...grandchildren);
+
+            }
+
+            // Return the descendants
+            return descendants;
+
         }
 
     },
@@ -133,7 +226,7 @@ export default {
     computed: {
 
         form() {
-            return this.getNodeContainingFields();
+            return this.getFormComponent();
         }
 
     }

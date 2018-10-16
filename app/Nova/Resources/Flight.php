@@ -2,8 +2,10 @@
 
 namespace App\Nova\Resources;
 
+use Laravel\Nova\Panel;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Otwell\CustomField\CustomField;
@@ -53,10 +55,13 @@ class Flight extends Resource
                 'water' => 'Water'
             ]),
             // Number::make('Wheel Count', 'wheel_count')->min(1)->max(1000)->step(1)
-            ValueToggle::make(Number::make('Wheel Count', 'wheel_count')->min(1)->max(1000)->step(1), 'lands_on == "land"')
+            ValueToggle::make(Number::make('Wheel Count', 'wheel_count')->min(1)->max(1000)->step(1), 'lands_on == "land"'),
             // Number::make('Wheel Count', 'wheel_count')->min(1)->max(1000)->step(1)->valueToggle(function() {
             //     return false;
             // })
+            new Panel('Example Panel', [
+                Number::make('Other Count', 'wheel_count')->min(1)->max(1000)->step(1)
+            ])
         ];
     }
 

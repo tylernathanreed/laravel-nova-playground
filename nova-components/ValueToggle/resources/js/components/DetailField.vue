@@ -1,5 +1,10 @@
 <template>
-    <panel-item :field="field" />
+    <component
+        :is="'detail-' + field.field.component"
+        :resource-id="resourceId"
+        :resource-name="resourceName"
+        :field="field.field"
+    />
 </template>
 
 <script>
