@@ -2,6 +2,7 @@
 
 namespace NovaComponents\ValueToggle;
 
+use Closure;
 use JsonSerializable;
 use Laravel\Nova\Fields\Field;
 
@@ -24,7 +25,7 @@ class ValueToggle extends Field implements JsonSerializable
     /**
      * The condition in which the field appears.
      *
-     * @var string
+     * @var \NovaComponents\ValueToggle\ToggleBuilder
      */
     public $condition;
 
@@ -32,14 +33,14 @@ class ValueToggle extends Field implements JsonSerializable
      * Create a new field.
      *
      * @param  \Laravel\Nova\Fields\Field  $field
-     * @param  string                      $condition
+     * @param  \Closure                    $condition
      *
      * @return void
      */
-    public function __construct(Field $field, $condition)
+    public function __construct(Field $field, Closure $condition)
     {
         $this->field = $field;
-        $this->condition = $condition;
+        $this->condition = ToggleBuilder::make($condition);
     }
 
     /**

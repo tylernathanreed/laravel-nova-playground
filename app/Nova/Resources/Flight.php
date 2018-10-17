@@ -55,7 +55,9 @@ class Flight extends Resource
                 'water' => 'Water'
             ]),
             // Number::make('Wheel Count', 'wheel_count')->min(1)->max(1000)->step(1)
-            ValueToggle::make(Number::make('Wheel Count', 'wheel_count')->min(1)->max(1000)->step(1), 'lands_on == "land"'),
+            ValueToggle::make(Number::make('Wheel Count', 'wheel_count')->min(1)->max(1000)->step(1), function($toggle) {
+                return $toggle->where('lands_on', '=', 'land');
+            }),
             // Number::make('Wheel Count', 'wheel_count')->min(1)->max(1000)->step(1)->valueToggle(function() {
             //     return false;
             // })

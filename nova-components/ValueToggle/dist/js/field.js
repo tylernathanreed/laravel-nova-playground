@@ -421,23 +421,26 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_mixins__ = __webpack_require__(20);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["FormField"], __WEBPACK_IMPORTED_MODULE_0_laravel_nova__["HandlesValidationErrors"]],
+
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["FormField"], __WEBPACK_IMPORTED_MODULE_0_laravel_nova__["HandlesValidationErrors"], __WEBPACK_IMPORTED_MODULE_1__mixins_mixins__["a" /* FormValues */], __WEBPACK_IMPORTED_MODULE_1__mixins_mixins__["b" /* ToggleBuilder */]],
 
     props: ['resourceName', 'resourceId', 'field'],
 
@@ -464,186 +467,6 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
          */
         handleChange: function handleChange(value) {
             this.value = value;
-        },
-
-
-        /**
-         * Returns the node that contains the fields for the form.
-         *
-         * @return {object|null}
-         */
-        getFormComponent: function getFormComponent() {
-
-            // Start with the parent
-            var node = this.$parent;
-
-            // Walk up the parent chain
-            while (typeof node !== 'undefined' && node !== null) {
-
-                // Check for a "fields" property
-                if (node.hasOwnProperty('fields')) {
-                    return node;
-                }
-
-                // Walk up the chain
-                node = node.$parent;
-            }
-
-            // Unknown
-            return null;
-        },
-
-
-        /**
-         * Returns the field with the specified attribute name.
-         *
-         * @param  {string}  key
-         *
-         * @return {object|undefined}
-         */
-        getField: function getField(key) {
-
-            // Determine the node containing the fields
-            var node = this.getFormComponent() || {};
-
-            // Determine the fields
-            var fields = node.fields || [];
-
-            // Search the fields for the specified field
-            for (var i = 0; i < fields.length; i++) {
-
-                // Determine the field
-                var field = fields[i];
-
-                // Return the field on a match
-                if (field.attribute == key) {
-                    return field;
-                }
-            }
-
-            // Unknown
-            return undefined;
-        },
-
-
-        /**
-         * Returns the value for the specified field.
-         *
-         * @param  {string}  key
-         *
-         * @return {mixed}
-         */
-        getFieldValue: function getFieldValue(key) {
-
-            // Determine the field
-            var field = this.getField(key) || {};
-
-            // Return the value
-            return field.value;
-        },
-
-
-        /**
-         * Returns the value for the specified attibute key.
-         *
-         * @param  {string}  key
-         *
-         * @return {mixed}
-         */
-        attr: function attr(key) {
-            return this.getFieldValue(key);
-        },
-
-
-        /**
-         * Returns all of the form field components.
-         *
-         * @return {Array}
-         */
-        getFormFieldComponents: function getFormFieldComponents() {
-
-            // Determine the form descendants
-            var descendants = this.getFormDescendants();
-
-            // Return the form field components
-            return descendants.filter(function (component) {
-
-                // All of the form field elements are forced to begin with "form".
-                // If a Vue Component doesn't have name, or it doesn't use the
-                // correct convention, we can immediately exclude it here.
-
-                // Make sure the component name begins with "form-"
-                if (component.$options.name.substring(0, 5) !== 'form-') {
-                    return false;
-                }
-
-                // We're only interested in fields that contain a value. Since
-                // labels used the "form-" convention, this will knock them
-                // out, as well as anything else without a known value.
-
-                // Make sure the component can provide a value
-                if (!component.hasOwnProperty('value')) {
-                    return false;
-                }
-
-                // Just in case something both follows the condition, and has
-                // a value, we'll also make sure that a field attribute is
-                // provided, since we'll need to know that eventually.
-
-                // Make sure the component has a field attribute
-                if (typeof component.fieldAttribute === 'undefined' || component.fieldAttribute === '') {
-                    return false;
-                }
-
-                // Component is a form field
-                return true;
-            });
-        },
-
-
-        /**
-         * Returns all of the descendants for the form.
-         *
-         * @return {Array}
-         */
-        getFormDescendants: function getFormDescendants() {
-            return this.getComponentDescendants(this.getFormComponent());
-        },
-
-
-        /**
-         * Returns all of the descendants for the specified component.
-         *
-         * @param  {VueComponent}  component
-         *
-         * @return {Array}
-         */
-        getComponentDescendants: function getComponentDescendants(component) {
-
-            // Initialize the list of descendants
-            var descendants = [];
-
-            // Determine the direct children of the component
-            var children = component.$children;
-
-            // Iterate through each child
-            for (var i = 0; i < children.length; i++) {
-
-                // Determine the current child
-                var child = children[i];
-
-                // Add the child to the list of descendants
-                descendants.push(child);
-
-                // Determine the grandchildren
-                var grandchildren = this.getComponentDescendants(child);
-
-                // Push the grandchildren to the list of descendants
-                descendants.push.apply(descendants, _toConsumableArray(grandchildren));
-            }
-
-            // Return the descendants
-            return descendants;
         }
     },
 
@@ -10798,15 +10621,17 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("form-" + _vm.field.field.component, {
-    tag: "component",
-    attrs: {
-      errors: _vm.errors,
-      "resource-id": _vm.resourceId,
-      "resource-name": _vm.resourceName,
-      field: _vm.field.field
-    }
-  })
+  return _vm.conditionIsTrue()
+    ? _c("form-" + _vm.field.field.component, {
+        tag: "component",
+        attrs: {
+          errors: _vm.errors,
+          "resource-id": _vm.resourceId,
+          "resource-name": _vm.resourceName,
+          field: _vm.field.field
+        }
+      })
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -10823,6 +10648,229 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+
+            methods: {
+
+                        /**
+                         * Returns the value for the specified attibute key.
+                         *
+                         * @param  {string}  key
+                         *
+                         * @return {mixed}
+                         */
+                        attr: function attr(key) {
+                                    return this.getFieldValue(key);
+                        },
+
+
+                        /**
+                         * Returns the value for the specified field.
+                         *
+                         * @param  {string}  key
+                         *
+                         * @return {mixed}
+                         */
+                        getFieldValue: function getFieldValue(key) {
+
+                                    // Determine the field
+                                    var field = this.getField(key) || {};
+
+                                    // Return the value
+                                    return field.value;
+                        },
+
+
+                        /**
+                         * Returns the field with the specified attribute name.
+                         *
+                         * @param  {string}  key
+                         *
+                         * @return {VueComponent|undefined}
+                         */
+                        getField: function getField(key) {
+
+                                    // Determine the fields
+                                    var fields = getFormFieldComponents();
+
+                                    // Search the fields for the specified field
+                                    for (var i = 0; i < fields.length; i++) {
+
+                                                // Determine the field
+                                                var field = fields[i];
+
+                                                // Return the field on a match
+                                                if (field.fieldAttribute == key) {
+                                                            return field;
+                                                }
+                                    }
+
+                                    // Unknown
+                                    return undefined;
+                        },
+
+
+                        /**
+                         * Returns all of the form field components.
+                         *
+                         * @return {Array}
+                         */
+                        getFormFieldComponents: function getFormFieldComponents() {
+
+                                    // Determine the form descendants
+                                    var descendants = this.getFormDescendants();
+
+                                    // Return the form field components
+                                    return descendants.filter(function (component) {
+
+                                                // All of the form field elements are forced to begin with "form".
+                                                // If a Vue Component doesn't have name, or it doesn't use the
+                                                // correct convention, we can immediately exclude it here.
+
+                                                // Make sure the component name begins with "form-"
+                                                if (component.$options.name.substring(0, 5) !== 'form-') {
+                                                            return false;
+                                                }
+
+                                                // We're only interested in fields that contain a value. Since
+                                                // labels used the "form-" convention, this will knock them
+                                                // out, as well as anything else without a known value.
+
+                                                // Make sure the component can provide a value
+                                                if (!component.hasOwnProperty('value')) {
+                                                            return false;
+                                                }
+
+                                                // Just in case something both follows the condition, and has
+                                                // a value, we'll also make sure that a field attribute is
+                                                // provided, since we'll need to know that eventually.
+
+                                                // Make sure the component has a field attribute
+                                                if (typeof component.fieldAttribute === 'undefined' || component.fieldAttribute === '') {
+                                                            return false;
+                                                }
+
+                                                // Component is a form field
+                                                return true;
+                                    });
+                        },
+
+
+                        /**
+                         * Returns all of the descendants for the form.
+                         *
+                         * @return {Array}
+                         */
+                        getFormDescendants: function getFormDescendants() {
+                                    return this.getComponentDescendants(this.getFormComponent());
+                        },
+
+
+                        /**
+                         * Returns the node that contains the fields for the form.
+                         *
+                         * @return {object|null}
+                         */
+                        getFormComponent: function getFormComponent() {
+
+                                    // Start with the parent
+                                    var node = this.$parent;
+
+                                    // Walk up the parent chain
+                                    while (typeof node !== 'undefined' && node !== null) {
+
+                                                // Check for a "fields" property
+                                                if (node.hasOwnProperty('fields')) {
+                                                            return node;
+                                                }
+
+                                                // Walk up the chain
+                                                node = node.$parent;
+                                    }
+
+                                    // Unknown
+                                    return null;
+                        },
+
+
+                        /**
+                         * Returns all of the descendants for the specified component.
+                         *
+                         * @param  {VueComponent}  component
+                         *
+                         * @return {Array}
+                         */
+                        getComponentDescendants: function getComponentDescendants(component) {
+
+                                    // Initialize the list of descendants
+                                    var descendants = [];
+
+                                    // Determine the direct children of the component
+                                    var children = component.$children;
+
+                                    // Iterate through each child
+                                    for (var i = 0; i < children.length; i++) {
+
+                                                // Determine the current child
+                                                var child = children[i];
+
+                                                // Add the child to the list of descendants
+                                                descendants.push(child);
+
+                                                // Determine the grandchildren
+                                                var grandchildren = this.getComponentDescendants(child);
+
+                                                // Push the grandchildren to the list of descendants
+                                                descendants.push.apply(descendants, _toConsumableArray(grandchildren));
+                                    }
+
+                                    // Return the descendants
+                                    return descendants;
+                        }
+            }
+});
+
+/***/ }),
+/* 20 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__FormValues__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ToggleBuilder__ = __webpack_require__(21);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__FormValues__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__ToggleBuilder__["a"]; });
+
+
+
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+
+	methods: {
+		conditionIsTrue: function conditionIsTrue() {
+			return true;
+		}
+	}
+
+});
 
 /***/ })
 /******/ ]);
