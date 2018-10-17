@@ -12,6 +12,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -20,6 +24,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         tag: {
             type: String,
             default: 'div'
+        },
+
+        toggleTag: {
+            type: String,
+            default: 'div'
+        },
+
+        toggleClass: {
+            type: String,
+            default: ''
         }
 
     },
@@ -163,7 +177,22 @@ var render = function() {
   return _c(
     _vm.tag,
     { tag: "component" },
-    [_vm._t("label"), _vm._v(" "), _vm.open ? _vm._t("menu") : _vm._e()],
+    [
+      _c(
+        _vm.toggleTag,
+        { tag: "component", class: _vm.toggleClass, on: { click: _vm.toggle } },
+        [
+          _vm._t("label"),
+          _vm._v(" "),
+          _vm.open ? _vm._t("label-open") : _vm._e(),
+          _vm._v(" "),
+          !_vm.open ? _vm._t("label-closed") : _vm._e()
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _vm.open ? _vm._t("menu") : _vm._e()
+    ],
     2
   )
 }
@@ -183,9 +212,6 @@ if (false) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__("./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -195,23 +221,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 __webpack_require__("./resources/js/bootstrap.js");
 
-
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('treeview', __webpack_require__("./resources/js/components/Treeview.vue"));
-
-window.addEventListener('load', function () {
-
-  var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
-
-    el: '#nova'
-
-  });
+Nova.booting(function (Vue, router) {
+  Vue.component('treeview', __webpack_require__("./resources/js/components/Treeview.vue"));
 });
 
 /***/ }),

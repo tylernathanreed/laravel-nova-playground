@@ -1,9 +1,7 @@
-/*
- * Component: Sidebar
- * ------------------
- */
-// Main Sidebar
-.main-sidebar {
+/*! Sidebar */
+
+// The wrapper container for the application's sidebar
+.sidebar {
 
     @apply .min-h-screen .flex-none .pt-header .w-sidebar;
 
@@ -38,60 +36,22 @@
     // }
 }
 
-.sidebar {
+// The top portion of the sidebar that contains the logo
+.sidebar-logo {
+    @apply .absolute .pin-t .pin-l .pin-r .bg-logo .flex .items-center .w-sidebar .h-header .px-6 .text-white;
+}
+
+// The remaining portion of the sidebar that contains navigational elements
+.sidebar-nav {
     padding-bottom: 10px;
 }
 
-// Remove border from form
-.sidebar-form {
-    input:focus {
-        border-color: transparent;
-    }
-}
-
-// Sidebar user panel
-// .user-panel {
-//   position: relative;
-//   width: 100%;
-//   padding: 10px;
-//   overflow: hidden;
-//   .clearfix();
-//   > .image > img {
-//     width: 100%;
-//     max-width: 45px;
-//     height: auto;
-//   }
-//   > .info {
-//     padding: 5px 5px 5px 15px;
-//     line-height: 1;
-//     position: absolute;
-//     left: 55px;
-//     > p {
-//       font-weight: 600;
-//       margin-bottom: 9px;
-//     }
-//     > a {
-//       text-decoration: none;
-//       padding-right: 5px;
-//       margin-top: 3px;
-//       font-size: 11px;
-//       > .fa,
-//       > .ion,
-//       > .glyphicon {
-//         margin-right: 3px;
-//       }
-//     }
-//   }
-// }
-
-// Sidebar menu
+// The root list wrapper
 .sidebar-menu {
 
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    @apply .list-reset;
 
-    //First Level
+    // First Level
     & > li {
 
         position: relative;
@@ -150,4 +110,29 @@
         display: block;
     }
 
+}
+
+// The individual sidebar items (contains the link and any nested items)
+.sidebar-item {
+
+}
+
+// The portion of the sidebar item that redirects the user
+.sidebar-link {
+  @apply .py-3 .px-6 .cursor-pointer .flex .items-center .font-normal .text-white .text-base .no-underline .select-none;
+}
+
+// The textual display portion of the sidebar item
+.sidebar-label {
+  @apply .select-none .flex-1;
+}
+
+// The container within sidebar items for nested sidebar items
+.sidebar-item-menu {
+  @apply .list-reset .pl-3 .bg-black-30%;
+}
+
+// Double nested sidebar items
+.sidebar-item-menu .sidebar-item-menu {
+  @apply .pl-6 .-ml-3;
 }

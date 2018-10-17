@@ -4927,7 +4927,7 @@ textarea.form-input:read-only,
 }
 
 .w-sidebar {
-  width: 13.75rem;
+  width: 16rem;
 }
 
 .w-editor-icon {
@@ -8061,7 +8061,7 @@ textarea.form-input:read-only,
   }
 
   .sm\:w-sidebar {
-    width: 13.75rem;
+    width: 16rem;
   }
 
   .sm\:w-editor-icon {
@@ -11196,7 +11196,7 @@ textarea.form-input:read-only,
   }
 
   .md\:w-sidebar {
-    width: 13.75rem;
+    width: 16rem;
   }
 
   .md\:w-editor-icon {
@@ -14331,7 +14331,7 @@ textarea.form-input:read-only,
   }
 
   .lg\:w-sidebar {
-    width: 13.75rem;
+    width: 16rem;
   }
 
   .lg\:w-editor-icon {
@@ -17466,7 +17466,7 @@ textarea.form-input:read-only,
   }
 
   .xl\:w-sidebar {
-    width: 13.75rem;
+    width: 16rem;
   }
 
   .xl\:w-editor-icon {
@@ -18208,39 +18208,44 @@ textarea.form-input:read-only,
 
 /*! Admin LTE */
 
-/*!
- *   AdminLTE v2.4.8
- *   Author: Almsaeed Studio
- *	 Website: Almsaeed Studio <https://adminlte.io>
- *   License: Open source - MIT
- *           Please visit http://opensource.org/licenses/MIT for more information
- */
+/*! Components */
 
-/*
- * Component: Sidebar
- * ------------------
- */
+/*! Sidebar */
 
-.main-sidebar {
+.sidebar {
   min-height: 100vh;
   -webkit-box-flex: 0;
       -ms-flex: none;
           flex: none;
   padding-top: 3.75rem;
-  width: 13.75rem;
+  width: 16rem;
 }
 
-.sidebar {
+.sidebar-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--logo);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 16rem;
+  height: 3.75rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  color: var(--white);
+}
+
+.sidebar-nav {
   padding-bottom: 10px;
-}
-
-.sidebar-form input:focus {
-  border-color: transparent;
 }
 
 .sidebar-menu {
   list-style: none;
-  margin: 0;
   padding: 0;
 }
 
@@ -18294,48 +18299,6 @@ textarea.form-input:read-only,
   display: block;
 }
 
-.treeview-menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  padding-left: 5px;
-}
-
-.treeview-menu .treeview-menu {
-  padding-left: 20px;
-}
-
-.treeview-menu > li {
-  margin: 0;
-}
-
-.treeview-menu > li > a {
-  padding: 5px 5px 5px 15px;
-  display: block;
-  font-size: 14px;
-}
-
-.treeview-menu > li > a > .fa,
-.treeview-menu > li > a > .glyphicon,
-.treeview-menu > li > a > .ion {
-  width: 20px;
-}
-
-.treeview-menu > li > a > .pull-right-container > .fa-angle-left,
-.treeview-menu > li > a > .pull-right-container > .fa-angle-down,
-.treeview-menu > li > a > .fa-angle-left,
-.treeview-menu > li > a > .fa-angle-down {
-  width: auto;
-}
-
-/*! Overrides */
-
-.navbar-laravel {
-  background-color: #fff;
-  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
-          box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
-}
-
 .sidebar-link {
   padding-top: .75rem;
   padding-bottom: .75rem;
@@ -18363,6 +18326,9 @@ textarea.form-input:read-only,
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 
 .sidebar-item-menu {
@@ -18375,6 +18341,14 @@ textarea.form-input:read-only,
 .sidebar-item-menu .sidebar-item-menu {
   padding-left: 1.5rem;
   margin-left: -0.75rem;
+}
+
+/*! Overrides */
+
+.navbar-laravel {
+  background-color: #fff;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
 }
 
 .pt-header {

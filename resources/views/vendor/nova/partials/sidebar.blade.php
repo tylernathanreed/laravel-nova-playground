@@ -1,13 +1,13 @@
 <!-- Sidebar -->
-<aside class="main-sidebar bg-grad-sidebar">
+<aside class="sidebar bg-grad-sidebar">
     <a href="{{ Nova::path() }}">
-        <div class="absolute pin-t pin-l pin-r bg-logo flex items-center w-sidebar h-header px-6 text-white">
+        <div class="sidebar-logo">
            @include('nova::partials.logo')
         </div>
     </a>
 
-    <section class="sidebar">
-    	<ul class="sidebar-menu list-reset">
+    <section class="sidebar-nav">
+    	<ul class="sidebar-menu">
 		    @foreach(Nova::availableTools(request()) as $tool)
 		        {!! $tool->renderNavigation() !!}
 		    @endforeach
