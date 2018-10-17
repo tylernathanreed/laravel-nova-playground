@@ -1,6 +1,6 @@
 <template>
     <component :is="tag">
-        <component :is="toggleTag" @click="toggle" :class="toggleClass">
+        <component :is="toggleTag" :class="toggleClass" @click="toggle">
             <slot name="label"></slot>
             <slot name="label-open" v-if="open"></slot>
             <slot name="label-closed" v-if="!open"></slot>

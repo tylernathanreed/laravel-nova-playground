@@ -9,7 +9,7 @@
             <span class="text-white sidebar-label">
                 {{ __('Resources') }}
             </span>
-        </template>
+
 
         <template slot="label-closed">
             <i class="fa fa-angle-left"></i>

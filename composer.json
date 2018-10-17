@@ -16,7 +16,8 @@
         "laravel/tinker": "^1.0",
         "reedware/laravel-blueprints": "*",
         "otwell/custom-field": "*",
-        "otwell/sidebar-tool": "*"
+        "otwell/sidebar-tool": "*",
+        "NovaComponents/ValueToggle": "*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
@@ -39,6 +40,10 @@
         {
             "type": "path",
             "url": "./nova-components/SidebarTool"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/ValueToggle"
         }
     ],
     "autoload": {
