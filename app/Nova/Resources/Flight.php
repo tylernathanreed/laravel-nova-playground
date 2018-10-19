@@ -61,9 +61,6 @@ class Flight extends Resource
             // Number::make('Wheel Count', 'wheel_count')->min(1)->max(1000)->step(1)->valueToggle(function() {
             //     return false;
             // })
-            new Panel('Example Panel', [
-                Number::make('Other Count', 'wheel_count')->min(1)->max(1000)->step(1)
-            ])
         ];
     }
 

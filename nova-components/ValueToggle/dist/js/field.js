@@ -177,7 +177,7 @@ module.exports = function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(2);
-module.exports = __webpack_require__(13);
+module.exports = __webpack_require__(16);
 
 
 /***/ }),
@@ -375,7 +375,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(10)
 /* template */
-var __vue_template__ = __webpack_require__(12)
+var __vue_template__ = __webpack_require__(15)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -421,7 +421,7 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_mixins__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_mixins__ = __webpack_require__(12);
 //
 //
 //
@@ -440,25 +440,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["FormField"], __WEBPACK_IMPORTED_MODULE_0_laravel_nova__["HandlesValidationErrors"], __WEBPACK_IMPORTED_MODULE_1__mixins_mixins__["a" /* FormValues */], __WEBPACK_IMPORTED_MODULE_1__mixins_mixins__["b" /* ToggleBuilder */]],
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["HandlesValidationErrors"], __WEBPACK_IMPORTED_MODULE_1__mixins_mixins__["a" /* FormValues */], __WEBPACK_IMPORTED_MODULE_1__mixins_mixins__["b" /* ToggleBuilder */]],
 
     props: ['resourceName', 'resourceId', 'field'],
 
+    data: function data() {
+        return {};
+    },
+
+    mounted: function mounted() {
+        var _this = this;
+
+        // Add a default fill method for the field
+        this.field.fill = this.fill;
+
+        // Register a global event for setting the field's value
+        Nova.$on(this.attribute + '-value', function (value) {
+            _this.value = value;
+        });
+    },
+
+    destroyed: function destroyed() {
+        Nova.$off(this.attribute + '-value');
+    },
+
     methods: {
-
-        /*
-         * Set the initial, internal value for the field.
-         */
-        setInitialValue: function setInitialValue() {
-            this.value = this.field.field.value || '';
-        },
-
 
         /**
          * Fill the given FormData object with the field's internal value.
          */
         fill: function fill(formData) {
-            formData.append(this.field.field.attribute, this.value || '');
+            this.child.fill(formData);
         },
 
 
@@ -466,13 +478,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          * Update the field's internal value.
          */
         handleChange: function handleChange(value) {
-            this.value = value;
+            this.child.handleChange(value);
         }
     },
 
     computed: {
         form: function form() {
             return this.getFormComponent();
+        },
+        child: function child() {
+            return this.$children[0];
+        },
+        value: function value() {
+            return this.child.value;
+        },
+        attribute: function attribute() {
+            return this.field.field.attribute;
         }
     }
 
@@ -10615,47 +10636,20 @@ module.exports = g;
 
 /***/ }),
 /* 12 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm.conditionIsTrue()
-    ? _c("form-" + _vm.field.field.component, {
-        tag: "component",
-        attrs: {
-          errors: _vm.errors,
-          "resource-id": _vm.resourceId,
-          "resource-name": _vm.resourceName,
-          field: _vm.field.field
-        }
-      })
-    : _vm._e()
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-c023248a", module.exports)
-  }
-}
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__FormValues__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ToggleBuilder__ = __webpack_require__(14);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__FormValues__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__ToggleBuilder__["a"]; });
+
+
+
+
 
 /***/ }),
 /* 13 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10704,7 +10698,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                         getField: function getField(key) {
 
                                     // Determine the fields
-                                    var fields = getFormFieldComponents();
+                                    var fields = this.getFormFieldComponents();
 
                                     // Search the fields for the specified field
                                     for (var i = 0; i < fields.length; i++) {
@@ -10844,33 +10838,323 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 });
 
 /***/ }),
-/* 20 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__FormValues__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ToggleBuilder__ = __webpack_require__(21);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__FormValues__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__ToggleBuilder__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ScriptGrammar_js__ = __webpack_require__(21);
 
 
-
-
-
-/***/ }),
-/* 21 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
+
+	data: function data() {
+
+		return {
+			'expression': this.newToggleExpression()
+		};
+	},
 
 	methods: {
 		conditionIsTrue: function conditionIsTrue() {
-			return true;
+			return this.expression() == true;
+		},
+		newToggleExpression: function newToggleExpression() {
+			return this.newScriptGrammar().compile(this.field.condition);
+		},
+		newScriptGrammar: function newScriptGrammar() {
+
+			var grammar = new __WEBPACK_IMPORTED_MODULE_0__ScriptGrammar_js__["a" /* default */]();
+
+			grammar.setColumnResolver(this.attr);
+
+			return grammar;
 		}
 	}
 
 });
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.conditionIsTrue()
+    ? _c("form-" + _vm.field.field.component, {
+        tag: "component",
+        attrs: {
+          errors: _vm.errors,
+          "resource-id": _vm.resourceId,
+          "resource-name": _vm.resourceName,
+          field: _vm.field.field
+        }
+      })
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-c023248a", module.exports)
+  }
+}
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var ScriptGrammar = function () {
+
+  /**
+   * Creates and returns a new script grammar instance.
+   *
+   * @param  {object}  options
+   *
+   * @return {this}
+   */
+  function ScriptGrammar() {
+    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, ScriptGrammar);
+
+    this.columnResolver = options.columnResolver || function () {
+      return null;
+    };
+  }
+
+  /**
+   * Sets the column resolver for this grammar.
+   *
+   * @param  {function}
+   *
+   * @return {this}
+   */
+
+
+  _createClass(ScriptGrammar, [{
+    key: 'setColumnResolver',
+    value: function setColumnResolver(resolver) {
+
+      this.columnResolver = resolver;
+
+      return this;
+    }
+
+    /**
+     * Compile the "where" portions of the query.
+     *
+     * @param  {object}  query
+     *
+     * @return {function}
+     */
+
+  }, {
+    key: 'compile',
+    value: function compile(query) {
+
+      return this.compileWheres(query);
+    }
+
+    /**
+     * Compile the "where" portions of the query.
+     *
+     * @param  {object}  query
+     *
+     * @return {function}
+     */
+
+  }, {
+    key: 'compileWheres',
+    value: function compileWheres(query) {
+
+      // Each type of where clauses has its own compiler function which is responsible
+      // for actually creating the where clauses SQL. This helps keep the code nice
+      // and maintainable since each clause has a very small method that it uses.
+
+      // Make sure the query has "where" clauses
+      if (typeof query.wheres === 'undefined' || query.wheres.length == 0) {
+        return function () {
+          return true;
+        };
+      }
+
+      // If we actually have some where clauses, we will strip off the first boolean
+      // operator, which is added by the query builders for convenience so we can
+      // avoid checking for the first clauses in each of the compilers methods.
+
+      // Compile the wheres into an array
+      var clauses = this.compileWheresToArray(query);
+
+      // If there aren't any clauses, stop here
+      if (clauses.length == 0) {
+        return function () {
+          return true;
+        };
+      }
+
+      // Evaluate the clauses into a boolean
+      return this.evaluateWhereClauses(query, clauses);
+    }
+
+    /**
+     * Compiles the "where" portions of the query into an array of clauses.
+     *
+     * @param  {object}  query
+     *
+     * @return {array}
+     */
+
+  }, {
+    key: 'compileWheresToArray',
+    value: function compileWheresToArray(query) {
+
+      var self = this;
+
+      return query.wheres.map(function (where) {
+
+        return {
+          'boolean': where.boolean,
+          'callback': self['where' + where.type](query, where)
+        };
+      });
+    }
+
+    /**
+     * Evaluates the specified clauses into a boolean value.
+     *
+     * @param  {object}  query
+     * @param  {array}   clauses
+     *
+     * @return {function}
+     */
+
+  }, {
+    key: 'evaluateWhereClauses',
+    value: function evaluateWhereClauses(query, clauses) {
+
+      return function () {
+
+        return clauses.reduce(function (result, clause) {
+
+          // Use the result of the first condition
+          if (result === null) {
+            return clause.callback();
+          }
+
+          // Determien the condition value
+          var value = clause.callback();
+
+          // Determine the result by the boolean
+          switch (clause.boolean) {
+
+            case 'and':
+              return result && value;
+            case 'or':
+              return result || value;
+
+          }
+        }, null);
+      };
+    }
+
+    /**
+     * Compiles the specified basic where clause.
+     *
+     * @param  {object}  $query
+     * @param  {object}  $where
+     *
+     * @return {function}
+     */
+
+  }, {
+    key: 'whereBasic',
+    value: function whereBasic(query, where) {
+
+      // Determine the value
+      var value = where.value;
+
+      // Determine the callback for the column value
+      var column = this.column(where.column);
+
+      // Determine the operator
+      var operator = where.operator;
+
+      // Determine the callback by the operator
+      switch (operator) {
+
+        case '=':
+          return function () {
+            return column() == value;
+          };
+        case '!=':
+          return function () {
+            return column() != value;
+          };
+        case '<>':
+          return function () {
+            return column() != value;
+          };
+        case '>':
+          return function () {
+            return column() > value;
+          };
+        case '>=':
+          return function () {
+            return column() >= value;
+          };
+        case '<':
+          return function () {
+            return column() < value;
+          };
+        case '<=':
+          return function () {
+            return column() <= value;
+          };
+
+      }
+    }
+
+    /**
+     * Returns a callback for accessing the specified column.
+     *
+     * @param  {string}  name
+     *
+     * @return {function}
+     */
+
+  }, {
+    key: 'column',
+    value: function column(name) {
+
+      return function () {
+        return this.columnResolver(name);
+      }.bind(this);
+    }
+  }]);
+
+  return ScriptGrammar;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (ScriptGrammar);
 
 /***/ })
 /******/ ]);

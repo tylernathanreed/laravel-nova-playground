@@ -40,7 +40,7 @@ export default {
         getField(key) {
 
             // Determine the fields
-            let fields = getFormFieldComponents();
+            let fields = this.getFormFieldComponents();
 
             // Search the fields for the specified field
             for(let i = 0; i < fields.length; i++) {

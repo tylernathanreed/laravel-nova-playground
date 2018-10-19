@@ -9,6 +9,15 @@ use Illuminate\Database\Query\Builder;
 
 class ToggleBuilder extends Builder implements JsonSerializable
 {
+    /**
+     * All of the available clause operators.
+     *
+     * @var array
+     */
+    public $operators = [
+        '=', '<', '>', '<=', '>=', '<>', '!='
+    ];
+
 	/**
 	 * Creates and returns a new toggle condition instance.
 	 *

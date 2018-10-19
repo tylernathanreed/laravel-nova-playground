@@ -11,36 +11,48 @@
 
 <script>
 
-import { FormField, HandlesValidationErrors } from 'laravel-nova'
+import { HandlesValidationErrors } from 'laravel-nova'
 import { FormValues, ToggleBuilder } from '../mixins/mixins'
 
 export default {
 
-    mixins: [FormField, HandlesValidationErrors, FormValues, ToggleBuilder],
+    mixins: [HandlesValidationErrors, FormValues, ToggleBuilder],
 
     props: ['resourceName', 'resourceId', 'field'],
 
-    methods: {
+    data: function() {
+        return {};
+    },
 
-        /*
-         * Set the initial, internal value for the field.
-         */
-        setInitialValue() {
-            this.value = this.field.field.value || ''
-        },
+    mounted: function() {
+
+        // Add a default fill method for the field
+        this.field.fill = this.fill;
+
+        // Register a global event for setting the field's value
+        Nova.$on(this.attribute + '-value', value => {
+            this.value = value;
+        });
+    },
+
+    destroyed: function() {
+        Nova.$off(this.attribute + '-value');
+    },
+
+    methods: {
 
         /**
          * Fill the given FormData object with the field's internal value.
          */
         fill(formData) {
-            formData.append(this.field.field.attribute, this.value || '')
+            this.child.fill(formData);
         },
 
         /**
          * Update the field's internal value.
          */
         handleChange(value) {
-            this.value = value
+            this.child.handleChange(value);
         }
 
     },
@@ -49,6 +61,18 @@ export default {
 
         form() {
             return this.getFormComponent();
+        },
+
+        child() {
+            return this.$children[0];
+        },
+
+        value() {
+            return this.child.value;
+        },
+
+        attribute() {
+            return this.field.field.attribute;
         }
 
     }
