@@ -45,7 +45,7 @@ export default {
          * Fill the given FormData object with the field's internal value.
          */
         fill(formData) {
-            this.child.fill(formData);
+            this.child.field.fill(formData);
         },
 
         /**
