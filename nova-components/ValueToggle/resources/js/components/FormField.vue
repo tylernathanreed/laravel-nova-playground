@@ -45,6 +45,11 @@ export default {
          * Fill the given FormData object with the field's internal value.
          */
         fill(formData) {
+
+            if(!this.child) {
+                return;
+            }
+
             this.child.field.fill(formData);
         },
 
@@ -52,6 +57,11 @@ export default {
          * Update the field's internal value.
          */
         handleChange(value) {
+
+            if(!this.child) {
+                return;
+            }
+
             this.child.handleChange(value);
         }
 
@@ -68,7 +78,7 @@ export default {
         },
 
         value() {
-            return this.child.value;
+            return this.child ? this.child.value : null;
         },
 
         attribute() {

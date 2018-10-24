@@ -260,7 +260,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("span", [_vm._v(_vm._s(_vm.field.value))])
+  return _c("span", [_vm._v(_vm._s(_vm.field.field.value))])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -470,6 +470,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          * Fill the given FormData object with the field's internal value.
          */
         fill: function fill(formData) {
+
+            if (!this.child) {
+                return;
+            }
+
             this.child.field.fill(formData);
         },
 
@@ -478,6 +483,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          * Update the field's internal value.
          */
         handleChange: function handleChange(value) {
+
+            if (!this.child) {
+                return;
+            }
+
             this.child.handleChange(value);
         }
     },
@@ -490,7 +500,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return this.$children[0];
         },
         value: function value() {
-            return this.child.value;
+            return this.child ? this.child.value : null;
         },
         attribute: function attribute() {
             return this.field.field.attribute;

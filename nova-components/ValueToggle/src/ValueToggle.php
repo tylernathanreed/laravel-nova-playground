@@ -5,8 +5,9 @@ namespace NovaComponents\ValueToggle;
 use Closure;
 use JsonSerializable;
 use Laravel\Nova\Fields\Field;
+use Laravel\Nova\Contracts\Resolvable;
 
-class ValueToggle implements JsonSerializable
+class ValueToggle implements JsonSerializable, Resolvable
 {
     /**
      * The vue component.
@@ -54,6 +55,19 @@ class ValueToggle implements JsonSerializable
     }
 
     /**
+     * Resolve the field's value.
+     *
+     * @param  mixed        $resource
+     * @param  string|null  $attribute
+     *
+     * @return void
+     */
+    public function resolve($resource, $attribute = null)
+    {
+        return $this->field->resolve($resource, $attribute);
+    }
+
+    /**
      * Prepare the panel for JSON serialization.
      *
      * @return array
@@ -65,7 +79,9 @@ class ValueToggle implements JsonSerializable
             'field' => $this->field,
             'condition' => $this->condition,
             'prefixComponent' => true,
-            'panel' => $this->panel
+            'panel' => $this->panel,
+            'indexName' => $this->field->name,
+            'textAlign' => $this->field->textAlign,
         ];
     }
 
