@@ -1,18 +1,18 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "content-hash": "bd0ed34bb0a2d40dc2967d41dd637b12",
     "packages": [
         {
             "name": "NovaComponents/ValueToggle",
-            "version": "dev-master",
+            "version": "9999999-dev",
             "dist": {
                 "type": "path",
                 "url": "./nova-components/ValueToggle",
-                "reference": "6f1f05087424a481fb59371dac68b5fb25afecc0",
+                "reference": "def3f1c0536e4738b09f296b236b308d1587dfbb",
                 "shasum": null
             },
             "require": {
@@ -1327,11 +1327,11 @@
         },
         {
             "name": "otwell/custom-field",
-            "version": "dev-master",
+            "version": "9999999-dev",
             "dist": {
                 "type": "path",
                 "url": "./nova-components/CustomField",
-                "reference": "1e53d4dc03a5f957f4ee2c07d1b8f094f404683b",
+                "reference": "1ffffc77afc7d55edb089395382bcf249560bd14",
                 "shasum": null
             },
             "require": {
@@ -1361,11 +1361,11 @@
         },
         {
             "name": "otwell/sidebar-tool",
-            "version": "dev-master",
+            "version": "9999999-dev",
             "dist": {
                 "type": "path",
                 "url": "./nova-components/SidebarTool",
-                "reference": "63668df85a1b2f36f088948a2c8ced64caee126a",
+                "reference": "f485727c88a17a6b122ea5de6bb64e1e7dcc4026",
                 "shasum": null
             },
             "require": {
@@ -1794,11 +1794,11 @@
         },
         {
             "name": "reedware/nova-treeview",
-            "version": "dev-master",
+            "version": "9999999-dev",
             "dist": {
                 "type": "path",
                 "url": "./packages/reedware/nova-treeview",
-                "reference": "a402fd1001ba4a5b754481f146d17e1ee93a5642",
+                "reference": "2d2b6068aff7124cd851709e1f2d6f411ca0e06a",
                 "shasum": null
             },
             "require": {
@@ -1808,7 +1808,7 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "Reedware\\NovaTreeview\\FieldServiceProvider"
+                        "Reedware\\NovaTreeview\\TreeviewServiceProvider"
                     ]
                 }
             },
