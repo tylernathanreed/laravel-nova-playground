@@ -11,14 +11,6 @@
             </span>
         </template>
 
-        <template slot="label-closed">
-            <i class="fa fa-angle-left"></i>
-        </template>
-
-        <template slot="label-open">
-            <i class="fa fa-angle-down"></i>
-        </template>
-
         <?php $showGroups = count(Nova::groups(request())) > 1; ?>
 
         <template slot="menu">
@@ -34,14 +26,6 @@
                                 <template slot="label">
                                     <i class="far fa-object-group sidebar-icon"></i>
                                     <span class="sidebar-label">{{ $group }}</span>
-                                </template>
-
-                                <template slot="label-closed">
-                                    <i class="fa fa-angle-left"></i>
-                                </template>
-
-                                <template slot="label-open">
-                                    <i class="fa fa-angle-down"></i>
                                 </template>
 
                                 <template slot="menu">

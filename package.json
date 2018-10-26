@@ -11,7 +11,9 @@
         "test": "jest",
         "watch:test": "jest --watch",
         "build-ValueToggle": "cd nova-components/ValueToggle && npm run dev",
-        "build-ValueToggle-prod": "cd nova-components/ValueToggle && npm run prod"
+        "build-ValueToggle-prod": "cd nova-components/ValueToggle && npm run prod",
+        "build-nova-treeview": "cd nova-components/NovaTreeview && npm run dev",
+        "build-nova-treeview-prod": "cd nova-components/NovaTreeview && npm run prod"
     },
     "devDependencies": {
         "@vue/test-utils": "^1.0.0-beta.16",

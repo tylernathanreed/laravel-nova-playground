@@ -13,6 +13,4 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Nova.booting((Vue, router) => {
-    Vue.component('treeview', require('./components/Treeview.vue'));
-});
+//
