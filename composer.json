@@ -17,8 +17,8 @@
         "reedware/laravel-blueprints": "*",
         "otwell/custom-field": "*",
         "otwell/sidebar-tool": "*",
-        "NovaComponents/ValueToggle": "*",
-        "reedware/nova-treeview": "*"
+        "reedware/nova-treeview": "*",
+        "reedware/nova-value-toggle": "*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
@@ -44,11 +44,11 @@
         },
         {
             "type": "path",
-            "url": "./nova-components/ValueToggle"
+            "url": "./packages/reedware/nova-treeview"
         },
         {
             "type": "path",
-            "url": "./packages/reedware/nova-treeview"
+            "url": "./packages/reedware/nova-value-toggle"
         }
     ],
     "autoload": {
