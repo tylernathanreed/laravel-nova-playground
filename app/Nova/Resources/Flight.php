@@ -9,7 +9,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Otwell\CustomField\CustomField;
-use NovaComponents\ValueToggle\ValueToggle;
+use Reedware\NovaValueToggle\ValueToggle;
 
 class Flight extends Resource
 {
