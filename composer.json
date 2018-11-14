@@ -18,7 +18,8 @@
         "otwell/custom-field": "*",
         "otwell/sidebar-tool": "*",
         "reedware/nova-treeview": "*",
-        "reedware/nova-value-toggle": "*"
+        "reedware/nova-value-toggle": "*",
+        "nova-components/action-gearbox": "*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
@@ -49,6 +50,10 @@
         {
             "type": "path",
             "url": "./packages/reedware/nova-value-toggle"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/ActionGearbox"
         }
     ],
     "autoload": {
