@@ -1,5 +1,9 @@
 <template>
     <div>
+        <span class="cursor-pointer text-70 hover:text-primary mr-3">
+            <icon type="actions-gearbox"/>
+        </span>
+
         <!-- View Resource Link -->
         <span v-if="resource.authorizedToView">
             <router-link

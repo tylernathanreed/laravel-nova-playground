@@ -18,8 +18,6 @@ __webpack_require__("./resources/js/bootstrap.js");
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-//
-
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
