@@ -1,93 +1,99 @@
 <template>
     <div>
-        <span class="cursor-pointer text-70 hover:text-primary mr-3">
-            <icon type="actions-gearbox"/>
-        </span>
+        <dropdown class="bg-30 hover:bg-40 mr-3 rounded">
+            <dropdown-trigger class="px-3" slot-scope="{toggle}" :handle-click="toggle">
+                <icon type="actions-gearbox" class="text-80" />
+            </dropdown-trigger>
 
-        <!-- View Resource Link -->
-        <span v-if="resource.authorizedToView">
-            <router-link
-                :data-testid="`${testId}-view-button`"
-                :dusk="`${resource['id'].value}-view-button`"
-                class="cursor-pointer text-70 hover:text-primary mr-3"
-                :to="{ name: 'detail', params: {
-                    resourceName: resourceName,
-                    resourceId: resource['id'].value
-                }}"
-                :title="__('View')"
-            >
-                <icon type="view" width="22" height="18" view-box="0 0 22 16" />
-            </router-link>
-        </span>
+            <dropdown-menu slot="menu" width="200" direction="rtl">
+                <div class="text-left">
+                    <!-- View Resource Link -->
+                    <span v-if="resource.authorizedToView">
+                        <router-link
+                            :data-testid="`${testId}-view-button`"
+                            :dusk="`${resource['id'].value}-view-button`"
+                            class="cursor-pointer text-70 hover:text-primary mr-3 p-3 block"
+                            :to="{ name: 'detail', params: {
+                                resourceName: resourceName,
+                                resourceId: resource['id'].value
+                            }}"
+                            :title="__('View')"
+                        >
+                            <icon type="view" width="22" height="18" view-box="0 0 22 16" />
+                        </router-link>
+                    </span>
 
-        <span v-if="resource.authorizedToUpdate">
-            <!-- Edit Pivot Button -->
-            <router-link
-                v-if="relationshipType == 'belongsToMany' || relationshipType == 'morphToMany'"
-                class="cursor-pointer text-70 hover:text-primary mr-3"
-                :dusk="`${resource['id'].value}-edit-attached-button`"
-                :to="{
-                    name: 'edit-attached',
-                    params: {
-                        resourceName: viaResource,
-                        resourceId: viaResourceId,
-                        relatedResourceName: resourceName,
-                        relatedResourceId: resource['id'].value
-                    },
-                    query: {
-                        viaRelationship: viaRelationship
-                    }
-                }"
-                :title="__('Edit Attached')"
-            >
-                <icon type="edit" />
-            </router-link>
+                    <span v-if="resource.authorizedToUpdate">
+                        <!-- Edit Pivot Button -->
+                        <router-link
+                            v-if="relationshipType == 'belongsToMany' || relationshipType == 'morphToMany'"
+                            class="cursor-pointer text-70 hover:text-primary p-3 block"
+                            :dusk="`${resource['id'].value}-edit-attached-button`"
+                            :to="{
+                                name: 'edit-attached',
+                                params: {
+                                    resourceName: viaResource,
+                                    resourceId: viaResourceId,
+                                    relatedResourceName: resourceName,
+                                    relatedResourceId: resource['id'].value
+                                },
+                                query: {
+                                    viaRelationship: viaRelationship
+                                }
+                            }"
+                            :title="__('Edit Attached')"
+                        >
+                            <icon type="edit" />
+                        </router-link>
 
-            <!-- Edit Resource Link -->
-            <router-link
-                v-else
-                class="cursor-pointer text-70 hover:text-primary mr-3"
-                :dusk="`${resource['id'].value}-edit-button`"
-                :to="{
-                    name: 'edit',
-                    params: {
-                        resourceName: resourceName,
-                        resourceId: resource['id'].value
-                    },
-                    query: {
-                        viaResource: viaResource,
-                        viaResourceId: viaResourceId,
-                        viaRelationship: viaRelationship
-                    }
-                }"
-                :title="__('Edit')"
-            >
-                <icon type="edit" />
-            </router-link>
-        </span>
+                        <!-- Edit Resource Link -->
+                        <router-link
+                            v-else
+                            class="cursor-pointer text-70 hover:text-primary p-3 block"
+                            :dusk="`${resource['id'].value}-edit-button`"
+                            :to="{
+                                name: 'edit',
+                                params: {
+                                    resourceName: resourceName,
+                                    resourceId: resource['id'].value
+                                },
+                                query: {
+                                    viaResource: viaResource,
+                                    viaResourceId: viaResourceId,
+                                    viaRelationship: viaRelationship
+                                }
+                            }"
+                            :title="__('Edit')"
+                        >
+                            <icon type="edit" />
+                        </router-link>
+                    </span>
 
-        <!-- Delete Resource Link -->
-        <button
-            :data-testid="`${testId}-delete-button`"
-            :dusk="`${resource['id'].value}-delete-button`"
-            class="appearance-none cursor-pointer text-70 hover:text-primary mr-3"
-            v-if="resource.authorizedToDelete && (! resource.softDeleted || viaManyToMany)"
-            @click.prevent="openDeleteModal"
-            :title="__(viaManyToMany ? 'Detach' : 'Delete')"
-        >
-            <icon />
-        </button>
+                    <!-- Delete Resource Link -->
+                    <button
+                        :data-testid="`${testId}-delete-button`"
+                        :dusk="`${resource['id'].value}-delete-button`"
+                        class="appearance-none cursor-pointer text-70 hover:text-primary p-3 block"
+                        v-if="resource.authorizedToDelete && (! resource.softDeleted || viaManyToMany)"
+                        @click.prevent="openDeleteModal"
+                        :title="__(viaManyToMany ? 'Detach' : 'Delete')"
+                    >
+                        <icon />
+                    </button>
 
-        <!-- Restore Resource Link -->
-        <button
-            :dusk="`${resource['id'].value}-restore-button`"
-            class="appearance-none cursor-pointer text-70 hover:text-primary mr-3"
-            v-if="resource.authorizedToRestore && resource.softDeleted && ! viaManyToMany"
-            @click.prevent="openRestoreModal"
-            :title="__('Restore')"
-        >
-            <icon type="restore" with="20" height="21" />
-        </button>
+                    <!-- Restore Resource Link -->
+                    <button
+                        :dusk="`${resource['id'].value}-restore-button`"
+                        class="appearance-none cursor-pointer text-70 hover:text-primary p-3 block"
+                        v-if="resource.authorizedToRestore && resource.softDeleted && ! viaManyToMany"
+                        @click.prevent="openRestoreModal"
+                        :title="__('Restore')"
+                    >
+                        <icon type="restore" with="20" height="21" />
+                    </button>
+                </div>
+            </dropdown-menu>
+        </dropdown>
 
         <portal to="modals">
             <transition name="fade">
