@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -174,881 +174,6 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(2);
-module.exports = __webpack_require__(11);
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-Nova.booting(function (Vue, router) {
-    Vue.component('resource-index', __webpack_require__(17));
-    Vue.component('resource-table-row', __webpack_require__(3));
-    Vue.component('resource-table-row-actions', __webpack_require__(6));
-    Vue.component('icon-actions-gearbox', __webpack_require__(9));
-});
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(4)
-/* template */
-var __vue_template__ = __webpack_require__(5)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/ResourceTableRow.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-14075ac5", Component.options)
-  } else {
-    hotAPI.reload("data-v-14075ac5", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['testId', 'deleteResource', 'restoreResource', 'resource', 'resourcesSelected', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus'],
-
-    data: function data() {
-        return {
-            deleteModalOpen: false,
-            restoreModalOpen: false
-        };
-    },
-
-    methods: {
-        /**
-         * Select the resource in the parent component
-         */
-        toggleSelection: function toggleSelection() {
-            this.updateSelectionStatus(this.resource);
-        },
-        openDeleteModal: function openDeleteModal() {
-            this.deleteModalOpen = true;
-        },
-        confirmDelete: function confirmDelete() {
-            this.deleteResource(this.resource);
-            this.closeDeleteModal();
-        },
-        closeDeleteModal: function closeDeleteModal() {
-            this.deleteModalOpen = false;
-        },
-        openRestoreModal: function openRestoreModal() {
-            this.restoreModalOpen = true;
-        },
-        confirmRestore: function confirmRestore() {
-            this.restoreResource(this.resource);
-            this.closeRestoreModal();
-        },
-        closeRestoreModal: function closeRestoreModal() {
-            this.restoreModalOpen = false;
-        }
-    }
-});
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "tr",
-    { attrs: { dusk: _vm.resource["id"].value + "-row" } },
-    [
-      _c(
-        "td",
-        {
-          class: {
-            "w-16": _vm.shouldShowCheckboxes,
-            "w-8": !_vm.shouldShowCheckboxes
-          }
-        },
-        [
-          _vm.shouldShowCheckboxes
-            ? _c("checkbox", {
-                attrs: {
-                  "data-testid": _vm.testId + "-checkbox",
-                  dusk: _vm.resource["id"].value + "-checkbox",
-                  checked: _vm.checked
-                },
-                on: { input: _vm.toggleSelection }
-              })
-            : _vm._e()
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _vm._l(_vm.resource.fields, function(field) {
-        return _c(
-          "td",
-          [
-            _c("index-" + field.component, {
-              tag: "component",
-              class: "text-" + field.textAlign,
-              attrs: {
-                "resource-name": _vm.resourceName,
-                "via-resource": _vm.viaResource,
-                "via-resource-id": _vm.viaResourceId,
-                field: field
-              }
-            })
-          ],
-          1
-        )
-      }),
-      _vm._v(" "),
-      _c(
-        "td",
-        { staticClass: "td-fit text-right pr-6" },
-        [
-          _c("resource-table-row-actions", {
-            attrs: {
-              "delete-resource": _vm.deleteResource,
-              "restore-resource": _vm.restoreResource,
-              resource: _vm.resource,
-              "resource-name": _vm.resourceName,
-              "relationship-type": _vm.relationshipType,
-              "via-relationship": _vm.viaRelationship,
-              "via-resource": _vm.viaResource,
-              "via-resource-id": _vm.viaResourceId,
-              "via-many-to-many": _vm.viaManyToMany
-            }
-          })
-        ],
-        1
-      )
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-14075ac5", module.exports)
-  }
-}
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(7)
-/* template */
-var __vue_template__ = __webpack_require__(8)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/ResourceTableRowActions.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-68e11828", Component.options)
-  } else {
-    hotAPI.reload("data-v-68e11828", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['testId', 'deleteResource', 'restoreResource', 'resource', 'resourcesSelected', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus'],
-
-    data: function data() {
-        return {
-            deleteModalOpen: false,
-            restoreModalOpen: false
-        };
-    },
-
-    methods: {
-        /**
-         * Select the resource in the parent component
-         */
-        toggleSelection: function toggleSelection() {
-            this.updateSelectionStatus(this.resource);
-        },
-        openDeleteModal: function openDeleteModal() {
-            this.deleteModalOpen = true;
-        },
-        confirmDelete: function confirmDelete() {
-            this.deleteResource(this.resource);
-            this.closeDeleteModal();
-        },
-        closeDeleteModal: function closeDeleteModal() {
-            this.deleteModalOpen = false;
-        },
-        openRestoreModal: function openRestoreModal() {
-            this.restoreModalOpen = true;
-        },
-        confirmRestore: function confirmRestore() {
-            this.restoreResource(this.resource);
-            this.closeRestoreModal();
-        },
-        closeRestoreModal: function closeRestoreModal() {
-            this.restoreModalOpen = false;
-        }
-    }
-});
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "dropdown",
-        {
-          staticClass: "bg-30 hover:bg-40 mr-3 rounded",
-          scopedSlots: _vm._u([
-            {
-              key: "default",
-              fn: function(ref) {
-                var toggle = ref.toggle
-                return _c(
-                  "dropdown-trigger",
-                  { staticClass: "px-3", attrs: { "handle-click": toggle } },
-                  [
-                    _c("icon", {
-                      staticClass: "text-80",
-                      attrs: { type: "actions-gearbox" }
-                    })
-                  ],
-                  1
-                )
-              }
-            }
-          ])
-        },
-        [
-          _c(
-            "dropdown-menu",
-            {
-              attrs: { slot: "menu", width: "200", direction: "rtl" },
-              slot: "menu"
-            },
-            [
-              _c("div", { staticClass: "text-left" }, [
-                _vm.resource.authorizedToView
-                  ? _c(
-                      "span",
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass:
-                              "cursor-pointer text-70 hover:text-primary mr-3 p-3 block",
-                            attrs: {
-                              "data-testid": _vm.testId + "-view-button",
-                              dusk: _vm.resource["id"].value + "-view-button",
-                              to: {
-                                name: "detail",
-                                params: {
-                                  resourceName: _vm.resourceName,
-                                  resourceId: _vm.resource["id"].value
-                                }
-                              },
-                              title: _vm.__("View")
-                            }
-                          },
-                          [
-                            _c("icon", {
-                              attrs: {
-                                type: "view",
-                                width: "22",
-                                height: "18",
-                                "view-box": "0 0 22 16"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.resource.authorizedToUpdate
-                  ? _c(
-                      "span",
-                      [
-                        _vm.relationshipType == "belongsToMany" ||
-                        _vm.relationshipType == "morphToMany"
-                          ? _c(
-                              "router-link",
-                              {
-                                staticClass:
-                                  "cursor-pointer text-70 hover:text-primary p-3 block",
-                                attrs: {
-                                  dusk:
-                                    _vm.resource["id"].value +
-                                    "-edit-attached-button",
-                                  to: {
-                                    name: "edit-attached",
-                                    params: {
-                                      resourceName: _vm.viaResource,
-                                      resourceId: _vm.viaResourceId,
-                                      relatedResourceName: _vm.resourceName,
-                                      relatedResourceId:
-                                        _vm.resource["id"].value
-                                    },
-                                    query: {
-                                      viaRelationship: _vm.viaRelationship
-                                    }
-                                  },
-                                  title: _vm.__("Edit Attached")
-                                }
-                              },
-                              [_c("icon", { attrs: { type: "edit" } })],
-                              1
-                            )
-                          : _c(
-                              "router-link",
-                              {
-                                staticClass:
-                                  "cursor-pointer text-70 hover:text-primary p-3 block",
-                                attrs: {
-                                  dusk:
-                                    _vm.resource["id"].value + "-edit-button",
-                                  to: {
-                                    name: "edit",
-                                    params: {
-                                      resourceName: _vm.resourceName,
-                                      resourceId: _vm.resource["id"].value
-                                    },
-                                    query: {
-                                      viaResource: _vm.viaResource,
-                                      viaResourceId: _vm.viaResourceId,
-                                      viaRelationship: _vm.viaRelationship
-                                    }
-                                  },
-                                  title: _vm.__("Edit")
-                                }
-                              },
-                              [_c("icon", { attrs: { type: "edit" } })],
-                              1
-                            )
-                      ],
-                      1
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.resource.authorizedToDelete &&
-                (!_vm.resource.softDeleted || _vm.viaManyToMany)
-                  ? _c(
-                      "button",
-                      {
-                        staticClass:
-                          "appearance-none cursor-pointer text-70 hover:text-primary p-3 block",
-                        attrs: {
-                          "data-testid": _vm.testId + "-delete-button",
-                          dusk: _vm.resource["id"].value + "-delete-button",
-                          title: _vm.__(_vm.viaManyToMany ? "Detach" : "Delete")
-                        },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.openDeleteModal($event)
-                          }
-                        }
-                      },
-                      [_c("icon")],
-                      1
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.resource.authorizedToRestore &&
-                _vm.resource.softDeleted &&
-                !_vm.viaManyToMany
-                  ? _c(
-                      "button",
-                      {
-                        staticClass:
-                          "appearance-none cursor-pointer text-70 hover:text-primary p-3 block",
-                        attrs: {
-                          dusk: _vm.resource["id"].value + "-restore-button",
-                          title: _vm.__("Restore")
-                        },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.openRestoreModal($event)
-                          }
-                        }
-                      },
-                      [
-                        _c("icon", {
-                          attrs: { type: "restore", with: "20", height: "21" }
-                        })
-                      ],
-                      1
-                    )
-                  : _vm._e()
-              ])
-            ]
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "portal",
-        { attrs: { to: "modals" } },
-        [
-          _c(
-            "transition",
-            { attrs: { name: "fade" } },
-            [
-              _vm.deleteModalOpen
-                ? _c("delete-resource-modal", {
-                    attrs: { mode: _vm.viaManyToMany ? "detach" : "delete" },
-                    on: {
-                      confirm: _vm.confirmDelete,
-                      close: _vm.closeDeleteModal
-                    },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "default",
-                        fn: function(ref) {
-                          var uppercaseMode = ref.uppercaseMode
-                          var mode = ref.mode
-                          return _c(
-                            "div",
-                            { staticClass: "p-8" },
-                            [
-                              _c(
-                                "heading",
-                                { staticClass: "mb-6", attrs: { level: 2 } },
-                                [
-                                  _vm._v(
-                                    _vm._s(_vm.__(uppercaseMode + " Resource"))
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "p",
-                                { staticClass: "text-80 leading-normal" },
-                                [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.__(
-                                        "Are you sure you want to " +
-                                          mode +
-                                          " this resource?"
-                                      )
-                                    )
-                                  )
-                                ]
-                              )
-                            ],
-                            1
-                          )
-                        }
-                      }
-                    ])
-                  })
-                : _vm._e()
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "transition",
-            { attrs: { name: "fade" } },
-            [
-              _vm.restoreModalOpen
-                ? _c(
-                    "restore-resource-modal",
-                    {
-                      on: {
-                        confirm: _vm.confirmRestore,
-                        close: _vm.closeRestoreModal
-                      }
-                    },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "p-8" },
-                        [
-                          _c(
-                            "heading",
-                            { staticClass: "mb-6", attrs: { level: 2 } },
-                            [_vm._v(_vm._s(_vm.__("Restore Resource")))]
-                          ),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "text-80 leading-normal" }, [
-                            _vm._v(
-                              _vm._s(
-                                _vm.__(
-                                  "Are you sure you want to restore this resource?"
-                                )
-                              )
-                            )
-                          ])
-                        ],
-                        1
-                      )
-                    ]
-                  )
-                : _vm._e()
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-68e11828", module.exports)
-  }
-}
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = null
-/* template */
-var __vue_template__ = __webpack_require__(10)
-/* template functional */
-var __vue_template_functional__ = true
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/Icons/Actions.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-d2f9c2e6", Component.options)
-  } else {
-    hotAPI.rerender("data-v-d2f9c2e6", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function(_h, _vm) {
-  var _c = _vm._c
-  return _c("path", {
-    attrs: {
-      d:
-        "M 17.68, 9.26 L 18.92, 8.54 C 19.29, 8.33, 19.47, 7.89, 19.36, 7.48 C 18.91, 5.82, 18.03, 4.34, 16.85,  3.15 C 16.55,  2.85, 16.09,  2.79, 15.72,  3.01 L 14.48,  3.72 A 7.67, 7.67, 0, 0, 0, 13.2, 2.98 V 1.54 A 0.94, 0.94, 0, 0, 0, 12.5, 0.64 C 10.87, 0.2, 9.13, 0.2, 7.5, 0.64 C 7.09, 0.75, 6.8, 1.12, 6.8, 1.54 V 2.98 A 7.67, 7.67, 0, 0, 0, 5.52, 3.72 L 4.28, 3.01 C 3.91, 2.79, 3.45, 2.85, 3.15, 3.15 C 1.97, 4.34, 1.09, 5.82, 0.64, 7.48 C 0.53, 7.89, 0.71, 8.33, 1.08, 8.54 L 2.32, 9.26 A 7.72, 7.72, 0, 0, 0, 2.32, 10.74 L 1.08, 11.46 C 0.71, 11.67, 0.53, 12.11, 0.64, 12.52 C 1.09, 14.18, 1.97, 15.66, 3.15, 16.85 C 3.45, 17.15, 3.91, 17.21, 4.28, 16.99 L 5.52, 16.28 A 7.66, 7.66, 0, 0, 0, 6.8, 17.02 V 18.46 A 0.94, 0.94, 0, 0, 0, 7.5, 19.36 C 9.13, 19.8, 10.87, 19.8, 12.5, 19.36 C 12.91, 19.25, 13.2, 18.88, 13.2, 18.46 V 17.02 A 7.67, 7.67, 0, 0, 0, 14.48, 16.28 L 15.72, 16.99 C 16.09, 17.21, 16.55, 17.15, 16.85, 16.85 C 18.03, 15.66, 18.91, 14.18, 19.36, 12.52 C 19.47, 12.11, 19.29, 11.67, 18.92, 11.46 L 17.68, 10.74 C 17.72, 10.25, 17.72, 9.75, 17.68, 9.26 Z M 15.62, 11.72 L 17.33, 12.71 A 7.82, 7.82, 0, 0, 1, 16.01, 14.99 L 14.3, 14 C 13.05, 15.08, 12.86, 15.18, 11.32, 15.72 V 17.7 A 7.85, 7.85, 0, 0, 1, 8.68, 17.7 V 15.72 C 7.14, 15.18, 6.95, 15.07, 5.7, 14 L 3.99, 14.99 A 7.82, 7.82, 0, 0, 1, 2.67, 12.71 L 4.38, 11.72 C 4.08, 10.11, 4.08, 9.89, 4.38, 8.28 L 2.67, 7.29 C 2.98, 6.46, 3.42, 5.69, 3.99, 5.01 L 5.7, 6 C 6.95, 4.92, 7.14, 4.82, 8.68, 4.28 V 2.3 A 7.85, 7.85, 0, 0, 1, 11.32, 2.3 V 4.28 C 12.86, 4.82, 13.05, 4.93, 14.3, 6 L 16.01, 5.01 A 7.82, 7.82, 0, 0, 1, 17.33, 7.29 L 15.62, 8.28 C 15.92, 9.89, 15.92, 10.11, 15.62, 11.72 Z M 10, 6.25 C 7.93, 6.25, 6.25, 7.93, 6.25, 10 S 7.93, 13.75, 10, 13.75 S 13.75, 12.07, 13.75, 10 S 12.07, 6.25, 10, 6.25 Z M 10, 11.88 C 8.97, 11.88, 8.13, 11.03, 8.13, 10 C 8.13, 8.97, 8.97, 8.13, 10, 8.13 S 11.88, 8.97, 11.88, 10 C 11.88, 11.03, 11.03, 11.88, 10, 11.88 Z"
-    }
-  })
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-d2f9c2e6", module.exports)
-  }
-}
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -11183,15 +10308,40 @@ module.exports = g;
 });
 
 /***/ }),
-/* 17 */
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(3);
+module.exports = __webpack_require__(18);
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+Nova.booting(function (Vue, router) {
+    Vue.component('resource-table', __webpack_require__(23));
+    Vue.component('resource-table-row', __webpack_require__(10));
+    Vue.component('resource-table-row-actions', __webpack_require__(13));
+    Vue.component('icon-actions-gearbox', __webpack_require__(16));
+});
+
+/***/ }),
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(18)
+var __vue_script__ = __webpack_require__(11)
 /* template */
-var __vue_template__ = __webpack_require__(22)
+var __vue_template__ = __webpack_require__(12)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -11208,7 +10358,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/js/components/Index.vue"
+Component.options.__file = "resources/js/components/ResourceTableRow.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -11217,9 +10367,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-bb962f12", Component.options)
+    hotAPI.createRecord("data-v-14075ac5", Component.options)
   } else {
-    hotAPI.reload("data-v-bb962f12", Component.options)
+    hotAPI.reload("data-v-14075ac5", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -11230,21 +10380,11 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 18 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_laravel_nova__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_laravel_nova__);
-
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
 //
 //
 //
@@ -11290,1783 +10430,49 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_1_laravel_nova__["Deletable"], __WEBPACK_IMPORTED_MODULE_1_laravel_nova__["Filterable"], __WEBPACK_IMPORTED_MODULE_1_laravel_nova__["HasCards"], __WEBPACK_IMPORTED_MODULE_1_laravel_nova__["Paginatable"], __WEBPACK_IMPORTED_MODULE_1_laravel_nova__["PerPageable"], __WEBPACK_IMPORTED_MODULE_1_laravel_nova__["InteractsWithResourceInformation"], __WEBPACK_IMPORTED_MODULE_1_laravel_nova__["InteractsWithQueryString"]],
-
-    props: {
-        field: {
-            type: Object
-        },
-        resourceName: {
-            type: String,
-            required: true
-        },
-        viaResource: {
-            default: ''
-        },
-        viaResourceId: {
-            default: ''
-        },
-        viaRelationship: {
-            default: ''
-        },
-        relationshipType: {
-            type: String,
-            default: ''
-        }
-    },
+    props: ['testId', 'deleteResource', 'restoreResource', 'resource', 'resourcesSelected', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus'],
 
     data: function data() {
         return {
-            actionEventsRefresher: null,
-            initialLoading: true,
-            loading: true,
-
-            resourceResponse: null,
-            resources: [],
-            softDeletes: false,
-            selectedResources: [],
-            selectAllMatchingResources: false,
-            allMatchingResourceCount: 0,
-
             deleteModalOpen: false,
-
-            actions: [],
-            pivotActions: null,
-
-            search: '',
-            lenses: [],
-            filters: [],
-
-            authorizedToRelate: false,
-
-            orderBy: '',
-            orderByDirection: '',
-            trashed: ''
+            restoreModalOpen: false
         };
     },
 
-    /**
-     * Mount the component and retrieve its initial data.
-     */
-    created: function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-            var _this = this;
-
-            return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-                while (1) {
-                    switch (_context.prev = _context.next) {
-                        case 0:
-                            // Bind the keydown even listener when the router is visited if this
-                            // component is not a relation on a Detail page
-                            if (!this.viaResource && !this.viaResourceId) {
-                                document.addEventListener('keydown', this.handleKeydown);
-                            }
-
-                            this.initializeSearchFromQueryString();
-                            this.initializePerPageFromQueryString();
-                            this.initializeTrashedFromQueryString();
-                            this.initializeOrderingFromQueryString();
-
-                            _context.next = 7;
-                            return this.getResources();
-
-                        case 7:
-                            _context.next = 9;
-                            return this.getAuthorizationToRelate();
-
-                        case 9:
-                            _context.next = 11;
-                            return this.getLenses();
-
-                        case 11:
-                            _context.next = 13;
-                            return this.getActions();
-
-                        case 13:
-                            _context.next = 15;
-                            return this.getFilters();
-
-                        case 15:
-
-                            this.initialLoading = false;
-
-                            this.$watch(function () {
-                                return _this.resourceName + _this.encodedFilters + _this.currentSearch + _this.currentPage + _this.currentPerPage + _this.currentOrderBy + _this.currentOrderByDirection + _this.currentTrashed;
-                            }, function () {
-                                _this.getResources();
-
-                                _this.initializeSearchFromQueryString();
-                                _this.initializePerPageFromQueryString();
-                                _this.initializeTrashedFromQueryString();
-                                _this.initializeOrderingFromQueryString();
-                                _this.initializeFilterValuesFromQueryString();
-                            });
-
-                            // Refresh the action events
-                            if (this.resourceName === 'action-events') {
-                                Nova.$on('refresh-action-events', function () {
-                                    _this.getResources();
-                                });
-
-                                this.actionEventsRefresher = setInterval(function () {
-                                    _this.getResources();
-                                }, 15 * 1000);
-                            }
-
-                        case 18:
-                        case 'end':
-                            return _context.stop();
-                    }
-                }
-            }, _callee, this);
-        }));
-
-        function created() {
-            return _ref.apply(this, arguments);
-        }
-
-        return created;
-    }(),
-
-
-    /**
-     * Unbind the keydown even listener when the component is destroyed
-     */
-    destroyed: function destroyed() {
-        if (this.actionEventsRefresher) {
-            clearInterval(this.actionEventsRefresher);
-        }
-
-        document.removeEventListener('keydown', this.handleKeydown);
-    },
-
-
     methods: {
         /**
-         * Handle the keydown event
+         * Select the resource in the parent component
          */
-        handleKeydown: function handleKeydown(e) {
-            // `c`
-            if (!e.ctrlKey && !e.altKey && !e.metaKey && !e.shiftKey && e.keyCode == 67 && e.target.tagName != 'INPUT' && e.target.tagName != 'TEXTAREA') {
-                this.$router.push({ name: 'create', params: { resourceName: this.resourceName } });
-            }
+        toggleSelection: function toggleSelection() {
+            this.updateSelectionStatus(this.resource);
         },
-
-
-        /**
-         * Select all of the available resources
-         */
-        selectAllResources: function selectAllResources() {
-            this.selectedResources = this.resources.slice(0);
+        openDeleteModal: function openDeleteModal() {
+            this.deleteModalOpen = true;
         },
-
-
-        /**
-         * Toggle the selection of all resources
-         */
-        toggleSelectAll: function toggleSelectAll() {
-            if (this.selectAllChecked) return this.clearResourceSelections();
-            this.selectAllResources();
+        confirmDelete: function confirmDelete() {
+            this.deleteResource(this.resource);
+            this.closeDeleteModal();
         },
-
-
-        /**
-         * Toggle the selection of all matching resources in the database
-         */
-        toggleSelectAllMatching: function toggleSelectAllMatching() {
-            if (!this.selectAllMatchingResources) {
-                this.selectAllResources();
-                this.selectAllMatchingResources = true;
-
-                return;
-            }
-
-            this.selectAllMatchingResources = false;
+        closeDeleteModal: function closeDeleteModal() {
+            this.deleteModalOpen = false;
         },
-
-
-        /*
-         * Update the resource selection status
-         */
-        updateSelectionStatus: function updateSelectionStatus(resource) {
-            if (!_(this.selectedResources).includes(resource)) return this.selectedResources.push(resource);
-            var index = this.selectedResources.indexOf(resource);
-            if (index > -1) return this.selectedResources.splice(index, 1);
+        openRestoreModal: function openRestoreModal() {
+            this.restoreModalOpen = true;
         },
-
-
-        /**
-         * Get the resources based on the current page, search, filters, etc.
-         */
-        getResources: function getResources() {
-            var _this2 = this;
-
-            this.$nextTick(function () {
-                _this2.clearResourceSelections();
-
-                return Object(__WEBPACK_IMPORTED_MODULE_1_laravel_nova__["Minimum"])(Nova.request().get('/nova-api/' + _this2.resourceName, {
-                    params: _this2.resourceRequestQueryString
-                })).then(function (_ref2) {
-                    var data = _ref2.data;
-
-                    _this2.resources = [];
-
-                    _this2.resourceResponse = data;
-                    _this2.resources = data.resources;
-                    _this2.softDeletes = data.softDeletes;
-
-                    _this2.loading = false;
-
-                    _this2.getAllMatchingResourceCount();
-                });
-            });
+        confirmRestore: function confirmRestore() {
+            this.restoreResource(this.resource);
+            this.closeRestoreModal();
         },
-
-
-        /**
-         * Get the relatable authorization status for the resource.
-         */
-        getAuthorizationToRelate: function getAuthorizationToRelate() {
-            var _this3 = this;
-
-            if (!this.authorizedToCreate && this.relationshipType != 'belongsToMany' && this.relationshipType != 'morphToMany') {
-                return;
-            }
-
-            if (!this.viaResource) {
-                return this.authorizedToRelate = true;
-            }
-
-            return Nova.request().get('/nova-api/' + this.resourceName + '/relate-authorization' + '?viaResource=' + this.viaResource + '&viaResourceId=' + this.viaResourceId + '&viaRelationship=' + this.viaRelationship + '&relationshipType=' + this.relationshipType).then(function (response) {
-                _this3.authorizedToRelate = response.data.authorized;
-            });
-        },
-
-
-        /**
-         * Get the lenses available for the current resource.
-         */
-        getLenses: function getLenses() {
-            var _this4 = this;
-
-            this.lenses = [];
-
-            if (this.viaResource) {
-                return;
-            }
-
-            return Nova.request().get('/nova-api/' + this.resourceName + '/lenses').then(function (response) {
-                _this4.lenses = response.data;
-            });
-        },
-
-
-        /**
-         * Get the actions available for the current resource.
-         */
-        getActions: function getActions() {
-            var _this5 = this;
-
-            this.actions = [];
-            this.pivotActions = null;
-            return Nova.request().get('/nova-api/' + this.resourceName + '/actions' + '?viaResource=' + this.viaResource + '&viaResourceId=' + this.viaResourceId + '&viaRelationship=' + this.viaRelationship).then(function (response) {
-                _this5.actions = _.filter(response.data.actions, function (action) {
-                    return !action.onlyOnDetail;
-                });
-                _this5.pivotActions = response.data.pivotActions;
-            });
-        },
-
-
-        /**
-         * Get the filters available for the current resource.
-         */
-        getFilters: function getFilters() {
-            var _this6 = this;
-
-            this.filters = [];
-            this.currentFilters = [];
-
-            return Nova.request().get('/nova-api/' + this.resourceName + '/filters').then(function (response) {
-                _this6.filters = response.data;
-                _this6.initializeFilterValuesFromQueryString();
-            });
-        },
-
-
-        /**
-         * Clear filters and reset the resource table
-         */
-        clearSelectedFilters: function clearSelectedFilters() {
-            this.clearAllFilters();
-            this.filterChanged();
-        },
-
-
-        /**
-         * Update the currentFilters with newFilters
-         */
-        updateFilters: function updateFilters(newFilters) {
-            this.currentFilters = newFilters;
-            this.filterChanged();
-        },
-
-
-        /**
-         * Execute a search against the resource.
-         */
-        performSearch: function performSearch(event) {
-            var _this7 = this;
-
-            this.debouncer(function () {
-                // Only search if we're not tabbing into the field
-                if (event.which != 9) {
-                    var _this7$updateQueryStr;
-
-                    _this7.updateQueryString((_this7$updateQueryStr = {}, _defineProperty(_this7$updateQueryStr, _this7.pageParameter, 1), _defineProperty(_this7$updateQueryStr, _this7.searchParameter, _this7.search), _this7$updateQueryStr));
-                }
-            });
-        },
-
-
-        debouncer: _.debounce(function (callback) {
-            return callback();
-        }, 500),
-
-        /**
-         * Clear the selected resouces and the "select all" states.
-         */
-        clearResourceSelections: function clearResourceSelections() {
-            this.selectAllMatchingResources = false;
-            this.selectedResources = [];
-        },
-
-
-        /**
-         * Get the count of all of the matching resources.
-         */
-        getAllMatchingResourceCount: function getAllMatchingResourceCount() {
-            var _this8 = this;
-
-            if (this.resourceName == 'action-events') {
-                return;
-            }
-
-            Nova.request().get('/nova-api/' + this.resourceName + '/count', {
-                params: this.resourceRequestQueryString
-            }).then(function (response) {
-                _this8.allMatchingResourceCount = response.data.count;
-            });
-        },
-
-
-        /**
-         * Sort the resources by the given field.
-         */
-        orderByField: function orderByField(field) {
-            var _updateQueryString;
-
-            var direction = this.currentOrderByDirection == 'asc' ? 'desc' : 'asc';
-            if (this.currentOrderBy != field.attribute) {
-                direction = 'asc';
-            }
-            this.updateQueryString((_updateQueryString = {}, _defineProperty(_updateQueryString, this.orderByParameter, field.attribute), _defineProperty(_updateQueryString, this.orderByDirectionParameter, direction), _updateQueryString));
-        },
-
-
-        /**
-         * Sync the current search value from the query string.
-         */
-        initializeSearchFromQueryString: function initializeSearchFromQueryString() {
-            this.search = this.currentSearch;
-        },
-
-
-        /**
-         * Sync the current order by values from the query string.
-         */
-        initializeOrderingFromQueryString: function initializeOrderingFromQueryString() {
-            this.orderBy = this.currentOrderBy;
-            this.orderByDirection = this.currentOrderByDirection;
-        },
-
-
-        /**
-         * Sync the trashed state values from the query string.
-         */
-        initializeTrashedFromQueryString: function initializeTrashedFromQueryString() {
-            this.trashed = this.currentTrashed;
-        },
-
-
-        /**
-         * Update the trashed constraint for the resource listing.
-         */
-        trashedChanged: function trashedChanged(trashedStatus) {
-            this.trashed = trashedStatus;
-            this.updateQueryString(_defineProperty({}, this.trashedParameter, this.trashed));
-        },
-
-
-        /**
-         * Update the per page parameter in the query string
-         */
-        updatePerPageChanged: function updatePerPageChanged(perPage) {
-            this.perPage = perPage;
-            this.perPageChanged();
-        }
-    },
-
-    computed: {
-        shouldShowCards: function shouldShowCards() {
-            // Don't show cards if this resource is not the main one being shown (e.g. a relation)
-            return this.cards.length > 0 && this.resourceName == this.$route.params.resourceName;
-        },
-
-
-        /**
-         * Get the endpoint for this resource's metrics.
-         */
-        cardsEndpoint: function cardsEndpoint() {
-            return '/nova-api/' + this.resourceName + '/cards';
-        },
-
-
-        /**
-         * Get the name of the filter query string variable.
-         */
-        filterParameter: function filterParameter() {
-            return this.resourceName + '_filter';
-        },
-
-
-        /**
-         * Get the name of the search query string variable.
-         */
-        searchParameter: function searchParameter() {
-            return this.resourceName + '_search';
-        },
-
-
-        /**
-         * Get the name of the order by query string variable.
-         */
-        orderByParameter: function orderByParameter() {
-            return this.resourceName + '_order';
-        },
-
-
-        /**
-         * Get the name of the order by direction query string variable.
-         */
-        orderByDirectionParameter: function orderByDirectionParameter() {
-            return this.resourceName + '_direction';
-        },
-
-
-        /**
-         * Get the name of the trashed constraint query string variable.
-         */
-        trashedParameter: function trashedParameter() {
-            return this.resourceName + '_trashed';
-        },
-
-
-        /**
-         * Get the name of the per page query string variable.
-         */
-        perPageParameter: function perPageParameter() {
-            return this.resourceName + '_per_page';
-        },
-
-
-        /**
-         * Get the name of the page query string variable.
-         */
-        pageParameter: function pageParameter() {
-            return this.resourceName + '_page';
-        },
-
-
-        /**
-         * Build the resource request query string.
-         */
-        resourceRequestQueryString: function resourceRequestQueryString() {
-            return {
-                search: this.currentSearch,
-                filters: this.encodedFilters,
-                orderBy: this.currentOrderBy,
-                orderByDirection: this.currentOrderByDirection,
-                perPage: this.currentPerPage,
-                trashed: this.currentTrashed,
-                page: this.currentPage,
-                viaResource: this.viaResource,
-                viaResourceId: this.viaResourceId,
-                viaRelationship: this.viaRelationship,
-                viaResourceRelationship: this.viaResourceRelationship,
-                relationshipType: this.relationshipType
-            };
-        },
-
-
-        /**
-         * Determine if all resources are selected.
-         */
-        selectAllChecked: function selectAllChecked() {
-            return this.selectedResources.length == this.resources.length;
-        },
-
-
-        /**
-         * Determine if all matching resources are selected.
-         */
-        selectAllMatchingChecked: function selectAllMatchingChecked() {
-            return this.selectedResources.length == this.resources.length && this.selectAllMatchingResources;
-        },
-
-
-        /**
-         * Get the IDs for the selected resources.
-         */
-        selectedResourceIds: function selectedResourceIds() {
-            return _.map(this.selectedResources, function (resource) {
-                return resource.id.value;
-            });
-        },
-
-
-        /**
-         * Get all of the actions available to the resource.
-         */
-        allActions: function allActions() {
-            return this.hasPivotActions ? this.actions.concat(this.pivotActions.actions) : this.actions;
-        },
-
-
-        /**
-         * Determine if the resource has any pivot actions available.
-         */
-        hasPivotActions: function hasPivotActions() {
-            return this.pivotActions && this.pivotActions.actions.length > 0;
-        },
-
-
-        /**
-         * Determine if the resource has any actions available.
-         */
-        actionsAreAvailable: function actionsAreAvailable() {
-            return this.allActions.length > 0;
-        },
-
-
-        /**
-         * Get the name of the pivot model for the resource.
-         */
-        pivotName: function pivotName() {
-            return this.pivotActions ? this.pivotActions.name : '';
-        },
-
-
-        /**
-         * Get the current search value from the query string.
-         */
-        currentSearch: function currentSearch() {
-            return this.$route.query[this.searchParameter] || '';
-        },
-
-
-        /**
-         * Get the current order by value from the query string.
-         */
-        currentOrderBy: function currentOrderBy() {
-            return this.$route.query[this.orderByParameter] || '';
-        },
-
-
-        /**
-         * Get the current order by direction from the query string.
-         */
-        currentOrderByDirection: function currentOrderByDirection() {
-            return this.$route.query[this.orderByDirectionParameter] || 'desc';
-        },
-
-
-        /**
-         * Get the current trashed constraint value from the query string.
-         */
-        currentTrashed: function currentTrashed() {
-            return this.$route.query[this.trashedParameter] || '';
-        },
-
-
-        /**
-         * Determine if the current resource listing is via a many-to-many relationship.
-         */
-        viaManyToMany: function viaManyToMany() {
-            return this.relationshipType == 'belongsToMany' || this.relationshipType == 'morphToMany';
-        },
-
-
-        /**
-         * Determine if the resource / relationship is "full".
-         */
-        resourceIsFull: function resourceIsFull() {
-            return this.viaHasOne && this.resources.length > 0;
-        },
-
-
-        /**
-         * Determine if the current resource listing is via a has-one relationship.
-         */
-        viaHasOne: function viaHasOne() {
-            return this.relationshipType == 'hasOne' || this.relationshipType == 'morphOne';
-        },
-
-
-        /**
-         * Get the singular name for the resource
-         */
-        singularName: function singularName() {
-            if (this.isRelation && this.field) {
-                return Object(__WEBPACK_IMPORTED_MODULE_1_laravel_nova__["Capitalize"])(this.field.singularLabel);
-            }
-
-            return Object(__WEBPACK_IMPORTED_MODULE_1_laravel_nova__["Capitalize"])(this.resourceInformation.singularLabel);
-        },
-
-
-        /**
-         * Get the selected resources for the action selector.
-         */
-        selectedResourcesForActionSelector: function selectedResourcesForActionSelector() {
-            return this.selectAllMatchingChecked ? 'all' : this.selectedResourceIds;
-        },
-
-
-        /**
-         * Determine if there are any resources for the view
-         */
-        hasResources: function hasResources() {
-            return Boolean(this.resources.length > 0);
-        },
-
-
-        /**
-         * Determine if there any filters for this resource
-         */
-        hasFilters: function hasFilters() {
-            return Boolean(this.filters.length > 0);
-        },
-
-
-        /**
-         * Determine if there any lenses for this resource
-         */
-        hasLenses: function hasLenses() {
-            return Boolean(this.lenses.length > 0);
-        },
-
-
-        /**
-         * Determine whether to show the toolbar for this resource index
-         */
-        shouldShowToolbar: function shouldShowToolbar() {
-            return Boolean(this.shouldShowCheckBoxes || this.hasFilters || this.hasLenses || this.softDeletes);
-        },
-
-
-        /**
-         * Determine whether to show the selection checkboxes for resources
-         */
-        shouldShowCheckBoxes: function shouldShowCheckBoxes() {
-            return Boolean(this.hasResources && !this.viaHasOne) && Boolean(this.actionsAreAvailable || this.authorizedToDeleteAnyResources || this.canShowDeleteMenu);
-        },
-
-
-        /**
-         * Determine if any selected resources may be deleted.
-         */
-        authorizedToDeleteSelectedResources: function authorizedToDeleteSelectedResources() {
-            return Boolean(_.find(this.selectedResources, function (resource) {
-                return resource.authorizedToDelete;
-            }));
-        },
-
-
-        /**
-         * Determine if any selected resources may be force deleted.
-         */
-        authorizedToForceDeleteSelectedResources: function authorizedToForceDeleteSelectedResources() {
-            return Boolean(_.find(this.selectedResources, function (resource) {
-                return resource.authorizedToForceDelete;
-            }));
-        },
-
-
-        /**
-         * Determine if the user is authorized to delete any listed resource.
-         */
-        authorizedToDeleteAnyResources: function authorizedToDeleteAnyResources() {
-            return this.resources.length > 0 && Boolean(_.find(this.resources, function (resource) {
-                return resource.authorizedToDelete;
-            }));
-        },
-
-
-        /**
-         * Determine if the user is authorized to force delete any listed resource.
-         */
-        authorizedToForceDeleteAnyResources: function authorizedToForceDeleteAnyResources() {
-            return this.resources.length > 0 && Boolean(_.find(this.resources, function (resource) {
-                return resource.authorizedToForceDelete;
-            }));
-        },
-
-
-        /**
-         * Determine if any selected resources may be restored.
-         */
-        authorizedToRestoreSelectedResources: function authorizedToRestoreSelectedResources() {
-            return Boolean(_.find(this.selectedResources, function (resource) {
-                return resource.authorizedToRestore;
-            }));
-        },
-
-
-        /**
-         * Determine if the user is authorized to restore any listed resource.
-         */
-        authorizedToRestoreAnyResources: function authorizedToRestoreAnyResources() {
-            return this.resources.length > 0 && Boolean(_.find(this.resources, function (resource) {
-                return resource.authorizedToRestore;
-            }));
-        },
-
-
-        /**
-         * Determinw whether the delete menu should be shown to the user
-         */
-        shouldShowDeleteMenu: function shouldShowDeleteMenu() {
-            return Boolean(this.selectedResources.length > 0) && this.canShowDeleteMenu;
-        },
-
-
-        /**
-         * Determine whether the user is authorized to perform actions on the delete menu
-         */
-        canShowDeleteMenu: function canShowDeleteMenu() {
-            return Boolean(this.authorizedToDeleteSelectedResources || this.authorizedToForceDeleteSelectedResources || this.authorizedToRestoreSelectedResources || this.selectAllMatchingChecked);
-        },
-
-
-        /**
-         * Determine if the index is a relation field
-         */
-        isRelation: function isRelation() {
-            return Boolean(this.viaResourceId && this.viaRelationship);
-        },
-
-
-        /**
-         * Return the heading for the view
-         */
-        headingTitle: function headingTitle() {
-            return this.isRelation && this.field ? this.field.name : this.resourceResponse.label;
+        closeRestoreModal: function closeRestoreModal() {
+            this.restoreModalOpen = false;
         }
     }
 });
 
 /***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(20);
-
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-// This method of obtaining a reference to the global object needs to be
-// kept identical to the way it is obtained in runtime.js
-var g = (function() { return this })() || Function("return this")();
-
-// Use `getOwnPropertyNames` because not all browsers support calling
-// `hasOwnProperty` on the global `self` object in a worker. See #183.
-var hadRuntime = g.regeneratorRuntime &&
-  Object.getOwnPropertyNames(g).indexOf("regeneratorRuntime") >= 0;
-
-// Save the old regeneratorRuntime in case it needs to be restored later.
-var oldRuntime = hadRuntime && g.regeneratorRuntime;
-
-// Force reevalutation of runtime.js.
-g.regeneratorRuntime = undefined;
-
-module.exports = __webpack_require__(21);
-
-if (hadRuntime) {
-  // Restore the original runtime.
-  g.regeneratorRuntime = oldRuntime;
-} else {
-  // Remove the global property added by runtime.js.
-  try {
-    delete g.regeneratorRuntime;
-  } catch(e) {
-    g.regeneratorRuntime = undefined;
-  }
-}
-
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports) {
-
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-!(function(global) {
-  "use strict";
-
-  var Op = Object.prototype;
-  var hasOwn = Op.hasOwnProperty;
-  var undefined; // More compressible than void 0.
-  var $Symbol = typeof Symbol === "function" ? Symbol : {};
-  var iteratorSymbol = $Symbol.iterator || "@@iterator";
-  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
-  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
-
-  var inModule = typeof module === "object";
-  var runtime = global.regeneratorRuntime;
-  if (runtime) {
-    if (inModule) {
-      // If regeneratorRuntime is defined globally and we're in a module,
-      // make the exports object identical to regeneratorRuntime.
-      module.exports = runtime;
-    }
-    // Don't bother evaluating the rest of this file if the runtime was
-    // already defined globally.
-    return;
-  }
-
-  // Define the runtime globally (as expected by generated code) as either
-  // module.exports (if we're in a module) or a new, empty object.
-  runtime = global.regeneratorRuntime = inModule ? module.exports : {};
-
-  function wrap(innerFn, outerFn, self, tryLocsList) {
-    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
-    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
-    var generator = Object.create(protoGenerator.prototype);
-    var context = new Context(tryLocsList || []);
-
-    // The ._invoke method unifies the implementations of the .next,
-    // .throw, and .return methods.
-    generator._invoke = makeInvokeMethod(innerFn, self, context);
-
-    return generator;
-  }
-  runtime.wrap = wrap;
-
-  // Try/catch helper to minimize deoptimizations. Returns a completion
-  // record like context.tryEntries[i].completion. This interface could
-  // have been (and was previously) designed to take a closure to be
-  // invoked without arguments, but in all the cases we care about we
-  // already have an existing method we want to call, so there's no need
-  // to create a new function object. We can even get away with assuming
-  // the method takes exactly one argument, since that happens to be true
-  // in every case, so we don't have to touch the arguments object. The
-  // only additional allocation required is the completion record, which
-  // has a stable shape and so hopefully should be cheap to allocate.
-  function tryCatch(fn, obj, arg) {
-    try {
-      return { type: "normal", arg: fn.call(obj, arg) };
-    } catch (err) {
-      return { type: "throw", arg: err };
-    }
-  }
-
-  var GenStateSuspendedStart = "suspendedStart";
-  var GenStateSuspendedYield = "suspendedYield";
-  var GenStateExecuting = "executing";
-  var GenStateCompleted = "completed";
-
-  // Returning this object from the innerFn has the same effect as
-  // breaking out of the dispatch switch statement.
-  var ContinueSentinel = {};
-
-  // Dummy constructor functions that we use as the .constructor and
-  // .constructor.prototype properties for functions that return Generator
-  // objects. For full spec compliance, you may wish to configure your
-  // minifier not to mangle the names of these two functions.
-  function Generator() {}
-  function GeneratorFunction() {}
-  function GeneratorFunctionPrototype() {}
-
-  // This is a polyfill for %IteratorPrototype% for environments that
-  // don't natively support it.
-  var IteratorPrototype = {};
-  IteratorPrototype[iteratorSymbol] = function () {
-    return this;
-  };
-
-  var getProto = Object.getPrototypeOf;
-  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
-  if (NativeIteratorPrototype &&
-      NativeIteratorPrototype !== Op &&
-      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
-    // This environment has a native %IteratorPrototype%; use it instead
-    // of the polyfill.
-    IteratorPrototype = NativeIteratorPrototype;
-  }
-
-  var Gp = GeneratorFunctionPrototype.prototype =
-    Generator.prototype = Object.create(IteratorPrototype);
-  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
-  GeneratorFunctionPrototype.constructor = GeneratorFunction;
-  GeneratorFunctionPrototype[toStringTagSymbol] =
-    GeneratorFunction.displayName = "GeneratorFunction";
-
-  // Helper for defining the .next, .throw, and .return methods of the
-  // Iterator interface in terms of a single ._invoke method.
-  function defineIteratorMethods(prototype) {
-    ["next", "throw", "return"].forEach(function(method) {
-      prototype[method] = function(arg) {
-        return this._invoke(method, arg);
-      };
-    });
-  }
-
-  runtime.isGeneratorFunction = function(genFun) {
-    var ctor = typeof genFun === "function" && genFun.constructor;
-    return ctor
-      ? ctor === GeneratorFunction ||
-        // For the native GeneratorFunction constructor, the best we can
-        // do is to check its .name property.
-        (ctor.displayName || ctor.name) === "GeneratorFunction"
-      : false;
-  };
-
-  runtime.mark = function(genFun) {
-    if (Object.setPrototypeOf) {
-      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
-    } else {
-      genFun.__proto__ = GeneratorFunctionPrototype;
-      if (!(toStringTagSymbol in genFun)) {
-        genFun[toStringTagSymbol] = "GeneratorFunction";
-      }
-    }
-    genFun.prototype = Object.create(Gp);
-    return genFun;
-  };
-
-  // Within the body of any async function, `await x` is transformed to
-  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
-  // `hasOwn.call(value, "__await")` to determine if the yielded value is
-  // meant to be awaited.
-  runtime.awrap = function(arg) {
-    return { __await: arg };
-  };
-
-  function AsyncIterator(generator) {
-    function invoke(method, arg, resolve, reject) {
-      var record = tryCatch(generator[method], generator, arg);
-      if (record.type === "throw") {
-        reject(record.arg);
-      } else {
-        var result = record.arg;
-        var value = result.value;
-        if (value &&
-            typeof value === "object" &&
-            hasOwn.call(value, "__await")) {
-          return Promise.resolve(value.__await).then(function(value) {
-            invoke("next", value, resolve, reject);
-          }, function(err) {
-            invoke("throw", err, resolve, reject);
-          });
-        }
-
-        return Promise.resolve(value).then(function(unwrapped) {
-          // When a yielded Promise is resolved, its final value becomes
-          // the .value of the Promise<{value,done}> result for the
-          // current iteration. If the Promise is rejected, however, the
-          // result for this iteration will be rejected with the same
-          // reason. Note that rejections of yielded Promises are not
-          // thrown back into the generator function, as is the case
-          // when an awaited Promise is rejected. This difference in
-          // behavior between yield and await is important, because it
-          // allows the consumer to decide what to do with the yielded
-          // rejection (swallow it and continue, manually .throw it back
-          // into the generator, abandon iteration, whatever). With
-          // await, by contrast, there is no opportunity to examine the
-          // rejection reason outside the generator function, so the
-          // only option is to throw it from the await expression, and
-          // let the generator function handle the exception.
-          result.value = unwrapped;
-          resolve(result);
-        }, reject);
-      }
-    }
-
-    var previousPromise;
-
-    function enqueue(method, arg) {
-      function callInvokeWithMethodAndArg() {
-        return new Promise(function(resolve, reject) {
-          invoke(method, arg, resolve, reject);
-        });
-      }
-
-      return previousPromise =
-        // If enqueue has been called before, then we want to wait until
-        // all previous Promises have been resolved before calling invoke,
-        // so that results are always delivered in the correct order. If
-        // enqueue has not been called before, then it is important to
-        // call invoke immediately, without waiting on a callback to fire,
-        // so that the async generator function has the opportunity to do
-        // any necessary setup in a predictable way. This predictability
-        // is why the Promise constructor synchronously invokes its
-        // executor callback, and why async functions synchronously
-        // execute code before the first await. Since we implement simple
-        // async functions in terms of async generators, it is especially
-        // important to get this right, even though it requires care.
-        previousPromise ? previousPromise.then(
-          callInvokeWithMethodAndArg,
-          // Avoid propagating failures to Promises returned by later
-          // invocations of the iterator.
-          callInvokeWithMethodAndArg
-        ) : callInvokeWithMethodAndArg();
-    }
-
-    // Define the unified helper method that is used to implement .next,
-    // .throw, and .return (see defineIteratorMethods).
-    this._invoke = enqueue;
-  }
-
-  defineIteratorMethods(AsyncIterator.prototype);
-  AsyncIterator.prototype[asyncIteratorSymbol] = function () {
-    return this;
-  };
-  runtime.AsyncIterator = AsyncIterator;
-
-  // Note that simple async functions are implemented on top of
-  // AsyncIterator objects; they just return a Promise for the value of
-  // the final result produced by the iterator.
-  runtime.async = function(innerFn, outerFn, self, tryLocsList) {
-    var iter = new AsyncIterator(
-      wrap(innerFn, outerFn, self, tryLocsList)
-    );
-
-    return runtime.isGeneratorFunction(outerFn)
-      ? iter // If outerFn is a generator, return the full iterator.
-      : iter.next().then(function(result) {
-          return result.done ? result.value : iter.next();
-        });
-  };
-
-  function makeInvokeMethod(innerFn, self, context) {
-    var state = GenStateSuspendedStart;
-
-    return function invoke(method, arg) {
-      if (state === GenStateExecuting) {
-        throw new Error("Generator is already running");
-      }
-
-      if (state === GenStateCompleted) {
-        if (method === "throw") {
-          throw arg;
-        }
-
-        // Be forgiving, per 25.3.3.3.3 of the spec:
-        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
-        return doneResult();
-      }
-
-      context.method = method;
-      context.arg = arg;
-
-      while (true) {
-        var delegate = context.delegate;
-        if (delegate) {
-          var delegateResult = maybeInvokeDelegate(delegate, context);
-          if (delegateResult) {
-            if (delegateResult === ContinueSentinel) continue;
-            return delegateResult;
-          }
-        }
-
-        if (context.method === "next") {
-          // Setting context._sent for legacy support of Babel's
-          // function.sent implementation.
-          context.sent = context._sent = context.arg;
-
-        } else if (context.method === "throw") {
-          if (state === GenStateSuspendedStart) {
-            state = GenStateCompleted;
-            throw context.arg;
-          }
-
-          context.dispatchException(context.arg);
-
-        } else if (context.method === "return") {
-          context.abrupt("return", context.arg);
-        }
-
-        state = GenStateExecuting;
-
-        var record = tryCatch(innerFn, self, context);
-        if (record.type === "normal") {
-          // If an exception is thrown from innerFn, we leave state ===
-          // GenStateExecuting and loop back for another invocation.
-          state = context.done
-            ? GenStateCompleted
-            : GenStateSuspendedYield;
-
-          if (record.arg === ContinueSentinel) {
-            continue;
-          }
-
-          return {
-            value: record.arg,
-            done: context.done
-          };
-
-        } else if (record.type === "throw") {
-          state = GenStateCompleted;
-          // Dispatch the exception by looping back around to the
-          // context.dispatchException(context.arg) call above.
-          context.method = "throw";
-          context.arg = record.arg;
-        }
-      }
-    };
-  }
-
-  // Call delegate.iterator[context.method](context.arg) and handle the
-  // result, either by returning a { value, done } result from the
-  // delegate iterator, or by modifying context.method and context.arg,
-  // setting context.delegate to null, and returning the ContinueSentinel.
-  function maybeInvokeDelegate(delegate, context) {
-    var method = delegate.iterator[context.method];
-    if (method === undefined) {
-      // A .throw or .return when the delegate iterator has no .throw
-      // method always terminates the yield* loop.
-      context.delegate = null;
-
-      if (context.method === "throw") {
-        if (delegate.iterator.return) {
-          // If the delegate iterator has a return method, give it a
-          // chance to clean up.
-          context.method = "return";
-          context.arg = undefined;
-          maybeInvokeDelegate(delegate, context);
-
-          if (context.method === "throw") {
-            // If maybeInvokeDelegate(context) changed context.method from
-            // "return" to "throw", let that override the TypeError below.
-            return ContinueSentinel;
-          }
-        }
-
-        context.method = "throw";
-        context.arg = new TypeError(
-          "The iterator does not provide a 'throw' method");
-      }
-
-      return ContinueSentinel;
-    }
-
-    var record = tryCatch(method, delegate.iterator, context.arg);
-
-    if (record.type === "throw") {
-      context.method = "throw";
-      context.arg = record.arg;
-      context.delegate = null;
-      return ContinueSentinel;
-    }
-
-    var info = record.arg;
-
-    if (! info) {
-      context.method = "throw";
-      context.arg = new TypeError("iterator result is not an object");
-      context.delegate = null;
-      return ContinueSentinel;
-    }
-
-    if (info.done) {
-      // Assign the result of the finished delegate to the temporary
-      // variable specified by delegate.resultName (see delegateYield).
-      context[delegate.resultName] = info.value;
-
-      // Resume execution at the desired location (see delegateYield).
-      context.next = delegate.nextLoc;
-
-      // If context.method was "throw" but the delegate handled the
-      // exception, let the outer generator proceed normally. If
-      // context.method was "next", forget context.arg since it has been
-      // "consumed" by the delegate iterator. If context.method was
-      // "return", allow the original .return call to continue in the
-      // outer generator.
-      if (context.method !== "return") {
-        context.method = "next";
-        context.arg = undefined;
-      }
-
-    } else {
-      // Re-yield the result returned by the delegate method.
-      return info;
-    }
-
-    // The delegate iterator is finished, so forget it and continue with
-    // the outer generator.
-    context.delegate = null;
-    return ContinueSentinel;
-  }
-
-  // Define Generator.prototype.{next,throw,return} in terms of the
-  // unified ._invoke helper method.
-  defineIteratorMethods(Gp);
-
-  Gp[toStringTagSymbol] = "Generator";
-
-  // A Generator should always return itself as the iterator object when the
-  // @@iterator function is called on it. Some browsers' implementations of the
-  // iterator prototype chain incorrectly implement this, causing the Generator
-  // object to not be returned from this call. This ensures that doesn't happen.
-  // See https://github.com/facebook/regenerator/issues/274 for more details.
-  Gp[iteratorSymbol] = function() {
-    return this;
-  };
-
-  Gp.toString = function() {
-    return "[object Generator]";
-  };
-
-  function pushTryEntry(locs) {
-    var entry = { tryLoc: locs[0] };
-
-    if (1 in locs) {
-      entry.catchLoc = locs[1];
-    }
-
-    if (2 in locs) {
-      entry.finallyLoc = locs[2];
-      entry.afterLoc = locs[3];
-    }
-
-    this.tryEntries.push(entry);
-  }
-
-  function resetTryEntry(entry) {
-    var record = entry.completion || {};
-    record.type = "normal";
-    delete record.arg;
-    entry.completion = record;
-  }
-
-  function Context(tryLocsList) {
-    // The root entry object (effectively a try statement without a catch
-    // or a finally block) gives us a place to store values thrown from
-    // locations where there is no enclosing try statement.
-    this.tryEntries = [{ tryLoc: "root" }];
-    tryLocsList.forEach(pushTryEntry, this);
-    this.reset(true);
-  }
-
-  runtime.keys = function(object) {
-    var keys = [];
-    for (var key in object) {
-      keys.push(key);
-    }
-    keys.reverse();
-
-    // Rather than returning an object with a next method, we keep
-    // things simple and return the next function itself.
-    return function next() {
-      while (keys.length) {
-        var key = keys.pop();
-        if (key in object) {
-          next.value = key;
-          next.done = false;
-          return next;
-        }
-      }
-
-      // To avoid creating an additional object, we just hang the .value
-      // and .done properties off the next function object itself. This
-      // also ensures that the minifier will not anonymize the function.
-      next.done = true;
-      return next;
-    };
-  };
-
-  function values(iterable) {
-    if (iterable) {
-      var iteratorMethod = iterable[iteratorSymbol];
-      if (iteratorMethod) {
-        return iteratorMethod.call(iterable);
-      }
-
-      if (typeof iterable.next === "function") {
-        return iterable;
-      }
-
-      if (!isNaN(iterable.length)) {
-        var i = -1, next = function next() {
-          while (++i < iterable.length) {
-            if (hasOwn.call(iterable, i)) {
-              next.value = iterable[i];
-              next.done = false;
-              return next;
-            }
-          }
-
-          next.value = undefined;
-          next.done = true;
-
-          return next;
-        };
-
-        return next.next = next;
-      }
-    }
-
-    // Return an iterator with no values.
-    return { next: doneResult };
-  }
-  runtime.values = values;
-
-  function doneResult() {
-    return { value: undefined, done: true };
-  }
-
-  Context.prototype = {
-    constructor: Context,
-
-    reset: function(skipTempReset) {
-      this.prev = 0;
-      this.next = 0;
-      // Resetting context._sent for legacy support of Babel's
-      // function.sent implementation.
-      this.sent = this._sent = undefined;
-      this.done = false;
-      this.delegate = null;
-
-      this.method = "next";
-      this.arg = undefined;
-
-      this.tryEntries.forEach(resetTryEntry);
-
-      if (!skipTempReset) {
-        for (var name in this) {
-          // Not sure about the optimal order of these conditions:
-          if (name.charAt(0) === "t" &&
-              hasOwn.call(this, name) &&
-              !isNaN(+name.slice(1))) {
-            this[name] = undefined;
-          }
-        }
-      }
-    },
-
-    stop: function() {
-      this.done = true;
-
-      var rootEntry = this.tryEntries[0];
-      var rootRecord = rootEntry.completion;
-      if (rootRecord.type === "throw") {
-        throw rootRecord.arg;
-      }
-
-      return this.rval;
-    },
-
-    dispatchException: function(exception) {
-      if (this.done) {
-        throw exception;
-      }
-
-      var context = this;
-      function handle(loc, caught) {
-        record.type = "throw";
-        record.arg = exception;
-        context.next = loc;
-
-        if (caught) {
-          // If the dispatched exception was caught by a catch block,
-          // then let that catch block handle the exception normally.
-          context.method = "next";
-          context.arg = undefined;
-        }
-
-        return !! caught;
-      }
-
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        var record = entry.completion;
-
-        if (entry.tryLoc === "root") {
-          // Exception thrown outside of any try block that could handle
-          // it, so set the completion value of the entire function to
-          // throw the exception.
-          return handle("end");
-        }
-
-        if (entry.tryLoc <= this.prev) {
-          var hasCatch = hasOwn.call(entry, "catchLoc");
-          var hasFinally = hasOwn.call(entry, "finallyLoc");
-
-          if (hasCatch && hasFinally) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            } else if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-
-          } else if (hasCatch) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            }
-
-          } else if (hasFinally) {
-            if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-
-          } else {
-            throw new Error("try statement without catch or finally");
-          }
-        }
-      }
-    },
-
-    abrupt: function(type, arg) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.tryLoc <= this.prev &&
-            hasOwn.call(entry, "finallyLoc") &&
-            this.prev < entry.finallyLoc) {
-          var finallyEntry = entry;
-          break;
-        }
-      }
-
-      if (finallyEntry &&
-          (type === "break" ||
-           type === "continue") &&
-          finallyEntry.tryLoc <= arg &&
-          arg <= finallyEntry.finallyLoc) {
-        // Ignore the finally entry if control is not jumping to a
-        // location outside the try/catch block.
-        finallyEntry = null;
-      }
-
-      var record = finallyEntry ? finallyEntry.completion : {};
-      record.type = type;
-      record.arg = arg;
-
-      if (finallyEntry) {
-        this.method = "next";
-        this.next = finallyEntry.finallyLoc;
-        return ContinueSentinel;
-      }
-
-      return this.complete(record);
-    },
-
-    complete: function(record, afterLoc) {
-      if (record.type === "throw") {
-        throw record.arg;
-      }
-
-      if (record.type === "break" ||
-          record.type === "continue") {
-        this.next = record.arg;
-      } else if (record.type === "return") {
-        this.rval = this.arg = record.arg;
-        this.method = "return";
-        this.next = "end";
-      } else if (record.type === "normal" && afterLoc) {
-        this.next = afterLoc;
-      }
-
-      return ContinueSentinel;
-    },
-
-    finish: function(finallyLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.finallyLoc === finallyLoc) {
-          this.complete(entry.completion, entry.afterLoc);
-          resetTryEntry(entry);
-          return ContinueSentinel;
-        }
-      }
-    },
-
-    "catch": function(tryLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.tryLoc === tryLoc) {
-          var record = entry.completion;
-          if (record.type === "throw") {
-            var thrown = record.arg;
-            resetTryEntry(entry);
-          }
-          return thrown;
-        }
-      }
-
-      // The context.catch method must only be called with a location
-      // argument that corresponds to a known catch block.
-      throw new Error("illegal catch attempt");
-    },
-
-    delegateYield: function(iterable, resultName, nextLoc) {
-      this.delegate = {
-        iterator: values(iterable),
-        resultName: resultName,
-        nextLoc: nextLoc
-      };
-
-      if (this.method === "next") {
-        // Deliberately forget the last sent value so that we don't
-        // accidentally pass it on to the delegate.
-        this.arg = undefined;
-      }
-
-      return ContinueSentinel;
-    }
-  };
-})(
-  // In sloppy mode, unbound `this` refers to the global object, fallback to
-  // Function constructor if we're in global strict mode. That is sadly a form
-  // of indirect eval which violates Content Security Policy.
-  (function() { return this })() || Function("return this")()
-);
-
-
-/***/ }),
-/* 22 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -13074,637 +10480,661 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "loading-view",
-    {
-      attrs: {
-        loading: _vm.initialLoading,
-        dusk: _vm.resourceName + "-index-component"
-      }
-    },
+    "tr",
+    { attrs: { dusk: _vm.resource["id"].value + "-row" } },
     [
-      !_vm.viaResource
-        ? _c("custom-index-header", {
-            staticClass: "mb-3",
-            attrs: { "resource-name": _vm.resourceName }
-          })
-        : _vm._e(),
+      _c(
+        "td",
+        {
+          class: {
+            "w-16": _vm.shouldShowCheckboxes,
+            "w-8": !_vm.shouldShowCheckboxes
+          }
+        },
+        [
+          _vm.shouldShowCheckboxes
+            ? _c("checkbox", {
+                attrs: {
+                  "data-testid": _vm.testId + "-checkbox",
+                  dusk: _vm.resource["id"].value + "-checkbox",
+                  checked: _vm.checked
+                },
+                on: { input: _vm.toggleSelection }
+              })
+            : _vm._e()
+        ],
+        1
+      ),
       _vm._v(" "),
-      _vm.shouldShowCards
-        ? _c(
-            "div",
-            [
-              _vm.smallCards.length > 0
-                ? _c("cards", {
-                    staticClass: "mb-3",
-                    attrs: {
-                      cards: _vm.smallCards,
-                      "resource-name": _vm.resourceName
-                    }
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.largeCards.length > 0
-                ? _c("cards", {
-                    attrs: {
-                      cards: _vm.largeCards,
-                      size: "large",
-                      "resource-name": _vm.resourceName
-                    }
-                  })
-                : _vm._e()
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.resourceResponse
-        ? _c("heading", { staticClass: "mb-3" }, [
-            _vm._v(_vm._s(_vm.headingTitle))
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("div", { staticClass: "flex" }, [
-        _vm.resourceInformation.searchable && !_vm.viaHasOne
-          ? _c(
-              "div",
-              { staticClass: "relative h-9 mb-6 flex-no-shrink" },
-              [
-                _c("icon", {
-                  staticClass: "absolute search-icon-center ml-3 text-70",
-                  attrs: { type: "search" }
-                }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.search,
-                      expression: "search"
-                    }
-                  ],
-                  staticClass:
-                    "appearance-none form-control form-input w-search pl-search",
-                  attrs: {
-                    "data-testid": "search-input",
-                    dusk: "search",
-                    placeholder: _vm.__("Search"),
-                    type: "search"
-                  },
-                  domProps: { value: _vm.search },
-                  on: {
-                    keydown: function($event) {
-                      $event.stopPropagation()
-                      return _vm.performSearch($event)
-                    },
-                    search: _vm.performSearch,
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.search = $event.target.value
-                    }
-                  }
-                })
-              ],
-              1
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "w-full flex items-center mb-6" },
+      _vm._l(_vm.resource.fields, function(field) {
+        return _c(
+          "td",
           [
-            !_vm.viaResource
-              ? _c("custom-index-toolbar", {
-                  attrs: { "resource-name": _vm.resourceName }
-                })
-              : _vm._e(),
-            _vm._v(" "),
-            _c("create-resource-button", {
-              staticClass: "flex-no-shrink ml-auto",
+            _c("index-" + field.component, {
+              tag: "component",
+              class: "text-" + field.textAlign,
               attrs: {
-                "singular-name": _vm.singularName,
                 "resource-name": _vm.resourceName,
                 "via-resource": _vm.viaResource,
                 "via-resource-id": _vm.viaResourceId,
-                "via-relationship": _vm.viaRelationship,
-                "relationship-type": _vm.relationshipType,
-                "authorized-to-create":
-                  _vm.authorizedToCreate && !_vm.resourceIsFull,
-                "authorized-to-relate": _vm.authorizedToRelate
+                field: field
               }
             })
           ],
           1
         )
-      ]),
+      }),
       _vm._v(" "),
       _c(
-        "loading-card",
+        "td",
+        { staticClass: "td-fit text-right pr-6" },
+        [
+          _c("resource-table-row-actions", {
+            attrs: {
+              "delete-resource": _vm.deleteResource,
+              "restore-resource": _vm.restoreResource,
+              resource: _vm.resource,
+              "resource-name": _vm.resourceName,
+              "relationship-type": _vm.relationshipType,
+              "via-relationship": _vm.viaRelationship,
+              "via-resource": _vm.viaResource,
+              "via-resource-id": _vm.viaResourceId,
+              "via-many-to-many": _vm.viaManyToMany
+            }
+          })
+        ],
+        1
+      )
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-14075ac5", module.exports)
+  }
+}
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(14)
+/* template */
+var __vue_template__ = __webpack_require__(15)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/ResourceTableRowActions.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-68e11828", Component.options)
+  } else {
+    hotAPI.reload("data-v-68e11828", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['testId', 'deleteResource', 'restoreResource', 'resource', 'resourcesSelected', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus'],
+
+    data: function data() {
+        return {
+            deleteModalOpen: false,
+            restoreModalOpen: false
+        };
+    },
+
+    methods: {
+        /**
+         * Select the resource in the parent component
+         */
+        toggleSelection: function toggleSelection() {
+            this.updateSelectionStatus(this.resource);
+        },
+        openDeleteModal: function openDeleteModal() {
+            this.deleteModalOpen = true;
+        },
+        confirmDelete: function confirmDelete() {
+            this.deleteResource(this.resource);
+            this.closeDeleteModal();
+        },
+        closeDeleteModal: function closeDeleteModal() {
+            this.deleteModalOpen = false;
+        },
+        openRestoreModal: function openRestoreModal() {
+            this.restoreModalOpen = true;
+        },
+        confirmRestore: function confirmRestore() {
+            this.restoreResource(this.resource);
+            this.closeRestoreModal();
+        },
+        closeRestoreModal: function closeRestoreModal() {
+            this.restoreModalOpen = false;
+        }
+    }
+});
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "dropdown",
         {
-          class: { "overflow-hidden border border-50": !_vm.shouldShowToolbar },
-          attrs: { loading: _vm.loading }
+          staticClass: "bg-30 hover:bg-40 mr-3 rounded",
+          scopedSlots: _vm._u([
+            {
+              key: "default",
+              fn: function(ref) {
+                var toggle = ref.toggle
+                return _c(
+                  "dropdown-trigger",
+                  { staticClass: "px-3", attrs: { "handle-click": toggle } },
+                  [
+                    _c("icon", {
+                      staticClass: "text-80",
+                      attrs: { type: "actions-gearbox" }
+                    })
+                  ],
+                  1
+                )
+              }
+            }
+          ])
         },
         [
-          _vm.shouldShowToolbar
-            ? _c(
-                "div",
-                { staticClass: "py-3 flex items-center border-b border-50" },
-                [
-                  _vm.shouldShowCheckBoxes
-                    ? _c(
-                        "div",
-                        { staticClass: "px-3" },
-                        [
-                          _c(
-                            "dropdown",
-                            {
-                              attrs: { dusk: "select-all-dropdown" },
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "default",
-                                  fn: function(ref) {
-                                    var toggle = ref.toggle
-                                    return _c(
-                                      "dropdown-trigger",
-                                      { attrs: { "handle-click": toggle } },
-                                      [
-                                        _c("fake-checkbox", {
-                                          attrs: {
-                                            checked: _vm.selectAllChecked
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  }
-                                }
-                              ])
-                            },
-                            [
-                              _c(
-                                "dropdown-menu",
-                                {
-                                  attrs: {
-                                    slot: "menu",
-                                    direction: "ltr",
-                                    width: "250"
-                                  },
-                                  slot: "menu"
-                                },
-                                [
-                                  _c("div", { staticClass: "p-4" }, [
-                                    _c("ul", { staticClass: "list-reset" }, [
-                                      _c(
-                                        "li",
-                                        {
-                                          staticClass: "flex items-center mb-4"
-                                        },
-                                        [
-                                          _c(
-                                            "label",
-                                            {
-                                              staticClass: "flex items-center",
-                                              on: {
-                                                input: _vm.toggleSelectAll,
-                                                keydown: function($event) {
-                                                  if (
-                                                    !("button" in $event) &&
-                                                    _vm._k(
-                                                      $event.keyCode,
-                                                      "space",
-                                                      32,
-                                                      $event.key,
-                                                      " "
-                                                    ) &&
-                                                    _vm._k(
-                                                      $event.keyCode,
-                                                      "enter",
-                                                      13,
-                                                      $event.key,
-                                                      "Enter"
-                                                    )
-                                                  ) {
-                                                    return null
-                                                  }
-                                                  $event.preventDefault()
-                                                  return _vm.toggleSelectAll(
-                                                    $event
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("checkbox", {
-                                                attrs: {
-                                                  checked: _vm.selectAllChecked
-                                                }
-                                              }),
-                                              _vm._v(" "),
-                                              _c(
-                                                "span",
-                                                { staticClass: "ml-2" },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                            " +
-                                                      _vm._s(
-                                                        _vm.__("Select All")
-                                                      ) +
-                                                      "\n                                        "
-                                                  )
-                                                ]
-                                              )
-                                            ],
-                                            1
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "li",
-                                        { staticClass: "flex items-center" },
-                                        [
-                                          _c(
-                                            "label",
-                                            {
-                                              staticClass: "flex items-center",
-                                              on: {
-                                                input:
-                                                  _vm.toggleSelectAllMatching,
-                                                keydown: function($event) {
-                                                  if (
-                                                    !("button" in $event) &&
-                                                    _vm._k(
-                                                      $event.keyCode,
-                                                      "space",
-                                                      32,
-                                                      $event.key,
-                                                      " "
-                                                    ) &&
-                                                    _vm._k(
-                                                      $event.keyCode,
-                                                      "enter",
-                                                      13,
-                                                      $event.key,
-                                                      "Enter"
-                                                    )
-                                                  ) {
-                                                    return null
-                                                  }
-                                                  $event.preventDefault()
-                                                  return _vm.toggleSelectAllMatching(
-                                                    $event
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("checkbox", {
-                                                attrs: {
-                                                  dusk:
-                                                    "select-all-matching-button",
-                                                  checked:
-                                                    _vm.selectAllMatchingChecked
-                                                }
-                                              }),
-                                              _vm._v(" "),
-                                              _c(
-                                                "span",
-                                                { staticClass: "ml-2" },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                            " +
-                                                      _vm._s(
-                                                        _vm.__(
-                                                          "Select All Matching"
-                                                        )
-                                                      ) +
-                                                      "\n                                            "
-                                                  ),
-                                                  _c("span", [
-                                                    _vm._v(
-                                                      "(" +
-                                                        _vm._s(
-                                                          _vm.allMatchingResourceCount
-                                                        ) +
-                                                        ")"
-                                                    )
-                                                  ])
-                                                ]
-                                              )
-                                            ],
-                                            1
-                                          )
-                                        ]
-                                      )
-                                    ])
-                                  ])
-                                ]
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "flex items-center ml-auto px-3" },
-                    [
-                      _vm.selectedResources.length > 0
-                        ? _c("action-selector", {
+          _c(
+            "dropdown-menu",
+            {
+              attrs: { slot: "menu", width: "200", direction: "rtl" },
+              slot: "menu"
+            },
+            [
+              _c("div", { staticClass: "text-left" }, [
+                _vm.resource.authorizedToView
+                  ? _c(
+                      "span",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass:
+                              "cursor-pointer text-70 hover:text-primary mr-3 p-3 flex items-center no-underline",
                             attrs: {
-                              "resource-name": _vm.resourceName,
-                              actions: _vm.actions,
-                              "pivot-actions": _vm.pivotActions,
-                              "pivot-name": _vm.pivotName,
-                              "query-string": {
-                                currentSearch: _vm.currentSearch,
-                                encodedFilters: _vm.encodedFilters,
-                                currentTrashed: _vm.currentTrashed,
-                                viaResource: _vm.viaResource,
-                                viaResourceId: _vm.viaResourceId,
-                                viaRelationship: _vm.viaRelationship
-                              },
-                              "selected-resources":
-                                _vm.selectedResourcesForActionSelector
-                            },
-                            on: { actionExecuted: _vm.getResources }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.lenses.length > 0
-                        ? _c(
-                            "dropdown",
-                            {
-                              staticClass: "bg-30 hover:bg-40 mr-3 rounded",
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "default",
-                                  fn: function(ref) {
-                                    var toggle = ref.toggle
-                                    return _c(
-                                      "dropdown-trigger",
-                                      {
-                                        staticClass: "px-3",
-                                        attrs: { "handle-click": toggle }
-                                      },
-                                      [
-                                        _c(
-                                          "h3",
-                                          {
-                                            staticClass:
-                                              "flex items-center font-normal text-base text-90 h-9",
-                                            attrs: { slot: "default" },
-                                            slot: "default"
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                            " +
-                                                _vm._s(_vm.__("Lens")) +
-                                                "\n                        "
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  }
+                              "data-testid": _vm.testId + "-view-button",
+                              dusk: _vm.resource["id"].value + "-view-button",
+                              to: {
+                                name: "detail",
+                                params: {
+                                  resourceName: _vm.resourceName,
+                                  resourceId: _vm.resource["id"].value
                                 }
-                              ])
-                            },
-                            [
-                              _c(
-                                "dropdown-menu",
-                                {
-                                  attrs: {
-                                    slot: "menu",
-                                    width: "240",
-                                    direction: "rtl"
-                                  },
-                                  slot: "menu"
-                                },
-                                [
-                                  _c("lens-selector", {
-                                    attrs: {
-                                      "resource-name": _vm.resourceName,
-                                      lenses: _vm.lenses
+                              },
+                              title: _vm.__("View")
+                            }
+                          },
+                          [
+                            _c("icon", {
+                              staticClass: "mr-3",
+                              attrs: {
+                                type: "view",
+                                width: "22",
+                                height: "16",
+                                "view-box": "0 0 22 16"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "text-90" }, [
+                              _vm._v(_vm._s(_vm.__("Details")))
+                            ])
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.resource.authorizedToUpdate
+                  ? _c(
+                      "span",
+                      [
+                        _vm.relationshipType == "belongsToMany" ||
+                        _vm.relationshipType == "morphToMany"
+                          ? _c(
+                              "router-link",
+                              {
+                                staticClass:
+                                  "cursor-pointer text-70 hover:text-primary p-3 flex items-center no-underline",
+                                attrs: {
+                                  dusk:
+                                    _vm.resource["id"].value +
+                                    "-edit-attached-button",
+                                  to: {
+                                    name: "edit-attached",
+                                    params: {
+                                      resourceName: _vm.viaResource,
+                                      resourceId: _vm.viaResourceId,
+                                      relatedResourceName: _vm.resourceName,
+                                      relatedResourceId:
+                                        _vm.resource["id"].value
+                                    },
+                                    query: {
+                                      viaRelationship: _vm.viaRelationship
                                     }
-                                  })
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("filter-menu", {
+                                  },
+                                  title: _vm.__("Edit Attached")
+                                }
+                              },
+                              [
+                                _c("icon", {
+                                  staticClass: "mr-3",
+                                  attrs: { type: "edit" }
+                                }),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "text-90" }, [
+                                  _vm._v(_vm._s(_vm.__("Edit Attached")))
+                                ])
+                              ],
+                              1
+                            )
+                          : _c(
+                              "router-link",
+                              {
+                                staticClass:
+                                  "cursor-pointer text-70 hover:text-primary p-3 flex items-center no-underline",
+                                attrs: {
+                                  dusk:
+                                    _vm.resource["id"].value + "-edit-button",
+                                  to: {
+                                    name: "edit",
+                                    params: {
+                                      resourceName: _vm.resourceName,
+                                      resourceId: _vm.resource["id"].value
+                                    },
+                                    query: {
+                                      viaResource: _vm.viaResource,
+                                      viaResourceId: _vm.viaResourceId,
+                                      viaRelationship: _vm.viaRelationship
+                                    }
+                                  },
+                                  title: _vm.__("Edit")
+                                }
+                              },
+                              [
+                                _c("icon", {
+                                  staticClass: "mr-3",
+                                  attrs: { type: "edit" }
+                                }),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "text-90" }, [
+                                  _vm._v(_vm._s(_vm.__("Edit")))
+                                ])
+                              ],
+                              1
+                            )
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.resource.authorizedToDelete &&
+                (!_vm.resource.softDeleted || _vm.viaManyToMany)
+                  ? _c(
+                      "button",
+                      {
+                        staticClass:
+                          "appearance-none cursor-pointer text-70 hover:text-primary p-3 flex items-center no-underline",
                         attrs: {
-                          filters: _vm.filters,
-                          "soft-deletes": _vm.softDeletes,
-                          "via-resource": _vm.viaResource,
-                          "via-has-one": _vm.viaHasOne,
-                          "current-filters": _vm.currentFilters,
-                          trashed: _vm.trashed,
-                          "per-page": _vm.perPage
+                          "data-testid": _vm.testId + "-delete-button",
+                          dusk: _vm.resource["id"].value + "-delete-button",
+                          title: _vm.__(_vm.viaManyToMany ? "Detach" : "Delete")
                         },
                         on: {
-                          "clear-selected-filters": _vm.clearSelectedFilters,
-                          "filter-changed": _vm.updateFilters,
-                          "trashed-changed": _vm.trashedChanged,
-                          "per-page-changed": _vm.updatePerPageChanged
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm.shouldShowDeleteMenu
-                        ? _c("delete-menu", {
-                            attrs: {
-                              dusk: "delete-menu",
-                              "soft-deletes": _vm.softDeletes,
-                              resources: _vm.resources,
-                              "selected-resources": _vm.selectedResources,
-                              "via-many-to-many": _vm.viaManyToMany,
-                              "all-matching-resource-count":
-                                _vm.allMatchingResourceCount,
-                              "all-matching-selected":
-                                _vm.selectAllMatchingChecked,
-                              "authorized-to-delete-selected-resources":
-                                _vm.authorizedToDeleteSelectedResources,
-                              "authorized-to-force-delete-selected-resources":
-                                _vm.authorizedToForceDeleteSelectedResources,
-                              "authorized-to-delete-any-resources":
-                                _vm.authorizedToDeleteAnyResources,
-                              "authorized-to-force-delete-any-resources":
-                                _vm.authorizedToForceDeleteAnyResources,
-                              "authorized-to-restore-selected-resources":
-                                _vm.authorizedToRestoreSelectedResources,
-                              "authorized-to-restore-any-resources":
-                                _vm.authorizedToRestoreAnyResources
-                            },
-                            on: {
-                              deleteSelected: _vm.deleteSelectedResources,
-                              deleteAllMatching: _vm.deleteAllMatchingResources,
-                              forceDeleteSelected:
-                                _vm.forceDeleteSelectedResources,
-                              forceDeleteAllMatching:
-                                _vm.forceDeleteAllMatchingResources,
-                              restoreSelected: _vm.restoreSelectedResources,
-                              restoreAllMatching:
-                                _vm.restoreAllMatchingResources,
-                              close: function($event) {
-                                _vm.deleteModalOpen = false
-                              }
-                            }
-                          })
-                        : _vm._e()
-                    ],
-                    1
-                  )
-                ]
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          !_vm.resources.length
-            ? _c(
-                "div",
-                { staticClass: "flex justify-center items-center px-6 py-8" },
-                [
-                  _c(
-                    "div",
-                    { staticClass: "text-center" },
-                    [
-                      _c(
-                        "svg",
-                        {
-                          staticClass: "mb-3",
-                          attrs: {
-                            xmlns: "http://www.w3.org/2000/svg",
-                            width: "65",
-                            height: "51",
-                            viewBox: "0 0 65 51"
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.openDeleteModal($event)
                           }
+                        }
+                      },
+                      [
+                        _c("icon", { staticClass: "mr-3" }),
+                        _vm._v(" "),
+                        _c("div", {
+                          staticClass: "text-90",
+                          domProps: {
+                            textContent: _vm._s(
+                              _vm.__(_vm.viaManyToMany ? "Detach" : "Delete")
+                            )
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.resource.authorizedToRestore &&
+                _vm.resource.softDeleted &&
+                !_vm.viaManyToMany
+                  ? _c(
+                      "button",
+                      {
+                        staticClass:
+                          "appearance-none cursor-pointer text-70 hover:text-primary p-3 flex items-center no-underline",
+                        attrs: {
+                          dusk: _vm.resource["id"].value + "-restore-button",
+                          title: _vm.__("Restore")
                         },
-                        [
-                          _c(
-                            "g",
-                            {
-                              attrs: {
-                                id: "Page-1",
-                                fill: "none",
-                                "fill-rule": "evenodd"
-                              }
-                            },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.openRestoreModal($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("icon", {
+                          staticClass: "mr-3",
+                          attrs: { type: "restore", with: "20", height: "21" }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-90" }, [
+                          _vm._v(_vm._s(_vm.__("Restore")))
+                        ])
+                      ],
+                      1
+                    )
+                  : _vm._e()
+              ])
+            ]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "portal",
+        { attrs: { to: "modals" } },
+        [
+          _c(
+            "transition",
+            { attrs: { name: "fade" } },
+            [
+              _vm.deleteModalOpen
+                ? _c("delete-resource-modal", {
+                    attrs: { mode: _vm.viaManyToMany ? "detach" : "delete" },
+                    on: {
+                      confirm: _vm.confirmDelete,
+                      close: _vm.closeDeleteModal
+                    },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(ref) {
+                          var uppercaseMode = ref.uppercaseMode
+                          var mode = ref.mode
+                          return _c(
+                            "div",
+                            { staticClass: "p-8" },
                             [
                               _c(
-                                "g",
-                                {
-                                  attrs: {
-                                    id: "05-blank-state",
-                                    fill: "#A8B9C5",
-                                    "fill-rule": "nonzero",
-                                    transform: "translate(-779 -695)"
-                                  }
-                                },
+                                "heading",
+                                { staticClass: "mb-6", attrs: { level: 2 } },
                                 [
-                                  _c("path", {
-                                    attrs: {
-                                      id: "Combined-Shape",
-                                      d:
-                                        "M835 735h2c.552285 0 1 .447715 1 1s-.447715 1-1 1h-2v2c0 .552285-.447715 1-1 1s-1-.447715-1-1v-2h-2c-.552285 0-1-.447715-1-1s.447715-1 1-1h2v-2c0-.552285.447715-1 1-1s1 .447715 1 1v2zm-5.364125-8H817v8h7.049375c.350333-3.528515 2.534789-6.517471 5.5865-8zm-5.5865 10H785c-3.313708 0-6-2.686292-6-6v-30c0-3.313708 2.686292-6 6-6h44c3.313708 0 6 2.686292 6 6v25.049375c5.053323.501725 9 4.765277 9 9.950625 0 5.522847-4.477153 10-10 10-5.185348 0-9.4489-3.946677-9.950625-9zM799 725h16v-8h-16v8zm0 2v8h16v-8h-16zm34-2v-8h-16v8h16zm-52 0h16v-8h-16v8zm0 2v4c0 2.209139 1.790861 4 4 4h12v-8h-16zm18-12h16v-8h-16v8zm34 0v-8h-16v8h16zm-52 0h16v-8h-16v8zm52-10v-4c0-2.209139-1.790861-4-4-4h-44c-2.209139 0-4 1.790861-4 4v4h52zm1 39c4.418278 0 8-3.581722 8-8s-3.581722-8-8-8-8 3.581722-8 8 3.581722 8 8 8z"
-                                    }
-                                  })
+                                  _vm._v(
+                                    _vm._s(_vm.__(uppercaseMode + " Resource"))
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "p",
+                                { staticClass: "text-80 leading-normal" },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.__(
+                                        "Are you sure you want to " +
+                                          mode +
+                                          " this resource?"
+                                      )
+                                    )
+                                  )
                                 ]
                               )
-                            ]
+                            ],
+                            1
                           )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "h3",
-                        { staticClass: "text-base text-80 font-normal mb-6" },
-                        [
-                          _vm._v(
-                            "\n                    " +
-                              _vm._s(
-                                _vm.__(
-                                  "No :resource matched the given criteria.",
-                                  { resource: _vm.singularName.toLowerCase() }
-                                )
-                              ) +
-                              "\n                "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("create-resource-button", {
-                        attrs: {
-                          classes: "btn btn-sm btn-outline",
-                          "singular-name": _vm.singularName,
-                          "resource-name": _vm.resourceName,
-                          "via-resource": _vm.viaResource,
-                          "via-resource-id": _vm.viaResourceId,
-                          "via-relationship": _vm.viaRelationship,
-                          "relationship-type": _vm.relationshipType,
-                          "authorized-to-create":
-                            _vm.authorizedToCreate && !_vm.resourceIsFull,
-                          "authorized-to-relate": _vm.authorizedToRelate
                         }
-                      })
-                    ],
-                    1
-                  )
-                ]
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "relative" },
-            [
-              _c("resource-table", {
-                ref: "resourceTable",
-                attrs: {
-                  "authorized-to-relate": _vm.authorizedToRelate,
-                  "resource-name": _vm.resourceName,
-                  resources: _vm.resources,
-                  "singular-name": _vm.singularName,
-                  "selected-resources": _vm.selectedResources,
-                  "selected-resource-ids": _vm.selectedResourceIds,
-                  "actions-are-available": _vm.allActions.length > 0,
-                  "should-show-checkboxes": _vm.shouldShowCheckBoxes,
-                  "via-resource": _vm.viaResource,
-                  "via-resource-id": _vm.viaResourceId,
-                  "via-relationship": _vm.viaRelationship,
-                  "relationship-type": _vm.relationshipType,
-                  "update-selection-status": _vm.updateSelectionStatus
-                },
-                on: {
-                  order: _vm.orderByField,
-                  delete: _vm.deleteResources,
-                  restore: _vm.restoreResources
-                }
-              })
+                      }
+                    ])
+                  })
+                : _vm._e()
             ],
             1
           ),
           _vm._v(" "),
-          _vm.resourceResponse
-            ? _c("pagination-links", {
-                attrs: {
-                  "resource-name": _vm.resourceName,
-                  resources: _vm.resources,
-                  "resource-response": _vm.resourceResponse
-                },
-                on: {
-                  previous: _vm.selectPreviousPage,
-                  next: _vm.selectNextPage
-                }
-              })
-            : _vm._e()
+          _c(
+            "transition",
+            { attrs: { name: "fade" } },
+            [
+              _vm.restoreModalOpen
+                ? _c(
+                    "restore-resource-modal",
+                    {
+                      on: {
+                        confirm: _vm.confirmRestore,
+                        close: _vm.closeRestoreModal
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "p-8" },
+                        [
+                          _c(
+                            "heading",
+                            { staticClass: "mb-6", attrs: { level: 2 } },
+                            [_vm._v(_vm._s(_vm.__("Restore Resource")))]
+                          ),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "text-80 leading-normal" }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.__(
+                                  "Are you sure you want to restore this resource?"
+                                )
+                              )
+                            )
+                          ])
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                : _vm._e()
+            ],
+            1
+          )
         ],
         1
       )
@@ -13718,7 +11148,440 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-bb962f12", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-68e11828", module.exports)
+  }
+}
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(17)
+/* template functional */
+var __vue_template_functional__ = true
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Icons/Actions.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-d2f9c2e6", Component.options)
+  } else {
+    hotAPI.rerender("data-v-d2f9c2e6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function(_h, _vm) {
+  var _c = _vm._c
+  return _c("path", {
+    attrs: {
+      d:
+        "M 17.68, 9.26 L 18.92, 8.54 C 19.29, 8.33, 19.47, 7.89, 19.36, 7.48 C 18.91, 5.82, 18.03, 4.34, 16.85,  3.15 C 16.55,  2.85, 16.09,  2.79, 15.72,  3.01 L 14.48,  3.72 A 7.67, 7.67, 0, 0, 0, 13.2, 2.98 V 1.54 A 0.94, 0.94, 0, 0, 0, 12.5, 0.64 C 10.87, 0.2, 9.13, 0.2, 7.5, 0.64 C 7.09, 0.75, 6.8, 1.12, 6.8, 1.54 V 2.98 A 7.67, 7.67, 0, 0, 0, 5.52, 3.72 L 4.28, 3.01 C 3.91, 2.79, 3.45, 2.85, 3.15, 3.15 C 1.97, 4.34, 1.09, 5.82, 0.64, 7.48 C 0.53, 7.89, 0.71, 8.33, 1.08, 8.54 L 2.32, 9.26 A 7.72, 7.72, 0, 0, 0, 2.32, 10.74 L 1.08, 11.46 C 0.71, 11.67, 0.53, 12.11, 0.64, 12.52 C 1.09, 14.18, 1.97, 15.66, 3.15, 16.85 C 3.45, 17.15, 3.91, 17.21, 4.28, 16.99 L 5.52, 16.28 A 7.66, 7.66, 0, 0, 0, 6.8, 17.02 V 18.46 A 0.94, 0.94, 0, 0, 0, 7.5, 19.36 C 9.13, 19.8, 10.87, 19.8, 12.5, 19.36 C 12.91, 19.25, 13.2, 18.88, 13.2, 18.46 V 17.02 A 7.67, 7.67, 0, 0, 0, 14.48, 16.28 L 15.72, 16.99 C 16.09, 17.21, 16.55, 17.15, 16.85, 16.85 C 18.03, 15.66, 18.91, 14.18, 19.36, 12.52 C 19.47, 12.11, 19.29, 11.67, 18.92, 11.46 L 17.68, 10.74 C 17.72, 10.25, 17.72, 9.75, 17.68, 9.26 Z M 15.62, 11.72 L 17.33, 12.71 A 7.82, 7.82, 0, 0, 1, 16.01, 14.99 L 14.3, 14 C 13.05, 15.08, 12.86, 15.18, 11.32, 15.72 V 17.7 A 7.85, 7.85, 0, 0, 1, 8.68, 17.7 V 15.72 C 7.14, 15.18, 6.95, 15.07, 5.7, 14 L 3.99, 14.99 A 7.82, 7.82, 0, 0, 1, 2.67, 12.71 L 4.38, 11.72 C 4.08, 10.11, 4.08, 9.89, 4.38, 8.28 L 2.67, 7.29 C 2.98, 6.46, 3.42, 5.69, 3.99, 5.01 L 5.7, 6 C 6.95, 4.92, 7.14, 4.82, 8.68, 4.28 V 2.3 A 7.85, 7.85, 0, 0, 1, 11.32, 2.3 V 4.28 C 12.86, 4.82, 13.05, 4.93, 14.3, 6 L 16.01, 5.01 A 7.82, 7.82, 0, 0, 1, 17.33, 7.29 L 15.62, 8.28 C 15.92, 9.89, 15.92, 10.11, 15.62, 11.72 Z M 10, 6.25 C 7.93, 6.25, 6.25, 7.93, 6.25, 10 S 7.93, 13.75, 10, 13.75 S 13.75, 12.07, 13.75, 10 S 12.07, 6.25, 10, 6.25 Z M 10, 11.88 C 8.97, 11.88, 8.13, 11.03, 8.13, 10 C 8.13, 8.97, 8.97, 8.13, 10, 8.13 S 11.88, 8.97, 11.88, 10 C 11.88, 11.03, 11.03, 11.88, 10, 11.88 Z"
+    }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-d2f9c2e6", module.exports)
+  }
+}
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */,
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(24)
+/* template */
+var __vue_template__ = __webpack_require__(25)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/ResourceTable.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e62a67f6", Component.options)
+  } else {
+    hotAPI.reload("data-v-e62a67f6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"]],
+
+    props: {
+        authorizedToRelate: {
+            type: Boolean,
+            required: true
+        },
+        resourceName: {
+            default: null
+        },
+        resources: {
+            default: []
+        },
+        singularName: {
+            type: String,
+            required: true
+        },
+        selectedResources: {
+            default: []
+        },
+        selectedResourceIds: {},
+        shouldShowCheckboxes: {
+            type: Boolean,
+            default: false
+        },
+        actionsAreAvailable: {
+            type: Boolean,
+            default: false
+        },
+        viaResource: {
+            default: null
+        },
+        viaResourceId: {
+            default: null
+        },
+        viaRelationship: {
+            default: null
+        },
+        relationshipType: {
+            default: null
+        },
+        updateSelectionStatus: {
+            type: Function
+        }
+    },
+
+    data: function data() {
+        return {
+            selectAllResources: false,
+            selectAllMatching: false,
+            resourceCount: null
+        };
+    },
+
+    methods: {
+        /**
+         * Delete the given resource.
+         */
+        deleteResource: function deleteResource(resource) {
+            this.$emit('delete', [resource]);
+        },
+
+
+        /**
+         * Restore the given resource.
+         */
+        restoreResource: function restoreResource(resource) {
+            this.$emit('restore', [resource]);
+        },
+
+
+        /**
+         * Broadcast that the ordering should be updated.
+         */
+        requestOrderByChange: function requestOrderByChange(field) {
+            this.$emit('order', field);
+        }
+    },
+
+    mounted: function mounted() {
+
+        this.$el.parentElement.classList.remove('overflow-hidden', 'overflow-x-auto');
+    },
+
+
+    computed: {
+        /**
+         * Get all of the available fields for the resources.
+         */
+        fields: function fields() {
+            if (this.resources) {
+                return this.resources[0].fields;
+            }
+        },
+
+
+        /**
+         * Determine if the current resource listing is via a many-to-many relationship.
+         */
+        viaManyToMany: function viaManyToMany() {
+            return this.relationshipType == 'belongsToMany' || this.relationshipType == 'morphToMany';
+        },
+
+
+        /**
+         * Determine if the current resource listing is via a has-one relationship.
+         */
+        viaHasOne: function viaHasOne() {
+            return this.relationshipType == 'hasOne' || this.relationshipType == 'morphOne';
+        }
+    }
+});
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.resources.length > 0
+    ? _c(
+        "table",
+        {
+          staticClass: "table w-full",
+          attrs: {
+            cellpadding: "0",
+            cellspacing: "0",
+            "data-testid": "resource-table"
+          }
+        },
+        [
+          _c("thead", [
+            _c(
+              "tr",
+              [
+                _c(
+                  "th",
+                  {
+                    class: {
+                      "w-16": _vm.shouldShowCheckboxes,
+                      "w-8": !_vm.shouldShowCheckboxes
+                    }
+                  },
+                  [_vm._v(" ")]
+                ),
+                _vm._v(" "),
+                _vm._l(_vm.fields, function(field) {
+                  return _c(
+                    "th",
+                    { class: "text-" + field.textAlign },
+                    [
+                      field.sortable
+                        ? _c(
+                            "sortable-icon",
+                            {
+                              attrs: {
+                                "resource-name": _vm.resourceName,
+                                "uri-key": field.attribute
+                              },
+                              on: {
+                                sort: function($event) {
+                                  _vm.requestOrderByChange(field)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                    " +
+                                  _vm._s(field.indexName) +
+                                  "\n                "
+                              )
+                            ]
+                          )
+                        : _c("span", [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(field.indexName) +
+                                "\n                "
+                            )
+                          ])
+                    ],
+                    1
+                  )
+                }),
+                _vm._v(" "),
+                _c("th", [_vm._v(" ")])
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.resources, function(resource, index) {
+              return _c("resource-table-row", {
+                key: resource.id.value,
+                tag: "tr",
+                attrs: {
+                  testId: _vm.resourceName + "-items-" + index,
+                  "delete-resource": _vm.deleteResource,
+                  "restore-resource": _vm.restoreResource,
+                  resource: resource,
+                  "resource-name": _vm.resourceName,
+                  "relationship-type": _vm.relationshipType,
+                  "via-relationship": _vm.viaRelationship,
+                  "via-resource": _vm.viaResource,
+                  "via-resource-id": _vm.viaResourceId,
+                  "via-many-to-many": _vm.viaManyToMany,
+                  checked: _vm.selectedResources.indexOf(resource) > -1,
+                  "actions-are-available": _vm.actionsAreAvailable,
+                  "should-show-checkboxes": _vm.shouldShowCheckboxes,
+                  "update-selection-status": _vm.updateSelectionStatus
+                }
+              })
+            })
+          )
+        ]
+      )
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-e62a67f6", module.exports)
   }
 }
 
