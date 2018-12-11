@@ -104,7 +104,9 @@ class Role extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            new \App\Nova\Actions\MarkAsActive
+        ];
     }
 
     /**

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <dropdown class="bg-30 hover:bg-40 mr-3 rounded">
+        <dropdown class="bg-30 hover:bg-40 mr-3 rounded" v-if="this.hasAnyAuthorizations()">
             <dropdown-trigger class="px-3" slot-scope="{toggle}" :handle-click="toggle">
                 <icon type="actions-gearbox" class="text-80" />
             </dropdown-trigger>
@@ -12,7 +12,7 @@
                         <router-link
                             :data-testid="`${testId}-view-button`"
                             :dusk="`${resource['id'].value}-view-button`"
-                            class="cursor-pointer text-70 hover:text-primary mr-3 p-3 flex items-center no-underline"
+                            class="cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline"
                             :to="{ name: 'detail', params: {
                                 resourceName: resourceName,
                                 resourceId: resource['id'].value
@@ -20,7 +20,7 @@
                             :title="__('View')"
                         >
                             <icon type="view" class="mr-3" width="22" height="16" view-box="0 0 22 16" />
-                            <div class="text-90">{{ __('Details') }}</div>
+                            <div>{{ __('Details') }}</div>
                         </router-link>
                     </span>
 
@@ -28,7 +28,7 @@
                         <!-- Edit Pivot Button -->
                         <router-link
                             v-if="relationshipType == 'belongsToMany' || relationshipType == 'morphToMany'"
-                            class="cursor-pointer text-70 hover:text-primary p-3 flex items-center no-underline"
+                            class="cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline"
                             :dusk="`${resource['id'].value}-edit-attached-button`"
                             :to="{
                                 name: 'edit-attached',
@@ -45,13 +45,13 @@
                             :title="__('Edit Attached')"
                         >
                             <icon type="edit" class="mr-3" />
-                            <div class="text-90">{{ __('Edit Attached') }}</div>
+                            <div>{{ __('Edit Attached') }}</div>
                         </router-link>
 
                         <!-- Edit Resource Link -->
                         <router-link
                             v-else
-                            class="cursor-pointer text-70 hover:text-primary p-3 flex items-center no-underline"
+                            class="cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline"
                             :dusk="`${resource['id'].value}-edit-button`"
                             :to="{
                                 name: 'edit',
@@ -68,7 +68,7 @@
                             :title="__('Edit')"
                         >
                             <icon type="edit" class="mr-3" />
-                            <div class="text-90">{{ __('Edit') }}</div>
+                            <div>{{ __('Edit') }}</div>
                         </router-link>
                     </span>
 
@@ -76,25 +76,28 @@
                     <button
                         :data-testid="`${testId}-delete-button`"
                         :dusk="`${resource['id'].value}-delete-button`"
-                        class="appearance-none cursor-pointer text-70 hover:text-primary p-3 flex items-center no-underline"
+                        class="appearance-none cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline w-full"
                         v-if="resource.authorizedToDelete && (! resource.softDeleted || viaManyToMany)"
                         @click.prevent="openDeleteModal"
                         :title="__(viaManyToMany ? 'Detach' : 'Delete')"
                     >
                         <icon class="mr-3" />
-                        <div class="text-90" v-text="__(viaManyToMany ? 'Detach' : 'Delete')"></div>
+                        <div v-text="__(viaManyToMany ? 'Detach' : 'Delete')"></div>
                     </button>
+
+                    <!-- Resource Actions -->
+                    <!-- Resource Pivot Actions -->
 
                     <!-- Restore Resource Link -->
                     <button
                         :dusk="`${resource['id'].value}-restore-button`"
-                        class="appearance-none cursor-pointer text-70 hover:text-primary p-3 flex items-center no-underline"
+                        class="appearance-none cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline"
                         v-if="resource.authorizedToRestore && resource.softDeleted && ! viaManyToMany"
                         @click.prevent="openRestoreModal"
                         :title="__('Restore')"
                     >
                         <icon type="restore" class="mr-3" with="20" height="21" />
-                        <div class="text-90">{{ __('Restore') }}</div>
+                        <div>{{ __('Restore') }}</div>
                     </button>
                 </div>
             </dropdown-menu>
@@ -189,6 +192,61 @@ export default {
         closeRestoreModal() {
             this.restoreModalOpen = false
         },
+
+        /**
+         * Returns whether or not the authenticated user has authorization to perform at least one action.
+         *
+         * @return {boolean}
+         */
+        hasAnyAuthorizations() {
+
+            return this.resource.authorizedToView
+                || this.resource.authorizedToUpdate
+                || (this.resource.authorizedToDelete && (! this.resource.softDeleted || this.viaManyToMany))
+                || (this.resource.authorizedToRestore && this.resource.softDeleted && ! this.viaManyToMany);
+
+        },
+
+        /**
+         * Returns the closest resource index in the parent tree.
+         *
+         * @return {VueComponent|null}
+         */
+        getResourceIndex() {
+
+            // Walk up the parent tree
+            for(let parent = this.$parent; typeof parent !== 'undefined'; parent = parent.$parent) {
+
+                // Return the eparent if it is a resource index
+                if(parent.$options.name === 'resource-index') {
+                    return parent;
+                }
+
+            }
+
+            // Failed to find resource index
+            return null;
+
+        },
+
+        /**
+         * Returns the available resource actions.
+         *
+         * @return {Array}
+         */
+        getResourceActions() {
+            return this.getResourceIndex().actions;
+        },
+
+        /**
+         * Returns the available resource pivot actions.
+         *
+         * @return {Array}
+         */
+        getResourcePivotActions() {
+            return this.getResourceIndex().pivotActions;
+        }
     },
+
 }
 </script>

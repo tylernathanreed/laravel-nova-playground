@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -174,6 +174,259 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(2);
+module.exports = __webpack_require__(15);
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+Nova.booting(function (Vue, router) {
+    Vue.component('resource-table', __webpack_require__(3));
+    Vue.component('resource-table-row', __webpack_require__(7));
+    Vue.component('resource-table-row-actions', __webpack_require__(10));
+    Vue.component('icon-actions-gearbox', __webpack_require__(13));
+});
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(4)
+/* template */
+var __vue_template__ = __webpack_require__(6)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/ResourceTable.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e62a67f6", Component.options)
+  } else {
+    hotAPI.reload("data-v-e62a67f6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"]],
+
+    props: {
+        authorizedToRelate: {
+            type: Boolean,
+            required: true
+        },
+        resourceName: {
+            default: null
+        },
+        resources: {
+            default: []
+        },
+        singularName: {
+            type: String,
+            required: true
+        },
+        selectedResources: {
+            default: []
+        },
+        selectedResourceIds: {},
+        shouldShowCheckboxes: {
+            type: Boolean,
+            default: false
+        },
+        actionsAreAvailable: {
+            type: Boolean,
+            default: false
+        },
+        viaResource: {
+            default: null
+        },
+        viaResourceId: {
+            default: null
+        },
+        viaRelationship: {
+            default: null
+        },
+        relationshipType: {
+            default: null
+        },
+        updateSelectionStatus: {
+            type: Function
+        }
+    },
+
+    data: function data() {
+        return {
+            selectAllResources: false,
+            selectAllMatching: false,
+            resourceCount: null
+        };
+    },
+
+    methods: {
+        /**
+         * Delete the given resource.
+         */
+        deleteResource: function deleteResource(resource) {
+            this.$emit('delete', [resource]);
+        },
+
+
+        /**
+         * Restore the given resource.
+         */
+        restoreResource: function restoreResource(resource) {
+            this.$emit('restore', [resource]);
+        },
+
+
+        /**
+         * Broadcast that the ordering should be updated.
+         */
+        requestOrderByChange: function requestOrderByChange(field) {
+            this.$emit('order', field);
+        }
+    },
+
+    mounted: function mounted() {
+
+        this.$el.parentElement.classList.remove('overflow-hidden', 'overflow-x-auto');
+    },
+
+
+    computed: {
+        /**
+         * Get all of the available fields for the resources.
+         */
+        fields: function fields() {
+            if (this.resources) {
+                return this.resources[0].fields;
+            }
+        },
+
+
+        /**
+         * Determine if the current resource listing is via a many-to-many relationship.
+         */
+        viaManyToMany: function viaManyToMany() {
+            return this.relationshipType == 'belongsToMany' || this.relationshipType == 'morphToMany';
+        },
+
+
+        /**
+         * Determine if the current resource listing is via a has-one relationship.
+         */
+        viaHasOne: function viaHasOne() {
+            return this.relationshipType == 'hasOne' || this.relationshipType == 'morphOne';
+        }
+    }
+});
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -10308,40 +10561,134 @@ module.exports = g;
 });
 
 /***/ }),
-/* 2 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(3);
-module.exports = __webpack_require__(18);
-
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.resources.length > 0
+    ? _c(
+        "table",
+        {
+          staticClass: "table w-full",
+          attrs: {
+            cellpadding: "0",
+            cellspacing: "0",
+            "data-testid": "resource-table"
+          }
+        },
+        [
+          _c("thead", [
+            _c(
+              "tr",
+              [
+                _c(
+                  "th",
+                  {
+                    class: {
+                      "w-16": _vm.shouldShowCheckboxes,
+                      "w-8": !_vm.shouldShowCheckboxes
+                    }
+                  },
+                  [_vm._v(" ")]
+                ),
+                _vm._v(" "),
+                _vm._l(_vm.fields, function(field) {
+                  return _c(
+                    "th",
+                    { class: "text-" + field.textAlign },
+                    [
+                      field.sortable
+                        ? _c(
+                            "sortable-icon",
+                            {
+                              attrs: {
+                                "resource-name": _vm.resourceName,
+                                "uri-key": field.attribute
+                              },
+                              on: {
+                                sort: function($event) {
+                                  _vm.requestOrderByChange(field)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                    " +
+                                  _vm._s(field.indexName) +
+                                  "\n                "
+                              )
+                            ]
+                          )
+                        : _c("span", [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(field.indexName) +
+                                "\n                "
+                            )
+                          ])
+                    ],
+                    1
+                  )
+                }),
+                _vm._v(" "),
+                _c("th", [_vm._v(" ")])
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.resources, function(resource, index) {
+              return _c("resource-table-row", {
+                key: resource.id.value,
+                tag: "tr",
+                attrs: {
+                  testId: _vm.resourceName + "-items-" + index,
+                  "delete-resource": _vm.deleteResource,
+                  "restore-resource": _vm.restoreResource,
+                  resource: resource,
+                  "resource-name": _vm.resourceName,
+                  "relationship-type": _vm.relationshipType,
+                  "via-relationship": _vm.viaRelationship,
+                  "via-resource": _vm.viaResource,
+                  "via-resource-id": _vm.viaResourceId,
+                  "via-many-to-many": _vm.viaManyToMany,
+                  checked: _vm.selectedResources.indexOf(resource) > -1,
+                  "actions-are-available": _vm.actionsAreAvailable,
+                  "should-show-checkboxes": _vm.shouldShowCheckboxes,
+                  "update-selection-status": _vm.updateSelectionStatus
+                }
+              })
+            })
+          )
+        ]
+      )
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-e62a67f6", module.exports)
+  }
+}
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-Nova.booting(function (Vue, router) {
-    Vue.component('resource-table', __webpack_require__(23));
-    Vue.component('resource-table-row', __webpack_require__(10));
-    Vue.component('resource-table-row-actions', __webpack_require__(13));
-    Vue.component('icon-actions-gearbox', __webpack_require__(16));
-});
-
-/***/ }),
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(11)
+var __vue_script__ = __webpack_require__(8)
 /* template */
-var __vue_template__ = __webpack_require__(12)
+var __vue_template__ = __webpack_require__(9)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -10380,7 +10727,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 11 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10472,7 +10819,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 12 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -10560,15 +10907,15 @@ if (false) {
 }
 
 /***/ }),
-/* 13 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(14)
+var __vue_script__ = __webpack_require__(11)
 /* template */
-var __vue_template__ = __webpack_require__(15)
+var __vue_template__ = __webpack_require__(12)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -10607,11 +10954,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 14 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
 //
 //
 //
@@ -10782,12 +11132,65 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         closeRestoreModal: function closeRestoreModal() {
             this.restoreModalOpen = false;
+        },
+
+
+        /**
+         * Returns whether or not the authenticated user has authorization to perform at least one action.
+         *
+         * @return {boolean}
+         */
+        hasAnyAuthorizations: function hasAnyAuthorizations() {
+
+            return this.resource.authorizedToView || this.resource.authorizedToUpdate || this.resource.authorizedToDelete && (!this.resource.softDeleted || this.viaManyToMany) || this.resource.authorizedToRestore && this.resource.softDeleted && !this.viaManyToMany;
+        },
+
+
+        /**
+         * Returns the closest resource index in the parent tree.
+         *
+         * @return {VueComponent|null}
+         */
+        getResourceIndex: function getResourceIndex() {
+
+            // Walk up the parent tree
+            for (var parent = this.$parent; typeof parent !== 'undefined'; parent = parent.$parent) {
+
+                // Return the eparent if it is a resource index
+                if (parent.$options.name === 'resource-index') {
+                    return parent;
+                }
+            }
+
+            // Failed to find resource index
+            return null;
+        },
+
+
+        /**
+         * Returns the available resource actions.
+         *
+         * @return {Array}
+         */
+        getResourceActions: function getResourceActions() {
+            return this.getResourceIndex().actions;
+        },
+
+
+        /**
+         * Returns the available resource pivot actions.
+         *
+         * @return {Array}
+         */
+        getResourcePivotActions: function getResourcePivotActions() {
+            return this.getResourceIndex().pivotActions;
         }
     }
+
 });
 
 /***/ }),
-/* 15 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -10797,239 +11200,248 @@ var render = function() {
   return _c(
     "div",
     [
-      _c(
-        "dropdown",
-        {
-          staticClass: "bg-30 hover:bg-40 mr-3 rounded",
-          scopedSlots: _vm._u([
+      this.hasAnyAuthorizations()
+        ? _c(
+            "dropdown",
             {
-              key: "default",
-              fn: function(ref) {
-                var toggle = ref.toggle
-                return _c(
-                  "dropdown-trigger",
-                  { staticClass: "px-3", attrs: { "handle-click": toggle } },
-                  [
-                    _c("icon", {
-                      staticClass: "text-80",
-                      attrs: { type: "actions-gearbox" }
-                    })
-                  ],
-                  1
-                )
-              }
-            }
-          ])
-        },
-        [
-          _c(
-            "dropdown-menu",
-            {
-              attrs: { slot: "menu", width: "200", direction: "rtl" },
-              slot: "menu"
+              staticClass: "bg-30 hover:bg-40 mr-3 rounded",
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(ref) {
+                    var toggle = ref.toggle
+                    return _c(
+                      "dropdown-trigger",
+                      {
+                        staticClass: "px-3",
+                        attrs: { "handle-click": toggle }
+                      },
+                      [
+                        _c("icon", {
+                          staticClass: "text-80",
+                          attrs: { type: "actions-gearbox" }
+                        })
+                      ],
+                      1
+                    )
+                  }
+                }
+              ])
             },
             [
-              _c("div", { staticClass: "text-left" }, [
-                _vm.resource.authorizedToView
-                  ? _c(
-                      "span",
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass:
-                              "cursor-pointer text-70 hover:text-primary mr-3 p-3 flex items-center no-underline",
-                            attrs: {
-                              "data-testid": _vm.testId + "-view-button",
-                              dusk: _vm.resource["id"].value + "-view-button",
-                              to: {
-                                name: "detail",
-                                params: {
-                                  resourceName: _vm.resourceName,
-                                  resourceId: _vm.resource["id"].value
+              _c(
+                "dropdown-menu",
+                {
+                  attrs: { slot: "menu", width: "200", direction: "rtl" },
+                  slot: "menu"
+                },
+                [
+                  _c("div", { staticClass: "text-left" }, [
+                    _vm.resource.authorizedToView
+                      ? _c(
+                          "span",
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass:
+                                  "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline",
+                                attrs: {
+                                  "data-testid": _vm.testId + "-view-button",
+                                  dusk:
+                                    _vm.resource["id"].value + "-view-button",
+                                  to: {
+                                    name: "detail",
+                                    params: {
+                                      resourceName: _vm.resourceName,
+                                      resourceId: _vm.resource["id"].value
+                                    }
+                                  },
+                                  title: _vm.__("View")
                                 }
                               },
-                              title: _vm.__("View")
+                              [
+                                _c("icon", {
+                                  staticClass: "mr-3",
+                                  attrs: {
+                                    type: "view",
+                                    width: "22",
+                                    height: "16",
+                                    "view-box": "0 0 22 16"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("div", [_vm._v(_vm._s(_vm.__("Details")))])
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.resource.authorizedToUpdate
+                      ? _c(
+                          "span",
+                          [
+                            _vm.relationshipType == "belongsToMany" ||
+                            _vm.relationshipType == "morphToMany"
+                              ? _c(
+                                  "router-link",
+                                  {
+                                    staticClass:
+                                      "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline",
+                                    attrs: {
+                                      dusk:
+                                        _vm.resource["id"].value +
+                                        "-edit-attached-button",
+                                      to: {
+                                        name: "edit-attached",
+                                        params: {
+                                          resourceName: _vm.viaResource,
+                                          resourceId: _vm.viaResourceId,
+                                          relatedResourceName: _vm.resourceName,
+                                          relatedResourceId:
+                                            _vm.resource["id"].value
+                                        },
+                                        query: {
+                                          viaRelationship: _vm.viaRelationship
+                                        }
+                                      },
+                                      title: _vm.__("Edit Attached")
+                                    }
+                                  },
+                                  [
+                                    _c("icon", {
+                                      staticClass: "mr-3",
+                                      attrs: { type: "edit" }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("div", [
+                                      _vm._v(_vm._s(_vm.__("Edit Attached")))
+                                    ])
+                                  ],
+                                  1
+                                )
+                              : _c(
+                                  "router-link",
+                                  {
+                                    staticClass:
+                                      "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline",
+                                    attrs: {
+                                      dusk:
+                                        _vm.resource["id"].value +
+                                        "-edit-button",
+                                      to: {
+                                        name: "edit",
+                                        params: {
+                                          resourceName: _vm.resourceName,
+                                          resourceId: _vm.resource["id"].value
+                                        },
+                                        query: {
+                                          viaResource: _vm.viaResource,
+                                          viaResourceId: _vm.viaResourceId,
+                                          viaRelationship: _vm.viaRelationship
+                                        }
+                                      },
+                                      title: _vm.__("Edit")
+                                    }
+                                  },
+                                  [
+                                    _c("icon", {
+                                      staticClass: "mr-3",
+                                      attrs: { type: "edit" }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("div", [_vm._v(_vm._s(_vm.__("Edit")))])
+                                  ],
+                                  1
+                                )
+                          ],
+                          1
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.resource.authorizedToDelete &&
+                    (!_vm.resource.softDeleted || _vm.viaManyToMany)
+                      ? _c(
+                          "button",
+                          {
+                            staticClass:
+                              "appearance-none cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline w-full",
+                            attrs: {
+                              "data-testid": _vm.testId + "-delete-button",
+                              dusk: _vm.resource["id"].value + "-delete-button",
+                              title: _vm.__(
+                                _vm.viaManyToMany ? "Detach" : "Delete"
+                              )
+                            },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.openDeleteModal($event)
+                              }
+                            }
+                          },
+                          [
+                            _c("icon", { staticClass: "mr-3" }),
+                            _vm._v(" "),
+                            _c("div", {
+                              domProps: {
+                                textContent: _vm._s(
+                                  _vm.__(
+                                    _vm.viaManyToMany ? "Detach" : "Delete"
+                                  )
+                                )
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.resource.authorizedToRestore &&
+                    _vm.resource.softDeleted &&
+                    !_vm.viaManyToMany
+                      ? _c(
+                          "button",
+                          {
+                            staticClass:
+                              "appearance-none cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline",
+                            attrs: {
+                              dusk:
+                                _vm.resource["id"].value + "-restore-button",
+                              title: _vm.__("Restore")
+                            },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.openRestoreModal($event)
+                              }
                             }
                           },
                           [
                             _c("icon", {
                               staticClass: "mr-3",
                               attrs: {
-                                type: "view",
-                                width: "22",
-                                height: "16",
-                                "view-box": "0 0 22 16"
+                                type: "restore",
+                                with: "20",
+                                height: "21"
                               }
                             }),
                             _vm._v(" "),
-                            _c("div", { staticClass: "text-90" }, [
-                              _vm._v(_vm._s(_vm.__("Details")))
-                            ])
+                            _c("div", [_vm._v(_vm._s(_vm.__("Restore")))])
                           ],
                           1
                         )
-                      ],
-                      1
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.resource.authorizedToUpdate
-                  ? _c(
-                      "span",
-                      [
-                        _vm.relationshipType == "belongsToMany" ||
-                        _vm.relationshipType == "morphToMany"
-                          ? _c(
-                              "router-link",
-                              {
-                                staticClass:
-                                  "cursor-pointer text-70 hover:text-primary p-3 flex items-center no-underline",
-                                attrs: {
-                                  dusk:
-                                    _vm.resource["id"].value +
-                                    "-edit-attached-button",
-                                  to: {
-                                    name: "edit-attached",
-                                    params: {
-                                      resourceName: _vm.viaResource,
-                                      resourceId: _vm.viaResourceId,
-                                      relatedResourceName: _vm.resourceName,
-                                      relatedResourceId:
-                                        _vm.resource["id"].value
-                                    },
-                                    query: {
-                                      viaRelationship: _vm.viaRelationship
-                                    }
-                                  },
-                                  title: _vm.__("Edit Attached")
-                                }
-                              },
-                              [
-                                _c("icon", {
-                                  staticClass: "mr-3",
-                                  attrs: { type: "edit" }
-                                }),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "text-90" }, [
-                                  _vm._v(_vm._s(_vm.__("Edit Attached")))
-                                ])
-                              ],
-                              1
-                            )
-                          : _c(
-                              "router-link",
-                              {
-                                staticClass:
-                                  "cursor-pointer text-70 hover:text-primary p-3 flex items-center no-underline",
-                                attrs: {
-                                  dusk:
-                                    _vm.resource["id"].value + "-edit-button",
-                                  to: {
-                                    name: "edit",
-                                    params: {
-                                      resourceName: _vm.resourceName,
-                                      resourceId: _vm.resource["id"].value
-                                    },
-                                    query: {
-                                      viaResource: _vm.viaResource,
-                                      viaResourceId: _vm.viaResourceId,
-                                      viaRelationship: _vm.viaRelationship
-                                    }
-                                  },
-                                  title: _vm.__("Edit")
-                                }
-                              },
-                              [
-                                _c("icon", {
-                                  staticClass: "mr-3",
-                                  attrs: { type: "edit" }
-                                }),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "text-90" }, [
-                                  _vm._v(_vm._s(_vm.__("Edit")))
-                                ])
-                              ],
-                              1
-                            )
-                      ],
-                      1
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.resource.authorizedToDelete &&
-                (!_vm.resource.softDeleted || _vm.viaManyToMany)
-                  ? _c(
-                      "button",
-                      {
-                        staticClass:
-                          "appearance-none cursor-pointer text-70 hover:text-primary p-3 flex items-center no-underline",
-                        attrs: {
-                          "data-testid": _vm.testId + "-delete-button",
-                          dusk: _vm.resource["id"].value + "-delete-button",
-                          title: _vm.__(_vm.viaManyToMany ? "Detach" : "Delete")
-                        },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.openDeleteModal($event)
-                          }
-                        }
-                      },
-                      [
-                        _c("icon", { staticClass: "mr-3" }),
-                        _vm._v(" "),
-                        _c("div", {
-                          staticClass: "text-90",
-                          domProps: {
-                            textContent: _vm._s(
-                              _vm.__(_vm.viaManyToMany ? "Detach" : "Delete")
-                            )
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.resource.authorizedToRestore &&
-                _vm.resource.softDeleted &&
-                !_vm.viaManyToMany
-                  ? _c(
-                      "button",
-                      {
-                        staticClass:
-                          "appearance-none cursor-pointer text-70 hover:text-primary p-3 flex items-center no-underline",
-                        attrs: {
-                          dusk: _vm.resource["id"].value + "-restore-button",
-                          title: _vm.__("Restore")
-                        },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.openRestoreModal($event)
-                          }
-                        }
-                      },
-                      [
-                        _c("icon", {
-                          staticClass: "mr-3",
-                          attrs: { type: "restore", with: "20", height: "21" }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "text-90" }, [
-                          _vm._v(_vm._s(_vm.__("Restore")))
-                        ])
-                      ],
-                      1
-                    )
-                  : _vm._e()
-              ])
-            ]
+                      : _vm._e()
+                  ])
+                ]
+              )
+            ],
+            1
           )
-        ],
-        1
-      ),
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "portal",
@@ -11153,7 +11565,7 @@ if (false) {
 }
 
 /***/ }),
-/* 16 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -11161,7 +11573,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(17)
+var __vue_template__ = __webpack_require__(14)
 /* template functional */
 var __vue_template_functional__ = true
 /* styles */
@@ -11200,7 +11612,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 17 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function(_h, _vm) {
@@ -11223,367 +11635,10 @@ if (false) {
 }
 
 /***/ }),
-/* 18 */
+/* 15 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(24)
-/* template */
-var __vue_template__ = __webpack_require__(25)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/ResourceTable.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-e62a67f6", Component.options)
-  } else {
-    hotAPI.reload("data-v-e62a67f6", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 24 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"]],
-
-    props: {
-        authorizedToRelate: {
-            type: Boolean,
-            required: true
-        },
-        resourceName: {
-            default: null
-        },
-        resources: {
-            default: []
-        },
-        singularName: {
-            type: String,
-            required: true
-        },
-        selectedResources: {
-            default: []
-        },
-        selectedResourceIds: {},
-        shouldShowCheckboxes: {
-            type: Boolean,
-            default: false
-        },
-        actionsAreAvailable: {
-            type: Boolean,
-            default: false
-        },
-        viaResource: {
-            default: null
-        },
-        viaResourceId: {
-            default: null
-        },
-        viaRelationship: {
-            default: null
-        },
-        relationshipType: {
-            default: null
-        },
-        updateSelectionStatus: {
-            type: Function
-        }
-    },
-
-    data: function data() {
-        return {
-            selectAllResources: false,
-            selectAllMatching: false,
-            resourceCount: null
-        };
-    },
-
-    methods: {
-        /**
-         * Delete the given resource.
-         */
-        deleteResource: function deleteResource(resource) {
-            this.$emit('delete', [resource]);
-        },
-
-
-        /**
-         * Restore the given resource.
-         */
-        restoreResource: function restoreResource(resource) {
-            this.$emit('restore', [resource]);
-        },
-
-
-        /**
-         * Broadcast that the ordering should be updated.
-         */
-        requestOrderByChange: function requestOrderByChange(field) {
-            this.$emit('order', field);
-        }
-    },
-
-    mounted: function mounted() {
-
-        this.$el.parentElement.classList.remove('overflow-hidden', 'overflow-x-auto');
-    },
-
-
-    computed: {
-        /**
-         * Get all of the available fields for the resources.
-         */
-        fields: function fields() {
-            if (this.resources) {
-                return this.resources[0].fields;
-            }
-        },
-
-
-        /**
-         * Determine if the current resource listing is via a many-to-many relationship.
-         */
-        viaManyToMany: function viaManyToMany() {
-            return this.relationshipType == 'belongsToMany' || this.relationshipType == 'morphToMany';
-        },
-
-
-        /**
-         * Determine if the current resource listing is via a has-one relationship.
-         */
-        viaHasOne: function viaHasOne() {
-            return this.relationshipType == 'hasOne' || this.relationshipType == 'morphOne';
-        }
-    }
-});
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm.resources.length > 0
-    ? _c(
-        "table",
-        {
-          staticClass: "table w-full",
-          attrs: {
-            cellpadding: "0",
-            cellspacing: "0",
-            "data-testid": "resource-table"
-          }
-        },
-        [
-          _c("thead", [
-            _c(
-              "tr",
-              [
-                _c(
-                  "th",
-                  {
-                    class: {
-                      "w-16": _vm.shouldShowCheckboxes,
-                      "w-8": !_vm.shouldShowCheckboxes
-                    }
-                  },
-                  [_vm._v(" ")]
-                ),
-                _vm._v(" "),
-                _vm._l(_vm.fields, function(field) {
-                  return _c(
-                    "th",
-                    { class: "text-" + field.textAlign },
-                    [
-                      field.sortable
-                        ? _c(
-                            "sortable-icon",
-                            {
-                              attrs: {
-                                "resource-name": _vm.resourceName,
-                                "uri-key": field.attribute
-                              },
-                              on: {
-                                sort: function($event) {
-                                  _vm.requestOrderByChange(field)
-                                }
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                    " +
-                                  _vm._s(field.indexName) +
-                                  "\n                "
-                              )
-                            ]
-                          )
-                        : _c("span", [
-                            _vm._v(
-                              "\n                    " +
-                                _vm._s(field.indexName) +
-                                "\n                "
-                            )
-                          ])
-                    ],
-                    1
-                  )
-                }),
-                _vm._v(" "),
-                _c("th", [_vm._v(" ")])
-              ],
-              2
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.resources, function(resource, index) {
-              return _c("resource-table-row", {
-                key: resource.id.value,
-                tag: "tr",
-                attrs: {
-                  testId: _vm.resourceName + "-items-" + index,
-                  "delete-resource": _vm.deleteResource,
-                  "restore-resource": _vm.restoreResource,
-                  resource: resource,
-                  "resource-name": _vm.resourceName,
-                  "relationship-type": _vm.relationshipType,
-                  "via-relationship": _vm.viaRelationship,
-                  "via-resource": _vm.viaResource,
-                  "via-resource-id": _vm.viaResourceId,
-                  "via-many-to-many": _vm.viaManyToMany,
-                  checked: _vm.selectedResources.indexOf(resource) > -1,
-                  "actions-are-available": _vm.actionsAreAvailable,
-                  "should-show-checkboxes": _vm.shouldShowCheckboxes,
-                  "update-selection-status": _vm.updateSelectionStatus
-                }
-              })
-            })
-          )
-        ]
-      )
-    : _vm._e()
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-e62a67f6", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);
