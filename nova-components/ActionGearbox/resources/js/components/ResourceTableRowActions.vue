@@ -72,6 +72,28 @@
                         </router-link>
                     </span>
 
+                    <!-- Resource Actions -->
+                    <dropdown v-if="resourceActions.length > 0">
+                        <dropdown-trigger class="cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline" slot-scope="{toggle}" :handle-click="toggle">
+                            <icon type="resource" class="mr-3"/>
+                            <div v-text="resourceInformation.singularLabel" class="flex-1"></div>
+                        </dropdown-trigger>
+
+                        <dropdown-menu slot="menu" width="200" direction="rtl">
+                            <div class="cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline">
+                                One
+                            </div>
+                            <div class="cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline">
+                                Two
+                            </div>
+                            <div class="cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline">
+                                Three
+                            </div>
+                        </dropdown-menu>
+                    </dropdown>
+
+                    <!-- Resource Pivot Actions -->
+
                     <!-- Delete Resource Link -->
                     <button
                         :data-testid="`${testId}-delete-button`"
@@ -85,9 +107,6 @@
                         <div v-text="__(viaManyToMany ? 'Detach' : 'Delete')"></div>
                     </button>
 
-                    <!-- Resource Actions -->
-                    <!-- Resource Pivot Actions -->
-
                     <!-- Restore Resource Link -->
                     <button
                         :dusk="`${resource['id'].value}-restore-button`"
@@ -96,7 +115,7 @@
                         @click.prevent="openRestoreModal"
                         :title="__('Restore')"
                     >
-                        <icon type="restore" class="mr-3" with="20" height="21" />
+                        <icon type="restore" class="mr-3" width="20" height="21" />
                         <div>{{ __('Restore') }}</div>
                     </button>
                 </div>
@@ -135,7 +154,11 @@
 </template>
 
 <script>
+import { InteractsWithResourceInformation } from 'laravel-nova'
+
 export default {
+    mixins: [InteractsWithResourceInformation],
+
     props: [
         'testId',
         'deleteResource',
@@ -247,6 +270,12 @@ export default {
             return this.getResourceIndex().pivotActions;
         }
     },
+
+    computed: {
+        resourceActions() {
+            return this.getResourceActions();
+        }
+    }
 
 }
 </script>

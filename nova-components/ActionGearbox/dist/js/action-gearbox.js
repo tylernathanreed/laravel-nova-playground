@@ -189,6 +189,7 @@ Nova.booting(function (Vue, router) {
     Vue.component('resource-table-row', __webpack_require__(7));
     Vue.component('resource-table-row-actions', __webpack_require__(10));
     Vue.component('icon-actions-gearbox', __webpack_require__(13));
+    Vue.component('icon-resource', __webpack_require__(20));
 });
 
 /***/ }),
@@ -10634,7 +10635,7 @@ var render = function() {
                   )
                 }),
                 _vm._v(" "),
-                _c("th", [_vm._v(" ")])
+                _c("th", [_vm._v("Actions")])
               ],
               2
             )
@@ -10959,6 +10960,27 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -11096,7 +11118,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"]],
+
     props: ['testId', 'deleteResource', 'restoreResource', 'resource', 'resourcesSelected', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus'],
 
     data: function data() {
@@ -11185,6 +11211,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getResourcePivotActions: function getResourcePivotActions() {
             return this.getResourceIndex().pivotActions;
         }
+    },
+
+    computed: {
+        resourceActions: function resourceActions() {
+            return this.getResourceActions();
+        }
     }
 
 });
@@ -11236,206 +11268,310 @@ var render = function() {
                   slot: "menu"
                 },
                 [
-                  _c("div", { staticClass: "text-left" }, [
-                    _vm.resource.authorizedToView
-                      ? _c(
-                          "span",
-                          [
-                            _c(
-                              "router-link",
-                              {
-                                staticClass:
-                                  "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline",
-                                attrs: {
-                                  "data-testid": _vm.testId + "-view-button",
-                                  dusk:
-                                    _vm.resource["id"].value + "-view-button",
-                                  to: {
-                                    name: "detail",
-                                    params: {
-                                      resourceName: _vm.resourceName,
-                                      resourceId: _vm.resource["id"].value
-                                    }
-                                  },
-                                  title: _vm.__("View")
-                                }
-                              },
-                              [
-                                _c("icon", {
-                                  staticClass: "mr-3",
+                  _c(
+                    "div",
+                    { staticClass: "text-left" },
+                    [
+                      _vm.resource.authorizedToView
+                        ? _c(
+                            "span",
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline",
                                   attrs: {
-                                    type: "view",
-                                    width: "22",
-                                    height: "16",
-                                    "view-box": "0 0 22 16"
+                                    "data-testid": _vm.testId + "-view-button",
+                                    dusk:
+                                      _vm.resource["id"].value + "-view-button",
+                                    to: {
+                                      name: "detail",
+                                      params: {
+                                        resourceName: _vm.resourceName,
+                                        resourceId: _vm.resource["id"].value
+                                      }
+                                    },
+                                    title: _vm.__("View")
                                   }
-                                }),
-                                _vm._v(" "),
-                                _c("div", [_vm._v(_vm._s(_vm.__("Details")))])
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.resource.authorizedToUpdate
-                      ? _c(
-                          "span",
-                          [
-                            _vm.relationshipType == "belongsToMany" ||
-                            _vm.relationshipType == "morphToMany"
-                              ? _c(
-                                  "router-link",
-                                  {
-                                    staticClass:
-                                      "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline",
+                                },
+                                [
+                                  _c("icon", {
+                                    staticClass: "mr-3",
                                     attrs: {
-                                      dusk:
-                                        _vm.resource["id"].value +
-                                        "-edit-attached-button",
-                                      to: {
-                                        name: "edit-attached",
-                                        params: {
-                                          resourceName: _vm.viaResource,
-                                          resourceId: _vm.viaResourceId,
-                                          relatedResourceName: _vm.resourceName,
-                                          relatedResourceId:
-                                            _vm.resource["id"].value
-                                        },
-                                        query: {
-                                          viaRelationship: _vm.viaRelationship
-                                        }
-                                      },
-                                      title: _vm.__("Edit Attached")
+                                      type: "view",
+                                      width: "22",
+                                      height: "16",
+                                      "view-box": "0 0 22 16"
                                     }
-                                  },
-                                  [
-                                    _c("icon", {
-                                      staticClass: "mr-3",
-                                      attrs: { type: "edit" }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("div", [
-                                      _vm._v(_vm._s(_vm.__("Edit Attached")))
-                                    ])
-                                  ],
-                                  1
-                                )
-                              : _c(
-                                  "router-link",
-                                  {
-                                    staticClass:
-                                      "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline",
-                                    attrs: {
-                                      dusk:
-                                        _vm.resource["id"].value +
-                                        "-edit-button",
-                                      to: {
-                                        name: "edit",
-                                        params: {
-                                          resourceName: _vm.resourceName,
-                                          resourceId: _vm.resource["id"].value
-                                        },
-                                        query: {
-                                          viaResource: _vm.viaResource,
-                                          viaResourceId: _vm.viaResourceId,
-                                          viaRelationship: _vm.viaRelationship
-                                        }
-                                      },
-                                      title: _vm.__("Edit")
-                                    }
-                                  },
-                                  [
-                                    _c("icon", {
-                                      staticClass: "mr-3",
-                                      attrs: { type: "edit" }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("div", [_vm._v(_vm._s(_vm.__("Edit")))])
-                                  ],
-                                  1
-                                )
-                          ],
-                          1
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.resource.authorizedToDelete &&
-                    (!_vm.resource.softDeleted || _vm.viaManyToMany)
-                      ? _c(
-                          "button",
-                          {
-                            staticClass:
-                              "appearance-none cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline w-full",
-                            attrs: {
-                              "data-testid": _vm.testId + "-delete-button",
-                              dusk: _vm.resource["id"].value + "-delete-button",
-                              title: _vm.__(
-                                _vm.viaManyToMany ? "Detach" : "Delete"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("div", [_vm._v(_vm._s(_vm.__("Details")))])
+                                ],
+                                1
                               )
-                            },
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                return _vm.openDeleteModal($event)
-                              }
-                            }
-                          },
-                          [
-                            _c("icon", { staticClass: "mr-3" }),
-                            _vm._v(" "),
-                            _c("div", {
-                              domProps: {
-                                textContent: _vm._s(
-                                  _vm.__(
-                                    _vm.viaManyToMany ? "Detach" : "Delete"
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.resource.authorizedToUpdate
+                        ? _c(
+                            "span",
+                            [
+                              _vm.relationshipType == "belongsToMany" ||
+                              _vm.relationshipType == "morphToMany"
+                                ? _c(
+                                    "router-link",
+                                    {
+                                      staticClass:
+                                        "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline",
+                                      attrs: {
+                                        dusk:
+                                          _vm.resource["id"].value +
+                                          "-edit-attached-button",
+                                        to: {
+                                          name: "edit-attached",
+                                          params: {
+                                            resourceName: _vm.viaResource,
+                                            resourceId: _vm.viaResourceId,
+                                            relatedResourceName:
+                                              _vm.resourceName,
+                                            relatedResourceId:
+                                              _vm.resource["id"].value
+                                          },
+                                          query: {
+                                            viaRelationship: _vm.viaRelationship
+                                          }
+                                        },
+                                        title: _vm.__("Edit Attached")
+                                      }
+                                    },
+                                    [
+                                      _c("icon", {
+                                        staticClass: "mr-3",
+                                        attrs: { type: "edit" }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("div", [
+                                        _vm._v(_vm._s(_vm.__("Edit Attached")))
+                                      ])
+                                    ],
+                                    1
                                   )
-                                )
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.resource.authorizedToRestore &&
-                    _vm.resource.softDeleted &&
-                    !_vm.viaManyToMany
-                      ? _c(
-                          "button",
-                          {
-                            staticClass:
-                              "appearance-none cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline",
-                            attrs: {
-                              dusk:
-                                _vm.resource["id"].value + "-restore-button",
-                              title: _vm.__("Restore")
+                                : _c(
+                                    "router-link",
+                                    {
+                                      staticClass:
+                                        "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline",
+                                      attrs: {
+                                        dusk:
+                                          _vm.resource["id"].value +
+                                          "-edit-button",
+                                        to: {
+                                          name: "edit",
+                                          params: {
+                                            resourceName: _vm.resourceName,
+                                            resourceId: _vm.resource["id"].value
+                                          },
+                                          query: {
+                                            viaResource: _vm.viaResource,
+                                            viaResourceId: _vm.viaResourceId,
+                                            viaRelationship: _vm.viaRelationship
+                                          }
+                                        },
+                                        title: _vm.__("Edit")
+                                      }
+                                    },
+                                    [
+                                      _c("icon", {
+                                        staticClass: "mr-3",
+                                        attrs: { type: "edit" }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("div", [
+                                        _vm._v(_vm._s(_vm.__("Edit")))
+                                      ])
+                                    ],
+                                    1
+                                  )
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.resourceActions.length > 0
+                        ? _c(
+                            "dropdown",
+                            {
+                              scopedSlots: _vm._u([
+                                {
+                                  key: "default",
+                                  fn: function(ref) {
+                                    var toggle = ref.toggle
+                                    return _c(
+                                      "dropdown-trigger",
+                                      {
+                                        staticClass:
+                                          "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline",
+                                        attrs: { "handle-click": toggle }
+                                      },
+                                      [
+                                        _c("icon", {
+                                          staticClass: "mr-3",
+                                          attrs: { type: "resource" }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("div", {
+                                          staticClass: "flex-1",
+                                          domProps: {
+                                            textContent: _vm._s(
+                                              _vm.resourceInformation
+                                                .singularLabel
+                                            )
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  }
+                                }
+                              ])
                             },
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                return _vm.openRestoreModal($event)
-                              }
-                            }
-                          },
-                          [
-                            _c("icon", {
-                              staticClass: "mr-3",
+                            [
+                              _c(
+                                "dropdown-menu",
+                                {
+                                  attrs: {
+                                    slot: "menu",
+                                    width: "200",
+                                    direction: "rtl"
+                                  },
+                                  slot: "menu"
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                            One\n                        "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                            Two\n                        "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                            Three\n                        "
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.resource.authorizedToDelete &&
+                      (!_vm.resource.softDeleted || _vm.viaManyToMany)
+                        ? _c(
+                            "button",
+                            {
+                              staticClass:
+                                "appearance-none cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline w-full",
                               attrs: {
-                                type: "restore",
-                                with: "20",
-                                height: "21"
+                                "data-testid": _vm.testId + "-delete-button",
+                                dusk:
+                                  _vm.resource["id"].value + "-delete-button",
+                                title: _vm.__(
+                                  _vm.viaManyToMany ? "Detach" : "Delete"
+                                )
+                              },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.openDeleteModal($event)
+                                }
                               }
-                            }),
-                            _vm._v(" "),
-                            _c("div", [_vm._v(_vm._s(_vm.__("Restore")))])
-                          ],
-                          1
-                        )
-                      : _vm._e()
-                  ])
+                            },
+                            [
+                              _c("icon", { staticClass: "mr-3" }),
+                              _vm._v(" "),
+                              _c("div", {
+                                domProps: {
+                                  textContent: _vm._s(
+                                    _vm.__(
+                                      _vm.viaManyToMany ? "Detach" : "Delete"
+                                    )
+                                  )
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.resource.authorizedToRestore &&
+                      _vm.resource.softDeleted &&
+                      !_vm.viaManyToMany
+                        ? _c(
+                            "button",
+                            {
+                              staticClass:
+                                "appearance-none cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline",
+                              attrs: {
+                                dusk:
+                                  _vm.resource["id"].value + "-restore-button",
+                                title: _vm.__("Restore")
+                              },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.openRestoreModal($event)
+                                }
+                              }
+                            },
+                            [
+                              _c("icon", {
+                                staticClass: "mr-3",
+                                attrs: {
+                                  type: "restore",
+                                  width: "20",
+                                  height: "21"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("div", [_vm._v(_vm._s(_vm.__("Restore")))])
+                            ],
+                            1
+                          )
+                        : _vm._e()
+                    ],
+                    1
+                  )
                 ]
               )
             ],
@@ -11639,6 +11775,80 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(21)
+/* template functional */
+var __vue_template_functional__ = true
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Icons/Resource.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-d37ff5a4", Component.options)
+  } else {
+    hotAPI.rerender("data-v-d37ff5a4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function(_h, _vm) {
+  var _c = _vm._c
+  return _c("path", {
+    attrs: {
+      d:
+        "M3 1h4c1.1045695 0 2 .8954305 2 2v4c0 1.1045695-.8954305 2-2 2H3c-1.1045695 0-2-.8954305-2-2V3c0-1.1045695.8954305-2 2-2zm0 2v4h4V3H3zm10-2h4c1.1045695 0 2 .8954305 2 2v4c0 1.1045695-.8954305 2-2 2h-4c-1.1045695 0-2-.8954305-2-2V3c0-1.1045695.8954305-2 2-2zm0 2v4h4V3h-4zM3 11h4c1.1045695 0 2 .8954305 2 2v4c0 1.1045695-.8954305 2-2 2H3c-1.1045695 0-2-.8954305-2-2v-4c0-1.1045695.8954305-2 2-2zm0 2v4h4v-4H3zm10-2h4c1.1045695 0 2 .8954305 2 2v4c0 1.1045695-.8954305 2-2 2h-4c-1.1045695 0-2-.8954305-2-2v-4c0-1.1045695.8954305-2 2-2zm0 2v4h4v-4h-4z"
+    }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-d37ff5a4", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

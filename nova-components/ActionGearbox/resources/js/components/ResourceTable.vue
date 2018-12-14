@@ -33,7 +33,7 @@
                     </span>
                 </th>
 
-                <th>&nbsp;<!-- View, Edit, Delete --></th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
