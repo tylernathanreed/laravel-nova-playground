@@ -73,13 +73,13 @@
                     </span>
 
                     <!-- Resource Actions -->
-                    <dropdown v-if="resourceActions.length > 0">
-                        <dropdown-trigger class="cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline" slot-scope="{toggle}" :handle-click="toggle">
+                    <subdropdown v-if="resourceActions.length > 0">
+                        <subdropdown-trigger class="cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline" slot-scope="{toggle}" :handle-click="toggle">
                             <icon type="resource" class="mr-3"/>
                             <div v-text="resourceInformation.singularLabel" class="flex-1"></div>
-                        </dropdown-trigger>
+                        </subdropdown-trigger>
 
-                        <dropdown-menu slot="menu" width="200" direction="rtl">
+                        <subdropdown-menu slot="menu" width="200" pull="left">
                             <div class="cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline">
                                 One
                             </div>
@@ -89,8 +89,8 @@
                             <div class="cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline">
                                 Three
                             </div>
-                        </dropdown-menu>
-                    </dropdown>
+                        </subdropdown-menu>
+                    </subdropdown>
 
                     <!-- Resource Pivot Actions -->
 
