@@ -6,6 +6,7 @@ use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\BelongsToMany;
 
 class Role extends Resource
@@ -66,6 +67,8 @@ class Role extends Resource
             Text::make('Display Name', 'display_name')->sortable(),
             Text::make('System Name', 'system_name')->sortable(),
 
+            Boolean::make('Active', 'active'),
+
             Number::make('Users', function() {
                 return $this->users_count;
             }),
@@ -105,7 +108,8 @@ class Role extends Resource
     public function actions(Request $request)
     {
         return [
-            new \App\Nova\Actions\MarkAsActive
+            new \App\Nova\Actions\MarkAsActive,
+            new \App\Nova\Actions\MarkAsInactive
         ];
     }
 
