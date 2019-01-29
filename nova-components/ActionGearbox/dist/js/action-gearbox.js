@@ -11163,6 +11163,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -11406,6 +11423,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          */
         resourceActions: function resourceActions() {
             return this.getResourceActions();
+        },
+
+
+        /**
+         * Computed alias of {@see $this.getResourcePivotActions()}.
+         *
+         * @return {Array}
+         */
+        resourcePivotActions: function resourcePivotActions() {
+            return this.getResourcePivotActions();
         },
 
 
@@ -28902,6 +28929,89 @@ var render = function() {
                                     1
                                   )
                                 })
+                              )
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.resourcePivotActions.actions.length > 0
+                        ? _c(
+                            "subdropdown",
+                            {
+                              scopedSlots: _vm._u([
+                                {
+                                  key: "default",
+                                  fn: function(ref) {
+                                    var toggle = ref.toggle
+                                    return _c(
+                                      "subdropdown-trigger",
+                                      {
+                                        staticClass:
+                                          "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
+                                        attrs: { "handle-click": toggle }
+                                      },
+                                      [
+                                        _c("icon", {
+                                          staticClass: "mr-3",
+                                          attrs: { type: "resource" }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("div", {
+                                          staticClass: "flex-1",
+                                          domProps: {
+                                            textContent: _vm._s(
+                                              _vm.resourcePivotActions.name
+                                            )
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  }
+                                }
+                              ])
+                            },
+                            [
+                              _c(
+                                "subdropdown-menu",
+                                {
+                                  attrs: {
+                                    slot: "menu",
+                                    width: "200",
+                                    pull: "left"
+                                  },
+                                  slot: "menu"
+                                },
+                                _vm._l(
+                                  _vm.resourcePivotActions.actions,
+                                  function(action) {
+                                    return _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
+                                        on: {
+                                          click: function($event) {
+                                            _vm.openConfirmationModal(
+                                              action,
+                                              true
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("icon", {
+                                          staticClass: "mr-3",
+                                          attrs: { type: "play" }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("div", [_vm._v(_vm._s(action.name))])
+                                      ],
+                                      1
+                                    )
+                                  }
+                                )
                               )
                             ],
                             1
