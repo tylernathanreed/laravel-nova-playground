@@ -343,9 +343,41 @@ export default {
 
             // Assume the action was successful
             else {
-                this.$emit('actionExecuted')
-                this.$toasted.show(this.__('The action ran successfully!'), { type: 'success' })
+
+                // Fire the action executed event
+                this.$emit('actionExecuted');
+
+                // Display that the action run successfully
+                this.$toasted.show(this.__('The action ran successfully!'), { type: 'success' });
+
+                // To avoid having to override every Vue component between
+                // this one and the index, we're just going to directly
+                // call the action executed response from the index.
+
+                // Update the index resources
+                this.updateIndexResources();
+
             }
+
+        },
+
+        /**
+         * Updates the index resources.
+         *
+         * @return {void}
+         */
+        updateIndexResources() {
+
+            // Determine the resource index
+            var index = this.getResourceIndex();
+
+            // Stop if we couldn't find the resource index
+            if(index == null) {
+                return;
+            }
+
+            // Call the resource updater
+            index.getResources();
 
         },
 

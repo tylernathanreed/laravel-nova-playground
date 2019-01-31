@@ -2,6 +2,7 @@
 
 namespace App\Nova\Resources;
 
+use Illuminate\Http\Request;
 use Laravel\Nova\Resource as NovaResource;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -62,5 +63,24 @@ abstract class Resource extends NovaResource
     public static function relatableQuery(NovaRequest $request, $query)
     {
         return parent::relatableQuery($request, $query);
+    }
+
+    /**
+     * Returns meta data information about this resource for client side consumption.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return array
+     */
+    public static function information(Request $request)
+    {
+        return [
+            'uriKey' => static::uriKey(),
+            'label' => static::label(),
+            'singularLabel' => static::singularLabel(),
+            'authorizedToCreate' => static::authorizedToCreate($request),
+            'searchable' => static::searchable(),
+            'icon' => 'asdf'
+        ];
     }
 }

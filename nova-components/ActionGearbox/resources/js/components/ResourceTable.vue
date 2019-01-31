@@ -55,6 +55,7 @@
                 :actions-are-available="actionsAreAvailable"
                 :should-show-checkboxes="shouldShowCheckboxes"
                 :update-selection-status="updateSelectionStatus"
+                @actionExecuted="actionExecuted"
             />
         </tbody>
     </table>
@@ -137,6 +138,14 @@ export default {
         requestOrderByChange(field) {
             this.$emit('order', field)
         },
+
+        /**
+         * Handle the actionExecuted event and pass it up the chain.
+         */
+        actionExecuted() {
+            this.$emit('actionExecuted')
+        }
+
     },
 
     mounted() {

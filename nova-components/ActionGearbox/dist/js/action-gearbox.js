@@ -10476,6 +10476,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -10556,6 +10557,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          */
         requestOrderByChange: function requestOrderByChange(field) {
             this.$emit('order', field);
+        },
+
+
+        /**
+         * Handle the actionExecuted event and pass it up the chain.
+         */
+        actionExecuted: function actionExecuted() {
+            this.$emit('actionExecuted');
         }
     },
 
@@ -10694,7 +10703,8 @@ var render = function() {
                   "actions-are-available": _vm.actionsAreAvailable,
                   "should-show-checkboxes": _vm.shouldShowCheckboxes,
                   "update-selection-status": _vm.updateSelectionStatus
-                }
+                },
+                on: { actionExecuted: _vm.actionExecuted }
               })
             })
           )
@@ -10810,6 +10820,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['testId', 'deleteResource', 'restoreResource', 'resource', 'resourcesSelected', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus'],
@@ -10847,6 +10858,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         closeRestoreModal: function closeRestoreModal() {
             this.restoreModalOpen = false;
+        },
+
+
+        /**
+         * Handle the actionExecuted event and pass it up the chain.
+         */
+        actionExecuted: function actionExecuted() {
+            this.$emit('actionExecuted');
         }
     }
 });
@@ -10920,7 +10939,8 @@ var render = function() {
               "via-resource": _vm.viaResource,
               "via-resource-id": _vm.viaResourceId,
               "via-many-to-many": _vm.viaManyToMany
-            }
+            },
+            on: { actionExecuted: _vm.actionExecuted }
           })
         ],
         1
@@ -11328,9 +11348,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                             // Assume the action was successful
                             else {
+
+                                    // Fire the action executed event
                                     this.$emit('actionExecuted');
+
+                                    // Display that the action run successfully
                                     this.$toasted.show(this.__('The action ran successfully!'), { type: 'success' });
+
+                                    // To avoid having to override every Vue component between
+                                    // this one and the index, we're just going to directly
+                                    // call the action executed response from the index.
+
+                                    // Update the index resources
+                                    this.updateIndexResources();
                                 }
+        },
+
+
+        /**
+         * Updates the index resources.
+         *
+         * @return {void}
+         */
+        updateIndexResources: function updateIndexResources() {
+
+            // Determine the resource index
+            var index = this.getResourceIndex();
+
+            // Stop if we couldn't find the resource index
+            if (index == null) {
+                return;
+            }
+
+            // Call the resource updater
+            index.getResources();
         },
 
 
@@ -41136,7 +41187,7 @@ var render = function() {
     "a",
     {
       staticClass:
-        "subdropdown-trigger h-9 flex items-center cursor-pointer select-none",
+        "subdropdown-trigger flex items-center cursor-pointer select-none",
       on: { click: _vm.handleClick }
     },
     [

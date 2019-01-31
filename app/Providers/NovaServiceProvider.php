@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Laravel\Nova\Nova;
+use Illuminate\Http\Request;
 use Laravel\Nova\Cards\Help;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Events\ServingNova;
@@ -22,6 +23,28 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         Nova::remoteScript(url('js/manifest.js'));
         Nova::remoteScript(url('js/vendor.js'));
         Nova::remoteScript(url('js/app.js'));
+
+        Nova::provideToScript([
+            'resources' => function (Request $request) {
+
+                return collect(Nova::$resources)->map(function ($resource) use ($request) {
+
+                    if(method_exists($resource, 'information')) {
+                        return $resource::information($request);
+                    }
+
+                    return [
+                        'uriKey' => $resource::uriKey(),
+                        'label' => $resource::label(),
+                        'singularLabel' => $resource::singularLabel(),
+                        'authorizedToCreate' => $resource::authorizedToCreate($request),
+                        'searchable' => $resource::searchable(),
+                    ];
+
+                })->values()->all();
+
+            },
+        ]);
     }
 
     /**

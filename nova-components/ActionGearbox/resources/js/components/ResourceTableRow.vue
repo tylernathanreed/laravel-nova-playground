@@ -37,6 +37,7 @@
                 :via-resource="viaResource"
                 :via-resource-id="viaResourceId"
                 :via-many-to-many="viaManyToMany"
+                @actionExecuted="actionExecuted"
             >
             </resource-table-row-actions>
         </td>
@@ -101,6 +102,14 @@ export default {
         closeRestoreModal() {
             this.restoreModalOpen = false
         },
+
+        /**
+         * Handle the actionExecuted event and pass it up the chain.
+         */
+        actionExecuted() {
+            this.$emit('actionExecuted')
+        }
+
     },
 }
 </script>

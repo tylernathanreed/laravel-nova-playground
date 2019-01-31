@@ -148,6 +148,11 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /**
+         * Laravel Nova Service Providers...
+         */
+        Laravel\Nova\NovaCoreServiceProvider::class,
+
+        /**
          * Package Service Providers...
          */
         Reedware\LaravelBlueprints\BlueprintsServiceProvider::class,
@@ -213,6 +218,11 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        /**
+         * Laravel Nova Facades...
+         */
+        'Nova' => Laravel\Nova\Nova::class,
 
         /**
          * Package Facades...

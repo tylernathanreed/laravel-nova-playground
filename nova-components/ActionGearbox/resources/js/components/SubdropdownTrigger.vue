@@ -1,5 +1,5 @@
 <template>
-    <a @click="handleClick" class="subdropdown-trigger h-9 flex items-center cursor-pointer select-none">
+    <a @click="handleClick" class="subdropdown-trigger flex items-center cursor-pointer select-none">
         <slot />
 
         <svg
