@@ -10351,6 +10351,15 @@ Nova.booting(function (Vue, router) {
     Vue.component('resource-table', __webpack_require__(5));
     Vue.component('resource-table-row', __webpack_require__(8));
     Vue.component('resource-table-row-actions', __webpack_require__(11));
+
+    Vue.component('view-resource-action', __webpack_require__(42));
+    Vue.component('edit-attached-resource-action', __webpack_require__(45));
+    Vue.component('edit-resource-action', __webpack_require__(48));
+    Vue.component('resource-actions-dropdown', __webpack_require__(51));
+    Vue.component('resource-pivot-actions-dropdown', __webpack_require__(56));
+    Vue.component('delete-resource-action', __webpack_require__(59));
+    Vue.component('restore-resource-action', __webpack_require__(62));
+
     Vue.component('icon-actions-gearbox', __webpack_require__(16));
     Vue.component('icon-resource', __webpack_require__(18));
 
@@ -11044,162 +11053,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -11207,199 +11060,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     mixins: [__WEBPACK_IMPORTED_MODULE_1_laravel_nova__["InteractsWithResourceInformation"]],
 
-    props: ['testId', 'deleteResource', 'restoreResource', 'resource', 'resourcesSelected', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint'],
+    props: {
+        actionComponents: {
+            type: Array,
+            default: function _default() {
+                return ['view-resource-action', 'edit-attached-resource-action', 'edit-resource-action', 'resource-actions-dropdown', 'resource-pivot-actions-dropdown', 'delete-resource-action', 'restore-resource-action'];
+            }
+        },
+        testId: { default: '' },
+        deleteResource: { default: '' },
+        restoreResource: { default: '' },
+        resource: { default: '' },
+        resourcesSelected: { default: '' },
+        resourceName: { default: '' },
+        relationshipType: { default: '' },
+        viaRelationship: { default: '' },
+        viaResource: { default: '' },
+        viaResourceId: { default: '' },
+        viaManyToMany: { default: '' },
+        checked: { default: '' },
+        actionsAreAvailable: { default: '' },
+        shouldShowCheckboxes: { default: '' },
+        updateSelectionStatus: { default: '' },
+        endpoint: { default: '' }
+    },
 
     data: function data() {
         return {
-
-            deleteModalOpen: false,
-            restoreModalOpen: false,
-            working: false,
-            errors: new __WEBPACK_IMPORTED_MODULE_1_laravel_nova__["Errors"](),
-            selectedAction: null,
-            selectedActionIsPivotAction: false,
-            confirmActionModalOpened: false
-
+            restoreModalOpen: false
         };
     },
 
     methods: {
 
         /**
-         * Confirm with the user that they actually want to run the selected action.
-         *
-         * @param  {Object}   action  The selected action.
-         * @param  {boolean}  pivot   Whether or not the action is a pivot action.
-         *
-         * @return {void}
-         */
-        openConfirmationModal: function openConfirmationModal(action) {
-            var pivot = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-
-            this.selectedAction = action;
-            this.selectedActionIsPivotAction = pivot;
-            this.confirmActionModalOpened = true;
-        },
-
-
-        /**
-         * Close the action confirmation modal.
-         */
-        closeConfirmationModal: function closeConfirmationModal() {
-            this.confirmActionModalOpened = false;
-        },
-
-
-        /**
-         * Execute the selected action.
-         */
-        executeAction: function executeAction() {
-            var _this = this;
-
-            // Set this action as working
-            this.working = true;
-
-            // Submit the request
-            Nova.request({
-                method: 'post',
-                url: this.endpoint || '/nova-api/' + this.resourceName + '/action',
-                params: this.actionRequestQueryString,
-                data: this.actionFormData()
-            })
-
-            // Handle the response
-            .then(function (response) {
-
-                _this.confirmActionModalOpened = false;
-                _this.handleActionResponse(response.data);
-                _this.working = false;
-            })
-
-            // Catch any errors
-            .catch(function (error) {
-
-                _this.working = false;
-
-                if (error.response.status == 422) {
-                    _this.errors = new __WEBPACK_IMPORTED_MODULE_1_laravel_nova__["Errors"](error.response.data.errors);
-                }
-            });
-        },
-
-
-        /**
-         * Gather the action FormData for the given action.
-         *
-         * @return {FormData}
-         */
-        actionFormData: function actionFormData() {
-            var _this2 = this;
-
-            return __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.tap(new FormData(), function (formData) {
-
-                formData.append('resources', [_this2.resource.id.value]);
-
-                __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.each(_this2.selectedAction.fields, function (field) {
-                    field.fill(formData);
-                });
-            });
-        },
-
-
-        /**
-         * Handle the action response. Typically either a message, download or a redirect.
-         *
-         * @param  {object}  response
-         *
-         * @return {void}
-         */
-        handleActionResponse: function handleActionResponse(response) {
-
-            // Check for a message
-            if (response.message) {
-                this.$emit('actionExecuted');
-                this.$toasted.show(response.message, { type: 'success' });
-            }
-
-            // Check if the response was deleted
-            else if (response.deleted) {
-                    this.$emit('actionExecuted');
-                }
-
-                // Check for a danger response
-                else if (response.danger) {
-                        this.$emit('actionExecuted');
-                        this.$toasted.show(response.danger, { type: 'error' });
-                    }
-
-                    // Check for a download response
-                    else if (response.download) {
-                            var link = document.createElement('a');
-                            link.href = response.download;
-                            link.download = response.name;
-                            link.click();
-                        }
-
-                        // Check for a redirect response
-                        else if (response.redirect) {
-                                window.location = response.redirect;
-                            }
-
-                            // Assume the action was successful
-                            else {
-
-                                    // Fire the action executed event
-                                    this.$emit('actionExecuted');
-
-                                    // Display that the action run successfully
-                                    this.$toasted.show(this.__('The action ran successfully!'), { type: 'success' });
-
-                                    // To avoid having to override every Vue component between
-                                    // this one and the index, we're just going to directly
-                                    // call the action executed response from the index.
-
-                                    // Update the index resources
-                                    this.updateIndexResources();
-                                }
-        },
-
-
-        /**
-         * Updates the index resources.
-         *
-         * @return {void}
-         */
-        updateIndexResources: function updateIndexResources() {
-
-            // Determine the resource index
-            var index = this.getResourceIndex();
-
-            // Stop if we couldn't find the resource index
-            if (index == null) {
-                return;
-            }
-
-            // Call the resource updater
-            index.getResources();
-        },
-
-
-        /**
          * Select the resource in the parent component
          */
         toggleSelection: function toggleSelection() {
             this.updateSelectionStatus(this.resource);
-        },
-        openDeleteModal: function openDeleteModal() {
-            this.deleteModalOpen = true;
-        },
-        confirmDelete: function confirmDelete() {
-            this.deleteResource(this.resource);
-            this.closeDeleteModal();
-        },
-        closeDeleteModal: function closeDeleteModal() {
-            this.deleteModalOpen = false;
         },
         openRestoreModal: function openRestoreModal() {
             this.restoreModalOpen = true;
@@ -11421,166 +11119,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         hasAnyAuthorizations: function hasAnyAuthorizations() {
 
             return this.resource.authorizedToView || this.resource.authorizedToUpdate || this.resource.authorizedToDelete && (!this.resource.softDeleted || this.viaManyToMany) || this.resource.authorizedToRestore && this.resource.softDeleted && !this.viaManyToMany;
-        },
-
-
-        /**
-         * Returns the closest resource index in the parent tree.
-         *
-         * @return {VueComponent|null}
-         */
-        getResourceIndex: function getResourceIndex() {
-
-            // Walk up the parent tree
-            for (var parent = this.$parent; typeof parent !== 'undefined'; parent = parent.$parent) {
-
-                // Return the eparent if it is a resource index
-                if (parent.$options.name === 'resource-index') {
-                    return parent;
-                }
-            }
-
-            // Failed to find resource index
-            return null;
-        },
-
-
-        /**
-         * Returns the available resource actions.
-         *
-         * @return {Array}
-         */
-        getResourceActions: function getResourceActions() {
-            return this.getResourceIndex().actions;
-        },
-
-
-        /**
-         * Returns the available resource pivot actions.
-         *
-         * @return {Array}
-         */
-        getResourcePivotActions: function getResourcePivotActions() {
-            return this.getResourceIndex().pivotActions;
-        }
-    },
-
-    computed: {
-
-        /**
-         * Computed alias of {@see $this.getResourceActions()}.
-         *
-         * @return {Array}
-         */
-        resourceActions: function resourceActions() {
-            return this.getResourceActions();
-        },
-
-
-        /**
-         * Computed alias of {@see $this.getResourcePivotActions()}.
-         *
-         * @return {Array}
-         */
-        resourcePivotActions: function resourcePivotActions() {
-            return this.getResourcePivotActions();
-        },
-
-
-        /**
-         * Returns the query string for an action request.
-         *
-         * @return {Object}
-         */
-        actionRequestQueryString: function actionRequestQueryString() {
-            return {
-                action: this.selectedAction.uriKey,
-                pivotAction: this.selectedActionIsPivotAction,
-                search: this.queryString.currentSearch,
-                filters: this.queryString.encodedFilters,
-                trashed: this.queryString.currentTrashed,
-                viaResource: this.queryString.viaResource,
-                viaResourceId: this.queryString.viaResourceId,
-                viaRelationship: this.queryString.viaRelationship
-            };
-        },
-
-
-        /**
-         * Returns the query string for this page.
-         *
-         * @return {Object}
-         */
-        queryString: function queryString() {
-
-            return {
-                currentSearch: this.currentSearch,
-                encodedFilters: this.encodedFilters,
-                currentTrashed: this.currentTrashed,
-                viaResource: this.viaResource,
-                viaResourceId: this.viaResourceId,
-                viaRelationship: this.viaRelationship
-            };
-        },
-
-
-        /**
-         * Returns the current search value from the query string.
-         *
-         * @return {string}
-         */
-        currentSearch: function currentSearch() {
-            return this.$route.query[this.searchParameter] || '';
-        },
-
-
-        /**
-         * Returns the encoded filters from the query string.
-         *
-         * @return {string}
-         */
-        encodedFilters: function encodedFilters() {
-            return this.$route.query[this.filterParameter] || '';
-        },
-
-
-        /**
-         * Returns the current trashed constraint value from the query string.
-         *
-         * @return {string}
-         */
-        currentTrashed: function currentTrashed() {
-            return this.$route.query[this.trashedParameter] || '';
-        },
-
-
-        /**
-         * Returns the name of the search query string variable.
-         *
-         * @return {string}
-         */
-        searchParameter: function searchParameter() {
-            return this.resourceName + '_search';
-        },
-
-
-        /**
-         * Returns the name of the filter query string variable.
-         *
-         * @return {string}
-         */
-        filterParameter: function filterParameter() {
-            return this.resourceName + '_filter';
-        },
-
-
-        /**
-         * Returns the name of the trashed constraint query string variable.
-         *
-         * @return {string}
-         */
-        trashedParameter: function trashedParameter() {
-            return this.resourceName + '_trashed';
         }
     }
 
@@ -28737,556 +28275,65 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      this.hasAnyAuthorizations()
-        ? _c(
-            "dropdown",
+  return this.hasAnyAuthorizations() && _vm.actionComponents.length > 0
+    ? _c(
+        "dropdown",
+        {
+          staticClass: "bg-30 hover:bg-40 mr-3 rounded",
+          scopedSlots: _vm._u([
             {
-              staticClass: "bg-30 hover:bg-40 mr-3 rounded",
-              scopedSlots: _vm._u([
-                {
-                  key: "default",
-                  fn: function(ref) {
-                    var toggle = ref.toggle
-                    return _c(
-                      "dropdown-trigger",
-                      {
-                        staticClass: "px-3",
-                        attrs: { "handle-click": toggle }
-                      },
-                      [
-                        _c("icon", {
-                          staticClass: "text-80",
-                          attrs: { type: "actions-gearbox" }
-                        })
-                      ],
-                      1
-                    )
-                  }
-                }
-              ])
+              key: "default",
+              fn: function(ref) {
+                var toggle = ref.toggle
+                return _c(
+                  "dropdown-trigger",
+                  { staticClass: "px-3", attrs: { "handle-click": toggle } },
+                  [
+                    _c("icon", {
+                      staticClass: "text-80",
+                      attrs: { type: "actions-gearbox" }
+                    })
+                  ],
+                  1
+                )
+              }
+            }
+          ])
+        },
+        [
+          _c(
+            "dropdown-menu",
+            {
+              attrs: { slot: "menu", width: "200", direction: "rtl" },
+              slot: "menu"
             },
             [
               _c(
-                "dropdown-menu",
-                {
-                  attrs: { slot: "menu", width: "200", direction: "rtl" },
-                  slot: "menu"
-                },
-                [
-                  _c(
-                    "div",
-                    { staticClass: "text-left" },
-                    [
-                      _vm.resource.authorizedToView
-                        ? _c(
-                            "span",
-                            [
-                              _c(
-                                "router-link",
-                                {
-                                  staticClass:
-                                    "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
-                                  attrs: {
-                                    "data-testid": _vm.testId + "-view-button",
-                                    dusk:
-                                      _vm.resource["id"].value + "-view-button",
-                                    to: {
-                                      name: "detail",
-                                      params: {
-                                        resourceName: _vm.resourceName,
-                                        resourceId: _vm.resource["id"].value
-                                      }
-                                    },
-                                    title: _vm.__("View")
-                                  }
-                                },
-                                [
-                                  _c("icon", {
-                                    staticClass: "mr-3",
-                                    attrs: {
-                                      type: "view",
-                                      width: "22",
-                                      height: "16",
-                                      "view-box": "0 0 22 16"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("div", [_vm._v(_vm._s(_vm.__("Details")))])
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.resource.authorizedToUpdate
-                        ? _c(
-                            "span",
-                            [
-                              _vm.relationshipType == "belongsToMany" ||
-                              _vm.relationshipType == "morphToMany"
-                                ? _c(
-                                    "router-link",
-                                    {
-                                      staticClass:
-                                        "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
-                                      attrs: {
-                                        dusk:
-                                          _vm.resource["id"].value +
-                                          "-edit-attached-button",
-                                        to: {
-                                          name: "edit-attached",
-                                          params: {
-                                            resourceName: _vm.viaResource,
-                                            resourceId: _vm.viaResourceId,
-                                            relatedResourceName:
-                                              _vm.resourceName,
-                                            relatedResourceId:
-                                              _vm.resource["id"].value
-                                          },
-                                          query: {
-                                            viaRelationship: _vm.viaRelationship
-                                          }
-                                        },
-                                        title: _vm.__("Edit Attached")
-                                      }
-                                    },
-                                    [
-                                      _c("icon", {
-                                        staticClass: "mr-3",
-                                        attrs: { type: "edit" }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("div", [
-                                        _vm._v(_vm._s(_vm.__("Edit Attached")))
-                                      ])
-                                    ],
-                                    1
-                                  )
-                                : _c(
-                                    "router-link",
-                                    {
-                                      staticClass:
-                                        "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
-                                      attrs: {
-                                        dusk:
-                                          _vm.resource["id"].value +
-                                          "-edit-button",
-                                        to: {
-                                          name: "edit",
-                                          params: {
-                                            resourceName: _vm.resourceName,
-                                            resourceId: _vm.resource["id"].value
-                                          },
-                                          query: {
-                                            viaResource: _vm.viaResource,
-                                            viaResourceId: _vm.viaResourceId,
-                                            viaRelationship: _vm.viaRelationship
-                                          }
-                                        },
-                                        title: _vm.__("Edit")
-                                      }
-                                    },
-                                    [
-                                      _c("icon", {
-                                        staticClass: "mr-3",
-                                        attrs: { type: "edit" }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("div", [
-                                        _vm._v(_vm._s(_vm.__("Edit")))
-                                      ])
-                                    ],
-                                    1
-                                  )
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.resourceActions.length > 0
-                        ? _c(
-                            "subdropdown",
-                            {
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "default",
-                                  fn: function(ref) {
-                                    var toggle = ref.toggle
-                                    return _c(
-                                      "subdropdown-trigger",
-                                      {
-                                        staticClass:
-                                          "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
-                                        attrs: { "handle-click": toggle }
-                                      },
-                                      [
-                                        _c("icon", {
-                                          staticClass: "mr-3",
-                                          attrs: { type: "resource" }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("div", {
-                                          staticClass: "flex-1",
-                                          domProps: {
-                                            textContent: _vm._s(
-                                              _vm.resourceInformation
-                                                .singularLabel
-                                            )
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  }
-                                }
-                              ])
-                            },
-                            [
-                              _c(
-                                "subdropdown-menu",
-                                {
-                                  attrs: {
-                                    slot: "menu",
-                                    width: "200",
-                                    pull: "left"
-                                  },
-                                  slot: "menu"
-                                },
-                                _vm._l(_vm.resourceActions, function(action) {
-                                  return _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
-                                      on: {
-                                        click: function($event) {
-                                          _vm.openConfirmationModal(action)
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("icon", {
-                                        staticClass: "mr-3",
-                                        attrs: { type: "play" }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("div", [_vm._v(_vm._s(action.name))])
-                                    ],
-                                    1
-                                  )
-                                })
-                              )
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.resourcePivotActions.actions.length > 0
-                        ? _c(
-                            "subdropdown",
-                            {
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "default",
-                                  fn: function(ref) {
-                                    var toggle = ref.toggle
-                                    return _c(
-                                      "subdropdown-trigger",
-                                      {
-                                        staticClass:
-                                          "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
-                                        attrs: { "handle-click": toggle }
-                                      },
-                                      [
-                                        _c("icon", {
-                                          staticClass: "mr-3",
-                                          attrs: { type: "resource" }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("div", {
-                                          staticClass: "flex-1",
-                                          domProps: {
-                                            textContent: _vm._s(
-                                              _vm.resourcePivotActions.name
-                                            )
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  }
-                                }
-                              ])
-                            },
-                            [
-                              _c(
-                                "subdropdown-menu",
-                                {
-                                  attrs: {
-                                    slot: "menu",
-                                    width: "200",
-                                    pull: "left"
-                                  },
-                                  slot: "menu"
-                                },
-                                _vm._l(
-                                  _vm.resourcePivotActions.actions,
-                                  function(action) {
-                                    return _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
-                                        on: {
-                                          click: function($event) {
-                                            _vm.openConfirmationModal(
-                                              action,
-                                              true
-                                            )
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c("icon", {
-                                          staticClass: "mr-3",
-                                          attrs: { type: "play" }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("div", [_vm._v(_vm._s(action.name))])
-                                      ],
-                                      1
-                                    )
-                                  }
-                                )
-                              )
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.resource.authorizedToDelete &&
-                      (!_vm.resource.softDeleted || _vm.viaManyToMany)
-                        ? _c(
-                            "button",
-                            {
-                              staticClass:
-                                "appearance-none cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline w-full rounded-lg",
-                              attrs: {
-                                "data-testid": _vm.testId + "-delete-button",
-                                dusk:
-                                  _vm.resource["id"].value + "-delete-button",
-                                title: _vm.__(
-                                  _vm.viaManyToMany ? "Detach" : "Delete"
-                                )
-                              },
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  return _vm.openDeleteModal($event)
-                                }
-                              }
-                            },
-                            [
-                              _c("icon", { staticClass: "mr-3" }),
-                              _vm._v(" "),
-                              _c("div", {
-                                domProps: {
-                                  textContent: _vm._s(
-                                    _vm.__(
-                                      _vm.viaManyToMany ? "Detach" : "Delete"
-                                    )
-                                  )
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.resource.authorizedToRestore &&
-                      _vm.resource.softDeleted &&
-                      !_vm.viaManyToMany
-                        ? _c(
-                            "button",
-                            {
-                              staticClass:
-                                "appearance-none cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
-                              attrs: {
-                                dusk:
-                                  _vm.resource["id"].value + "-restore-button",
-                                title: _vm.__("Restore")
-                              },
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  return _vm.openRestoreModal($event)
-                                }
-                              }
-                            },
-                            [
-                              _c("icon", {
-                                staticClass: "mr-3",
-                                attrs: {
-                                  type: "restore",
-                                  width: "20",
-                                  height: "21"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("div", [_vm._v(_vm._s(_vm.__("Restore")))])
-                            ],
-                            1
-                          )
-                        : _vm._e()
-                    ],
-                    1
-                  )
-                ]
-              )
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "portal",
-        { attrs: { to: "modals" } },
-        [
-          _c(
-            "transition",
-            { attrs: { name: "fade" } },
-            [
-              _vm.deleteModalOpen
-                ? _c("delete-resource-modal", {
-                    attrs: { mode: _vm.viaManyToMany ? "detach" : "delete" },
-                    on: {
-                      confirm: _vm.confirmDelete,
-                      close: _vm.closeDeleteModal
-                    },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "default",
-                        fn: function(ref) {
-                          var uppercaseMode = ref.uppercaseMode
-                          var mode = ref.mode
-                          return _c(
-                            "div",
-                            { staticClass: "p-8" },
-                            [
-                              _c(
-                                "heading",
-                                { staticClass: "mb-6", attrs: { level: 2 } },
-                                [
-                                  _vm._v(
-                                    _vm._s(_vm.__(uppercaseMode + " Resource"))
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "p",
-                                { staticClass: "text-80 leading-normal" },
-                                [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.__(
-                                        "Are you sure you want to " +
-                                          mode +
-                                          " this resource?"
-                                      )
-                                    )
-                                  )
-                                ]
-                              )
-                            ],
-                            1
-                          )
-                        }
-                      }
-                    ])
-                  })
-                : _vm._e()
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "transition",
-            { attrs: { name: "fade" } },
-            [
-              _vm.restoreModalOpen
-                ? _c(
-                    "restore-resource-modal",
-                    {
-                      on: {
-                        confirm: _vm.confirmRestore,
-                        close: _vm.closeRestoreModal
-                      }
-                    },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "p-8" },
-                        [
-                          _c(
-                            "heading",
-                            { staticClass: "mb-6", attrs: { level: 2 } },
-                            [_vm._v(_vm._s(_vm.__("Restore Resource")))]
-                          ),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "text-80 leading-normal" }, [
-                            _vm._v(
-                              _vm._s(
-                                _vm.__(
-                                  "Are you sure you want to restore this resource?"
-                                )
-                              )
-                            )
-                          ])
-                        ],
-                        1
-                      )
-                    ]
-                  )
-                : _vm._e()
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "transition",
-            { attrs: { name: "fade" } },
-            [
-              _vm.confirmActionModalOpened
-                ? _c("confirm-action-modal", {
+                "div",
+                { staticClass: "text-left" },
+                _vm._l(_vm.actionComponents, function(actionComponent, index) {
+                  return _c(actionComponent, {
+                    key: "resource-action-component-" + index,
+                    tag: "component",
                     attrs: {
-                      working: _vm.working,
+                      "restore-resource": _vm.restoreResource,
+                      resource: _vm.resource,
                       "resource-name": _vm.resourceName,
-                      "selected-action": _vm.selectedAction,
-                      errors: _vm.errors
-                    },
-                    on: {
-                      confirm: _vm.executeAction,
-                      close: function($event) {
-                        _vm.confirmActionModalOpened = false
-                      }
+                      "relationship-type": _vm.relationshipType,
+                      "via-relationship": _vm.viaRelationship,
+                      "via-resource": _vm.viaResource,
+                      "via-resource-id": _vm.viaResourceId,
+                      "via-many-to-many": _vm.viaManyToMany
                     }
                   })
-                : _vm._e()
-            ],
-            1
+                })
+              )
+            ]
           )
         ],
         1
       )
-    ],
-    1
-  )
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -29522,7 +28569,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.visible = false;
         },
         showParentOverflow: function showParentOverflow() {
-            this.$parent.$el.children[1].classList.remove('overflow-hidden');
+            this.dropdown.$el.children[1].classList.remove('overflow-hidden');
+        },
+        putParentBehindModalSplash: function putParentBehindModalSplash() {
+            this.dropdown.$el.classList.remove('z-50');
+            this.dropdown.$el.classList.add('z-20');
+        },
+
+
+        /**
+         * Returns the dropdown menu in the parent tree.
+         *
+         * @return {VueComponent|null}
+         */
+        getDropdownMenu: function getDropdownMenu() {
+
+            // Walk up the parent tree
+            for (var parent = this.$parent; typeof parent !== 'undefined'; parent = parent.$parent) {
+
+                // Return the parent if it is a dropdown menu
+                if (parent.$options.name === 'dropdown-menu') {
+                    return parent;
+                }
+            }
+
+            // Failed to find dropdown menu
+            return null;
+        }
+    },
+
+    computed: {
+        dropdown: function dropdown() {
+            return this.getDropdownMenu();
         }
     },
 
@@ -29530,6 +28608,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         // Show the overflow in the parent
         this.showParentOverflow();
+
+        // Put the dropdown behind the modal splash
+        this.putParentBehindModalSplash();
     }
 });
 
@@ -41372,7 +40453,7 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "subdropdown-menu absolute z-50 select-none pin-t",
+      staticClass: "subdropdown-menu absolute select-none pin-t",
       class: _vm.menuClasses,
       style: _vm.menuStyles
     },
@@ -41380,7 +40461,7 @@ var render = function() {
       _c(
         "div",
         {
-          staticClass: "z-40 bg-white border border-60 shadow rounded-lg",
+          staticClass: "bg-white border border-60 shadow rounded-lg",
           style: _vm.styles
         },
         [_vm._t("default")],
@@ -41404,6 +40485,1738 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(43)
+/* template */
+var __vue_template__ = __webpack_require__(44)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Actions/View.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-60231d02", Component.options)
+  } else {
+    hotAPI.reload("data-v-60231d02", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 43 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"]],
+
+    props: ['testId', 'resource', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint']
+});
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.resource.authorizedToView
+    ? _c(
+        "span",
+        [
+          _c(
+            "router-link",
+            {
+              staticClass:
+                "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
+              attrs: {
+                "data-testid": _vm.testId + "-view-button",
+                dusk: _vm.resource["id"].value + "-view-button",
+                to: {
+                  name: "detail",
+                  params: {
+                    resourceName: _vm.resourceName,
+                    resourceId: _vm.resource["id"].value
+                  }
+                },
+                title: _vm.__("View")
+              }
+            },
+            [
+              _c("icon", {
+                staticClass: "mr-3",
+                attrs: {
+                  type: "view",
+                  width: "22",
+                  height: "16",
+                  "view-box": "0 0 22 16"
+                }
+              }),
+              _vm._v(" "),
+              _c("div", [_vm._v(_vm._s(_vm.__("Details")))])
+            ],
+            1
+          )
+        ],
+        1
+      )
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-60231d02", module.exports)
+  }
+}
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(46)
+/* template */
+var __vue_template__ = __webpack_require__(47)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Actions/EditAttached.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-166692aa", Component.options)
+  } else {
+    hotAPI.reload("data-v-166692aa", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 46 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"]],
+
+    props: ['testId', 'resource', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint']
+});
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.resource.authorizedToUpdate
+    ? _c(
+        "span",
+        [
+          _vm.relationshipType == "belongsToMany" ||
+          _vm.relationshipType == "morphToMany"
+            ? _c(
+                "router-link",
+                {
+                  staticClass:
+                    "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
+                  attrs: {
+                    dusk: _vm.resource["id"].value + "-edit-attached-button",
+                    to: {
+                      name: "edit-attached",
+                      params: {
+                        resourceName: _vm.viaResource,
+                        resourceId: _vm.viaResourceId,
+                        relatedResourceName: _vm.resourceName,
+                        relatedResourceId: _vm.resource["id"].value
+                      },
+                      query: {
+                        viaRelationship: _vm.viaRelationship
+                      }
+                    },
+                    title: _vm.__("Edit Attached")
+                  }
+                },
+                [
+                  _c("icon", { staticClass: "mr-3", attrs: { type: "edit" } }),
+                  _vm._v(" "),
+                  _c("div", [_vm._v(_vm._s(_vm.__("Edit Attached")))])
+                ],
+                1
+              )
+            : _vm._e()
+        ],
+        1
+      )
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-166692aa", module.exports)
+  }
+}
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(49)
+/* template */
+var __vue_template__ = __webpack_require__(50)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Actions/Edit.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-785915e7", Component.options)
+  } else {
+    hotAPI.reload("data-v-785915e7", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 49 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"]],
+
+    props: ['testId', 'resource', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint']
+});
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.resource.authorizedToUpdate
+    ? _c(
+        "span",
+        [
+          _vm.relationshipType != "belongsToMany" &&
+          _vm.relationshipType != "morphToMany"
+            ? _c(
+                "router-link",
+                {
+                  staticClass:
+                    "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
+                  attrs: {
+                    dusk: _vm.resource["id"].value + "-edit-button",
+                    to: {
+                      name: "edit",
+                      params: {
+                        resourceName: _vm.resourceName,
+                        resourceId: _vm.resource["id"].value
+                      },
+                      query: {
+                        viaResource: _vm.viaResource,
+                        viaResourceId: _vm.viaResourceId,
+                        viaRelationship: _vm.viaRelationship
+                      }
+                    },
+                    title: _vm.__("Edit")
+                  }
+                },
+                [
+                  _c("icon", { staticClass: "mr-3", attrs: { type: "edit" } }),
+                  _vm._v(" "),
+                  _c("div", [_vm._v(_vm._s(_vm.__("Edit")))])
+                ],
+                1
+              )
+            : _vm._e()
+        ],
+        1
+      )
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-785915e7", module.exports)
+  }
+}
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(52)
+/* template */
+var __vue_template__ = __webpack_require__(53)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Actions/ResourceActionsDropdown.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-06f54a73", Component.options)
+  } else {
+    hotAPI.reload("data-v-06f54a73", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 52 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_mixins__ = __webpack_require__(55);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"], __WEBPACK_IMPORTED_MODULE_1__mixins_mixins__["a" /* InteractsWithResourceActions */]],
+
+    props: ['testId', 'resource', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint'],
+
+    data: function data() {
+        return {
+
+            working: false,
+            errors: new __WEBPACK_IMPORTED_MODULE_0_laravel_nova__["Errors"](),
+            selectedAction: null,
+            selectedActionIsPivotAction: false,
+            confirmActionModalOpened: false
+
+        };
+    }
+
+});
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.resourceActions.length > 0
+        ? _c(
+            "subdropdown",
+            {
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(ref) {
+                    var toggle = ref.toggle
+                    return _c(
+                      "subdropdown-trigger",
+                      {
+                        staticClass:
+                          "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
+                        attrs: { "handle-click": toggle }
+                      },
+                      [
+                        _c("icon", {
+                          staticClass: "mr-3",
+                          attrs: { type: "resource" }
+                        }),
+                        _vm._v(" "),
+                        _c("div", {
+                          staticClass: "flex-1",
+                          domProps: {
+                            textContent: _vm._s(
+                              _vm.resourceInformation.singularLabel
+                            )
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  }
+                }
+              ])
+            },
+            [
+              _c(
+                "subdropdown-menu",
+                {
+                  attrs: { slot: "menu", width: "200", pull: "left" },
+                  slot: "menu"
+                },
+                _vm._l(_vm.resourceActions, function(action) {
+                  return _c(
+                    "div",
+                    {
+                      staticClass:
+                        "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
+                      on: {
+                        click: function($event) {
+                          _vm.openConfirmationModal(action)
+                        }
+                      }
+                    },
+                    [
+                      _c("icon", {
+                        staticClass: "mr-3",
+                        attrs: { type: "play" }
+                      }),
+                      _vm._v(" "),
+                      _c("div", [_vm._v(_vm._s(action.name))])
+                    ],
+                    1
+                  )
+                })
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "portal",
+        { attrs: { to: "modals" } },
+        [
+          _c(
+            "transition",
+            { attrs: { name: "fade" } },
+            [
+              _vm.confirmActionModalOpened
+                ? _c("confirm-action-modal", {
+                    attrs: {
+                      working: _vm.working,
+                      "resource-name": _vm.resourceName,
+                      "selected-action": _vm.selectedAction,
+                      errors: _vm.errors
+                    },
+                    on: {
+                      confirm: _vm.executeAction,
+                      close: function($event) {
+                        _vm.confirmActionModalOpened = false
+                      }
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-06f54a73", module.exports)
+  }
+}
+
+/***/ }),
+/* 54 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+
+  methods: {
+
+    /**
+     * Confirm with the user that they actually want to run the selected action.
+     *
+     * @param  {Object}   action  The selected action.
+     * @param  {boolean}  pivot   Whether or not the action is a pivot action.
+     *
+     * @return {void}
+     */
+    openConfirmationModal: function openConfirmationModal(action) {
+      var pivot = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+
+      this.selectedAction = action;
+      this.selectedActionIsPivotAction = pivot;
+      this.confirmActionModalOpened = true;
+    },
+
+
+    /**
+     * Close the action confirmation modal.
+     */
+    closeConfirmationModal: function closeConfirmationModal() {
+      this.confirmActionModalOpened = false;
+    },
+
+
+    /**
+     * Execute the selected action.
+     */
+    executeAction: function executeAction() {
+      var _this = this;
+
+      // Set this action as working
+      this.working = true;
+
+      // Submit the request
+      Nova.request({
+        method: 'post',
+        url: this.endpoint || '/nova-api/' + this.resourceName + '/action',
+        params: this.actionRequestQueryString,
+        data: this.actionFormData()
+      })
+
+      // Handle the response
+      .then(function (response) {
+
+        _this.confirmActionModalOpened = false;
+        _this.handleActionResponse(response.data);
+        _this.working = false;
+      })
+
+      // Catch any errors
+      .catch(function (error) {
+
+        _this.working = false;
+
+        if (error.response.status == 422) {
+          _this.errors = new Errors(error.response.data.errors);
+        }
+      });
+    },
+
+
+    /**
+     * Gather the action FormData for the given action.
+     *
+     * @return {FormData}
+     */
+    actionFormData: function actionFormData() {
+      var _this2 = this;
+
+      return _.tap(new FormData(), function (formData) {
+
+        formData.append('resources', [_this2.resource.id.value]);
+
+        _.each(_this2.selectedAction.fields, function (field) {
+          field.fill(formData);
+        });
+      });
+    },
+
+
+    /**
+     * Handle the action response. Typically either a message, download or a redirect.
+     *
+     * @param  {object}  response
+     *
+     * @return {void}
+     */
+    handleActionResponse: function handleActionResponse(response) {
+
+      // Check for a message
+      if (response.message) {
+        this.$emit('actionExecuted');
+        this.$toasted.show(response.message, { type: 'success' });
+      }
+
+      // Check if the response was deleted
+      else if (response.deleted) {
+          this.$emit('actionExecuted');
+        }
+
+        // Check for a danger response
+        else if (response.danger) {
+            this.$emit('actionExecuted');
+            this.$toasted.show(response.danger, { type: 'error' });
+          }
+
+          // Check for a download response
+          else if (response.download) {
+              var link = document.createElement('a');
+              link.href = response.download;
+              link.download = response.name;
+              link.click();
+            }
+
+            // Check for a redirect response
+            else if (response.redirect) {
+                window.location = response.redirect;
+              }
+
+              // Assume the action was successful
+              else {
+
+                  // Fire the action executed event
+                  this.$emit('actionExecuted');
+
+                  // Display that the action run successfully
+                  this.$toasted.show(this.__('The action ran successfully!'), { type: 'success' });
+
+                  // To avoid having to override every Vue component between
+                  // this one and the index, we're just going to directly
+                  // call the action executed response from the index.
+
+                  // Update the index resources
+                  this.updateIndexResources();
+                }
+    },
+
+
+    /**
+     * Updates the index resources.
+     *
+     * @return {void}
+     */
+    updateIndexResources: function updateIndexResources() {
+
+      // Determine the resource index
+      var index = this.getResourceIndex();
+
+      // Stop if we couldn't find the resource index
+      if (index == null) {
+        return;
+      }
+
+      // Call the resource updater
+      index.getResources();
+    },
+
+
+    /**
+     * Returns the closest resource index in the parent tree.
+     *
+     * @return {VueComponent|null}
+     */
+    getResourceIndex: function getResourceIndex() {
+
+      // Walk up the parent tree
+      for (var parent = this.$parent; typeof parent !== 'undefined'; parent = parent.$parent) {
+
+        // Return the eparent if it is a resource index
+        if (parent.$options.name === 'resource-index') {
+          return parent;
+        }
+      }
+
+      // Failed to find resource index
+      return null;
+    },
+
+
+    /**
+     * Returns the available resource actions.
+     *
+     * @return {Array}
+     */
+    getResourceActions: function getResourceActions() {
+      return this.getResourceIndex().actions;
+    },
+
+
+    /**
+     * Returns the available resource pivot actions.
+     *
+     * @return {Array}
+     */
+    getResourcePivotActions: function getResourcePivotActions() {
+      return this.getResourceIndex().pivotActions;
+    }
+  },
+
+  computed: {
+
+    /**
+     * Computed alias of {@see $this.getResourceActions()}.
+     *
+     * @return {Array}
+     */
+    resourceActions: function resourceActions() {
+      return this.getResourceActions();
+    },
+
+
+    /**
+     * Computed alias of {@see $this.getResourcePivotActions()}.
+     *
+     * @return {Array}
+     */
+    resourcePivotActions: function resourcePivotActions() {
+      return this.getResourcePivotActions();
+    },
+
+
+    /**
+     * Returns the query string for an action request.
+     *
+     * @return {Object}
+     */
+    actionRequestQueryString: function actionRequestQueryString() {
+      return {
+        action: this.selectedAction.uriKey,
+        pivotAction: this.selectedActionIsPivotAction,
+        search: this.queryString.currentSearch,
+        filters: this.queryString.encodedFilters,
+        trashed: this.queryString.currentTrashed,
+        viaResource: this.queryString.viaResource,
+        viaResourceId: this.queryString.viaResourceId,
+        viaRelationship: this.queryString.viaRelationship
+      };
+    },
+
+
+    /**
+     * Returns the query string for this page.
+     *
+     * @return {Object}
+     */
+    queryString: function queryString() {
+
+      return {
+        currentSearch: this.currentSearch,
+        encodedFilters: this.encodedFilters,
+        currentTrashed: this.currentTrashed,
+        viaResource: this.viaResource,
+        viaResourceId: this.viaResourceId,
+        viaRelationship: this.viaRelationship
+      };
+    },
+
+
+    /**
+     * Returns the current search value from the query string.
+     *
+     * @return {string}
+     */
+    currentSearch: function currentSearch() {
+      return this.$route.query[this.searchParameter] || '';
+    },
+
+
+    /**
+     * Returns the encoded filters from the query string.
+     *
+     * @return {string}
+     */
+    encodedFilters: function encodedFilters() {
+      return this.$route.query[this.filterParameter] || '';
+    },
+
+
+    /**
+     * Returns the current trashed constraint value from the query string.
+     *
+     * @return {string}
+     */
+    currentTrashed: function currentTrashed() {
+      return this.$route.query[this.trashedParameter] || '';
+    },
+
+
+    /**
+     * Returns the name of the search query string variable.
+     *
+     * @return {string}
+     */
+    searchParameter: function searchParameter() {
+      return this.resourceName + '_search';
+    },
+
+
+    /**
+     * Returns the name of the filter query string variable.
+     *
+     * @return {string}
+     */
+    filterParameter: function filterParameter() {
+      return this.resourceName + '_filter';
+    },
+
+
+    /**
+     * Returns the name of the trashed constraint query string variable.
+     *
+     * @return {string}
+     */
+    trashedParameter: function trashedParameter() {
+      return this.resourceName + '_trashed';
+    }
+  }
+
+});
+
+/***/ }),
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__InteractsWithResourceActions__ = __webpack_require__(54);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__InteractsWithResourceActions__["a"]; });
+
+
+
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(57)
+/* template */
+var __vue_template__ = __webpack_require__(58)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Actions/ResourcePivotActionsDropdown.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-00ec3997", Component.options)
+  } else {
+    hotAPI.reload("data-v-00ec3997", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 57 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_mixins__ = __webpack_require__(55);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"], __WEBPACK_IMPORTED_MODULE_1__mixins_mixins__["a" /* InteractsWithResourceActions */]],
+
+    props: ['testId', 'resource', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint'],
+
+    data: function data() {
+        return {
+
+            working: false,
+            errors: new __WEBPACK_IMPORTED_MODULE_0_laravel_nova__["Errors"](),
+            selectedAction: null,
+            selectedActionIsPivotAction: false,
+            confirmActionModalOpened: false
+
+        };
+    }
+
+});
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.resourcePivotActions.actions.length > 0
+        ? _c(
+            "subdropdown",
+            {
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(ref) {
+                    var toggle = ref.toggle
+                    return _c(
+                      "subdropdown-trigger",
+                      {
+                        staticClass:
+                          "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
+                        attrs: { "handle-click": toggle }
+                      },
+                      [
+                        _c("icon", {
+                          staticClass: "mr-3",
+                          attrs: { type: "resource" }
+                        }),
+                        _vm._v(" "),
+                        _c("div", {
+                          staticClass: "flex-1",
+                          domProps: {
+                            textContent: _vm._s(_vm.resourcePivotActions.name)
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  }
+                }
+              ])
+            },
+            [
+              _c(
+                "subdropdown-menu",
+                {
+                  attrs: { slot: "menu", width: "200", pull: "left" },
+                  slot: "menu"
+                },
+                _vm._l(_vm.resourcePivotActions.actions, function(action) {
+                  return _c(
+                    "div",
+                    {
+                      staticClass:
+                        "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
+                      on: {
+                        click: function($event) {
+                          _vm.openConfirmationModal(action, true)
+                        }
+                      }
+                    },
+                    [
+                      _c("icon", {
+                        staticClass: "mr-3",
+                        attrs: { type: "play" }
+                      }),
+                      _vm._v(" "),
+                      _c("div", [_vm._v(_vm._s(action.name))])
+                    ],
+                    1
+                  )
+                })
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "portal",
+        { attrs: { to: "modals" } },
+        [
+          _c(
+            "transition",
+            { attrs: { name: "fade" } },
+            [
+              _vm.confirmActionModalOpened
+                ? _c("confirm-action-modal", {
+                    attrs: {
+                      working: _vm.working,
+                      "resource-name": _vm.resourceName,
+                      "selected-action": _vm.selectedAction,
+                      errors: _vm.errors
+                    },
+                    on: {
+                      confirm: _vm.executeAction,
+                      close: function($event) {
+                        _vm.confirmActionModalOpened = false
+                      }
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-00ec3997", module.exports)
+  }
+}
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(61)
+/* template */
+var __vue_template__ = __webpack_require__(60)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Actions/Delete.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0a201070", Component.options)
+  } else {
+    hotAPI.reload("data-v-0a201070", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.resource.authorizedToDelete &&
+      (!_vm.resource.softDeleted || _vm.viaManyToMany)
+        ? _c(
+            "button",
+            {
+              staticClass:
+                "appearance-none cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline w-full rounded-lg",
+              attrs: {
+                "data-testid": _vm.testId + "-delete-button",
+                dusk: _vm.resource["id"].value + "-delete-button",
+                title: _vm.__(_vm.viaManyToMany ? "Detach" : "Delete")
+              },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.openDeleteModal($event)
+                }
+              }
+            },
+            [
+              _c("icon", { staticClass: "mr-3" }),
+              _vm._v(" "),
+              _c("div", {
+                domProps: {
+                  textContent: _vm._s(
+                    _vm.__(_vm.viaManyToMany ? "Detach" : "Delete")
+                  )
+                }
+              })
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "portal",
+        { attrs: { to: "modals" } },
+        [
+          _c(
+            "transition",
+            { attrs: { name: "fade" } },
+            [
+              _vm.deleteModalOpen
+                ? _c("delete-resource-modal", {
+                    attrs: { mode: _vm.viaManyToMany ? "detach" : "delete" },
+                    on: {
+                      confirm: _vm.confirmDelete,
+                      close: _vm.closeDeleteModal
+                    },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(ref) {
+                          var uppercaseMode = ref.uppercaseMode
+                          var mode = ref.mode
+                          return _c(
+                            "div",
+                            { staticClass: "p-8" },
+                            [
+                              _c(
+                                "heading",
+                                { staticClass: "mb-6", attrs: { level: 2 } },
+                                [
+                                  _vm._v(
+                                    _vm._s(_vm.__(uppercaseMode + " Resource"))
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "p",
+                                { staticClass: "text-80 leading-normal" },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.__(
+                                        "Are you sure you want to " +
+                                          mode +
+                                          " this resource?"
+                                      )
+                                    )
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        }
+                      }
+                    ])
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0a201070", module.exports)
+  }
+}
+
+/***/ }),
+/* 61 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"]],
+
+    props: ['testId', 'resource', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint'],
+
+    data: function data() {
+        return {
+            deleteModalOpen: false
+        };
+    },
+
+    methods: {
+        openDeleteModal: function openDeleteModal() {
+            this.deleteModalOpen = true;
+        },
+        confirmDelete: function confirmDelete() {
+            this.deleteResource(this.resource);
+            this.closeDeleteModal();
+        },
+        closeDeleteModal: function closeDeleteModal() {
+            this.deleteModalOpen = false;
+        }
+    }
+});
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(63)
+/* template */
+var __vue_template__ = __webpack_require__(64)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Actions/Restore.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-8790bc7e", Component.options)
+  } else {
+    hotAPI.reload("data-v-8790bc7e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 63 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"]],
+
+    props: ['testId', 'deleteResource', 'restoreResource', 'resource', 'resourcesSelected', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint'],
+
+    data: function data() {
+        return {
+            restoreModalOpen: false
+        };
+    },
+
+    methods: {
+        openRestoreModal: function openRestoreModal() {
+            this.restoreModalOpen = true;
+        },
+        confirmRestore: function confirmRestore() {
+            this.restoreResource(this.resource);
+            this.closeRestoreModal();
+        },
+        closeRestoreModal: function closeRestoreModal() {
+            this.restoreModalOpen = false;
+        }
+    }
+
+});
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.resource.authorizedToRestore &&
+      _vm.resource.softDeleted &&
+      !_vm.viaManyToMany
+        ? _c(
+            "button",
+            {
+              staticClass:
+                "appearance-none cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline w-full rounded-lg",
+              attrs: {
+                dusk: _vm.resource["id"].value + "-restore-button",
+                title: _vm.__("Restore")
+              },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.openRestoreModal($event)
+                }
+              }
+            },
+            [
+              _c("icon", {
+                staticClass: "mr-3",
+                attrs: { type: "restore", width: "20", height: "21" }
+              }),
+              _vm._v(" "),
+              _c("div", [_vm._v(_vm._s(_vm.__("Restore")))])
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "portal",
+        { attrs: { to: "modals" } },
+        [
+          _c(
+            "transition",
+            { attrs: { name: "fade" } },
+            [
+              _vm.restoreModalOpen
+                ? _c(
+                    "restore-resource-modal",
+                    {
+                      on: {
+                        confirm: _vm.confirmRestore,
+                        close: _vm.closeRestoreModal
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "p-8" },
+                        [
+                          _c(
+                            "heading",
+                            { staticClass: "mb-6", attrs: { level: 2 } },
+                            [_vm._v(_vm._s(_vm.__("Restore Resource")))]
+                          ),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "text-80 leading-normal" }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.__(
+                                  "Are you sure you want to restore this resource?"
+                                )
+                              )
+                            )
+                          ])
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-8790bc7e", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

@@ -1,6 +1,6 @@
 <template>
-    <div class="subdropdown-menu absolute z-50 select-none pin-t" :class="menuClasses" :style="menuStyles">
-        <div :style="styles" class="z-40 bg-white border border-60 shadow rounded-lg">
+    <div class="subdropdown-menu absolute select-none pin-t" :class="menuClasses" :style="menuStyles">
+        <div :style="styles" class="bg-white border border-60 shadow rounded-lg">
             <slot />
         </div>
     </div>

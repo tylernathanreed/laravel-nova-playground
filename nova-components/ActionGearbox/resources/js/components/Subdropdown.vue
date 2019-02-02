@@ -28,7 +28,43 @@
             },
 
             showParentOverflow() {
-                this.$parent.$el.children[1].classList.remove('overflow-hidden');
+                this.dropdown.$el.children[1].classList.remove('overflow-hidden');
+            },
+
+            putParentBehindModalSplash() {
+                this.dropdown.$el.classList.remove('z-50');
+                this.dropdown.$el.classList.add('z-20');
+            },
+
+
+            /**
+             * Returns the dropdown menu in the parent tree.
+             *
+             * @return {VueComponent|null}
+             */
+            getDropdownMenu() {
+
+                // Walk up the parent tree
+                for(let parent = this.$parent; typeof parent !== 'undefined'; parent = parent.$parent) {
+
+                    // Return the parent if it is a dropdown menu
+                    if(parent.$options.name === 'dropdown-menu') {
+                        return parent;
+                    }
+
+                }
+
+                // Failed to find dropdown menu
+                return null;
+
+            },
+
+        },
+
+        computed: {
+
+            dropdown() {
+                return this.getDropdownMenu();
             }
 
         },
@@ -37,6 +73,9 @@
 
             // Show the overflow in the parent
             this.showParentOverflow();
+
+            // Put the dropdown behind the modal splash
+            this.putParentBehindModalSplash();
 
         }
 
