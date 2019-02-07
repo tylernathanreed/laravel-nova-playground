@@ -10,42 +10,27 @@
                 <div
                     v-for="action in resourcePivotActions.actions"
                     class="cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg"
-                    @click="openConfirmationModal(action, true)"
+                    @click="onActionSelected(action)"
                 >
                     <icon type="play" class="mr-3" />
                     <div>{{ action.name}}</div>
                 </div>
             </subdropdown-menu>
         </subdropdown>
-
-        <portal to="modals">
-            <!-- Action Confirmation Modal -->
-            <transition name="fade">
-                <confirm-action-modal
-                    :working="working"
-                    v-if="confirmActionModalOpened"
-                    :resource-name="resourceName"
-                    :selected-action="selectedAction"
-                    :errors="errors"
-                    @confirm="executeAction"
-                    @close="confirmActionModalOpened = false"
-                />
-            </transition>
-        </portal>
     </div>
 </template>
 
 <script>
-import { Errors, InteractsWithResourceInformation } from 'laravel-nova'
-import { InteractsWithResourceActions } from '../../mixins/mixins'
+import { InteractsWithResourceInformation } from 'laravel-nova'
 
 export default {
-    mixins: [InteractsWithResourceInformation, InteractsWithResourceActions],
+    mixins: [InteractsWithResourceInformation],
 
     props: [
         'testId',
         'resource',
         'resourceName',
+        'resourcePivotActions',
         'relationshipType',
         'viaRelationship',
         'viaResource',
@@ -58,15 +43,13 @@ export default {
         'endpoint'
     ],
 
-    data: () => ({
+    methods: {
 
-        working: false,
-        errors: new Errors(),
-        selectedAction: null,
-        selectedActionIsPivotAction: false,
-        confirmActionModalOpened: false
+        onActionSelected: function(action) {
+            this.$emit('onActionSelected', action, true);
+        }
 
-    })
+    }
 
 }
 </script>

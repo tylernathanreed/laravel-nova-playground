@@ -1,37 +1,57 @@
 <template>
-    <dropdown class="bg-30 hover:bg-40 mr-3 rounded" v-if="this.hasAnyAuthorizations() && actionComponents.length > 0">
-        <dropdown-trigger class="px-3" slot-scope="{toggle}" :handle-click="toggle">
-            <icon type="actions-gearbox" class="text-80" />
-        </dropdown-trigger>
+    <div>
+        <dropdown class="bg-30 hover:bg-40 mr-3 rounded" v-if="this.hasAnyAuthorizations() && actionComponents.length > 0">
+            <dropdown-trigger class="px-3" slot-scope="{toggle}" :handle-click="toggle">
+                <icon type="actions-gearbox" class="text-80" />
+            </dropdown-trigger>
 
-        <dropdown-menu slot="menu" width="200" direction="rtl">
-            <div class="text-left">
+            <dropdown-menu slot="menu" width="200" direction="rtl">
+                <div class="text-left">
 
-                <component
-                    v-for="(actionComponent, index) in actionComponents"
-                    :key="`resource-action-component-${index}`"
-                    :is="actionComponent"
-                    :restore-resource="restoreResource"
-                    :resource="resource"
+                    <component
+                        v-for="(actionComponent, index) in actionComponents"
+                        :key="`resource-action-component-${index}`"
+                        :is="actionComponent"
+                        :restore-resource="restoreResource"
+                        :resource="resource"
+                        :resource-name="resourceName"
+                        :resource-actions="resourceActions"
+                        :resource-pivot-actions="resourcePivotActions"
+                        :relationship-type="relationshipType"
+                        :via-relationship="viaRelationship"
+                        :via-resource="viaResource"
+                        :via-resource-id="viaResourceId"
+                        :via-many-to-many="viaManyToMany"
+                        @onActionSelected="openConfirmationModal"
+                    />
+
+                </div>
+            </dropdown-menu>
+        </dropdown>
+
+        <div class="text-left">
+            <transition name="fade">
+                <confirm-action-modal
+                    :working="working"
+                    v-if="confirmActionModalOpened"
                     :resource-name="resourceName"
-                    :relationship-type="relationshipType"
-                    :via-relationship="viaRelationship"
-                    :via-resource="viaResource"
-                    :via-resource-id="viaResourceId"
-                    :via-many-to-many="viaManyToMany"
+                    :selected-action="selectedAction"
+                    :errors="errors"
+                    @confirm="executeAction"
+                    @close="confirmActionModalOpened = false"
                 />
-
-            </div>
-        </dropdown-menu>
-    </dropdown>
+            </transition>
+        </div>
+    </div>
 </template>
 
 <script>
 import _ from 'lodash'
-import { InteractsWithResourceInformation } from 'laravel-nova'
+import { Errors, InteractsWithResourceInformation } from 'laravel-nova'
+import { InteractsWithResourceActions } from '../mixins/mixins'
 
 export default {
-    mixins: [InteractsWithResourceInformation],
+    mixins: [InteractsWithResourceInformation, InteractsWithResourceActions],
 
     props: {
         actionComponents: {
@@ -67,7 +87,13 @@ export default {
     },
 
     data: () => ({
-        restoreModalOpen: false,
+
+        working: false,
+        errors: new Errors(),
+        selectedAction: null,
+        selectedActionIsPivotAction: false,
+        confirmActionModalOpened: false
+
     }),
 
     methods: {
@@ -77,19 +103,6 @@ export default {
          */
         toggleSelection() {
             this.updateSelectionStatus(this.resource)
-        },
-
-        openRestoreModal() {
-            this.restoreModalOpen = true
-        },
-
-        confirmRestore() {
-            this.restoreResource(this.resource)
-            this.closeRestoreModal()
-        },
-
-        closeRestoreModal() {
-            this.restoreModalOpen = false
         },
 
         /**

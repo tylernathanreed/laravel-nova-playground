@@ -11,20 +11,18 @@
             <div>{{ __('Restore') }}</div>
         </button>
 
-        <portal to="modals">
-            <transition name="fade">
-                <restore-resource-modal
-                    v-if="restoreModalOpen"
-                    @confirm="confirmRestore"
-                    @close="closeRestoreModal"
-                >
-                    <div class="p-8">
-                        <heading :level="2" class="mb-6">{{__('Restore Resource')}}</heading>
-                        <p class="text-80 leading-normal">{{__('Are you sure you want to restore this resource?')}}</p>
-                    </div>
-                </restore-resource-modal>
-            </transition>
-        </portal>
+        <transition name="fade">
+            <restore-resource-modal
+                v-if="restoreModalOpen"
+                @confirm="confirmRestore"
+                @close="closeRestoreModal"
+            >
+                <div class="p-8">
+                    <heading :level="2" class="mb-6">{{__('Restore Resource')}}</heading>
+                    <p class="text-80 leading-normal">{{__('Are you sure you want to restore this resource?')}}</p>
+                </div>
+            </restore-resource-modal>
+        </transition>
     </div>
 </template>
 

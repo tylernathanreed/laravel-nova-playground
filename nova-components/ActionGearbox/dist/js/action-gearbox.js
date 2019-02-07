@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -174,33 +174,6 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -10335,49 +10308,87 @@ module.exports = g;
 });
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 2 */
+/***/ (function(module, exports) {
 
-__webpack_require__(4);
-module.exports = __webpack_require__(34);
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__InteractsWithResourceActions__ = __webpack_require__(28);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__InteractsWithResourceActions__["a"]; });
+
+
 
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-Nova.booting(function (Vue, router) {
+__webpack_require__(5);
+module.exports = __webpack_require__(57);
 
-    Vue.component('resource-table', __webpack_require__(5));
-    Vue.component('resource-table-row', __webpack_require__(8));
-    Vue.component('resource-table-row-actions', __webpack_require__(11));
-
-    Vue.component('view-resource-action', __webpack_require__(42));
-    Vue.component('edit-attached-resource-action', __webpack_require__(45));
-    Vue.component('edit-resource-action', __webpack_require__(48));
-    Vue.component('resource-actions-dropdown', __webpack_require__(51));
-    Vue.component('resource-pivot-actions-dropdown', __webpack_require__(56));
-    Vue.component('delete-resource-action', __webpack_require__(59));
-    Vue.component('restore-resource-action', __webpack_require__(62));
-
-    Vue.component('icon-actions-gearbox', __webpack_require__(16));
-    Vue.component('icon-resource', __webpack_require__(18));
-
-    Vue.component('subdropdown', __webpack_require__(20));
-    Vue.component('subdropdown-trigger', __webpack_require__(28));
-    Vue.component('subdropdown-menu', __webpack_require__(31));
-});
 
 /***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
+Nova.booting(function (Vue, router) {
+
+    Vue.component('resource-table', __webpack_require__(6));
+    Vue.component('resource-table-row', __webpack_require__(9));
+    Vue.component('resource-table-row-actions', __webpack_require__(12));
+
+    Vue.component('view-resource-action', __webpack_require__(17));
+    Vue.component('edit-attached-resource-action', __webpack_require__(20));
+    Vue.component('edit-resource-action', __webpack_require__(23));
+    Vue.component('resource-actions-dropdown', __webpack_require__(26));
+    Vue.component('resource-pivot-actions-dropdown', __webpack_require__(30));
+    Vue.component('delete-resource-action', __webpack_require__(33));
+    Vue.component('restore-resource-action', __webpack_require__(36));
+
+    Vue.component('icon-actions-gearbox', __webpack_require__(39));
+    Vue.component('icon-resource', __webpack_require__(41));
+
+    Vue.component('subdropdown', __webpack_require__(43));
+    Vue.component('subdropdown-trigger', __webpack_require__(51));
+    Vue.component('subdropdown-menu', __webpack_require__(54));
+});
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(6)
+var __vue_script__ = __webpack_require__(7)
 /* template */
-var __vue_template__ = __webpack_require__(7)
+var __vue_template__ = __webpack_require__(8)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -10416,12 +10427,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
 //
 //
@@ -10612,7 +10623,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -10732,15 +10743,15 @@ if (false) {
 }
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(9)
+var __vue_script__ = __webpack_require__(10)
 /* template */
-var __vue_template__ = __webpack_require__(10)
+var __vue_template__ = __webpack_require__(11)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -10779,7 +10790,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10880,7 +10891,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -10969,15 +10980,15 @@ if (false) {
 }
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(12)
+var __vue_script__ = __webpack_require__(13)
 /* template */
-var __vue_template__ = __webpack_require__(15)
+var __vue_template__ = __webpack_require__(16)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -11016,15 +11027,16 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_laravel_nova__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_laravel_nova__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_laravel_nova__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_mixins__ = __webpack_require__(3);
 //
 //
 //
@@ -11053,12 +11065,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_1_laravel_nova__["InteractsWithResourceInformation"]],
+    mixins: [__WEBPACK_IMPORTED_MODULE_1_laravel_nova__["InteractsWithResourceInformation"], __WEBPACK_IMPORTED_MODULE_2__mixins_mixins__["a" /* InteractsWithResourceActions */]],
 
     props: {
         actionComponents: {
@@ -11087,7 +11119,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            restoreModalOpen: false
+
+            working: false,
+            errors: new __WEBPACK_IMPORTED_MODULE_1_laravel_nova__["Errors"](),
+            selectedAction: null,
+            selectedActionIsPivotAction: false,
+            confirmActionModalOpened: false
+
         };
     },
 
@@ -11098,16 +11136,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          */
         toggleSelection: function toggleSelection() {
             this.updateSelectionStatus(this.resource);
-        },
-        openRestoreModal: function openRestoreModal() {
-            this.restoreModalOpen = true;
-        },
-        confirmRestore: function confirmRestore() {
-            this.restoreResource(this.resource);
-            this.closeRestoreModal();
-        },
-        closeRestoreModal: function closeRestoreModal() {
-            this.restoreModalOpen = false;
         },
 
 
@@ -11125,7 +11153,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -28237,10 +28265,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(14)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(15)(module)))
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -28268,72 +28296,118 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return this.hasAnyAuthorizations() && _vm.actionComponents.length > 0
-    ? _c(
-        "dropdown",
-        {
-          staticClass: "bg-30 hover:bg-40 mr-3 rounded",
-          scopedSlots: _vm._u([
+  return _c(
+    "div",
+    [
+      this.hasAnyAuthorizations() && _vm.actionComponents.length > 0
+        ? _c(
+            "dropdown",
             {
-              key: "default",
-              fn: function(ref) {
-                var toggle = ref.toggle
-                return _c(
-                  "dropdown-trigger",
-                  { staticClass: "px-3", attrs: { "handle-click": toggle } },
-                  [
-                    _c("icon", {
-                      staticClass: "text-80",
-                      attrs: { type: "actions-gearbox" }
-                    })
-                  ],
-                  1
-                )
-              }
-            }
-          ])
-        },
-        [
-          _c(
-            "dropdown-menu",
-            {
-              attrs: { slot: "menu", width: "200", direction: "rtl" },
-              slot: "menu"
+              staticClass: "bg-30 hover:bg-40 mr-3 rounded",
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(ref) {
+                    var toggle = ref.toggle
+                    return _c(
+                      "dropdown-trigger",
+                      {
+                        staticClass: "px-3",
+                        attrs: { "handle-click": toggle }
+                      },
+                      [
+                        _c("icon", {
+                          staticClass: "text-80",
+                          attrs: { type: "actions-gearbox" }
+                        })
+                      ],
+                      1
+                    )
+                  }
+                }
+              ])
             },
             [
               _c(
-                "div",
-                { staticClass: "text-left" },
-                _vm._l(_vm.actionComponents, function(actionComponent, index) {
-                  return _c(actionComponent, {
-                    key: "resource-action-component-" + index,
-                    tag: "component",
+                "dropdown-menu",
+                {
+                  attrs: { slot: "menu", width: "200", direction: "rtl" },
+                  slot: "menu"
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "text-left" },
+                    _vm._l(_vm.actionComponents, function(
+                      actionComponent,
+                      index
+                    ) {
+                      return _c(actionComponent, {
+                        key: "resource-action-component-" + index,
+                        tag: "component",
+                        attrs: {
+                          "restore-resource": _vm.restoreResource,
+                          resource: _vm.resource,
+                          "resource-name": _vm.resourceName,
+                          "resource-actions": _vm.resourceActions,
+                          "resource-pivot-actions": _vm.resourcePivotActions,
+                          "relationship-type": _vm.relationshipType,
+                          "via-relationship": _vm.viaRelationship,
+                          "via-resource": _vm.viaResource,
+                          "via-resource-id": _vm.viaResourceId,
+                          "via-many-to-many": _vm.viaManyToMany
+                        },
+                        on: { onActionSelected: _vm.openConfirmationModal }
+                      })
+                    })
+                  )
+                ]
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "text-left" },
+        [
+          _c(
+            "transition",
+            { attrs: { name: "fade" } },
+            [
+              _vm.confirmActionModalOpened
+                ? _c("confirm-action-modal", {
                     attrs: {
-                      "restore-resource": _vm.restoreResource,
-                      resource: _vm.resource,
+                      working: _vm.working,
                       "resource-name": _vm.resourceName,
-                      "relationship-type": _vm.relationshipType,
-                      "via-relationship": _vm.viaRelationship,
-                      "via-resource": _vm.viaResource,
-                      "via-resource-id": _vm.viaResourceId,
-                      "via-many-to-many": _vm.viaManyToMany
+                      "selected-action": _vm.selectedAction,
+                      errors: _vm.errors
+                    },
+                    on: {
+                      confirm: _vm.executeAction,
+                      close: function($event) {
+                        _vm.confirmActionModalOpened = false
+                      }
                     }
                   })
-                })
-              )
-            ]
+                : _vm._e()
+            ],
+            1
           )
         ],
         1
       )
-    : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -28346,7 +28420,1608 @@ if (false) {
 }
 
 /***/ }),
-/* 16 */
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(18)
+/* template */
+var __vue_template__ = __webpack_require__(19)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Actions/View.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-60231d02", Component.options)
+  } else {
+    hotAPI.reload("data-v-60231d02", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"]],
+
+    props: ['testId', 'resource', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint']
+});
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.resource.authorizedToView
+    ? _c(
+        "span",
+        [
+          _c(
+            "router-link",
+            {
+              staticClass:
+                "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
+              attrs: {
+                "data-testid": _vm.testId + "-view-button",
+                dusk: _vm.resource["id"].value + "-view-button",
+                to: {
+                  name: "detail",
+                  params: {
+                    resourceName: _vm.resourceName,
+                    resourceId: _vm.resource["id"].value
+                  }
+                },
+                title: _vm.__("View")
+              }
+            },
+            [
+              _c("icon", {
+                staticClass: "mr-3",
+                attrs: {
+                  type: "view",
+                  width: "22",
+                  height: "16",
+                  "view-box": "0 0 22 16"
+                }
+              }),
+              _vm._v(" "),
+              _c("div", [_vm._v(_vm._s(_vm.__("Details")))])
+            ],
+            1
+          )
+        ],
+        1
+      )
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-60231d02", module.exports)
+  }
+}
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(21)
+/* template */
+var __vue_template__ = __webpack_require__(22)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Actions/EditAttached.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-166692aa", Component.options)
+  } else {
+    hotAPI.reload("data-v-166692aa", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"]],
+
+    props: ['testId', 'resource', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint']
+});
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.resource.authorizedToUpdate
+    ? _c(
+        "span",
+        [
+          _vm.relationshipType == "belongsToMany" ||
+          _vm.relationshipType == "morphToMany"
+            ? _c(
+                "router-link",
+                {
+                  staticClass:
+                    "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
+                  attrs: {
+                    dusk: _vm.resource["id"].value + "-edit-attached-button",
+                    to: {
+                      name: "edit-attached",
+                      params: {
+                        resourceName: _vm.viaResource,
+                        resourceId: _vm.viaResourceId,
+                        relatedResourceName: _vm.resourceName,
+                        relatedResourceId: _vm.resource["id"].value
+                      },
+                      query: {
+                        viaRelationship: _vm.viaRelationship
+                      }
+                    },
+                    title: _vm.__("Edit Attached")
+                  }
+                },
+                [
+                  _c("icon", { staticClass: "mr-3", attrs: { type: "edit" } }),
+                  _vm._v(" "),
+                  _c("div", [_vm._v(_vm._s(_vm.__("Edit Attached")))])
+                ],
+                1
+              )
+            : _vm._e()
+        ],
+        1
+      )
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-166692aa", module.exports)
+  }
+}
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(24)
+/* template */
+var __vue_template__ = __webpack_require__(25)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Actions/Edit.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-785915e7", Component.options)
+  } else {
+    hotAPI.reload("data-v-785915e7", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"]],
+
+    props: ['testId', 'resource', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint']
+});
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.resource.authorizedToUpdate
+    ? _c(
+        "span",
+        [
+          _vm.relationshipType != "belongsToMany" &&
+          _vm.relationshipType != "morphToMany"
+            ? _c(
+                "router-link",
+                {
+                  staticClass:
+                    "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
+                  attrs: {
+                    dusk: _vm.resource["id"].value + "-edit-button",
+                    to: {
+                      name: "edit",
+                      params: {
+                        resourceName: _vm.resourceName,
+                        resourceId: _vm.resource["id"].value
+                      },
+                      query: {
+                        viaResource: _vm.viaResource,
+                        viaResourceId: _vm.viaResourceId,
+                        viaRelationship: _vm.viaRelationship
+                      }
+                    },
+                    title: _vm.__("Edit")
+                  }
+                },
+                [
+                  _c("icon", { staticClass: "mr-3", attrs: { type: "edit" } }),
+                  _vm._v(" "),
+                  _c("div", [_vm._v(_vm._s(_vm.__("Edit")))])
+                ],
+                1
+              )
+            : _vm._e()
+        ],
+        1
+      )
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-785915e7", module.exports)
+  }
+}
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(27)
+/* template */
+var __vue_template__ = __webpack_require__(29)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Actions/ResourceActionsDropdown.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-06f54a73", Component.options)
+  } else {
+    hotAPI.reload("data-v-06f54a73", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"]],
+
+    props: ['testId', 'resource', 'resourceName', 'resourceActions', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint'],
+
+    methods: {
+
+        onActionSelected: function onActionSelected(action) {
+            this.$emit('onActionSelected', action);
+        }
+
+    }
+
+});
+
+/***/ }),
+/* 28 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+
+  methods: {
+
+    /**
+     * Confirm with the user that they actually want to run the selected action.
+     *
+     * @param  {Object}   action  The selected action.
+     * @param  {boolean}  pivot   Whether or not the action is a pivot action.
+     *
+     * @return {void}
+     */
+    openConfirmationModal: function openConfirmationModal(action) {
+      var pivot = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+
+      this.selectedAction = action;
+      this.selectedActionIsPivotAction = pivot;
+      this.confirmActionModalOpened = true;
+    },
+
+
+    /**
+     * Close the action confirmation modal.
+     */
+    closeConfirmationModal: function closeConfirmationModal() {
+      this.confirmActionModalOpened = false;
+    },
+
+
+    /**
+     * Execute the selected action.
+     */
+    executeAction: function executeAction() {
+      var _this = this;
+
+      // Set this action as working
+      this.working = true;
+
+      // Submit the request
+      Nova.request({
+        method: 'post',
+        url: this.endpoint || '/nova-api/' + this.resourceName + '/action',
+        params: this.actionRequestQueryString,
+        data: this.actionFormData()
+      })
+
+      // Handle the response
+      .then(function (response) {
+
+        _this.confirmActionModalOpened = false;
+        _this.handleActionResponse(response.data);
+        _this.working = false;
+      })
+
+      // Catch any errors
+      .catch(function (error) {
+
+        _this.working = false;
+
+        if (error.response.status == 422) {
+          _this.errors = new Errors(error.response.data.errors);
+        }
+      });
+    },
+
+
+    /**
+     * Gather the action FormData for the given action.
+     *
+     * @return {FormData}
+     */
+    actionFormData: function actionFormData() {
+      var _this2 = this;
+
+      return _.tap(new FormData(), function (formData) {
+
+        formData.append('resources', [_this2.resource.id.value]);
+
+        _.each(_this2.selectedAction.fields, function (field) {
+          field.fill(formData);
+        });
+      });
+    },
+
+
+    /**
+     * Handle the action response. Typically either a message, download or a redirect.
+     *
+     * @param  {object}  response
+     *
+     * @return {void}
+     */
+    handleActionResponse: function handleActionResponse(response) {
+
+      // Check for a message
+      if (response.message) {
+        this.$emit('actionExecuted');
+        this.$toasted.show(response.message, { type: 'success' });
+      }
+
+      // Check if the response was deleted
+      else if (response.deleted) {
+          this.$emit('actionExecuted');
+        }
+
+        // Check for a danger response
+        else if (response.danger) {
+            this.$emit('actionExecuted');
+            this.$toasted.show(response.danger, { type: 'error' });
+          }
+
+          // Check for a download response
+          else if (response.download) {
+              var link = document.createElement('a');
+              link.href = response.download;
+              link.download = response.name;
+              link.click();
+            }
+
+            // Check for a redirect response
+            else if (response.redirect) {
+                window.location = response.redirect;
+              }
+
+              // Assume the action was successful
+              else {
+
+                  // Fire the action executed event
+                  this.$emit('actionExecuted');
+
+                  // Display that the action run successfully
+                  this.$toasted.show(this.__('The action ran successfully!'), { type: 'success' });
+
+                  // To avoid having to override every Vue component between
+                  // this one and the index, we're just going to directly
+                  // call the action executed response from the index.
+
+                  // Update the index resources
+                  this.updateIndexResources();
+                }
+    },
+
+
+    /**
+     * Updates the index resources.
+     *
+     * @return {void}
+     */
+    updateIndexResources: function updateIndexResources() {
+
+      // Determine the resource index
+      var index = this.getResourceIndex();
+
+      // Stop if we couldn't find the resource index
+      if (index == null) {
+        return;
+      }
+
+      // Call the resource updater
+      index.getResources();
+    },
+
+
+    /**
+     * Returns the closest resource index in the parent tree.
+     *
+     * @return {VueComponent|null}
+     */
+    getResourceIndex: function getResourceIndex() {
+
+      // Walk up the parent tree
+      for (var parent = this.$parent; typeof parent !== 'undefined'; parent = parent.$parent) {
+
+        // Return the eparent if it is a resource index
+        if (parent.$options.name === 'resource-index') {
+          return parent;
+        }
+      }
+
+      // Failed to find resource index
+      return null;
+    },
+
+
+    /**
+     * Returns the available resource actions.
+     *
+     * @return {Array}
+     */
+    getResourceActions: function getResourceActions() {
+      return this.getResourceIndex().actions;
+    },
+
+
+    /**
+     * Returns the available resource pivot actions.
+     *
+     * @return {Array}
+     */
+    getResourcePivotActions: function getResourcePivotActions() {
+      return this.getResourceIndex().pivotActions;
+    }
+  },
+
+  computed: {
+
+    /**
+     * Computed alias of {@see $this.getResourceActions()}.
+     *
+     * @return {Array}
+     */
+    resourceActions: function resourceActions() {
+      return this.getResourceActions();
+    },
+
+
+    /**
+     * Computed alias of {@see $this.getResourcePivotActions()}.
+     *
+     * @return {Array}
+     */
+    resourcePivotActions: function resourcePivotActions() {
+      return this.getResourcePivotActions();
+    },
+
+
+    /**
+     * Returns the query string for an action request.
+     *
+     * @return {Object}
+     */
+    actionRequestQueryString: function actionRequestQueryString() {
+      return {
+        action: this.selectedAction.uriKey,
+        pivotAction: this.selectedActionIsPivotAction,
+        search: this.queryString.currentSearch,
+        filters: this.queryString.encodedFilters,
+        trashed: this.queryString.currentTrashed,
+        viaResource: this.queryString.viaResource,
+        viaResourceId: this.queryString.viaResourceId,
+        viaRelationship: this.queryString.viaRelationship
+      };
+    },
+
+
+    /**
+     * Returns the query string for this page.
+     *
+     * @return {Object}
+     */
+    queryString: function queryString() {
+
+      return {
+        currentSearch: this.currentSearch,
+        encodedFilters: this.encodedFilters,
+        currentTrashed: this.currentTrashed,
+        viaResource: this.viaResource,
+        viaResourceId: this.viaResourceId,
+        viaRelationship: this.viaRelationship
+      };
+    },
+
+
+    /**
+     * Returns the current search value from the query string.
+     *
+     * @return {string}
+     */
+    currentSearch: function currentSearch() {
+      return this.$route.query[this.searchParameter] || '';
+    },
+
+
+    /**
+     * Returns the encoded filters from the query string.
+     *
+     * @return {string}
+     */
+    encodedFilters: function encodedFilters() {
+      return this.$route.query[this.filterParameter] || '';
+    },
+
+
+    /**
+     * Returns the current trashed constraint value from the query string.
+     *
+     * @return {string}
+     */
+    currentTrashed: function currentTrashed() {
+      return this.$route.query[this.trashedParameter] || '';
+    },
+
+
+    /**
+     * Returns the name of the search query string variable.
+     *
+     * @return {string}
+     */
+    searchParameter: function searchParameter() {
+      return this.resourceName + '_search';
+    },
+
+
+    /**
+     * Returns the name of the filter query string variable.
+     *
+     * @return {string}
+     */
+    filterParameter: function filterParameter() {
+      return this.resourceName + '_filter';
+    },
+
+
+    /**
+     * Returns the name of the trashed constraint query string variable.
+     *
+     * @return {string}
+     */
+    trashedParameter: function trashedParameter() {
+      return this.resourceName + '_trashed';
+    }
+  }
+
+});
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.resourceActions.length > 0
+        ? _c(
+            "subdropdown",
+            {
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(ref) {
+                    var toggle = ref.toggle
+                    return _c(
+                      "subdropdown-trigger",
+                      {
+                        staticClass:
+                          "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
+                        attrs: { "handle-click": toggle }
+                      },
+                      [
+                        _c("icon", {
+                          staticClass: "mr-3",
+                          attrs: { type: "resource" }
+                        }),
+                        _vm._v(" "),
+                        _c("div", {
+                          staticClass: "flex-1",
+                          domProps: {
+                            textContent: _vm._s(
+                              _vm.resourceInformation.singularLabel
+                            )
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  }
+                }
+              ])
+            },
+            [
+              _c(
+                "subdropdown-menu",
+                {
+                  attrs: { slot: "menu", width: "200", pull: "left" },
+                  slot: "menu"
+                },
+                _vm._l(_vm.resourceActions, function(action) {
+                  return _c(
+                    "div",
+                    {
+                      staticClass:
+                        "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
+                      on: {
+                        click: function($event) {
+                          _vm.onActionSelected(action)
+                        }
+                      }
+                    },
+                    [
+                      _c("icon", {
+                        staticClass: "mr-3",
+                        attrs: { type: "play" }
+                      }),
+                      _vm._v(" "),
+                      _c("div", [_vm._v(_vm._s(action.name))])
+                    ],
+                    1
+                  )
+                })
+              )
+            ],
+            1
+          )
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-06f54a73", module.exports)
+  }
+}
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(31)
+/* template */
+var __vue_template__ = __webpack_require__(32)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Actions/ResourcePivotActionsDropdown.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-00ec3997", Component.options)
+  } else {
+    hotAPI.reload("data-v-00ec3997", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 31 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"]],
+
+    props: ['testId', 'resource', 'resourceName', 'resourcePivotActions', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint'],
+
+    methods: {
+
+        onActionSelected: function onActionSelected(action) {
+            this.$emit('onActionSelected', action, true);
+        }
+
+    }
+
+});
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.resourcePivotActions.actions.length > 0
+        ? _c(
+            "subdropdown",
+            {
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(ref) {
+                    var toggle = ref.toggle
+                    return _c(
+                      "subdropdown-trigger",
+                      {
+                        staticClass:
+                          "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
+                        attrs: { "handle-click": toggle }
+                      },
+                      [
+                        _c("icon", {
+                          staticClass: "mr-3",
+                          attrs: { type: "resource" }
+                        }),
+                        _vm._v(" "),
+                        _c("div", {
+                          staticClass: "flex-1",
+                          domProps: {
+                            textContent: _vm._s(_vm.resourcePivotActions.name)
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  }
+                }
+              ])
+            },
+            [
+              _c(
+                "subdropdown-menu",
+                {
+                  attrs: { slot: "menu", width: "200", pull: "left" },
+                  slot: "menu"
+                },
+                _vm._l(_vm.resourcePivotActions.actions, function(action) {
+                  return _c(
+                    "div",
+                    {
+                      staticClass:
+                        "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
+                      on: {
+                        click: function($event) {
+                          _vm.onActionSelected(action)
+                        }
+                      }
+                    },
+                    [
+                      _c("icon", {
+                        staticClass: "mr-3",
+                        attrs: { type: "play" }
+                      }),
+                      _vm._v(" "),
+                      _c("div", [_vm._v(_vm._s(action.name))])
+                    ],
+                    1
+                  )
+                })
+              )
+            ],
+            1
+          )
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-00ec3997", module.exports)
+  }
+}
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(34)
+/* template */
+var __vue_template__ = __webpack_require__(35)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Actions/Delete.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0a201070", Component.options)
+  } else {
+    hotAPI.reload("data-v-0a201070", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 34 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"]],
+
+    props: ['testId', 'resource', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint'],
+
+    data: function data() {
+        return {
+            deleteModalOpen: false
+        };
+    },
+
+    methods: {
+        openDeleteModal: function openDeleteModal() {
+            this.deleteModalOpen = true;
+        },
+        confirmDelete: function confirmDelete() {
+            this.deleteResource(this.resource);
+            this.closeDeleteModal();
+        },
+        closeDeleteModal: function closeDeleteModal() {
+            this.deleteModalOpen = false;
+        }
+    }
+});
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.resource.authorizedToDelete &&
+      (!_vm.resource.softDeleted || _vm.viaManyToMany)
+        ? _c(
+            "button",
+            {
+              staticClass:
+                "appearance-none cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline w-full rounded-lg",
+              attrs: {
+                "data-testid": _vm.testId + "-delete-button",
+                dusk: _vm.resource["id"].value + "-delete-button",
+                title: _vm.__(_vm.viaManyToMany ? "Detach" : "Delete")
+              },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.openDeleteModal($event)
+                }
+              }
+            },
+            [
+              _c("icon", { staticClass: "mr-3" }),
+              _vm._v(" "),
+              _c("div", {
+                domProps: {
+                  textContent: _vm._s(
+                    _vm.__(_vm.viaManyToMany ? "Detach" : "Delete")
+                  )
+                }
+              })
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "portal",
+        { attrs: { to: "modals" } },
+        [
+          _c(
+            "transition",
+            { attrs: { name: "fade" } },
+            [
+              _vm.deleteModalOpen
+                ? _c("delete-resource-modal", {
+                    attrs: { mode: _vm.viaManyToMany ? "detach" : "delete" },
+                    on: {
+                      confirm: _vm.confirmDelete,
+                      close: _vm.closeDeleteModal
+                    },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(ref) {
+                          var uppercaseMode = ref.uppercaseMode
+                          var mode = ref.mode
+                          return _c(
+                            "div",
+                            { staticClass: "p-8" },
+                            [
+                              _c(
+                                "heading",
+                                { staticClass: "mb-6", attrs: { level: 2 } },
+                                [
+                                  _vm._v(
+                                    _vm._s(_vm.__(uppercaseMode + " Resource"))
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "p",
+                                { staticClass: "text-80 leading-normal" },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.__(
+                                        "Are you sure you want to " +
+                                          mode +
+                                          " this resource?"
+                                      )
+                                    )
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        }
+                      }
+                    ])
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0a201070", module.exports)
+  }
+}
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(37)
+/* template */
+var __vue_template__ = __webpack_require__(38)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Actions/Restore.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-8790bc7e", Component.options)
+  } else {
+    hotAPI.reload("data-v-8790bc7e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 37 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"]],
+
+    props: ['testId', 'deleteResource', 'restoreResource', 'resource', 'resourcesSelected', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint'],
+
+    data: function data() {
+        return {
+            restoreModalOpen: false
+        };
+    },
+
+    methods: {
+        openRestoreModal: function openRestoreModal() {
+            this.restoreModalOpen = true;
+        },
+        confirmRestore: function confirmRestore() {
+            this.restoreResource(this.resource);
+            this.closeRestoreModal();
+        },
+        closeRestoreModal: function closeRestoreModal() {
+            this.restoreModalOpen = false;
+        }
+    }
+
+});
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.resource.authorizedToRestore &&
+      _vm.resource.softDeleted &&
+      !_vm.viaManyToMany
+        ? _c(
+            "button",
+            {
+              staticClass:
+                "appearance-none cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline w-full rounded-lg",
+              attrs: {
+                dusk: _vm.resource["id"].value + "-restore-button",
+                title: _vm.__("Restore")
+              },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.openRestoreModal($event)
+                }
+              }
+            },
+            [
+              _c("icon", {
+                staticClass: "mr-3",
+                attrs: { type: "restore", width: "20", height: "21" }
+              }),
+              _vm._v(" "),
+              _c("div", [_vm._v(_vm._s(_vm.__("Restore")))])
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "transition",
+        { attrs: { name: "fade" } },
+        [
+          _vm.restoreModalOpen
+            ? _c(
+                "restore-resource-modal",
+                {
+                  on: {
+                    confirm: _vm.confirmRestore,
+                    close: _vm.closeRestoreModal
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "p-8" },
+                    [
+                      _c(
+                        "heading",
+                        { staticClass: "mb-6", attrs: { level: 2 } },
+                        [_vm._v(_vm._s(_vm.__("Restore Resource")))]
+                      ),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "text-80 leading-normal" }, [
+                        _vm._v(
+                          _vm._s(
+                            _vm.__(
+                              "Are you sure you want to restore this resource?"
+                            )
+                          )
+                        )
+                      ])
+                    ],
+                    1
+                  )
+                ]
+              )
+            : _vm._e()
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-8790bc7e", module.exports)
+  }
+}
+
+/***/ }),
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -28354,7 +30029,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(17)
+var __vue_template__ = __webpack_require__(40)
 /* template functional */
 var __vue_template_functional__ = true
 /* styles */
@@ -28393,7 +30068,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 17 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function(_h, _vm) {
@@ -28416,7 +30091,7 @@ if (false) {
 }
 
 /***/ }),
-/* 18 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -28424,7 +30099,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(19)
+var __vue_template__ = __webpack_require__(42)
 /* template functional */
 var __vue_template_functional__ = true
 /* styles */
@@ -28463,7 +30138,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 19 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function(_h, _vm) {
@@ -28486,15 +30161,15 @@ if (false) {
 }
 
 /***/ }),
-/* 20 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(21)
+var __vue_script__ = __webpack_require__(44)
 /* template */
-var __vue_template__ = __webpack_require__(27)
+var __vue_template__ = __webpack_require__(50)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -28533,12 +30208,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 21 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_clickaway__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_clickaway__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_clickaway___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_clickaway__);
 //
 //
@@ -28615,13 +30290,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 22 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Vue = __webpack_require__(23);
+var Vue = __webpack_require__(46);
 Vue = 'default' in Vue ? Vue['default'] : Vue;
 
 var version = '2.2.2';
@@ -28704,7 +30379,7 @@ exports.directive = directive;
 exports.mixin = mixin;
 
 /***/ }),
-/* 23 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -39667,10 +41342,10 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(24).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(47).setImmediate))
 
 /***/ }),
-/* 24 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
@@ -39726,7 +41401,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(25);
+__webpack_require__(48);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -39737,10 +41412,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
-/* 25 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -39930,10 +41605,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(26)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(49)))
 
 /***/ }),
-/* 26 */
+/* 49 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -40123,7 +41798,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 27 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -40167,15 +41842,15 @@ if (false) {
 }
 
 /***/ }),
-/* 28 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(29)
+var __vue_script__ = __webpack_require__(52)
 /* template */
-var __vue_template__ = __webpack_require__(30)
+var __vue_template__ = __webpack_require__(53)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -40214,7 +41889,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 29 */
+/* 52 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -40257,7 +41932,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 30 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -40338,15 +42013,15 @@ if (false) {
 }
 
 /***/ }),
-/* 31 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(32)
+var __vue_script__ = __webpack_require__(55)
 /* template */
-var __vue_template__ = __webpack_require__(33)
+var __vue_template__ = __webpack_require__(56)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -40385,7 +42060,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 32 */
+/* 55 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -40443,7 +42118,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 33 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -40481,1742 +42156,10 @@ if (false) {
 }
 
 /***/ }),
-/* 34 */
+/* 57 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(43)
-/* template */
-var __vue_template__ = __webpack_require__(44)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/Actions/View.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-60231d02", Component.options)
-  } else {
-    hotAPI.reload("data-v-60231d02", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 43 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"]],
-
-    props: ['testId', 'resource', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint']
-});
-
-/***/ }),
-/* 44 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm.resource.authorizedToView
-    ? _c(
-        "span",
-        [
-          _c(
-            "router-link",
-            {
-              staticClass:
-                "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
-              attrs: {
-                "data-testid": _vm.testId + "-view-button",
-                dusk: _vm.resource["id"].value + "-view-button",
-                to: {
-                  name: "detail",
-                  params: {
-                    resourceName: _vm.resourceName,
-                    resourceId: _vm.resource["id"].value
-                  }
-                },
-                title: _vm.__("View")
-              }
-            },
-            [
-              _c("icon", {
-                staticClass: "mr-3",
-                attrs: {
-                  type: "view",
-                  width: "22",
-                  height: "16",
-                  "view-box": "0 0 22 16"
-                }
-              }),
-              _vm._v(" "),
-              _c("div", [_vm._v(_vm._s(_vm.__("Details")))])
-            ],
-            1
-          )
-        ],
-        1
-      )
-    : _vm._e()
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-60231d02", module.exports)
-  }
-}
-
-/***/ }),
-/* 45 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(46)
-/* template */
-var __vue_template__ = __webpack_require__(47)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/Actions/EditAttached.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-166692aa", Component.options)
-  } else {
-    hotAPI.reload("data-v-166692aa", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 46 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"]],
-
-    props: ['testId', 'resource', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint']
-});
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm.resource.authorizedToUpdate
-    ? _c(
-        "span",
-        [
-          _vm.relationshipType == "belongsToMany" ||
-          _vm.relationshipType == "morphToMany"
-            ? _c(
-                "router-link",
-                {
-                  staticClass:
-                    "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
-                  attrs: {
-                    dusk: _vm.resource["id"].value + "-edit-attached-button",
-                    to: {
-                      name: "edit-attached",
-                      params: {
-                        resourceName: _vm.viaResource,
-                        resourceId: _vm.viaResourceId,
-                        relatedResourceName: _vm.resourceName,
-                        relatedResourceId: _vm.resource["id"].value
-                      },
-                      query: {
-                        viaRelationship: _vm.viaRelationship
-                      }
-                    },
-                    title: _vm.__("Edit Attached")
-                  }
-                },
-                [
-                  _c("icon", { staticClass: "mr-3", attrs: { type: "edit" } }),
-                  _vm._v(" "),
-                  _c("div", [_vm._v(_vm._s(_vm.__("Edit Attached")))])
-                ],
-                1
-              )
-            : _vm._e()
-        ],
-        1
-      )
-    : _vm._e()
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-166692aa", module.exports)
-  }
-}
-
-/***/ }),
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(49)
-/* template */
-var __vue_template__ = __webpack_require__(50)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/Actions/Edit.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-785915e7", Component.options)
-  } else {
-    hotAPI.reload("data-v-785915e7", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 49 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"]],
-
-    props: ['testId', 'resource', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint']
-});
-
-/***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm.resource.authorizedToUpdate
-    ? _c(
-        "span",
-        [
-          _vm.relationshipType != "belongsToMany" &&
-          _vm.relationshipType != "morphToMany"
-            ? _c(
-                "router-link",
-                {
-                  staticClass:
-                    "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
-                  attrs: {
-                    dusk: _vm.resource["id"].value + "-edit-button",
-                    to: {
-                      name: "edit",
-                      params: {
-                        resourceName: _vm.resourceName,
-                        resourceId: _vm.resource["id"].value
-                      },
-                      query: {
-                        viaResource: _vm.viaResource,
-                        viaResourceId: _vm.viaResourceId,
-                        viaRelationship: _vm.viaRelationship
-                      }
-                    },
-                    title: _vm.__("Edit")
-                  }
-                },
-                [
-                  _c("icon", { staticClass: "mr-3", attrs: { type: "edit" } }),
-                  _vm._v(" "),
-                  _c("div", [_vm._v(_vm._s(_vm.__("Edit")))])
-                ],
-                1
-              )
-            : _vm._e()
-        ],
-        1
-      )
-    : _vm._e()
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-785915e7", module.exports)
-  }
-}
-
-/***/ }),
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(52)
-/* template */
-var __vue_template__ = __webpack_require__(53)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/Actions/ResourceActionsDropdown.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-06f54a73", Component.options)
-  } else {
-    hotAPI.reload("data-v-06f54a73", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 52 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_mixins__ = __webpack_require__(55);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"], __WEBPACK_IMPORTED_MODULE_1__mixins_mixins__["a" /* InteractsWithResourceActions */]],
-
-    props: ['testId', 'resource', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint'],
-
-    data: function data() {
-        return {
-
-            working: false,
-            errors: new __WEBPACK_IMPORTED_MODULE_0_laravel_nova__["Errors"](),
-            selectedAction: null,
-            selectedActionIsPivotAction: false,
-            confirmActionModalOpened: false
-
-        };
-    }
-
-});
-
-/***/ }),
-/* 53 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm.resourceActions.length > 0
-        ? _c(
-            "subdropdown",
-            {
-              scopedSlots: _vm._u([
-                {
-                  key: "default",
-                  fn: function(ref) {
-                    var toggle = ref.toggle
-                    return _c(
-                      "subdropdown-trigger",
-                      {
-                        staticClass:
-                          "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
-                        attrs: { "handle-click": toggle }
-                      },
-                      [
-                        _c("icon", {
-                          staticClass: "mr-3",
-                          attrs: { type: "resource" }
-                        }),
-                        _vm._v(" "),
-                        _c("div", {
-                          staticClass: "flex-1",
-                          domProps: {
-                            textContent: _vm._s(
-                              _vm.resourceInformation.singularLabel
-                            )
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  }
-                }
-              ])
-            },
-            [
-              _c(
-                "subdropdown-menu",
-                {
-                  attrs: { slot: "menu", width: "200", pull: "left" },
-                  slot: "menu"
-                },
-                _vm._l(_vm.resourceActions, function(action) {
-                  return _c(
-                    "div",
-                    {
-                      staticClass:
-                        "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
-                      on: {
-                        click: function($event) {
-                          _vm.openConfirmationModal(action)
-                        }
-                      }
-                    },
-                    [
-                      _c("icon", {
-                        staticClass: "mr-3",
-                        attrs: { type: "play" }
-                      }),
-                      _vm._v(" "),
-                      _c("div", [_vm._v(_vm._s(action.name))])
-                    ],
-                    1
-                  )
-                })
-              )
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "portal",
-        { attrs: { to: "modals" } },
-        [
-          _c(
-            "transition",
-            { attrs: { name: "fade" } },
-            [
-              _vm.confirmActionModalOpened
-                ? _c("confirm-action-modal", {
-                    attrs: {
-                      working: _vm.working,
-                      "resource-name": _vm.resourceName,
-                      "selected-action": _vm.selectedAction,
-                      errors: _vm.errors
-                    },
-                    on: {
-                      confirm: _vm.executeAction,
-                      close: function($event) {
-                        _vm.confirmActionModalOpened = false
-                      }
-                    }
-                  })
-                : _vm._e()
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-06f54a73", module.exports)
-  }
-}
-
-/***/ }),
-/* 54 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = ({
-
-  methods: {
-
-    /**
-     * Confirm with the user that they actually want to run the selected action.
-     *
-     * @param  {Object}   action  The selected action.
-     * @param  {boolean}  pivot   Whether or not the action is a pivot action.
-     *
-     * @return {void}
-     */
-    openConfirmationModal: function openConfirmationModal(action) {
-      var pivot = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-
-      this.selectedAction = action;
-      this.selectedActionIsPivotAction = pivot;
-      this.confirmActionModalOpened = true;
-    },
-
-
-    /**
-     * Close the action confirmation modal.
-     */
-    closeConfirmationModal: function closeConfirmationModal() {
-      this.confirmActionModalOpened = false;
-    },
-
-
-    /**
-     * Execute the selected action.
-     */
-    executeAction: function executeAction() {
-      var _this = this;
-
-      // Set this action as working
-      this.working = true;
-
-      // Submit the request
-      Nova.request({
-        method: 'post',
-        url: this.endpoint || '/nova-api/' + this.resourceName + '/action',
-        params: this.actionRequestQueryString,
-        data: this.actionFormData()
-      })
-
-      // Handle the response
-      .then(function (response) {
-
-        _this.confirmActionModalOpened = false;
-        _this.handleActionResponse(response.data);
-        _this.working = false;
-      })
-
-      // Catch any errors
-      .catch(function (error) {
-
-        _this.working = false;
-
-        if (error.response.status == 422) {
-          _this.errors = new Errors(error.response.data.errors);
-        }
-      });
-    },
-
-
-    /**
-     * Gather the action FormData for the given action.
-     *
-     * @return {FormData}
-     */
-    actionFormData: function actionFormData() {
-      var _this2 = this;
-
-      return _.tap(new FormData(), function (formData) {
-
-        formData.append('resources', [_this2.resource.id.value]);
-
-        _.each(_this2.selectedAction.fields, function (field) {
-          field.fill(formData);
-        });
-      });
-    },
-
-
-    /**
-     * Handle the action response. Typically either a message, download or a redirect.
-     *
-     * @param  {object}  response
-     *
-     * @return {void}
-     */
-    handleActionResponse: function handleActionResponse(response) {
-
-      // Check for a message
-      if (response.message) {
-        this.$emit('actionExecuted');
-        this.$toasted.show(response.message, { type: 'success' });
-      }
-
-      // Check if the response was deleted
-      else if (response.deleted) {
-          this.$emit('actionExecuted');
-        }
-
-        // Check for a danger response
-        else if (response.danger) {
-            this.$emit('actionExecuted');
-            this.$toasted.show(response.danger, { type: 'error' });
-          }
-
-          // Check for a download response
-          else if (response.download) {
-              var link = document.createElement('a');
-              link.href = response.download;
-              link.download = response.name;
-              link.click();
-            }
-
-            // Check for a redirect response
-            else if (response.redirect) {
-                window.location = response.redirect;
-              }
-
-              // Assume the action was successful
-              else {
-
-                  // Fire the action executed event
-                  this.$emit('actionExecuted');
-
-                  // Display that the action run successfully
-                  this.$toasted.show(this.__('The action ran successfully!'), { type: 'success' });
-
-                  // To avoid having to override every Vue component between
-                  // this one and the index, we're just going to directly
-                  // call the action executed response from the index.
-
-                  // Update the index resources
-                  this.updateIndexResources();
-                }
-    },
-
-
-    /**
-     * Updates the index resources.
-     *
-     * @return {void}
-     */
-    updateIndexResources: function updateIndexResources() {
-
-      // Determine the resource index
-      var index = this.getResourceIndex();
-
-      // Stop if we couldn't find the resource index
-      if (index == null) {
-        return;
-      }
-
-      // Call the resource updater
-      index.getResources();
-    },
-
-
-    /**
-     * Returns the closest resource index in the parent tree.
-     *
-     * @return {VueComponent|null}
-     */
-    getResourceIndex: function getResourceIndex() {
-
-      // Walk up the parent tree
-      for (var parent = this.$parent; typeof parent !== 'undefined'; parent = parent.$parent) {
-
-        // Return the eparent if it is a resource index
-        if (parent.$options.name === 'resource-index') {
-          return parent;
-        }
-      }
-
-      // Failed to find resource index
-      return null;
-    },
-
-
-    /**
-     * Returns the available resource actions.
-     *
-     * @return {Array}
-     */
-    getResourceActions: function getResourceActions() {
-      return this.getResourceIndex().actions;
-    },
-
-
-    /**
-     * Returns the available resource pivot actions.
-     *
-     * @return {Array}
-     */
-    getResourcePivotActions: function getResourcePivotActions() {
-      return this.getResourceIndex().pivotActions;
-    }
-  },
-
-  computed: {
-
-    /**
-     * Computed alias of {@see $this.getResourceActions()}.
-     *
-     * @return {Array}
-     */
-    resourceActions: function resourceActions() {
-      return this.getResourceActions();
-    },
-
-
-    /**
-     * Computed alias of {@see $this.getResourcePivotActions()}.
-     *
-     * @return {Array}
-     */
-    resourcePivotActions: function resourcePivotActions() {
-      return this.getResourcePivotActions();
-    },
-
-
-    /**
-     * Returns the query string for an action request.
-     *
-     * @return {Object}
-     */
-    actionRequestQueryString: function actionRequestQueryString() {
-      return {
-        action: this.selectedAction.uriKey,
-        pivotAction: this.selectedActionIsPivotAction,
-        search: this.queryString.currentSearch,
-        filters: this.queryString.encodedFilters,
-        trashed: this.queryString.currentTrashed,
-        viaResource: this.queryString.viaResource,
-        viaResourceId: this.queryString.viaResourceId,
-        viaRelationship: this.queryString.viaRelationship
-      };
-    },
-
-
-    /**
-     * Returns the query string for this page.
-     *
-     * @return {Object}
-     */
-    queryString: function queryString() {
-
-      return {
-        currentSearch: this.currentSearch,
-        encodedFilters: this.encodedFilters,
-        currentTrashed: this.currentTrashed,
-        viaResource: this.viaResource,
-        viaResourceId: this.viaResourceId,
-        viaRelationship: this.viaRelationship
-      };
-    },
-
-
-    /**
-     * Returns the current search value from the query string.
-     *
-     * @return {string}
-     */
-    currentSearch: function currentSearch() {
-      return this.$route.query[this.searchParameter] || '';
-    },
-
-
-    /**
-     * Returns the encoded filters from the query string.
-     *
-     * @return {string}
-     */
-    encodedFilters: function encodedFilters() {
-      return this.$route.query[this.filterParameter] || '';
-    },
-
-
-    /**
-     * Returns the current trashed constraint value from the query string.
-     *
-     * @return {string}
-     */
-    currentTrashed: function currentTrashed() {
-      return this.$route.query[this.trashedParameter] || '';
-    },
-
-
-    /**
-     * Returns the name of the search query string variable.
-     *
-     * @return {string}
-     */
-    searchParameter: function searchParameter() {
-      return this.resourceName + '_search';
-    },
-
-
-    /**
-     * Returns the name of the filter query string variable.
-     *
-     * @return {string}
-     */
-    filterParameter: function filterParameter() {
-      return this.resourceName + '_filter';
-    },
-
-
-    /**
-     * Returns the name of the trashed constraint query string variable.
-     *
-     * @return {string}
-     */
-    trashedParameter: function trashedParameter() {
-      return this.resourceName + '_trashed';
-    }
-  }
-
-});
-
-/***/ }),
-/* 55 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__InteractsWithResourceActions__ = __webpack_require__(54);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__InteractsWithResourceActions__["a"]; });
-
-
-
-
-/***/ }),
-/* 56 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(57)
-/* template */
-var __vue_template__ = __webpack_require__(58)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/Actions/ResourcePivotActionsDropdown.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-00ec3997", Component.options)
-  } else {
-    hotAPI.reload("data-v-00ec3997", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 57 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_mixins__ = __webpack_require__(55);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"], __WEBPACK_IMPORTED_MODULE_1__mixins_mixins__["a" /* InteractsWithResourceActions */]],
-
-    props: ['testId', 'resource', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint'],
-
-    data: function data() {
-        return {
-
-            working: false,
-            errors: new __WEBPACK_IMPORTED_MODULE_0_laravel_nova__["Errors"](),
-            selectedAction: null,
-            selectedActionIsPivotAction: false,
-            confirmActionModalOpened: false
-
-        };
-    }
-
-});
-
-/***/ }),
-/* 58 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm.resourcePivotActions.actions.length > 0
-        ? _c(
-            "subdropdown",
-            {
-              scopedSlots: _vm._u([
-                {
-                  key: "default",
-                  fn: function(ref) {
-                    var toggle = ref.toggle
-                    return _c(
-                      "subdropdown-trigger",
-                      {
-                        staticClass:
-                          "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
-                        attrs: { "handle-click": toggle }
-                      },
-                      [
-                        _c("icon", {
-                          staticClass: "mr-3",
-                          attrs: { type: "resource" }
-                        }),
-                        _vm._v(" "),
-                        _c("div", {
-                          staticClass: "flex-1",
-                          domProps: {
-                            textContent: _vm._s(_vm.resourcePivotActions.name)
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  }
-                }
-              ])
-            },
-            [
-              _c(
-                "subdropdown-menu",
-                {
-                  attrs: { slot: "menu", width: "200", pull: "left" },
-                  slot: "menu"
-                },
-                _vm._l(_vm.resourcePivotActions.actions, function(action) {
-                  return _c(
-                    "div",
-                    {
-                      staticClass:
-                        "cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg",
-                      on: {
-                        click: function($event) {
-                          _vm.openConfirmationModal(action, true)
-                        }
-                      }
-                    },
-                    [
-                      _c("icon", {
-                        staticClass: "mr-3",
-                        attrs: { type: "play" }
-                      }),
-                      _vm._v(" "),
-                      _c("div", [_vm._v(_vm._s(action.name))])
-                    ],
-                    1
-                  )
-                })
-              )
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "portal",
-        { attrs: { to: "modals" } },
-        [
-          _c(
-            "transition",
-            { attrs: { name: "fade" } },
-            [
-              _vm.confirmActionModalOpened
-                ? _c("confirm-action-modal", {
-                    attrs: {
-                      working: _vm.working,
-                      "resource-name": _vm.resourceName,
-                      "selected-action": _vm.selectedAction,
-                      errors: _vm.errors
-                    },
-                    on: {
-                      confirm: _vm.executeAction,
-                      close: function($event) {
-                        _vm.confirmActionModalOpened = false
-                      }
-                    }
-                  })
-                : _vm._e()
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-00ec3997", module.exports)
-  }
-}
-
-/***/ }),
-/* 59 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(61)
-/* template */
-var __vue_template__ = __webpack_require__(60)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/Actions/Delete.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0a201070", Component.options)
-  } else {
-    hotAPI.reload("data-v-0a201070", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 60 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm.resource.authorizedToDelete &&
-      (!_vm.resource.softDeleted || _vm.viaManyToMany)
-        ? _c(
-            "button",
-            {
-              staticClass:
-                "appearance-none cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline w-full rounded-lg",
-              attrs: {
-                "data-testid": _vm.testId + "-delete-button",
-                dusk: _vm.resource["id"].value + "-delete-button",
-                title: _vm.__(_vm.viaManyToMany ? "Detach" : "Delete")
-              },
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  return _vm.openDeleteModal($event)
-                }
-              }
-            },
-            [
-              _c("icon", { staticClass: "mr-3" }),
-              _vm._v(" "),
-              _c("div", {
-                domProps: {
-                  textContent: _vm._s(
-                    _vm.__(_vm.viaManyToMany ? "Detach" : "Delete")
-                  )
-                }
-              })
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "portal",
-        { attrs: { to: "modals" } },
-        [
-          _c(
-            "transition",
-            { attrs: { name: "fade" } },
-            [
-              _vm.deleteModalOpen
-                ? _c("delete-resource-modal", {
-                    attrs: { mode: _vm.viaManyToMany ? "detach" : "delete" },
-                    on: {
-                      confirm: _vm.confirmDelete,
-                      close: _vm.closeDeleteModal
-                    },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "default",
-                        fn: function(ref) {
-                          var uppercaseMode = ref.uppercaseMode
-                          var mode = ref.mode
-                          return _c(
-                            "div",
-                            { staticClass: "p-8" },
-                            [
-                              _c(
-                                "heading",
-                                { staticClass: "mb-6", attrs: { level: 2 } },
-                                [
-                                  _vm._v(
-                                    _vm._s(_vm.__(uppercaseMode + " Resource"))
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "p",
-                                { staticClass: "text-80 leading-normal" },
-                                [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.__(
-                                        "Are you sure you want to " +
-                                          mode +
-                                          " this resource?"
-                                      )
-                                    )
-                                  )
-                                ]
-                              )
-                            ],
-                            1
-                          )
-                        }
-                      }
-                    ])
-                  })
-                : _vm._e()
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0a201070", module.exports)
-  }
-}
-
-/***/ }),
-/* 61 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"]],
-
-    props: ['testId', 'resource', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint'],
-
-    data: function data() {
-        return {
-            deleteModalOpen: false
-        };
-    },
-
-    methods: {
-        openDeleteModal: function openDeleteModal() {
-            this.deleteModalOpen = true;
-        },
-        confirmDelete: function confirmDelete() {
-            this.deleteResource(this.resource);
-            this.closeDeleteModal();
-        },
-        closeDeleteModal: function closeDeleteModal() {
-            this.deleteModalOpen = false;
-        }
-    }
-});
-
-/***/ }),
-/* 62 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(63)
-/* template */
-var __vue_template__ = __webpack_require__(64)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/Actions/Restore.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-8790bc7e", Component.options)
-  } else {
-    hotAPI.reload("data-v-8790bc7e", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 63 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_0_laravel_nova__["InteractsWithResourceInformation"]],
-
-    props: ['testId', 'deleteResource', 'restoreResource', 'resource', 'resourcesSelected', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus', 'endpoint'],
-
-    data: function data() {
-        return {
-            restoreModalOpen: false
-        };
-    },
-
-    methods: {
-        openRestoreModal: function openRestoreModal() {
-            this.restoreModalOpen = true;
-        },
-        confirmRestore: function confirmRestore() {
-            this.restoreResource(this.resource);
-            this.closeRestoreModal();
-        },
-        closeRestoreModal: function closeRestoreModal() {
-            this.restoreModalOpen = false;
-        }
-    }
-
-});
-
-/***/ }),
-/* 64 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm.resource.authorizedToRestore &&
-      _vm.resource.softDeleted &&
-      !_vm.viaManyToMany
-        ? _c(
-            "button",
-            {
-              staticClass:
-                "appearance-none cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline w-full rounded-lg",
-              attrs: {
-                dusk: _vm.resource["id"].value + "-restore-button",
-                title: _vm.__("Restore")
-              },
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  return _vm.openRestoreModal($event)
-                }
-              }
-            },
-            [
-              _c("icon", {
-                staticClass: "mr-3",
-                attrs: { type: "restore", width: "20", height: "21" }
-              }),
-              _vm._v(" "),
-              _c("div", [_vm._v(_vm._s(_vm.__("Restore")))])
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "portal",
-        { attrs: { to: "modals" } },
-        [
-          _c(
-            "transition",
-            { attrs: { name: "fade" } },
-            [
-              _vm.restoreModalOpen
-                ? _c(
-                    "restore-resource-modal",
-                    {
-                      on: {
-                        confirm: _vm.confirmRestore,
-                        close: _vm.closeRestoreModal
-                      }
-                    },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "p-8" },
-                        [
-                          _c(
-                            "heading",
-                            { staticClass: "mb-6", attrs: { level: 2 } },
-                            [_vm._v(_vm._s(_vm.__("Restore Resource")))]
-                          ),
-                          _vm._v(" "),
-                          _c("p", { staticClass: "text-80 leading-normal" }, [
-                            _vm._v(
-                              _vm._s(
-                                _vm.__(
-                                  "Are you sure you want to restore this resource?"
-                                )
-                              )
-                            )
-                          ])
-                        ],
-                        1
-                      )
-                    ]
-                  )
-                : _vm._e()
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-8790bc7e", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);
