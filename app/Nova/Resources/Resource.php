@@ -83,4 +83,30 @@ abstract class Resource extends NovaResource
             'icon' => 'asdf'
         ];
     }
+
+    /**
+     * Get the actions for the given request.
+     *
+     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @return \Illuminate\Support\Collection
+     */
+    public function resolveActions(NovaRequest $request)
+    {
+        return collect(array_values($this->filter($this->actions($request))));
+    }
+
+    /**
+     * Get the "pivot" actions for the given request.
+     *
+     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @return \Illuminate\Support\Collection
+     */
+    public function resolvePivotActions(NovaRequest $request)
+    {
+        if ($request->viaRelationship()) {
+            return collect(array_values($this->filter($this->getPivotActions($request))));
+        }
+
+        return collect();
+    }
 }

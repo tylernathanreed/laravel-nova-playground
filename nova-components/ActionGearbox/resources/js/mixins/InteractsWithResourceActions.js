@@ -43,11 +43,7 @@ export default {
 
                 // Handle the response
                 .then(response => {
-
-                    this.confirmActionModalOpened = false;
                     this.handleActionResponse(response.data);
-                    this.working = false;
-
                 })
 
                 // Catch any errors
@@ -91,6 +87,11 @@ export default {
          */
         handleActionResponse(response) {
 
+            // Close the action modal, unless we're making another request
+            if(!response.request) {
+                this.confirmActionModalOpened = false;
+            }
+
             // Check for a message
             if(response.message) {
                 this.$emit('actionExecuted');
@@ -109,15 +110,25 @@ export default {
             }
 
             // Check for a download response
-            else if (response.download) {
+            else if(response.download) {
                 let link = document.createElement('a')
                 link.href = response.download
                 link.download = response.name
                 link.click()
             }
 
+            // Check for a request
+            else if(response.request) {
+
+                // Submit the request
+                Nova.request(response.request).then(response => {
+                    this.handleActionResponse(response.data);
+                });
+
+            }
+
             // Check for a redirect response
-            else if (response.redirect) {
+            else if(response.redirect) {
                 window.location = response.redirect
             }
 
@@ -137,6 +148,11 @@ export default {
                 // Update the index resources
                 this.updateIndexResources();
 
+            }
+
+            // Stop working, unless we're making another request
+            if(!response.request) {
+                this.working = false;
             }
 
         },

@@ -88,7 +88,9 @@ class Address extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            new \NovaComponents\ActionGearbox\DeleteResourceAction
+        ];
     }
 
     /**

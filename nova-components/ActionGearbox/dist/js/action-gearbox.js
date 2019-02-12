@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10336,37 +10336,26 @@ module.exports = g;
 
 /***/ }),
 /* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__InteractsWithResourceActions__ = __webpack_require__(28);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__InteractsWithResourceActions__["a"]; });
-
-
+__webpack_require__(4);
+module.exports = __webpack_require__(57);
 
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(5);
-module.exports = __webpack_require__(57);
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
 Nova.booting(function (Vue, router) {
 
-    Vue.component('resource-table', __webpack_require__(6));
-    Vue.component('resource-table-row', __webpack_require__(9));
-    Vue.component('resource-table-row-actions', __webpack_require__(12));
+    Vue.component('resource-table', __webpack_require__(5));
+    Vue.component('resource-table-row', __webpack_require__(8));
+    Vue.component('resource-table-row-actions', __webpack_require__(11));
 
-    Vue.component('view-resource-action', __webpack_require__(17));
-    Vue.component('edit-attached-resource-action', __webpack_require__(20));
-    Vue.component('edit-resource-action', __webpack_require__(23));
-    Vue.component('resource-actions-dropdown', __webpack_require__(26));
+    Vue.component('view-resource-action', __webpack_require__(18));
+    Vue.component('edit-attached-resource-action', __webpack_require__(21));
+    Vue.component('edit-resource-action', __webpack_require__(24));
+    Vue.component('resource-actions-dropdown', __webpack_require__(27));
     Vue.component('resource-pivot-actions-dropdown', __webpack_require__(30));
     Vue.component('delete-resource-action', __webpack_require__(33));
     Vue.component('restore-resource-action', __webpack_require__(36));
@@ -10380,15 +10369,15 @@ Nova.booting(function (Vue, router) {
 });
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(7)
+var __vue_script__ = __webpack_require__(6)
 /* template */
-var __vue_template__ = __webpack_require__(8)
+var __vue_template__ = __webpack_require__(7)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -10427,7 +10416,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10623,7 +10612,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -10743,15 +10732,15 @@ if (false) {
 }
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(10)
+var __vue_script__ = __webpack_require__(9)
 /* template */
-var __vue_template__ = __webpack_require__(11)
+var __vue_template__ = __webpack_require__(10)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -10790,7 +10779,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10891,7 +10880,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -10980,15 +10969,15 @@ if (false) {
 }
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(13)
+var __vue_script__ = __webpack_require__(12)
 /* template */
-var __vue_template__ = __webpack_require__(16)
+var __vue_template__ = __webpack_require__(17)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -11027,16 +11016,16 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_laravel_nova__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_laravel_nova__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_mixins__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_mixins__ = __webpack_require__(15);
 //
 //
 //
@@ -11153,7 +11142,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -28265,10 +28254,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(15)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(14)(module)))
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -28296,7 +28285,366 @@ module.exports = function(module) {
 
 
 /***/ }),
+/* 15 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__InteractsWithResourceActions__ = __webpack_require__(16);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__InteractsWithResourceActions__["a"]; });
+
+
+
+
+/***/ }),
 /* 16 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+
+    methods: {
+
+        /**
+         * Confirm with the user that they actually want to run the selected action.
+         *
+         * @param  {Object}   action  The selected action.
+         * @param  {boolean}  pivot   Whether or not the action is a pivot action.
+         *
+         * @return {void}
+         */
+        openConfirmationModal: function openConfirmationModal(action) {
+            var pivot = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+
+            this.selectedAction = action;
+            this.selectedActionIsPivotAction = pivot;
+            this.confirmActionModalOpened = true;
+        },
+
+
+        /**
+         * Close the action confirmation modal.
+         */
+        closeConfirmationModal: function closeConfirmationModal() {
+            this.confirmActionModalOpened = false;
+        },
+
+
+        /**
+         * Execute the selected action.
+         */
+        executeAction: function executeAction() {
+            var _this = this;
+
+            // Set this action as working
+            this.working = true;
+
+            // Submit the request
+            Nova.request({
+                method: 'post',
+                url: this.endpoint || '/nova-api/' + this.resourceName + '/action',
+                params: this.actionRequestQueryString,
+                data: this.actionFormData()
+            })
+
+            // Handle the response
+            .then(function (response) {
+                _this.handleActionResponse(response.data);
+            })
+
+            // Catch any errors
+            .catch(function (error) {
+
+                _this.working = false;
+
+                if (error.response.status == 422) {
+                    _this.errors = new Errors(error.response.data.errors);
+                }
+            });
+        },
+
+
+        /**
+         * Gather the action FormData for the given action.
+         *
+         * @return {FormData}
+         */
+        actionFormData: function actionFormData() {
+            var _this2 = this;
+
+            return _.tap(new FormData(), function (formData) {
+
+                formData.append('resources', [_this2.resource.id.value]);
+
+                _.each(_this2.selectedAction.fields, function (field) {
+                    field.fill(formData);
+                });
+            });
+        },
+
+
+        /**
+         * Handle the action response. Typically either a message, download or a redirect.
+         *
+         * @param  {object}  response
+         *
+         * @return {void}
+         */
+        handleActionResponse: function handleActionResponse(response) {
+            var _this3 = this;
+
+            // Close the action modal, unless we're making another request
+            if (!response.request) {
+                this.confirmActionModalOpened = false;
+            }
+
+            // Check for a message
+            if (response.message) {
+                this.$emit('actionExecuted');
+                this.$toasted.show(response.message, { type: 'success' });
+            }
+
+            // Check if the response was deleted
+            else if (response.deleted) {
+                    this.$emit('actionExecuted');
+                }
+
+                // Check for a danger response
+                else if (response.danger) {
+                        this.$emit('actionExecuted');
+                        this.$toasted.show(response.danger, { type: 'error' });
+                    }
+
+                    // Check for a download response
+                    else if (response.download) {
+                            var link = document.createElement('a');
+                            link.href = response.download;
+                            link.download = response.name;
+                            link.click();
+                        }
+
+                        // Check for a request
+                        else if (response.request) {
+
+                                // Submit the request
+                                Nova.request(response.request).then(function (response) {
+                                    _this3.handleActionResponse(response.data);
+                                });
+                            }
+
+                            // Check for a redirect response
+                            else if (response.redirect) {
+                                    window.location = response.redirect;
+                                }
+
+                                // Assume the action was successful
+                                else {
+
+                                        // Fire the action executed event
+                                        this.$emit('actionExecuted');
+
+                                        // Display that the action run successfully
+                                        this.$toasted.show(this.__('The action ran successfully!'), { type: 'success' });
+
+                                        // To avoid having to override every Vue component between
+                                        // this one and the index, we're just going to directly
+                                        // call the action executed response from the index.
+
+                                        // Update the index resources
+                                        this.updateIndexResources();
+                                    }
+
+            // Stop working, unless we're making another request
+            if (!response.request) {
+                this.working = false;
+            }
+        },
+
+
+        /**
+         * Updates the index resources.
+         *
+         * @return {void}
+         */
+        updateIndexResources: function updateIndexResources() {
+
+            // Determine the resource index
+            var index = this.getResourceIndex();
+
+            // Stop if we couldn't find the resource index
+            if (index == null) {
+                return;
+            }
+
+            // Call the resource updater
+            index.getResources();
+        },
+
+
+        /**
+         * Returns the closest resource index in the parent tree.
+         *
+         * @return {VueComponent|null}
+         */
+        getResourceIndex: function getResourceIndex() {
+
+            // Walk up the parent tree
+            for (var parent = this.$parent; typeof parent !== 'undefined'; parent = parent.$parent) {
+
+                // Return the eparent if it is a resource index
+                if (parent.$options.name === 'resource-index') {
+                    return parent;
+                }
+            }
+
+            // Failed to find resource index
+            return null;
+        },
+
+
+        /**
+         * Returns the available resource actions.
+         *
+         * @return {Array}
+         */
+        getResourceActions: function getResourceActions() {
+            return this.getResourceIndex().actions;
+        },
+
+
+        /**
+         * Returns the available resource pivot actions.
+         *
+         * @return {Array}
+         */
+        getResourcePivotActions: function getResourcePivotActions() {
+            return this.getResourceIndex().pivotActions;
+        }
+    },
+
+    computed: {
+
+        /**
+         * Computed alias of {@see $this.getResourceActions()}.
+         *
+         * @return {Array}
+         */
+        resourceActions: function resourceActions() {
+            return this.getResourceActions();
+        },
+
+
+        /**
+         * Computed alias of {@see $this.getResourcePivotActions()}.
+         *
+         * @return {Array}
+         */
+        resourcePivotActions: function resourcePivotActions() {
+            return this.getResourcePivotActions();
+        },
+
+
+        /**
+         * Returns the query string for an action request.
+         *
+         * @return {Object}
+         */
+        actionRequestQueryString: function actionRequestQueryString() {
+            return {
+                action: this.selectedAction.uriKey,
+                pivotAction: this.selectedActionIsPivotAction,
+                search: this.queryString.currentSearch,
+                filters: this.queryString.encodedFilters,
+                trashed: this.queryString.currentTrashed,
+                viaResource: this.queryString.viaResource,
+                viaResourceId: this.queryString.viaResourceId,
+                viaRelationship: this.queryString.viaRelationship
+            };
+        },
+
+
+        /**
+         * Returns the query string for this page.
+         *
+         * @return {Object}
+         */
+        queryString: function queryString() {
+
+            return {
+                currentSearch: this.currentSearch,
+                encodedFilters: this.encodedFilters,
+                currentTrashed: this.currentTrashed,
+                viaResource: this.viaResource,
+                viaResourceId: this.viaResourceId,
+                viaRelationship: this.viaRelationship
+            };
+        },
+
+
+        /**
+         * Returns the current search value from the query string.
+         *
+         * @return {string}
+         */
+        currentSearch: function currentSearch() {
+            return this.$route.query[this.searchParameter] || '';
+        },
+
+
+        /**
+         * Returns the encoded filters from the query string.
+         *
+         * @return {string}
+         */
+        encodedFilters: function encodedFilters() {
+            return this.$route.query[this.filterParameter] || '';
+        },
+
+
+        /**
+         * Returns the current trashed constraint value from the query string.
+         *
+         * @return {string}
+         */
+        currentTrashed: function currentTrashed() {
+            return this.$route.query[this.trashedParameter] || '';
+        },
+
+
+        /**
+         * Returns the name of the search query string variable.
+         *
+         * @return {string}
+         */
+        searchParameter: function searchParameter() {
+            return this.resourceName + '_search';
+        },
+
+
+        /**
+         * Returns the name of the filter query string variable.
+         *
+         * @return {string}
+         */
+        filterParameter: function filterParameter() {
+            return this.resourceName + '_filter';
+        },
+
+
+        /**
+         * Returns the name of the trashed constraint query string variable.
+         *
+         * @return {string}
+         */
+        trashedParameter: function trashedParameter() {
+            return this.resourceName + '_trashed';
+        }
+    }
+
+});
+
+/***/ }),
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -28420,15 +28768,15 @@ if (false) {
 }
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(18)
+var __vue_script__ = __webpack_require__(19)
 /* template */
-var __vue_template__ = __webpack_require__(19)
+var __vue_template__ = __webpack_require__(20)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -28467,7 +28815,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28502,7 +28850,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -28562,15 +28910,15 @@ if (false) {
 }
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(21)
+var __vue_script__ = __webpack_require__(22)
 /* template */
-var __vue_template__ = __webpack_require__(22)
+var __vue_template__ = __webpack_require__(23)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -28609,7 +28957,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28652,7 +29000,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -28711,15 +29059,15 @@ if (false) {
 }
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(24)
+var __vue_script__ = __webpack_require__(25)
 /* template */
-var __vue_template__ = __webpack_require__(25)
+var __vue_template__ = __webpack_require__(26)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -28758,7 +29106,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28801,7 +29149,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -28860,13 +29208,13 @@ if (false) {
 }
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(27)
+var __vue_script__ = __webpack_require__(28)
 /* template */
 var __vue_template__ = __webpack_require__(29)
 /* template functional */
@@ -28907,7 +29255,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28951,337 +29299,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
 
     }
-
-});
-
-/***/ }),
-/* 28 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = ({
-
-  methods: {
-
-    /**
-     * Confirm with the user that they actually want to run the selected action.
-     *
-     * @param  {Object}   action  The selected action.
-     * @param  {boolean}  pivot   Whether or not the action is a pivot action.
-     *
-     * @return {void}
-     */
-    openConfirmationModal: function openConfirmationModal(action) {
-      var pivot = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-
-      this.selectedAction = action;
-      this.selectedActionIsPivotAction = pivot;
-      this.confirmActionModalOpened = true;
-    },
-
-
-    /**
-     * Close the action confirmation modal.
-     */
-    closeConfirmationModal: function closeConfirmationModal() {
-      this.confirmActionModalOpened = false;
-    },
-
-
-    /**
-     * Execute the selected action.
-     */
-    executeAction: function executeAction() {
-      var _this = this;
-
-      // Set this action as working
-      this.working = true;
-
-      // Submit the request
-      Nova.request({
-        method: 'post',
-        url: this.endpoint || '/nova-api/' + this.resourceName + '/action',
-        params: this.actionRequestQueryString,
-        data: this.actionFormData()
-      })
-
-      // Handle the response
-      .then(function (response) {
-
-        _this.confirmActionModalOpened = false;
-        _this.handleActionResponse(response.data);
-        _this.working = false;
-      })
-
-      // Catch any errors
-      .catch(function (error) {
-
-        _this.working = false;
-
-        if (error.response.status == 422) {
-          _this.errors = new Errors(error.response.data.errors);
-        }
-      });
-    },
-
-
-    /**
-     * Gather the action FormData for the given action.
-     *
-     * @return {FormData}
-     */
-    actionFormData: function actionFormData() {
-      var _this2 = this;
-
-      return _.tap(new FormData(), function (formData) {
-
-        formData.append('resources', [_this2.resource.id.value]);
-
-        _.each(_this2.selectedAction.fields, function (field) {
-          field.fill(formData);
-        });
-      });
-    },
-
-
-    /**
-     * Handle the action response. Typically either a message, download or a redirect.
-     *
-     * @param  {object}  response
-     *
-     * @return {void}
-     */
-    handleActionResponse: function handleActionResponse(response) {
-
-      // Check for a message
-      if (response.message) {
-        this.$emit('actionExecuted');
-        this.$toasted.show(response.message, { type: 'success' });
-      }
-
-      // Check if the response was deleted
-      else if (response.deleted) {
-          this.$emit('actionExecuted');
-        }
-
-        // Check for a danger response
-        else if (response.danger) {
-            this.$emit('actionExecuted');
-            this.$toasted.show(response.danger, { type: 'error' });
-          }
-
-          // Check for a download response
-          else if (response.download) {
-              var link = document.createElement('a');
-              link.href = response.download;
-              link.download = response.name;
-              link.click();
-            }
-
-            // Check for a redirect response
-            else if (response.redirect) {
-                window.location = response.redirect;
-              }
-
-              // Assume the action was successful
-              else {
-
-                  // Fire the action executed event
-                  this.$emit('actionExecuted');
-
-                  // Display that the action run successfully
-                  this.$toasted.show(this.__('The action ran successfully!'), { type: 'success' });
-
-                  // To avoid having to override every Vue component between
-                  // this one and the index, we're just going to directly
-                  // call the action executed response from the index.
-
-                  // Update the index resources
-                  this.updateIndexResources();
-                }
-    },
-
-
-    /**
-     * Updates the index resources.
-     *
-     * @return {void}
-     */
-    updateIndexResources: function updateIndexResources() {
-
-      // Determine the resource index
-      var index = this.getResourceIndex();
-
-      // Stop if we couldn't find the resource index
-      if (index == null) {
-        return;
-      }
-
-      // Call the resource updater
-      index.getResources();
-    },
-
-
-    /**
-     * Returns the closest resource index in the parent tree.
-     *
-     * @return {VueComponent|null}
-     */
-    getResourceIndex: function getResourceIndex() {
-
-      // Walk up the parent tree
-      for (var parent = this.$parent; typeof parent !== 'undefined'; parent = parent.$parent) {
-
-        // Return the eparent if it is a resource index
-        if (parent.$options.name === 'resource-index') {
-          return parent;
-        }
-      }
-
-      // Failed to find resource index
-      return null;
-    },
-
-
-    /**
-     * Returns the available resource actions.
-     *
-     * @return {Array}
-     */
-    getResourceActions: function getResourceActions() {
-      return this.getResourceIndex().actions;
-    },
-
-
-    /**
-     * Returns the available resource pivot actions.
-     *
-     * @return {Array}
-     */
-    getResourcePivotActions: function getResourcePivotActions() {
-      return this.getResourceIndex().pivotActions;
-    }
-  },
-
-  computed: {
-
-    /**
-     * Computed alias of {@see $this.getResourceActions()}.
-     *
-     * @return {Array}
-     */
-    resourceActions: function resourceActions() {
-      return this.getResourceActions();
-    },
-
-
-    /**
-     * Computed alias of {@see $this.getResourcePivotActions()}.
-     *
-     * @return {Array}
-     */
-    resourcePivotActions: function resourcePivotActions() {
-      return this.getResourcePivotActions();
-    },
-
-
-    /**
-     * Returns the query string for an action request.
-     *
-     * @return {Object}
-     */
-    actionRequestQueryString: function actionRequestQueryString() {
-      return {
-        action: this.selectedAction.uriKey,
-        pivotAction: this.selectedActionIsPivotAction,
-        search: this.queryString.currentSearch,
-        filters: this.queryString.encodedFilters,
-        trashed: this.queryString.currentTrashed,
-        viaResource: this.queryString.viaResource,
-        viaResourceId: this.queryString.viaResourceId,
-        viaRelationship: this.queryString.viaRelationship
-      };
-    },
-
-
-    /**
-     * Returns the query string for this page.
-     *
-     * @return {Object}
-     */
-    queryString: function queryString() {
-
-      return {
-        currentSearch: this.currentSearch,
-        encodedFilters: this.encodedFilters,
-        currentTrashed: this.currentTrashed,
-        viaResource: this.viaResource,
-        viaResourceId: this.viaResourceId,
-        viaRelationship: this.viaRelationship
-      };
-    },
-
-
-    /**
-     * Returns the current search value from the query string.
-     *
-     * @return {string}
-     */
-    currentSearch: function currentSearch() {
-      return this.$route.query[this.searchParameter] || '';
-    },
-
-
-    /**
-     * Returns the encoded filters from the query string.
-     *
-     * @return {string}
-     */
-    encodedFilters: function encodedFilters() {
-      return this.$route.query[this.filterParameter] || '';
-    },
-
-
-    /**
-     * Returns the current trashed constraint value from the query string.
-     *
-     * @return {string}
-     */
-    currentTrashed: function currentTrashed() {
-      return this.$route.query[this.trashedParameter] || '';
-    },
-
-
-    /**
-     * Returns the name of the search query string variable.
-     *
-     * @return {string}
-     */
-    searchParameter: function searchParameter() {
-      return this.resourceName + '_search';
-    },
-
-
-    /**
-     * Returns the name of the filter query string variable.
-     *
-     * @return {string}
-     */
-    filterParameter: function filterParameter() {
-      return this.resourceName + '_filter';
-    },
-
-
-    /**
-     * Returns the name of the trashed constraint query string variable.
-     *
-     * @return {string}
-     */
-    trashedParameter: function trashedParameter() {
-      return this.resourceName + '_trashed';
-    }
-  }
 
 });
 
