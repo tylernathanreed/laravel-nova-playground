@@ -33,13 +33,15 @@ export default {
             // Set this action as working
             this.working = true;
 
-            // Submit the request
-            Nova.request({
+            window['request'] = {
                 method: 'post',
-                url: this.endpoint || `/nova-api/${this.resourceName}/action`,
+                url: this.actionRequestUrl,
                 params: this.actionRequestQueryString,
                 data: this.actionFormData(),
-            })
+            };
+
+            // Submit the request
+            Nova.request(window['request'])
 
                 // Handle the response
                 .then(response => {
@@ -240,12 +242,38 @@ export default {
 	    },
 
         /**
+         * Returns the url to submit the action request to.
+         *
+         * @return {string}
+         */
+        actionRequestUrl() {
+
+            // Check for a custom endpoint
+            if(this.selectedAction.endpoint) {
+
+                // Determine the custom endpoint
+                let endpoint = this.selectedAction.endpoint;
+
+                // Replace the resource name, if applicable
+                endpoint = endpoint.replace(/\{\{resourceName\}\}/g, this.resourceName);
+
+                // Return the custom endpoint
+                return endpoint;
+
+            }
+
+            // Return the default implementation
+            return this.endpoint || `/nova-api/${this.resourceName}/action`;
+        },
+
+        /**
          * Returns the query string for an action request.
          *
          * @return {Object}
          */
         actionRequestQueryString() {
             return {
+                _method: this.selectedAction.method || 'post',
                 action: this.selectedAction.uriKey,
                 pivotAction: this.selectedActionIsPivotAction,
                 search: this.queryString.currentSearch,

@@ -7,6 +7,8 @@ use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Place;
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Address extends Resource
 {
@@ -49,6 +51,10 @@ class Address extends Resource
             Place::make('Address', 'address_line_1'),
             Text::make('Address Line 2', 'address_line_2'),
 
+            Number::make('A Count', function() {
+                return substr_count($this->address_line_1, 'a');
+            }),
+
             new Panel('More Address Details', [
                 Text::make('City'),
                 Text::make('State'),
@@ -89,7 +95,7 @@ class Address extends Resource
     public function actions(Request $request)
     {
         return [
-            new \NovaComponents\ActionGearbox\DeleteResourceAction
+            new \App\Nova\Actions\MarkAsActive
         ];
     }
 

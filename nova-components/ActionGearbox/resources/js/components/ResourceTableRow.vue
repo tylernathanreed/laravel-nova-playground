@@ -28,6 +28,7 @@
 
         <td class="td-fit text-right pr-6">
             <resource-table-row-actions
+                :testId="testId"
                 :delete-resource="deleteResource"
                 :restore-resource="restoreResource"
                 :resource="resource"

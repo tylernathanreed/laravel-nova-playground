@@ -5,9 +5,12 @@ namespace App\Nova\Resources;
 use Illuminate\Http\Request;
 use Laravel\Nova\Resource as NovaResource;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use NovaComponents\ActionGearbox\HasGearboxActions;
 
 abstract class Resource extends NovaResource
 {
+    use HasGearboxActions;
+
     /**
      * The relationship counts that should be eager loaded when performing an index query.
      *
@@ -82,31 +85,5 @@ abstract class Resource extends NovaResource
             'searchable' => static::searchable(),
             'icon' => 'asdf'
         ];
-    }
-
-    /**
-     * Get the actions for the given request.
-     *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
-     * @return \Illuminate\Support\Collection
-     */
-    public function resolveActions(NovaRequest $request)
-    {
-        return collect(array_values($this->filter($this->actions($request))));
-    }
-
-    /**
-     * Get the "pivot" actions for the given request.
-     *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
-     * @return \Illuminate\Support\Collection
-     */
-    public function resolvePivotActions(NovaRequest $request)
-    {
-        if ($request->viaRelationship()) {
-            return collect(array_values($this->filter($this->getPivotActions($request))));
-        }
-
-        return collect();
     }
 }
