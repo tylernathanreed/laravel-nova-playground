@@ -2,10 +2,12 @@
 
 namespace App\Nova\Resources;
 
+use Laravel\Nova\Panel;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\Country;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\Password;
@@ -86,6 +88,10 @@ class User extends Resource
             // ResourceTool::make()->canSee(function ($request) {
             //     return ! $request->user()->isBlockedFrom('resourceTool');
             // }),
+
+            new Panel('Demographics', [
+                Country::make('Country')->hideFromIndex(),
+            ]),
 
             HasMany::make('Posts', 'posts', Post::class),
 

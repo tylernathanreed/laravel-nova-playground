@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostsTable extends Migration
+class CreatePhotosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,18 +13,16 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('photos', function (Blueprint $table) {
 
             // Identification
             $table->increments('id');
 
-            // Relations
-            $table->belongsTo('users', 'user_id')->index();
-
             // Attributes
-            $table->string('title', 255);
-            $table->text('body');
-            $table->boolean('active')->nullable();
+            $table->string('display_name', 100)->index();
+            $table->string('original_name', 255);
+            $table->integer('size')->unsigned();
+            $table->text('photo');
 
             // Revision tracking
             $table->timestamps();
@@ -39,6 +38,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('photos');
     }
 }

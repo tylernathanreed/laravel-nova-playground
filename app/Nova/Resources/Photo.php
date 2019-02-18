@@ -5,18 +5,16 @@ namespace App\Nova\Resources;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Avatar;
-use Laravel\Nova\Fields\MorphMany;
-use App\Support\Omdb\RetrieveMoviePoster;
+use Laravel\Nova\Fields\Image;
 
-class Video extends Resource
+class Photo extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Video::class;
+    public static $model = \App\Models\Photo::class;
 
     /**
      * The columns that should be searched.
@@ -34,9 +32,18 @@ class Video extends Resource
      */
     public static function icon()
     {
-        return '<i class="fab fa-youtube sidebar-icon"></i>';
+        return '<i class="fas fa-camera sidebar-icon"></i>';
     }
 
+    /**
+     * Returns the displayable label of the resource.
+     *
+     * @return string
+     */
+    public static function label()
+    {
+        return 'Photos';
+    }
 
     /**
      * Get the fields displayed by the resource.
@@ -49,14 +56,32 @@ class Video extends Resource
         return [
             ID::make('ID', 'id')->sortable(),
 
-            Avatar::make('Poster')
-                ->thumbnail(new RetrieveMoviePoster($this))
-                ->exceptOnForms(),
+            Text::make('Name', 'display_name')->rules('required', 'max:100')->sortable(),
 
-            Text::make('Title', 'title')->sortable(),
+            $this->photoField(),
 
-            MorphMany::make('Comments', 'comments'),
+            Text::make('Original Name')->onlyOnDetail(),
+
+            Text::make('Size', 'size', function($value) {
+                return number_format($value / 1024, 2) . 'kb';
+            })->onlyOnDetail()
         ];
+    }
+
+    /**
+     * Returns the photo field.
+     *
+     * @return \Laravel\Nova\Fields\File
+     */
+    protected function photoField()
+    {
+        return Image::make('Photo')
+            ->disk('public')
+            ->storeOriginalName('original_name')
+            ->storeSize('size')
+            ->creationRules('required', 'max:1024')
+            ->updateRules('max:1024')
+            ->prunable();
     }
 
     /**
@@ -89,7 +114,9 @@ class Video extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            // new \App\Nova\Actions\MarkAsActive,
+        ];
     }
 
     /**
@@ -100,6 +127,8 @@ class Video extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            // new \App\Nova\Filters\Active
+        ];
     }
 }

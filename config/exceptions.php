@@ -17,9 +17,9 @@ return [
     */
 
     'transformers' => [
-        GrahamCampbell\Exceptions\Transformers\AuthTransformer::class,
-        GrahamCampbell\Exceptions\Transformers\CsrfTransformer::class,
-        GrahamCampbell\Exceptions\Transformers\ModelTransformer::class,
+        // GrahamCampbell\Exceptions\Transformers\AuthTransformer::class,
+        // GrahamCampbell\Exceptions\Transformers\CsrfTransformer::class,
+        // GrahamCampbell\Exceptions\Transformers\ModelTransformer::class,
         App\Exceptions\Transformers\FatalThrowableErrorTransformer::class,
     ],
 

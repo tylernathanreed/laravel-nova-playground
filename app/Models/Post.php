@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Post extends Model
 {
+    use SoftDeletes;
+
     /**
      * Returns the user that created this post.
      *
