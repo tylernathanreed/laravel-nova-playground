@@ -128,6 +128,7 @@ class User extends Resource
     {
         return [
             new \App\Nova\Filters\SelectFirst,
+            new \App\Nova\Filters\ActiveUsers,
         ];
     }
 
