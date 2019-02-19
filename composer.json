@@ -19,7 +19,7 @@
         "nova-components/action-gearbox": "*",
         "otwell/custom-field": "*",
         "otwell/sidebar-tool": "*",
-        "reedware/laravel-blueprints": "*",
+        "reedware/laravel-blueprints": "^1.0@dev",
         "reedware/nova-treeview": "*",
         "reedware/nova-value-toggle": "*"
     },

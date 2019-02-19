@@ -17,7 +17,15 @@ class ActiveUsers extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        return $query->where('active', $value == 'only-active');
+        // Check for only active users
+        if($value == 'only-active') {
+            return $query->where('active', '=', 1);
+        }
+
+        // Use inactive users
+        return $query->where(function($query) {
+            $query->where('active', '=', 0)->orWhereNull('active');
+        });
     }
 
     /**

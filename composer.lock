@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "319c2dd5e1bf60058205f8a190c0e352",
+    "content-hash": "47989c9a3026bd7bbd3567947eeacb21",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -1768,7 +1768,7 @@
             "dist": {
                 "type": "path",
                 "url": "./nova-components/ActionGearbox",
-                "reference": "dd78a31e4925f1fd0c1270453f9ad934cdc180e6",
+                "reference": "d3c42f5324231d3e7d941fe4cefcad9b4e2bad8a",
                 "shasum": null
             },
             "require": {
@@ -5816,7 +5816,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "reedware/laravel-blueprints": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
