@@ -4,6 +4,8 @@ Nova.booting((Vue, router) => {
     Vue.component('resource-table-row', require('./components/ResourceTableRow'));
     Vue.component('resource-table-row-actions', require('./components/ResourceTableRowActions'));
 
+    Vue.component('action-selector', require('./components/ActionSelector'));
+
     Vue.component('action-item', require('./components/ActionItem'));
     Vue.component('action-group', require('./components/ActionGroup'));
 

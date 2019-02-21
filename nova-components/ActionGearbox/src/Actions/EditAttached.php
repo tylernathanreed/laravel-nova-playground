@@ -29,6 +29,13 @@ class EditAttached extends Action
     public $icon = 'edit';
 
     /**
+     * Whether or not this action is available for a selection of multiple resources.
+     *
+     * @var boolean
+     */
+    public $availableForMultipleResources = false;
+
+    /**
      * The url to redirect the user to.
      *
      * @var string|array|null

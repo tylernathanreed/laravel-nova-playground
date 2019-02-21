@@ -106,6 +106,13 @@ class Action extends NovaAction
     public $availableForIndividualResource = true;
 
     /**
+     * Whether or not this action is available for a selection of multiple resources.
+     *
+     * @var boolean
+     */
+    public $availableForMultipleResources = true;
+
+    /**
      * The callback used to authorize viewing the action for an individual resource.
      *
      * @var \Closure|null
@@ -193,6 +200,7 @@ class Action extends NovaAction
 
         // Add additional information
         return array_merge($data, [
+            'class' => static::class,
             'dusk' => $this->dusk,
             'icon' => $this->icon,
             'iconSize' => $this->iconSize,
@@ -204,7 +212,9 @@ class Action extends NovaAction
             'heading' => $this->heading,
             'prompt' => $this->prompt,
             'cancelButtonText' => $this->cancelButtonText,
-            'submitButtonText' => $this->submitButtonText
+            'submitButtonText' => $this->submitButtonText,
+            'availableForMultipleResources' => $this->availableForMultipleResources,
+            'availableForIndividualResource' => $this->availableForIndividualResource
         ]);
     }
 }

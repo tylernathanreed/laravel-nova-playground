@@ -114,6 +114,9 @@ class User extends Resource
     {
         return [
             (new \App\Nova\Metrics\PostCount)->onlyOnDetail(),
+            new \App\Nova\Metrics\TotalUsers,
+            new \App\Nova\Metrics\NewUsers,
+            new \App\Nova\Metrics\ActiveUsers,
         ];
     }
 

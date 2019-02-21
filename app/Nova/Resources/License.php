@@ -75,7 +75,9 @@ class License extends Resource
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+            new \App\Nova\Metrics\LicenseRevenue
+        ];
     }
 
     /**

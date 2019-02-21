@@ -1,6 +1,6 @@
 <template>
 	<component
-		v-if="resource.authorizedToSee[action.uriKey]"
+		v-if="available"
 		:is="action.to ? 'router-link' : 'div'"
 		class="cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg"
 		:data-testid="action.dusk ? `${testId}-${action.dusk}-button` : null"
@@ -136,6 +136,38 @@ export default {
     },
 
     computed: {
+
+        available: function() {
+
+            // Check if the action is available for an individual resource
+            if(this.action.availableForIndividualResource) {
+
+                // We must have been given a resource
+                if(this.resource) {
+
+                    // The resource must authorize the action
+                    if(this.resource.authorizedToSee[this.action.uriKey]) {
+                        return true;
+                    }
+
+                }
+
+            }
+
+            // Check if the action is available for multiple resources
+            if(this.action.availableForMultipleResources) {
+
+                // We must have not been given a resource
+                if(!this.resource) {
+                    return true;
+                }
+
+            }
+
+            // Not available
+            return false;
+
+        },
 
     	routerLinkTo: function() {
     		return this.replaceWildcardsRecursive(this.action.to);
