@@ -3,7 +3,7 @@
 		v-if="available"
 		:is="action.to ? 'router-link' : 'div'"
 		class="cursor-pointer text-80 hover:text-primary hover:bg-30 p-3 flex items-center no-underline rounded-lg"
-		:data-testid="action.dusk ? `${testId}-${action.dusk}-button` : null"
+		:data-testid="action.dusk && testId ? `${testId}-${action.dusk}-button` : null"
 		:dusk="action.dusk ? `${resource['id'].value}-${action.dusk}-button` : null"
 		:to="routerLinkTo"
 		:title="__(action.name)"
@@ -21,20 +21,32 @@
 </template>
 
 <script>
+import _ from 'lodash'
+
 export default {
 
-	props: [
-		'testId',
-		'action',
-		'resource',
-		'resourceName',
-		'pivotName',
-		'relationshipType',
-		'viaRelationship',
-		'viaResource',
-		'viaResourceId',
-		'viaManyToMany'
-	],
+	props: {
+		testId: String,
+		action: {
+            type: Object,
+            required: true
+        },
+		resource: Object,
+        selectedResources: {
+            type: [Array, String],
+            default: () => [],
+        },
+		resourceName: String,
+		pivotName: String,
+        relationshipType: {
+            type: String,
+            default: null,
+        },
+		viaRelationship: String,
+		viaResource: String,
+		viaResourceId: String,
+		viaManyToMany: Boolean
+	},
 
     methods: {
 
@@ -129,7 +141,7 @@ export default {
     		}
 
     		// Propagate the event
-    		this.$emit('onActionSelected', this.action, this.action.isPivotAction);
+    		this.$emit('onActionSelected', this.action, this.action.isPivotAction || false);
 
     	}
 
@@ -146,9 +158,7 @@ export default {
                 if(this.resource) {
 
                     // The resource must authorize the action
-                    if(this.resource.authorizedToSee[this.action.uriKey]) {
-                        return true;
-                    }
+                    return this.resource.authorizedToSee[this.action.uriKey];
 
                 }
 
@@ -157,9 +167,13 @@ export default {
             // Check if the action is available for multiple resources
             if(this.action.availableForMultipleResources) {
 
-                // We must have not been given a resource
-                if(!this.resource) {
+                // We must have been given selected resources
+                if(this.selectedResources) {
+
+                    // At least one selected resource must authorize the action
+                    // return Boolean(_.find(this.selectedResources, resource => resource.authorizedToSee[this.action.uriKey]));
                     return true;
+
                 }
 
             }

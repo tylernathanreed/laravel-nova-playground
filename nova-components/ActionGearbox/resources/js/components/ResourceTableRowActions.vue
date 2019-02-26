@@ -1,119 +1,127 @@
 <template>
-    <div>
-        <dropdown class="bg-30 hover:bg-40 mr-3 rounded" v-if="this.hasAnyAuthorizations() && allActions.length > 0">
-            <dropdown-trigger class="px-3" slot-scope="{toggle}" :handle-click="toggle">
-                <icon type="actions-gearbox" class="text-80" />
-            </dropdown-trigger>
-
-            <dropdown-menu slot="menu" width="200" direction="rtl">
-                <div class="text-left">
-
-                    <component
-                        v-for="(action, index) in allActions"
-                        :key="`resource-action-0-${index}`"
-                        :depth="0"
-                        :is="action.actions ? 'action-group' : 'action-item'"
-                        :testId="testId"
-                        :resource="resource"
-                        :resource-name="resourceName"
-                        :pivot-name="pivotActions.name"
-                        :action="action"
-                        :relationship-type="relationshipType"
-                        :via-relationship="viaRelationship"
-                        :via-resource="viaResource"
-                        :via-resource-id="viaResourceId"
-                        :via-many-to-many="viaManyToMany"
-                        @onActionSelected="openConfirmationModal"
-                    />
-
-                </div>
-            </dropdown-menu>
-        </dropdown>
-
-        <div class="text-left">
-            <transition name="fade">
-                <confirm-action-modal
-                    :working="working"
-                    v-if="confirmActionModalOpened"
-                    :selected-resources="[resource.id.value]"
-                    :resource-name="resourceName"
-                    :selected-action="selectedAction"
-                    :errors="errors"
-                    @confirm="executeAction"
-                    @close="confirmActionModalOpened = false"
-                />
-            </transition>
-        </div>
-    </div>
+    <action-selector
+        v-if="actions.length > 0 || availablePivotActions.length > 0"
+        :active="false"
+        :resource="resource"
+        :resource-name="resourceName"
+        :actions="actions"
+        :pivot-actions="pivotActions"
+        :pivot-name="pivotName"
+        :query-string="{
+            currentSearch,
+            encodedFilters,
+            currentTrashed,
+            viaResource,
+            viaResourceId,
+            viaRelationship,
+        }"
+        :selected-resources="selectedResourcesForActionSelector"
+        @actionExecuted="getResources"
+    />
 </template>
 
 <script>
-import _ from 'lodash'
-import { Errors, InteractsWithResourceInformation } from 'laravel-nova'
+import { InteractsWithResourceInformation } from 'laravel-nova'
 import {
-    InteractsWithResourceActions,
+    HasActions,
     ObtainsActionsFromParentComponent,
     ObtainsQueryStringFromRoute,
 } from '../mixins/mixins'
 
 export default {
     mixins: [
+        HasActions,
         InteractsWithResourceInformation,
-        InteractsWithResourceActions,
         ObtainsActionsFromParentComponent,
         ObtainsQueryStringFromRoute
     ],
 
-    props: [
-        'testId',
-        'deleteResource',
-        'restoreResource',
-        'resource',
-        'resourcesSelected',
-        'resourceName',
-        'relationshipType',
-        'viaRelationship',
-        'viaResource',
-        'viaResourceId',
-        'viaManyToMany',
-        'checked',
-        'actionsAreAvailable',
-        'shouldShowCheckboxes',
-        'updateSelectionStatus',
-        'endpoint'
-    ],
-
-    data: () => ({
-
-        working: false,
-        errors: new Errors(),
-        selectedAction: null,
-        selectedActionIsPivotAction: false,
-        confirmActionModalOpened: false
-
-    }),
+    props: {
+        testId: String,
+        resource: Object,
+        resourceName: String,
+        relationshipType: {
+            type: String,
+            default: null
+        },
+        viaRelationship: String,
+        viaResource: String,
+        viaResourceId: String,
+        viaManyToMany: Boolean,
+    },
 
     methods: {
 
         /**
-         * Select the resource in the parent component
+         * Returns the closest component that can refresh the resources.
+         *
+         * @return {VueComponent|null}
          */
-        toggleSelection() {
-            this.updateSelectionStatus(this.resource)
+        getResourceRefresher() {
+
+            // Walk up the parent tree
+            for(let parent = this.$parent; typeof parent !== 'undefined'; parent = parent.$parent) {
+
+                // Check if the parent has a resource refresher
+                if(typeof parent.getResources !== 'undefined') {
+                    return parent;
+                }
+
+            }
+
+            // Failed to find parent with refresher
+            return null;
         },
 
         /**
-         * Returns whether or not the authenticated user has authorization to perform at least one action.
+         * Updates the resources.
          *
-         * @return {boolean}
+         * @return {void}
          */
-        hasAnyAuthorizations() {
+        getResources() {
 
-            return this.resource.authorizedToView
-                || this.resource.authorizedToUpdate
-                || (this.resource.authorizedToDelete && (! this.resource.softDeleted || this.viaManyToMany))
-                || (this.resource.authorizedToRestore && this.resource.softDeleted && ! this.viaManyToMany);
+            // Determine the resource refresher
+            var refresher = this.getResourceRefresher();
 
+            // Stop if we couldn't find the resource refresher
+            if(refresher == null) {
+                return;
+            }
+
+            // Call the resource refresher
+            refresher.getResources();
+
+        }
+
+    },
+
+    computed: {
+
+        /**
+         * Returns the selected resources.
+         *
+         * @return {Array}
+         */
+        selectedResources() {
+            return [this.resource];
+        },
+
+        /**
+         * Returns the selected resource ids.
+         *
+         * @return {Array}
+         */
+        selectedResourceIds() {
+            return [this.resource.id.value];
+        },
+
+        /**
+         * Returns the selected resources for the action selector.
+         *
+         * @return {Array}
+         */
+        selectedResourcesForActionSelector() {
+            return this.selectedResourceIds;
         }
 
     }

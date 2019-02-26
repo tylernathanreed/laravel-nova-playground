@@ -23,7 +23,7 @@
 </head>
 <body class="min-w-site bg-40 text-black min-h-full">
     <div id="app">
-        <div v-cloak class="flex min-h-screen">
+        <div class="flex min-h-screen">
             <div class="content max-w-full">
                 <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
                     <div class="container">

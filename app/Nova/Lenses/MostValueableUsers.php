@@ -6,7 +6,6 @@ use DB;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Lenses\Lens;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Http\Requests\LensRequest;
 

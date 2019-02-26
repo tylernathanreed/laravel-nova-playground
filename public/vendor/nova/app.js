@@ -86,6 +86,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     mixins: [_laravelNova.InteractsWithResourceInformation],
@@ -149,6 +155,18 @@ exports.default = {
     },
 
     methods: {
+        /**
+         * Determine whether the action should redirect or open a confirmation modal
+         */
+        determineActionStrategy: function determineActionStrategy() {
+            if (this.selectedAction.withoutConfirmation) {
+                this.executeAction();
+            }
+
+            this.openConfirmationModal();
+        },
+
+
         /**
          * Confirm with the user that they actually want to run the selected action.
          */
@@ -243,10 +261,9 @@ exports.default = {
                 var link = document.createElement('a');
                 link.href = response.download;
                 link.download = response.name;
+                document.body.appendChild(link);
                 link.click();
-
-                // window.open(response.download,'_blank');
-                // window.location = response.download
+                document.body.removeChild(link);
             } else if (response.redirect) {
                 window.location = response.redirect;
             } else {
@@ -348,6 +365,76 @@ exports.default = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/BooleanOption.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _defineProperty2 = __webpack_require__("./node_modules/babel-runtime/helpers/defineProperty.js");
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _extends3 = __webpack_require__("./node_modules/babel-runtime/helpers/extends.js");
+
+var _extends4 = _interopRequireDefault(_extends3);
+
+var _Checkbox = __webpack_require__("./resources/js/components/Index/Checkbox.vue");
+
+var _Checkbox2 = _interopRequireDefault(_Checkbox);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+    components: { Checkbox: _Checkbox2.default },
+
+    props: {
+        resourceName: {
+            type: String,
+            required: true
+        },
+        filter: Object,
+        option: Object
+    },
+
+    methods: {
+        updateCheckedState: function updateCheckedState(optionKey, event) {
+            var oldValue = this.filter.currentValue;
+            var newValue = (0, _extends4.default)({}, oldValue, (0, _defineProperty3.default)({}, optionKey, event.target.checked));
+
+            this.$store.commit(this.resourceName + '/updateFilterState', {
+                filterClass: this.filter.class,
+                value: newValue
+            });
+
+            this.$emit('change');
+        }
+    },
+
+    computed: {
+        isChecked: function isChecked() {
+            return this.$store.getters[this.resourceName + '/filterOptionValue'](this.filter.class, this.option.value) == true;
+        }
+    }
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/CardWrapper.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -382,6 +469,11 @@ exports.default = {
 
         resourceId: {
             type: [Number, String]
+        },
+
+        lens: {
+            lens: String,
+            default: ''
         }
     },
 
@@ -406,9 +498,6 @@ exports.default = {
         }
     }
 }; //
-//
-//
-//
 //
 //
 //
@@ -454,6 +543,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
 
 exports.default = {
     props: {
@@ -479,6 +569,11 @@ exports.default = {
         onlyOnDetail: {
             type: Boolean,
             default: false
+        },
+
+        lens: {
+            lens: String,
+            default: ''
         }
     },
 
@@ -511,6 +606,141 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -644,7 +874,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/CreateResourceButton.vue":
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/CheckboxWithLabel.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -657,6 +887,110 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+    props: {
+        checked: Boolean,
+        disabled: {
+            type: Boolean,
+            default: false
+        }
+    }
+};
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Controls/SelectControl.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+    props: {
+        options: {
+            default: []
+        },
+        selected: {},
+        label: {
+            default: 'label'
+        },
+        value: {}
+    },
+
+    computed: {
+        groupedOptions: function groupedOptions() {
+            return _.groupBy(this.options, function (option) {
+                return option.group || '';
+            });
+        },
+        inputListeners: function inputListeners() {
+            var _this = this;
+
+            return _.assign({}, this.$listeners, {
+                input: function input(event) {
+                    _this.$emit('input', event.target.value);
+                }
+            });
+        }
+    },
+    methods: {
+        labelFor: function labelFor(option) {
+            return this.label instanceof Function ? this.label(option) : option[this.label];
+        },
+        attrsFor: function attrsFor(option) {
+            return _.assign({}, option.attrs || {}, { value: option.value }, this.selected !== void 0 ? { selected: this.selected == option.value } : {});
+        }
+    }
+};
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/CreateResourceButton.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 //
 //
 //
@@ -842,18 +1176,27 @@ __webpack_require__("./node_modules/flatpickr/dist/themes/airbnb.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 exports.default = {
     props: {
-        field: {
-            required: true
-        },
         value: {
             required: false
         },
         placeholder: {
             type: String,
             default: function _default() {
-                return moment().format('YYYY-MM-DD kk:mm:ss');
+                return moment().format('YYYY-MM-DD HH:mm:ss');
             }
         },
         disabled: {
@@ -875,6 +1218,10 @@ exports.default = {
         enableSeconds: {
             type: Boolean,
             default: true
+        },
+        firstDayOfWeek: {
+            type: Number,
+            default: 0
         }
     },
 
@@ -890,9 +1237,12 @@ exports.default = {
                 enableTime: _this.enableTime,
                 enableSeconds: _this.enableSeconds,
                 onClose: _this.onChange,
+                onChange: _this.onChange,
                 dateFormat: _this.dateFormat,
                 allowInput: true,
-                time_24hr: !_this.twelveHourTime
+                // static: true,
+                time_24hr: !_this.twelveHourTime,
+                locale: { firstDayOfWeek: _this.firstDayOfWeek }
             });
         });
     },
@@ -928,7 +1278,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
 
 exports.default = {};
 
@@ -943,6 +1292,17 @@ exports.default = {};
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1077,11 +1437,7 @@ exports.default = {
          * Delete the selected resources.
          */
         deleteSelectedResources: function deleteSelectedResources() {
-            if (this.allMatchingSelected) {
-                this.$emit('deleteAllMatching');
-            }
-
-            this.$emit('deleteSelected');
+            this.$emit(this.allMatchingSelected ? 'deleteAllMatching' : 'deleteSelected');
         },
 
 
@@ -1089,11 +1445,7 @@ exports.default = {
          * Force delete the selected resources.
          */
         forceDeleteSelectedResources: function forceDeleteSelectedResources() {
-            if (this.allMatchingSelected) {
-                this.$emit('forceDeleteAllMatching');
-            }
-
-            this.$emit('forceDeleteSelected');
+            this.$emit(this.allMatchingSelected ? 'forceDeleteAllMatching' : 'forceDeleteSelected');
         },
 
 
@@ -1101,11 +1453,7 @@ exports.default = {
          * Restore the selected resources.
          */
         restoreSelectedResources: function restoreSelectedResources() {
-            if (this.allMatchingSelected) {
-                this.$emit('restoreAllMatching');
-            }
-
-            this.$emit('restoreSelected');
+            this.$emit(this.allMatchingSelected ? 'restoreAllMatching' : 'restoreSelected');
         },
 
 
@@ -1155,6 +1503,9 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+//
+//
+//
 //
 //
 //
@@ -1296,6 +1647,10 @@ __webpack_require__("./node_modules/codemirror/mode/dockerfile/dockerfile.js");
 
 __webpack_require__("./node_modules/codemirror/keymap/vim.js");
 
+__webpack_require__("./node_modules/codemirror/mode/twig/twig.js");
+
+__webpack_require__("./node_modules/codemirror/mode/htmlmixed/htmlmixed.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //
@@ -1340,32 +1695,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
+_codemirror2.default.defineMode('htmltwig', function (config, parserConfig) {
+    return _codemirror2.default.overlayMode(_codemirror2.default.getMode(config, parserConfig.backdrop || 'text/html'), _codemirror2.default.getMode(config, 'twig'));
+});
+
+// Modes
 exports.default = {
     props: ['resource', 'resourceName', 'resourceId', 'field'],
 
@@ -1382,7 +1717,8 @@ exports.default = {
             indentWithTabs: true,
             lineWrapping: true,
             lineNumbers: true,
-            theme: 'dracula'
+            theme: 'dracula',
+            viewportMargin: Infinity
         }, this.field.options, { readOnly: true });
 
         this.codemirror = _codemirror2.default.fromTextArea(this.$refs.theTextarea, config);
@@ -1390,8 +1726,6 @@ exports.default = {
         this.codemirror.getDoc().setValue(this.field.value);
     }
 };
-
-// Modes
 
 /***/ }),
 
@@ -1477,14 +1811,6 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _regenerator = __webpack_require__("./node_modules/babel-runtime/regenerator/index.js");
-
-var _regenerator2 = _interopRequireDefault(_regenerator);
-
-var _asyncToGenerator2 = __webpack_require__("./node_modules/babel-runtime/helpers/asyncToGenerator.js");
-
-var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
-
 var _ImageLoader = __webpack_require__("./resources/js/components/ImageLoader.vue");
 
 var _ImageLoader2 = _interopRequireDefault(_ImageLoader);
@@ -1497,7 +1823,7 @@ exports.default = {
     components: { ImageLoader: _ImageLoader2.default },
 
     data: function data() {
-        return { removeModalOpen: false, missing: false, deleted: false };
+        return { missing: false };
     },
 
     methods: {
@@ -1513,88 +1839,30 @@ exports.default = {
             var link = document.createElement('a');
             link.href = '/nova-api/' + resourceName + '/' + resourceId + '/download/' + attribute;
             link.download = 'download';
+            document.body.appendChild(link);
             link.click();
-        },
-
-
-        /**
-         * Confirm removal of the linked file
-         */
-        confirmRemoval: function confirmRemoval() {
-            this.removeModalOpen = true;
-        },
-
-
-        /**
-         * Close the upload removal modal
-         */
-        closeRemoveModal: function closeRemoveModal() {
-            this.removeModalOpen = false;
-        },
-
-
-        /**
-         * Remove the linked file from storage
-         */
-        removeFile: function () {
-            var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
-                var resourceName, resourceId, attribute;
-                return _regenerator2.default.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                resourceName = this.resourceName, resourceId = this.resourceId;
-                                attribute = this.field.attribute;
-                                _context.prev = 2;
-                                _context.next = 5;
-                                return Nova.request().delete('/nova-api/' + resourceName + '/' + resourceId + '/field/' + attribute);
-
-                            case 5:
-                                this.closeRemoveModal();
-                                this.deleted = true;
-                                _context.next = 12;
-                                break;
-
-                            case 9:
-                                _context.prev = 9;
-                                _context.t0 = _context['catch'](2);
-
-                                this.closeRemoveModal();
-
-                            case 12:
-                            case 'end':
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, this, [[2, 9]]);
-            }));
-
-            function removeFile() {
-                return _ref.apply(this, arguments);
-            }
-
-            return removeFile;
-        }()
+            document.body.removeChild(link);
+        }
     },
 
     computed: {
         hasValue: function hasValue() {
-            return Boolean(this.field.value || this.field.thumbnailUrl) && !Boolean(this.deleted) && !Boolean(this.missing);
+            return Boolean(this.field.value || this.imageUrl) && !Boolean(this.missing);
         },
         shouldShowLoader: function shouldShowLoader() {
-            return !Boolean(this.deleted) && Boolean(this.field.thumbnailUrl);
+            return Boolean(this.imageUrl);
         },
         shouldShowToolbar: function shouldShowToolbar() {
-            return Boolean(this.field.downloadable || this.field.deletable) && this.hasValue;
+            return Boolean(this.field.downloadable && this.hasValue);
+        },
+        imageUrl: function imageUrl() {
+            return this.field.previewUrl || this.field.thumbnailUrl;
+        },
+        maxWidth: function maxWidth() {
+            return this.field.maxWidth || 320;
         }
     }
 }; //
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -1713,6 +1981,47 @@ exports.default = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Detail/HeadingField.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+    props: ['resource', 'resourceName', 'resourceId', 'field'],
+
+    computed: {
+        fieldValue: function fieldValue() {
+            if (this.field.value === '' || this.field.value === null || this.field.value === undefined) {
+                return false;
+            }
+
+            return String(this.field.value);
+        },
+        shouldDisplayAsHtml: function shouldDisplayAsHtml() {
+            return this.field.asHtml;
+        }
+    }
+};
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Detail/MarkdownField.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1789,6 +2098,11 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1915,9 +2229,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
-//
 
 exports.default = {
     props: ['resource', 'resourceName', 'resourceId', 'field']
@@ -1955,6 +2266,7 @@ exports.default = {
 //
 //
 //
+//
 
 /***/ }),
 
@@ -1967,6 +2279,10 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+//
+//
+//
+//
 //
 //
 //
@@ -2076,9 +2392,32 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _toConsumableArray2 = __webpack_require__("./node_modules/babel-runtime/helpers/toConsumableArray.js");
+
+var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
 var _vueClickaway = __webpack_require__("./node_modules/vue-clickaway/dist/vue-clickaway.common.js");
 
+var _composedPath = __webpack_require__("./resources/js/polyfills/composedPath.js");
+
+var _composedPath2 = _interopRequireDefault(_composedPath);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+
 exports.default = {
+    props: {
+        classWhitelist: [Array, String]
+    },
+
     mixins: [_vueClickaway.mixin],
 
     data: function data() {
@@ -2089,20 +2428,28 @@ exports.default = {
         toggle: function toggle() {
             this.visible = !this.visible;
         },
-        close: function close() {
+        close: function close(event) {
+            var classArray = Array.isArray(this.classWhitelist) ? this.classWhitelist : [this.classWhitelist];
+
+            if (_.filter(classArray, function (className) {
+                return pathIncludesClass(event, className);
+            }).length > 0) {
+                return;
+            }
+
             this.visible = false;
         }
     }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
+};
+
+
+function pathIncludesClass(event, className) {
+    return (0, _composedPath2.default)(event).filter(function (el) {
+        return el !== document && el !== window;
+    }).reduce(function (acc, e) {
+        return acc.concat([].concat((0, _toConsumableArray3.default)(e.classList)));
+    }, []).includes(className);
+}
 
 /***/ }),
 
@@ -2126,16 +2473,9 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
-//
 
 exports.default = {
     props: {
-        dark: {
-            type: Boolean,
-            default: false
-        },
         direction: {
             type: String,
             default: 'ltr',
@@ -2203,10 +2543,28 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
 
 exports.default = {
     props: {
-        handleClick: Function
+        handleClick: Function,
+        active: {
+            type: Boolean,
+            default: false
+        },
+        showArrow: {
+            type: Boolean,
+            default: true
+        }
+    },
+
+    computed: {
+        activeIconColor: function activeIconColor() {
+            return this.active ? 'var(--white)' : 'var(--90)';
+        }
     }
 };
 
@@ -2243,9 +2601,20 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     props: {
+        plainText: {
+            type: Boolean,
+            default: false
+        },
         shouldShow: {
             type: Boolean,
             default: false
@@ -2277,15 +2646,102 @@ exports.default = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/FilterSelect.vue":
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/FilterMenu.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
+
+var _defineProperty2 = __webpack_require__("./node_modules/babel-runtime/helpers/defineProperty.js");
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _props;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2297,11 +2753,122 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 
-exports.default = {};
+exports.default = {
+    props: (_props = {
+        resourceName: String,
+        softDeletes: Boolean,
+        viaResource: String,
+        viaHasOne: Boolean
+    }, (0, _defineProperty3.default)(_props, 'softDeletes', Boolean), (0, _defineProperty3.default)(_props, 'trashed', {
+        type: String,
+        validator: function validator(value) {
+            return ['', 'with', 'only'].indexOf(value) != -1;
+        }
+    }), (0, _defineProperty3.default)(_props, 'perPage', [String, Number]), (0, _defineProperty3.default)(_props, 'showTrashedOption', {
+        type: Boolean,
+        default: true
+    }), _props),
+
+    methods: {
+        trashedChanged: function trashedChanged(event) {
+            this.$emit('trashed-changed', event.target.value);
+        },
+        perPageChanged: function perPageChanged(event) {
+            this.$emit('per-page-changed', event.target.value);
+        }
+    },
+
+    computed: {
+        /**
+         * Return the filters from state
+         */
+        filters: function filters() {
+            return this.$store.getters[this.resourceName + '/filters'];
+        },
+
+
+        /**
+         * Determine via state whether filters are applied
+         */
+        filtersAreApplied: function filtersAreApplied() {
+            return this.$store.getters[this.resourceName + '/filtersAreApplied'];
+        },
+
+
+        /**
+         * Return the number of active filters
+         */
+        activeFilterCount: function activeFilterCount() {
+            return this.$store.getters[this.resourceName + '/activeFilterCount'];
+        }
+    }
+};
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/FilterSelector.vue":
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Filters/BooleanFilter.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _BooleanOption = __webpack_require__("./resources/js/components/BooleanOption.vue");
+
+var _BooleanOption2 = _interopRequireDefault(_BooleanOption);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+    components: { BooleanOption: _BooleanOption2.default },
+
+    props: {
+        resourceName: {
+            type: String,
+            required: true
+        },
+        filterKey: {
+            type: String,
+            required: true
+        }
+    },
+
+    methods: {
+        handleChange: function handleChange() {
+            this.$emit('change');
+        }
+    },
+
+    computed: {
+        filter: function filter() {
+            return this.$store.getters[this.resourceName + '/getFilter'](this.filterKey);
+        },
+        options: function options() {
+            return this.$store.getters[this.resourceName + '/getOptionsForFilter'](this.filterKey);
+        }
+    }
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Filters/DateFilter.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2332,37 +2899,108 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+
+exports.default = {
+    props: {
+        resourceName: {
+            type: String,
+            required: true
+        },
+        filterKey: {
+            type: String,
+            required: true
+        }
+    },
+
+    methods: {
+        handleChange: function handleChange(value) {
+            this.$store.commit(this.resourceName + '/updateFilterState', {
+                filterClass: this.filterKey,
+                value: value
+            });
+            this.$emit('change');
+        }
+    },
+
+    computed: {
+        placeholder: function placeholder() {
+            return this.filter.placeholder || this.__('Choose date');
+        },
+        value: function value() {
+            return this.filter.currentValue;
+        },
+        filter: function filter() {
+            return this.$store.getters[this.resourceName + '/getFilter'](this.filterKey);
+        },
+        options: function options() {
+            return this.$store.getters[this.resourceName + '/getOptionsForFilter'](this.filterKey);
+        },
+        firstDayOfWeek: function firstDayOfWeek() {
+            return this.filter.firstDayOfWeek || 0;
+        }
+    }
+};
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Filters/SelectFilter.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 
 exports.default = {
-    props: ['filters', 'currentFilters'],
-
-    /**
-     * Mount the component.
-     */
-    mounted: function mounted() {
-        this.current = this.currentFilters;
+    props: {
+        resourceName: {
+            type: String,
+            required: true
+        },
+        filterKey: {
+            type: String,
+            required: true
+        }
     },
 
-
     methods: {
-        /**
-         * Handle a filter selection change.
-         */
-        filterChanged: function filterChanged(filter) {
-            this.current = _.reject(this.current, function (f) {
-                return f.class == filter.class;
+        handleChange: function handleChange(event) {
+            this.$store.commit(this.resourceName + '/updateFilterState', {
+                filterClass: this.filterKey,
+                value: event.target.value
             });
 
-            if (filter.currentValue !== '') {
-                this.current.push({
-                    class: filter.class,
-                    value: filter.currentValue
-                });
-            }
+            this.$emit('change');
+        }
+    },
 
-            this.$emit('update:currentFilters', this.current);
-            this.$emit('changed');
+    computed: {
+        filter: function filter() {
+            return this.$store.getters[this.resourceName + '/getFilter'](this.filterKey);
+        },
+        value: function value() {
+            return this.filter.currentValue;
         }
     }
 };
@@ -2393,12 +3031,6 @@ var _vueClickaway = __webpack_require__("./node_modules/vue-clickaway/dist/vue-c
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2555,10 +3187,9 @@ exports.default = {
          * Fill the forms formData with details from this field
          */
         fill: function fill(formData) {
-            if (this.selectedResource) {
-                formData.append(this.field.attribute, this.selectedResource.value);
-                formData.append(this.field.attribute + '_trashed', this.withTrashed);
-            }
+            formData.append(this.field.attribute, this.selectedResource ? this.selectedResource.value : '');
+
+            formData.append(this.field.attribute + '_trashed', this.withTrashed);
         },
 
 
@@ -2644,7 +3275,7 @@ exports.default = {
          * Determine if we are creating a new resource via a parent relation
          */
         creatingViaRelatedResource: function creatingViaRelatedResource() {
-            return this.viaResource == this.field.resourceName && this.viaResourceId;
+            return this.viaResource == this.field.resourceName && this.field.reverse && this.viaResourceId;
         },
 
 
@@ -2678,7 +3309,7 @@ exports.default = {
             };
         },
         isLocked: function isLocked() {
-            return this.viaResource == this.field.resourceName;
+            return this.viaResource == this.field.resourceName && this.field.reverse;
         }
     }
 };
@@ -2794,36 +3425,18 @@ __webpack_require__("./node_modules/codemirror/keymap/vim.js");
 
 __webpack_require__("./node_modules/codemirror/mode/sql/sql.js");
 
+__webpack_require__("./node_modules/codemirror/mode/twig/twig.js");
+
+__webpack_require__("./node_modules/codemirror/mode/htmlmixed/htmlmixed.js");
+
 var _laravelNova = __webpack_require__("./node_modules/laravel-nova/dist/index.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+// Modes
+_codemirror2.default.defineMode('htmltwig', function (config, parserConfig) {
+    return _codemirror2.default.overlayMode(_codemirror2.default.getMode(config, parserConfig.backdrop || 'text/html'), _codemirror2.default.getMode(config, 'twig'));
+}); //
 //
 //
 //
@@ -2885,7 +3498,8 @@ exports.default = {
             indentWithTabs: true,
             lineWrapping: true,
             lineNumbers: true,
-            theme: 'dracula'
+            theme: 'dracula',
+            viewportMargin: Infinity
         }, this.field.options);
 
         this.codemirror = _codemirror2.default.fromTextArea(this.$refs.theTextarea, config);
@@ -2905,8 +3519,6 @@ exports.default = {
     }
 };
 
-// Modes
-
 /***/ }),
 
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Form/DateField.vue":
@@ -2919,43 +3531,39 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _DateTimePicker = __webpack_require__("./resources/js/components/DateTimePicker.vue");
-
-var _DateTimePicker2 = _interopRequireDefault(_DateTimePicker);
-
 var _laravelNova = __webpack_require__("./node_modules/laravel-nova/dist/index.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 exports.default = {
     mixins: [_laravelNova.HandlesValidationErrors, _laravelNova.FormField, _laravelNova.InteractsWithDates],
-    components: { DateTimePicker: _DateTimePicker2.default },
 
     computed: {
+        firstDayOfWeek: function firstDayOfWeek() {
+            return this.field.firstDayOfWeek || 0;
+        },
         placeholder: function placeholder() {
-            return moment().format('YYYY-MM-DD');
+            return this.field.placeholder || moment().format('YYYY-MM-DD');
         }
     }
-};
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 
@@ -2969,40 +3577,22 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _DateTimePicker = __webpack_require__("./resources/js/components/DateTimePicker.vue");
-
-var _DateTimePicker2 = _interopRequireDefault(_DateTimePicker);
-
 var _laravelNova = __webpack_require__("./node_modules/laravel-nova/dist/index.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 exports.default = {
     mixins: [_laravelNova.HandlesValidationErrors, _laravelNova.FormField, _laravelNova.InteractsWithDates],
 
-    components: { DateTimePicker: _DateTimePicker2.default },
-
     data: function data() {
         return { localizedValue: '' };
+    },
+
+    computed: {
+        firstDayOfWeek: function firstDayOfWeek() {
+            return this.field.firstDayOfWeek || 0;
+        },
+        placeholder: function placeholder() {
+            return this.field.placeholder || moment().format('YYYY-MM-DD HH:mm:ss');
+        }
     },
 
     methods: {
@@ -3028,7 +3618,28 @@ exports.default = {
             this.value = this.toAppTimezone(value);
         }
     }
-};
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 
@@ -3070,6 +3681,7 @@ exports.default = {
         }
     }
 }; //
+//
 //
 //
 //
@@ -3135,7 +3747,6 @@ exports.default = {
     data: function data() {
         return {
             file: null,
-            label: 'no file selected',
             fileName: '',
             removeModalOpen: false,
             missing: false,
@@ -3148,7 +3759,9 @@ exports.default = {
         var _this = this;
 
         this.field.fill = function (formData) {
-            formData.append(_this.field.attribute, _this.file, _this.fileName);
+            if (_this.file) {
+                formData.append(_this.field.attribute, _this.file, _this.fileName);
+            }
         };
     },
 
@@ -3248,7 +3861,7 @@ exports.default = {
          * The current label of the file field
          */
         currentLabel: function currentLabel() {
-            return this.fileName || this.label;
+            return this.fileName || this.__('no file selected');
         },
 
 
@@ -3273,7 +3886,7 @@ exports.default = {
          * Determine whether the field has a value
          */
         hasValue: function hasValue() {
-            return Boolean(this.field.value || this.field.thumbnailUrl) && !Boolean(this.deleted) && !Boolean(this.missing);
+            return Boolean(this.field.value || this.imageUrl) && !Boolean(this.deleted) && !Boolean(this.missing);
         },
 
 
@@ -3281,7 +3894,7 @@ exports.default = {
          * Determine whether the field should show the loader component
          */
         shouldShowLoader: function shouldShowLoader() {
-            return !Boolean(this.deleted) && Boolean(this.field.thumbnailUrl);
+            return !Boolean(this.deleted) && Boolean(this.imageUrl);
         },
 
 
@@ -3290,6 +3903,12 @@ exports.default = {
          */
         shouldShowRemoveButton: function shouldShowRemoveButton() {
             return Boolean(this.field.deletable);
+        },
+        imageUrl: function imageUrl() {
+            return this.field.previewUrl || this.field.thumbnailUrl;
+        },
+        maxWidth: function maxWidth() {
+            return this.field.maxWidth || 320;
         }
     }
 }; //
@@ -3362,9 +3981,54 @@ exports.default = {
 //
 //
 //
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Form/HeadingField.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 //
 //
 //
+//
+//
+//
+//
+//
+
+exports.default = {
+    props: {
+        resourceName: {
+            type: String,
+            require: true
+        },
+        field: {
+            type: Object,
+            require: true
+        }
+    },
+
+    created: function created() {
+        this.field.fill = function () {};
+    },
+
+
+    computed: {
+        classes: function classes() {
+            return ['bg-20', 'remove-last-margin-bottom', 'leading-normal', 'w-full', 'py-6', 'px-8'];
+        },
+
+        shouldDisplayAsHtml: function shouldDisplayAsHtml() {
+            return this.field.asHtml || false;
+        }
+    }
+};
 
 /***/ }),
 
@@ -3395,8 +4059,6 @@ exports.default = {};
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-//
-//
 //
 //
 //
@@ -3458,7 +4120,12 @@ var actions = {
         this.insertAround('[', '](http://)');
     },
     toggleFullScreen: function toggleFullScreen() {
+        var _this = this;
+
         this.fullScreen = !this.fullScreen;
+        this.$nextTick(function () {
+            return _this.codemirror.refresh();
+        });
     },
     fullScreen: function fullScreen() {
         this.fullScreen = true;
@@ -3467,6 +4134,33 @@ var actions = {
         this.fullScreen = false;
     }
 }; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3513,6 +4207,7 @@ exports.default = {
     data: function data() {
         return {
             fullScreen: false,
+            isFocused: false,
             codemirror: null,
             mode: 'write',
             tools: [{ name: 'bold', action: 'bold', className: 'fa fa-bold', icon: 'editor-bold' }, {
@@ -3530,13 +4225,14 @@ exports.default = {
     },
 
     mounted: function mounted() {
-        var _this = this;
+        var _this2 = this;
 
         this.codemirror = _codemirror2.default.fromTextArea(this.$refs.theTextarea, {
             tabSize: 4,
             indentWithTabs: true,
             lineWrapping: true,
             mode: 'markdown',
+            viewportMargin: Infinity,
             extraKeys: (0, _extends3.default)({
                 Enter: 'newlineAndIndentContinueMarkdownList'
             }, _lodash2.default.map(this.tools, function (tool) {
@@ -3546,16 +4242,27 @@ exports.default = {
 
         _lodash2.default.each(keyMaps, function (action, map) {
             var realMap = map.replace('Cmd-', _codemirror2.default.keyMap['default'] == _codemirror2.default.keyMap.macDefault ? 'Cmd-' : 'Ctrl-');
-            _this.codemirror.options.extraKeys[realMap] = actions[keyMaps[map]].bind(_this);
+            _this2.codemirror.options.extraKeys[realMap] = actions[keyMaps[map]].bind(_this2);
         });
 
         this.doc.on('change', function (cm, changeObj) {
-            _this.value = cm.getValue();
+            _this2.value = cm.getValue();
+        });
+
+        this.codemirror.on('focus', function () {
+            return _this2.isFocused = true;
+        });
+        this.codemirror.on('blur', function () {
+            return _this2.isFocused = false;
         });
 
         if (this.field.value) {
             this.doc.setValue(this.field.value);
         }
+
+        this.$nextTick(function () {
+            return _this2.codemirror.refresh();
+        });
     },
 
 
@@ -3592,7 +4299,7 @@ exports.default = {
             }
         },
         insertBefore: function insertBefore(insertion, cursorOffset) {
-            var _this2 = this;
+            var _this3 = this;
 
             if (this.doc.somethingSelected()) {
                 var selects = this.doc.listSelections();
@@ -3600,10 +4307,10 @@ exports.default = {
                     var pos = [selection.head.line, selection.anchor.line].sort();
 
                     for (var i = pos[0]; i <= pos[1]; i++) {
-                        _this2.doc.replaceRange(insertion, { line: i, ch: 0 });
+                        _this3.doc.replaceRange(insertion, { line: i, ch: 0 });
                     }
 
-                    _this2.doc.setCursor({ line: pos[0], ch: cursorOffset || 0 });
+                    _this3.doc.setCursor({ line: pos[0], ch: cursorOffset || 0 });
                 });
             } else {
                 this.doc.replaceRange(insertion, {
@@ -3625,6 +4332,9 @@ exports.default = {
     computed: {
         doc: function doc() {
             return this.codemirror.getDoc();
+        },
+        isFullScreen: function isFullScreen() {
+            return this.fullScreen == true;
         },
         cursor: function cursor() {
             return this.doc.getCursor();
@@ -3735,11 +4445,15 @@ exports.default = {
          * Fill the forms formData with details from this field
          */
         fill: function fill(formData) {
-            if (this.selectedResource) {
+            if (this.selectedResource && this.resourceType) {
                 formData.append(this.field.attribute, this.selectedResource.value);
                 formData.append(this.field.attribute + '_type', this.resourceType);
-                formData.append(this.field.attribute + '_trashed', this.withTrashed);
+            } else {
+                formData.append(this.field.attribute, '');
+                formData.append(this.field.attribute + '_type', '');
             }
+
+            formData.append(this.field.attribute + '_trashed', this.withTrashed);
         },
 
 
@@ -3814,7 +4528,7 @@ exports.default = {
                                 this.determineIfSoftDeletes();
                                 // }
 
-                                if (!this.isSearchable) {
+                                if (!this.isSearchable && this.resourceType) {
                                     this.getAvailableResources();
                                 }
 
@@ -3903,7 +4617,7 @@ exports.default = {
          * Determine if the field is locked
          */
         isLocked: function isLocked() {
-            return Boolean(this.viaResource);
+            return Boolean(this.viaResource && this.field.reverse);
         },
 
 
@@ -3931,6 +4645,20 @@ exports.default = {
         }
     }
 }; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4134,6 +4862,9 @@ exports.default = {
                     Nova.$emit(_this2.field.postalCode + '-value', e.suggestion.postcode);
 
                     Nova.$emit(_this2.field.country + '-value', e.suggestion.countryCode.toUpperCase());
+
+                    Nova.$emit(_this2.field.latitude + '-value', e.suggestion.latlng.lat);
+                    Nova.$emit(_this2.field.longitude + '-value', e.suggestion.latlng.lng);
                 });
             });
 
@@ -4146,6 +4877,8 @@ exports.default = {
                     Nova.$emit(_this2.field.state + '-value', '');
                     Nova.$emit(_this2.field.postalCode + '-value', '');
                     Nova.$emit(_this2.field.country + '-value', '');
+                    Nova.$emit(_this2.field.latitude + '-value', '');
+                    Nova.$emit(_this2.field.longitude + '-value', '');
                 });
             });
         },
@@ -4491,15 +5224,6 @@ exports.default = {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /***/ }),
 
@@ -4642,7 +5366,8 @@ exports.default = {
         defaultAttributes: function defaultAttributes() {
             return {
                 rows: this.field.rows,
-                class: this.errorClasses
+                class: this.errorClasses,
+                placeholder: this.field.name
             };
         },
         extraAttributes: function extraAttributes() {
@@ -4677,6 +5402,10 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _extends2 = __webpack_require__("./node_modules/babel-runtime/helpers/extends.js");
+
+var _extends3 = _interopRequireDefault(_extends2);
 
 var _Trix = __webpack_require__("./resources/js/components/Trix.vue");
 
@@ -4784,6 +5513,19 @@ exports.default = {
                 }).catch(function (error) {});
             }
         }
+    },
+
+    computed: {
+        defaultAttributes: function defaultAttributes() {
+            return {
+                placeholder: this.field.placeholder || this.field.name
+            };
+        },
+        extraAttributes: function extraAttributes() {
+            var attrs = this.field.extraAttributes;
+
+            return (0, _extends3.default)({}, this.defaultAttributes, attrs);
+        }
     }
 };
 
@@ -4824,6 +5566,12 @@ var _vueClickaway = __webpack_require__("./node_modules/vue-clickaway/dist/vue-c
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5198,6 +5946,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
 
 exports.default = {
     props: {
@@ -5373,7 +6122,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
     props: {
-        src: String
+        src: String,
+        maxWidth: {
+            type: Number,
+            default: 320
+        }
     },
 
     data: function data() {
@@ -5383,30 +6136,48 @@ exports.default = {
         };
     },
 
+    computed: {
+        cardClasses: function cardClasses() {
+            return {
+                'max-w-xs': !this.maxWidth || this.loading || this.missing
+            };
+        }
+    },
+
     mounted: function mounted() {
         var _this = this;
 
         (0, _laravelNova.Minimum)(new _promise2.default(function (resolve, reject) {
             var image = new Image();
+
             image.addEventListener('load', function () {
                 return resolve(image);
             });
             image.addEventListener('error', function () {
                 return reject();
             });
+
             image.src = _this.src;
         })).then(function (image) {
             image.className = 'block w-full';
             image.draggable = false;
+
+            if (_this.maxWidth) {
+                _this.$refs.card.$el.style.maxWidth = _this.maxWidth + 'px';
+            }
+
             _this.$refs.card.$el.appendChild(image);
-            _this.loading = false;
         }).catch(function () {
             _this.missing = true;
+
             _this.$emit('missing', true);
+        }).finally(function () {
             _this.loading = false;
         });
     }
 }; //
+//
+//
 //
 //
 //
@@ -5453,6 +6224,8 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
 
 exports.default = {
     props: ['resourceName', 'field']
@@ -5477,6 +6250,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
 
 exports.default = {
     props: ['resourceName', 'field']
@@ -5493,6 +6267,45 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5622,6 +6435,50 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     props: {
@@ -5649,9 +6506,34 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
 
 exports.default = {
     props: ['viaResource', 'viaResourceId', 'resourceName', 'field']
+};
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Index/HeadingField.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+//
+//
+//
+//
+
+exports.default = {
+    props: ['field', 'viaResource', 'viaResourceId', 'resourceName']
 };
 
 /***/ }),
@@ -5665,8 +6547,6 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-//
-//
 //
 //
 //
@@ -5750,13 +6630,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 exports.default = {
     props: ['resourceName', 'field']
@@ -5773,6 +6646,17 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6003,10 +6887,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
-//
-//
 
 exports.default = {
     props: {
@@ -6162,6 +7042,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
 
 exports.default = {
     props: ['resourceName', 'lenses']
@@ -6176,8 +7057,11 @@ exports.default = {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
+//
+//
+//
 //
 //
 //
@@ -6190,83 +7074,83 @@ Object.defineProperty(exports, "__esModule", {
 
 // https://github.com/nuxt/nuxt.js/blob/master/lib/app/components/nuxt-loading.vue
 exports.default = {
-  data: function data() {
-    return {
-      percent: 0,
-      show: false,
-      canSuccess: true,
-      duration: 3000,
-      height: '3px',
-      color: 'var(--primary)',
-      failedColor: 'red'
-    };
-  },
+    data: function data() {
+        return {
+            percent: 0,
+            show: false,
+            canSuccess: true,
+            duration: 3000,
+            height: '3px',
+            color: 'var(--primary)',
+            failedColor: 'red'
+        };
+    },
 
-  methods: {
-    start: function start() {
-      var _this = this;
+    methods: {
+        start: function start() {
+            var _this = this;
 
-      this.show = true;
-      this.canSuccess = true;
-      if (this._timer) {
-        clearInterval(this._timer);
-        this.percent = 0;
-      }
-      this._cut = 10000 / Math.floor(this.duration);
-      this._timer = setInterval(function () {
-        _this.increase(_this._cut * Math.random());
-        if (_this.percent > 95) {
-          _this.finish();
+            this.show = true;
+            this.canSuccess = true;
+            if (this._timer) {
+                clearInterval(this._timer);
+                this.percent = 0;
+            }
+            this._cut = 10000 / Math.floor(this.duration);
+            this._timer = setInterval(function () {
+                _this.increase(_this._cut * Math.random());
+                if (_this.percent > 95) {
+                    _this.finish();
+                }
+            }, 100);
+            return this;
+        },
+        set: function set(num) {
+            this.show = true;
+            this.canSuccess = true;
+            this.percent = Math.floor(num);
+            return this;
+        },
+        get: function get() {
+            return Math.floor(this.percent);
+        },
+        increase: function increase(num) {
+            this.percent = this.percent + Math.floor(num);
+            return this;
+        },
+        decrease: function decrease(num) {
+            this.percent = this.percent - Math.floor(num);
+            return this;
+        },
+        finish: function finish() {
+            this.percent = 100;
+            this.hide();
+            return this;
+        },
+        pause: function pause() {
+            clearInterval(this._timer);
+            return this;
+        },
+        hide: function hide() {
+            var _this2 = this;
+
+            clearInterval(this._timer);
+            this._timer = null;
+            setTimeout(function () {
+                _this2.show = false;
+                _this2.$nextTick(function () {
+                    setTimeout(function () {
+                        _this2.percent = 0;
+                    }, 200);
+                });
+            }, 500);
+            return this;
+        },
+        fail: function fail() {
+            this.canSuccess = false;
+            return this;
         }
-      }, 100);
-      return this;
-    },
-    set: function set(num) {
-      this.show = true;
-      this.canSuccess = true;
-      this.percent = Math.floor(num);
-      return this;
-    },
-    get: function get() {
-      return Math.floor(this.percent);
-    },
-    increase: function increase(num) {
-      this.percent = this.percent + Math.floor(num);
-      return this;
-    },
-    decrease: function decrease(num) {
-      this.percent = this.percent - Math.floor(num);
-      return this;
-    },
-    finish: function finish() {
-      this.percent = 100;
-      this.hide();
-      return this;
-    },
-    pause: function pause() {
-      clearInterval(this._timer);
-      return this;
-    },
-    hide: function hide() {
-      var _this2 = this;
-
-      clearInterval(this._timer);
-      this._timer = null;
-      setTimeout(function () {
-        _this2.show = false;
-        _this2.$nextTick(function () {
-          setTimeout(function () {
-            _this2.percent = 0;
-          }, 200);
-        });
-      }, 500);
-      return this;
-    },
-    fail: function fail() {
-      this.canSuccess = false;
-      return this;
     }
-  }
 };
 
 /***/ }),
@@ -6342,6 +7226,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
 
 exports.default = {
     props: {
@@ -6372,6 +7257,11 @@ __webpack_require__("./node_modules/chartist/dist/chartist.min.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6429,25 +7319,40 @@ exports.default = {
             startAngle: 270,
             showLabel: false
         });
+
+        this.chartist.on('draw', function (context) {
+            if (context.type === 'slice') {
+                context.element.attr({ style: 'fill: ' + context.meta.color + ' !important' });
+            }
+        });
     },
 
 
     methods: {
         renderChart: function renderChart() {
             this.chartist.update(this.formattedChartData);
+        },
+        getItemColor: function getItemColor(item, index) {
+            return typeof item.color === 'string' ? item.color : colorForIndex(index);
         }
     },
 
     computed: {
+        chartClasses: function chartClasses() {
+            return ['vertical-center', 'rounded-b-lg', 'ct-chart', this.formattedTotal <= 0 ? 'invisible' : ''];
+        },
         formattedChartData: function formattedChartData() {
             return { labels: this.formattedLabels, series: this.formattedData };
         },
         formattedItems: function formattedItems() {
+            var _this = this;
+
             return _(this.chartData).map(function (item, index) {
                 return {
                     label: item.label,
                     value: item.value,
-                    color: colorForIndex(index)
+                    color: _this.getItemColor(item, index),
+                    percentage: _this.formattedTotal > 0 ? (item.value * 100 / _this.formattedTotal).toFixed(2) : '0'
                 };
             }).value();
         },
@@ -6457,8 +7362,13 @@ exports.default = {
             }).value();
         },
         formattedData: function formattedData() {
-            return _(this.chartData).map(function (item) {
-                return item.value;
+            var _this2 = this;
+
+            return _(this.chartData).map(function (item, index) {
+                return {
+                    value: item.value,
+                    meta: { color: _this2.getItemColor(item, index) }
+                };
             }).value();
         },
         formattedTotal: function formattedTotal() {
@@ -6522,7 +7432,11 @@ exports.default = {
         ranges: { type: Array, default: function _default() {
                 return [];
             } },
-        selectedRangeKey: [String, Number]
+        selectedRangeKey: [String, Number],
+        format: {
+            type: String,
+            default: '(0[.]00a)'
+        }
     },
 
     data: function data() {
@@ -6565,12 +7479,7 @@ exports.default = {
                 showLabel: true,
                 offset: 0
             },
-            plugins: [
-            // Chartist.plugins.tooltip({
-            //     anchorToPoint: true,
-            // }),
-
-            _chartist2.default.plugins.tooltip({
+            plugins: [_chartist2.default.plugins.tooltip({
                 anchorToPoint: true,
                 transformTooltipTextFnc: function transformTooltipTextFnc(value) {
                     if (_this.prefix) {
@@ -6579,6 +7488,7 @@ exports.default = {
 
                     if (_this.suffix) {
                         var suffix = (0, _laravelNova.SingularOrPlural)(value, _this.suffix);
+
                         return value + ' ' + suffix;
                     }
 
@@ -6604,9 +7514,7 @@ exports.default = {
         },
         formattedValue: function formattedValue() {
             if (!this.isNullValue) {
-                var numeralValue = (0, _numeral2.default)(this.value);
-
-                return numeralValue.value() > 1000 ? this.prefix + numeralValue.format('(0.00a)') : this.prefix + this.value;
+                return this.prefix + (0, _numeral2.default)(this.value).format(this.format);
             }
 
             return '';
@@ -6616,17 +7524,6 @@ exports.default = {
         }
     }
 }; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -6733,6 +7630,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
 
 exports.default = {
     name: 'BaseValueMetric',
@@ -6746,7 +7648,11 @@ exports.default = {
         selectedRangeKey: [String, Number],
         ranges: { type: Array, default: function _default() {
                 return [];
-            } }
+            } },
+        format: {
+            type: String,
+            default: '(0[.]00a)'
+        }
     },
 
     methods: {
@@ -6789,9 +7695,7 @@ exports.default = {
         },
         formattedValue: function formattedValue() {
             if (!this.isNullValue) {
-                var numeralValue = (0, _numeral2.default)(this.value);
-
-                return numeralValue.value() > 1000 ? this.prefix + numeralValue.format('(0.00a)') : this.prefix + this.value;
+                return this.prefix + (0, _numeral2.default)(this.value).format(this.format);
             }
 
             return '';
@@ -6826,10 +7730,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
-//
-//
-//
 
 exports.default = {
     components: {
@@ -6847,6 +7747,11 @@ exports.default = {
         },
         resourceId: {
             type: [Number, String],
+            default: ''
+        },
+
+        lens: {
+            type: String,
             default: ''
         }
     },
@@ -6869,7 +7774,7 @@ exports.default = {
 
             this.loading = true;
 
-            (0, _laravelNova.Minimum)(Nova.request(this.cardEndpoint)).then(function (_ref) {
+            (0, _laravelNova.Minimum)(Nova.request(this.metricEndpoint)).then(function (_ref) {
                 var value = _ref.data.value.value;
 
                 _this.chartData = value;
@@ -6878,11 +7783,12 @@ exports.default = {
         }
     },
     computed: {
-        cardEndpoint: function cardEndpoint() {
+        metricEndpoint: function metricEndpoint() {
+            var lens = this.lens !== '' ? '/lens/' + this.lens : '';
             if (this.resourceName && this.resourceId) {
-                return '/nova-api/' + this.resourceName + '/' + this.resourceId + '/metrics/' + this.card.uriKey;
+                return '/nova-api/' + this.resourceName + lens + '/' + this.resourceId + '/metrics/' + this.card.uriKey;
             } else if (this.resourceName) {
-                return '/nova-api/' + this.resourceName + '/metrics/' + this.card.uriKey;
+                return '/nova-api/' + this.resourceName + lens + '/metrics/' + this.card.uriKey;
             } else {
                 return '/nova-api/metrics/' + this.card.uriKey;
             }
@@ -6939,6 +7845,11 @@ exports.default = {
         resourceId: {
             type: [Number, String],
             default: ''
+        },
+
+        lens: {
+            type: String,
+            default: ''
         }
     },
 
@@ -6947,6 +7858,7 @@ exports.default = {
             loading: true,
             value: '',
             data: [],
+            format: '(0[.]00a)',
             prefix: '',
             suffix: '',
             selectedRangeKey: null
@@ -6979,7 +7891,8 @@ exports.default = {
                     trend = _ref$data$value.trend,
                     value = _ref$data$value.value,
                     prefix = _ref$data$value.prefix,
-                    suffix = _ref$data$value.suffix;
+                    suffix = _ref$data$value.suffix,
+                    format = _ref$data$value.format;
 
                 _this.value = value;
                 _this.labels = (0, _keys2.default)(trend);
@@ -6992,8 +7905,9 @@ exports.default = {
                         };
                     })]
                 };
-                _this.prefix = prefix || '';
-                _this.suffix = suffix || '';
+                _this.format = format || _this.format;
+                _this.prefix = prefix || _this.prefix;
+                _this.suffix = suffix || _this.suffix;
                 _this.loading = false;
             });
         }
@@ -7018,16 +7932,18 @@ exports.default = {
             return payload;
         },
         metricEndpoint: function metricEndpoint() {
+            var lens = this.lens !== '' ? '/lens/' + this.lens : '';
             if (this.resourceName && this.resourceId) {
-                return '/nova-api/' + this.resourceName + '/' + this.resourceId + '/metrics/' + this.card.uriKey;
+                return '/nova-api/' + this.resourceName + lens + '/' + this.resourceId + '/metrics/' + this.card.uriKey;
             } else if (this.resourceName) {
-                return '/nova-api/' + this.resourceName + '/metrics/' + this.card.uriKey;
+                return '/nova-api/' + this.resourceName + lens + '/metrics/' + this.card.uriKey;
             } else {
                 return '/nova-api/metrics/' + this.card.uriKey;
             }
         }
     }
 }; //
+//
 //
 //
 //
@@ -7076,6 +7992,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 
 exports.default = {
     name: 'ValueMetric',
@@ -7096,12 +8013,18 @@ exports.default = {
         resourceId: {
             type: [Number, String],
             default: ''
+        },
+
+        lens: {
+            type: String,
+            default: ''
         }
     },
 
     data: function data() {
         return {
             loading: true,
+            format: '(0[.]00a)',
             value: 0,
             previous: 0,
             prefix: '',
@@ -7135,11 +8058,13 @@ exports.default = {
                     value = _ref$data$value.value,
                     previous = _ref$data$value.previous,
                     prefix = _ref$data$value.prefix,
-                    suffix = _ref$data$value.suffix;
+                    suffix = _ref$data$value.suffix,
+                    format = _ref$data$value.format;
 
                 _this.value = value;
-                _this.prefix = prefix || '';
-                _this.suffix = suffix || '';
+                _this.format = format || _this.format;
+                _this.prefix = prefix || _this.prefix;
+                _this.suffix = suffix || _this.suffix;
                 _this.previous = previous;
                 _this.loading = false;
             });
@@ -7154,10 +8079,11 @@ exports.default = {
             return this.hasRanges ? { params: { range: this.selectedRangeKey } } : {};
         },
         metricEndpoint: function metricEndpoint() {
+            var lens = this.lens !== '' ? '/lens/' + this.lens : '';
             if (this.resourceName && this.resourceId) {
-                return '/nova-api/' + this.resourceName + '/' + this.resourceId + '/metrics/' + this.card.uriKey;
+                return '/nova-api/' + this.resourceName + lens + '/' + this.resourceId + '/metrics/' + this.card.uriKey;
             } else if (this.resourceName) {
-                return '/nova-api/' + this.resourceName + '/metrics/' + this.card.uriKey;
+                return '/nova-api/' + this.resourceName + lens + '/metrics/' + this.card.uriKey;
             } else {
                 return '/nova-api/metrics/' + this.card.uriKey;
             }
@@ -7177,10 +8103,33 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _toConsumableArray2 = __webpack_require__("./node_modules/babel-runtime/helpers/toConsumableArray.js");
+
+var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
 var _vueClickaway = __webpack_require__("./node_modules/vue-clickaway/dist/vue-clickaway.common.js");
+
+var _composedPath = __webpack_require__("./resources/js/polyfills/composedPath.js");
+
+var _composedPath2 = _interopRequireDefault(_composedPath);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     mixins: [_vueClickaway.mixin],
+
+    props: {
+        classWhitelist: [Array, String]
+    },
 
     created: function created() {
         document.addEventListener('keydown', this.handleEscape);
@@ -7212,20 +8161,28 @@ exports.default = {
                 this.close();
             }
         },
-        close: function close() {
-            this.$emit('modal-close');
+        close: function close(e) {
+            var classArray = Array.isArray(this.classWhitelist) ? this.classWhitelist : [this.classWhitelist];
+
+            if (_.filter(classArray, function (className) {
+                return pathIncludesClass(e, className);
+            }).length > 0) {
+                return;
+            }
+
+            this.$emit('modal-close', e);
         }
     }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
+};
+
+
+function pathIncludesClass(event, className) {
+    return (0, _composedPath2.default)(event).filter(function (el) {
+        return el !== document && el !== window;
+    }).reduce(function (acc, e) {
+        return acc.concat([].concat((0, _toConsumableArray3.default)(e.classList)));
+    }, []).includes(className);
+}
 
 /***/ }),
 
@@ -7238,15 +8195,86 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _laravelNova = __webpack_require__("./node_modules/laravel-nova/dist/index.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     props: {
         working: Boolean,
-        resourceName: {},
-        selectedAction: {},
-        errors: { required: true }
+        resourceName: { type: String, required: true },
+        action: { type: Object, required: true },
+        selectedResources: { type: [Array, String], required: true },
+        errors: { type: Object, required: true }
     },
 
     /**
@@ -7258,7 +8286,7 @@ exports.default = {
         if (document.querySelectorAll('.modal input').length) {
             document.querySelectorAll('.modal input')[0].focus();
         } else {
-            document.querySelectorAll('.modal button[type=submit]')[0].focus();
+            this.$refs.runButton.focus();
         }
     },
 
@@ -7279,7 +8307,7 @@ exports.default = {
         /**
          * Execute the selected action.
          */
-        handleConfirm: function handleConfirm(e) {
+        handleConfirm: function handleConfirm() {
             this.$emit('confirm');
         },
 
@@ -7291,77 +8319,7 @@ exports.default = {
             this.$emit('close');
         }
     }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+};
 
 /***/ }),
 
@@ -7374,6 +8332,19 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7426,6 +8397,24 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7523,6 +8512,23 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     methods: {
@@ -7553,6 +8559,8 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+//
+//
 //
 //
 //
@@ -7655,8 +8663,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
 
 exports.default = {
     props: {
@@ -7682,6 +8688,41 @@ exports.default = {
         },
         shouldDisplayAsHtml: function shouldDisplayAsHtml() {
             return this.field.asHtml;
+        }
+    }
+};
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/ProgressButton.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+    props: {
+        processing: {
+            type: Boolean,
+            default: false
         }
     }
 };
@@ -7867,7 +8908,39 @@ exports.default = {
 //
 //
 //
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/ScrollWrap.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 //
+//
+//
+//
+
+exports.default = {
+    props: {
+        height: {
+            type: Number,
+            default: 288
+        }
+    },
+
+    computed: {
+        style: function style() {
+            return {
+                maxHeight: this.height + "px"
+            };
+        }
+    }
+};
 
 /***/ }),
 
@@ -7897,6 +8970,27 @@ var _vueClickaway = __webpack_require__("./node_modules/vue-clickaway/dist/vue-c
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -8064,19 +9158,19 @@ exports.default = {
             return _lodash2.default.get(option, this.trackBy);
         },
         open: function open() {
-            // if (!this.disabled) {
-            this.show = true;
-            this.search = '';
-            // }
+            if (!this.disabled) {
+                this.show = true;
+                this.search = '';
+            }
         },
         close: function close() {
             this.show = false;
         },
         clear: function clear() {
-            // if (!this.disabled) {
-            this.selected = null;
-            this.$emit('clear', null);
-            // }
+            if (!this.disabled) {
+                this.selected = null;
+                this.$emit('clear', null);
+            }
         },
         move: function move(offset) {
             var newIndex = this.selected + offset;
@@ -8247,8 +9341,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
-//
-//
 
 exports.default = {
     props: ['errors']
@@ -8310,6 +9402,8 @@ exports.default = {
     data: function data() {
         return {
             loading: true,
+            submittedViaAttachAndAttachAnother: false,
+            submittedViaAttachResource: false,
             field: null,
             softDeletes: false,
             fields: [],
@@ -8318,6 +9412,11 @@ exports.default = {
             selectedResourceId: null
         };
     },
+
+    created: function created() {
+        if (Nova.missingResource(this.resourceName)) return this.$router.push({ name: '404' });
+    },
+
 
     /**
      * Mount the component.
@@ -8427,11 +9526,15 @@ exports.default = {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
-                                _context.prev = 0;
-                                _context.next = 3;
+                                this.submittedViaAttachResource = true;
+
+                                _context.prev = 1;
+                                _context.next = 4;
                                 return this.attachRequest();
 
-                            case 3:
+                            case 4:
+
+                                this.submittedViaAttachResource = false;
 
                                 this.$router.push({
                                     name: 'detail',
@@ -8440,23 +9543,25 @@ exports.default = {
                                         resourceId: this.resourceId
                                     }
                                 });
-                                _context.next = 9;
+                                _context.next = 12;
                                 break;
 
-                            case 6:
-                                _context.prev = 6;
-                                _context.t0 = _context['catch'](0);
+                            case 8:
+                                _context.prev = 8;
+                                _context.t0 = _context['catch'](1);
+
+                                this.submittedViaAttachResource = false;
 
                                 if (_context.t0.response.status == 422) {
                                     this.validationErrors = new _laravelNova.Errors(_context.t0.response.data.errors);
                                 }
 
-                            case 9:
+                            case 12:
                             case 'end':
                                 return _context.stop();
                         }
                     }
-                }, _callee, this, [[0, 6]]);
+                }, _callee, this, [[1, 8]]);
             }));
 
             function attachResource() {
@@ -8476,31 +9581,37 @@ exports.default = {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
-                                _context2.prev = 0;
-                                _context2.next = 3;
+                                this.submittedViaAttachAndAttachAnother = true;
+
+                                _context2.prev = 1;
+                                _context2.next = 4;
                                 return this.attachRequest();
 
-                            case 3:
+                            case 4:
+
+                                this.submittedViaAttachAndAttachAnother = false;
 
                                 // Reset the form by refetching the fields
                                 this.initializeComponent();
-                                _context2.next = 9;
+                                _context2.next = 12;
                                 break;
 
-                            case 6:
-                                _context2.prev = 6;
-                                _context2.t0 = _context2['catch'](0);
+                            case 8:
+                                _context2.prev = 8;
+                                _context2.t0 = _context2['catch'](1);
+
+                                this.submittedViaAttachAndAttachAnother = false;
 
                                 if (_context2.t0.response.status == 422) {
                                     this.validationErrors = new _laravelNova.Errors(_context2.t0.response.data.errors);
                                 }
 
-                            case 9:
+                            case 12:
                             case 'end':
                                 return _context2.stop();
                         }
                     }
-                }, _callee2, this, [[0, 6]]);
+                }, _callee2, this, [[1, 8]]);
             }));
 
             function attachAndAttachAnother() {
@@ -8600,9 +9711,31 @@ exports.default = {
          */
         isSearchable: function isSearchable() {
             return this.field.searchable;
+        },
+
+
+        /**
+         * Determine if the form is being processed
+         */
+        isWorking: function isWorking() {
+            return this.submittedViaAttachResource || this.submittedViaAttachAndAttachAnother;
         }
     }
 }; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -8749,6 +9882,8 @@ exports.default = {
         return {
             relationResponse: null,
             loading: true,
+            submittedViaCreateAndAddAnother: false,
+            submittedViaCreateResource: false,
             fields: [],
             validationErrors: new _laravelNova.Errors()
         };
@@ -8762,25 +9897,33 @@ exports.default = {
                 while (1) {
                     switch (_context.prev = _context.next) {
                         case 0:
-                            if (!this.isRelation) {
-                                _context.next = 6;
+                            if (!Nova.missingResource(this.resourceName)) {
+                                _context.next = 2;
                                 break;
                             }
 
-                            _context.next = 3;
+                            return _context.abrupt('return', this.$router.push({ name: '404' }));
+
+                        case 2:
+                            if (!this.isRelation) {
+                                _context.next = 8;
+                                break;
+                            }
+
+                            _context.next = 5;
                             return Nova.request('/nova-api/' + this.viaResource + '/field/' + this.viaRelationship);
 
-                        case 3:
+                        case 5:
                             _ref2 = _context.sent;
                             data = _ref2.data;
 
                             this.relationResponse = data;
 
-                        case 6:
+                        case 8:
 
                             this.getFields();
 
-                        case 7:
+                        case 9:
                         case 'end':
                             return _context.stop();
                     }
@@ -8811,7 +9954,13 @@ exports.default = {
                                 this.fields = [];
 
                                 _context2.next = 3;
-                                return Nova.request().get('/nova-api/' + this.resourceName + '/creation-fields');
+                                return Nova.request().get('/nova-api/' + this.resourceName + '/creation-fields', {
+                                    params: {
+                                        viaResource: this.viaResource,
+                                        viaResourceId: this.viaResourceId,
+                                        viaRelationship: this.viaRelationship
+                                    }
+                                });
 
                             case 3:
                                 _ref4 = _context2.sent;
@@ -8847,13 +9996,17 @@ exports.default = {
                     while (1) {
                         switch (_context3.prev = _context3.next) {
                             case 0:
-                                _context3.prev = 0;
-                                _context3.next = 3;
+                                this.submittedViaCreateResource = true;
+
+                                _context3.prev = 1;
+                                _context3.next = 4;
                                 return this.createRequest();
 
-                            case 3:
+                            case 4:
                                 response = _context3.sent;
 
+
+                                this.submittedViaCreateResource = false;
 
                                 this.$toasted.show(this.__('The :resource was created!', {
                                     resource: this.resourceInformation.singularLabel.toLowerCase()
@@ -8866,23 +10019,25 @@ exports.default = {
                                         resourceId: response.data.id
                                     }
                                 });
-                                _context3.next = 11;
+                                _context3.next = 14;
                                 break;
 
-                            case 8:
-                                _context3.prev = 8;
-                                _context3.t0 = _context3['catch'](0);
+                            case 10:
+                                _context3.prev = 10;
+                                _context3.t0 = _context3['catch'](1);
+
+                                this.submittedViaCreateResource = false;
 
                                 if (_context3.t0.response.status == 422) {
                                     this.validationErrors = new _laravelNova.Errors(_context3.t0.response.data.errors);
                                 }
 
-                            case 11:
+                            case 14:
                             case 'end':
                                 return _context3.stop();
                         }
                     }
-                }, _callee3, this, [[0, 8]]);
+                }, _callee3, this, [[1, 10]]);
             }));
 
             function createResource() {
@@ -8903,13 +10058,17 @@ exports.default = {
                     while (1) {
                         switch (_context4.prev = _context4.next) {
                             case 0:
-                                _context4.prev = 0;
-                                _context4.next = 3;
+                                this.submittedViaCreateAndAddAnother = true;
+
+                                _context4.prev = 1;
+                                _context4.next = 4;
                                 return this.createRequest();
 
-                            case 3:
+                            case 4:
                                 response = _context4.sent;
 
+
+                                this.submittedViaCreateAndAddAnother = false;
 
                                 this.$toasted.show(this.__('The :resource was created!', {
                                     resource: this.resourceInformation.singularLabel.toLowerCase()
@@ -8919,23 +10078,25 @@ exports.default = {
                                 this.getFields();
 
                                 this.validationErrors = new _laravelNova.Errors();
-                                _context4.next = 12;
+                                _context4.next = 15;
                                 break;
 
-                            case 9:
-                                _context4.prev = 9;
-                                _context4.t0 = _context4['catch'](0);
+                            case 11:
+                                _context4.prev = 11;
+                                _context4.t0 = _context4['catch'](1);
+
+                                this.submittedViaCreateAndAddAnother = false;
 
                                 if (_context4.t0.response.status == 422) {
                                     this.validationErrors = new _laravelNova.Errors(_context4.t0.response.data.errors);
                                 }
 
-                            case 12:
+                            case 15:
                             case 'end':
                                 return _context4.stop();
                         }
                     }
-                }, _callee4, this, [[0, 9]]);
+                }, _callee4, this, [[1, 11]]);
             }));
 
             function createAndAddAnother() {
@@ -8982,9 +10143,28 @@ exports.default = {
         },
         isRelation: function isRelation() {
             return Boolean(this.viaResourceId && this.viaRelationship);
+        },
+
+
+        /**
+         * Determine if the form is being processed
+         */
+        isWorking: function isWorking() {
+            return this.submittedViaCreateResource || this.submittedViaCreateAndAddAnother;
         }
     }
 }; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -9119,6 +10299,8 @@ exports.default = {
      * Bind the keydown even listener when the component is created
      */
     created: function created() {
+        if (Nova.missingResource(this.resourceName)) return this.$router.push({ name: '404' });
+
         document.addEventListener('keydown', this.handleKeydown);
     },
 
@@ -9236,8 +10418,14 @@ exports.default = {
 
             this.actions = [];
 
-            return Nova.request().get('/nova-api/' + this.resourceName + '/actions').then(function (response) {
-                _this2.actions = response.data.actions;
+            return Nova.request().get('/nova-api/' + this.resourceName + '/actions', {
+                params: {
+                    resourceId: this.resourceId
+                }
+            }).then(function (response) {
+                _this2.actions = _.filter(response.data.actions, function (action) {
+                    return !action.onlyOnIndex;
+                });
             });
         },
 
@@ -9255,6 +10443,10 @@ exports.default = {
                                 return this.getResource();
 
                             case 2:
+                                _context2.next = 4;
+                                return this.getActions();
+
+                            case 4:
                             case 'end':
                                 return _context2.stop();
                         }
@@ -9527,6 +10719,10 @@ exports.default = {
         }
     }
 }; //
+//
+//
+//
+//
 //
 //
 //
@@ -9988,20 +11184,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 exports.default = {
     mixins: [_laravelNova.Deletable, _laravelNova.Filterable, _laravelNova.HasCards, _laravelNova.Paginatable, _laravelNova.PerPageable, _laravelNova.InteractsWithResourceInformation, _laravelNova.InteractsWithQueryString],
@@ -10049,7 +11231,6 @@ exports.default = {
 
             search: '',
             lenses: [],
-            filters: [],
 
             authorizedToRelate: false,
 
@@ -10070,6 +11251,15 @@ exports.default = {
                 while (1) {
                     switch (_context.prev = _context.next) {
                         case 0:
+                            if (!Nova.missingResource(this.resourceName)) {
+                                _context.next = 2;
+                                break;
+                            }
+
+                            return _context.abrupt('return', this.$router.push({ name: '404' }));
+
+                        case 2:
+
                             // Bind the keydown even listener when the router is visited if this
                             // component is not a relation on a Detail page
                             if (!this.viaResource && !this.viaResourceId) {
@@ -10081,26 +11271,21 @@ exports.default = {
                             this.initializeTrashedFromQueryString();
                             this.initializeOrderingFromQueryString();
 
-                            _context.next = 7;
-                            return this.getResources();
-
-                        case 7:
                             _context.next = 9;
-                            return this.getAuthorizationToRelate();
+                            return this.initializeFilters();
 
                         case 9:
                             _context.next = 11;
-                            return this.getLenses();
+                            return this.getResources();
 
                         case 11:
                             _context.next = 13;
-                            return this.getActions();
+                            return this.getAuthorizationToRelate();
 
                         case 13:
-                            _context.next = 15;
-                            return this.getFilters();
 
-                        case 15:
+                            this.getLenses();
+                            this.getActions();
 
                             this.initialLoading = false;
 
@@ -10113,7 +11298,6 @@ exports.default = {
                                 _this.initializePerPageFromQueryString();
                                 _this.initializeTrashedFromQueryString();
                                 _this.initializeOrderingFromQueryString();
-                                _this.initializeFilterValuesFromQueryString();
                             });
 
                             // Refresh the action events
@@ -10178,7 +11362,7 @@ exports.default = {
         /**
          * Toggle the selection of all resources
          */
-        toggleSelectAll: function toggleSelectAll() {
+        toggleSelectAll: function toggleSelectAll(event) {
             if (this.selectAllChecked) return this.clearResourceSelections();
             this.selectAllResources();
         },
@@ -10293,33 +11477,17 @@ exports.default = {
 
 
         /**
-         * Get the filters available for the current resource.
-         */
-        getFilters: function getFilters() {
-            var _this6 = this;
-
-            this.filters = [];
-            this.currentFilters = [];
-
-            return Nova.request().get('/nova-api/' + this.resourceName + '/filters').then(function (response) {
-                _this6.filters = response.data;
-                _this6.initializeFilterValuesFromQueryString();
-            });
-        },
-
-
-        /**
          * Execute a search against the resource.
          */
         performSearch: function performSearch(event) {
-            var _this7 = this;
+            var _this6 = this;
 
             this.debouncer(function () {
                 // Only search if we're not tabbing into the field
                 if (event.which != 9) {
-                    var _this7$updateQueryStr;
+                    var _this6$updateQueryStr;
 
-                    _this7.updateQueryString((_this7$updateQueryStr = {}, (0, _defineProperty3.default)(_this7$updateQueryStr, _this7.pageParameter, 1), (0, _defineProperty3.default)(_this7$updateQueryStr, _this7.searchParameter, _this7.search), _this7$updateQueryStr));
+                    _this6.updateQueryString((_this6$updateQueryStr = {}, (0, _defineProperty3.default)(_this6$updateQueryStr, _this6.pageParameter, 1), (0, _defineProperty3.default)(_this6$updateQueryStr, _this6.searchParameter, _this6.search), _this6$updateQueryStr));
                 }
             });
         },
@@ -10342,16 +11510,12 @@ exports.default = {
          * Get the count of all of the matching resources.
          */
         getAllMatchingResourceCount: function getAllMatchingResourceCount() {
-            var _this8 = this;
-
-            if (this.resourceName == 'action-events') {
-                return;
-            }
+            var _this7 = this;
 
             Nova.request().get('/nova-api/' + this.resourceName + '/count', {
                 params: this.resourceRequestQueryString
             }).then(function (response) {
-                _this8.allMatchingResourceCount = response.data.count;
+                _this7.allMatchingResourceCount = response.data.count;
             });
         },
 
@@ -10398,14 +11562,35 @@ exports.default = {
         /**
          * Update the trashed constraint for the resource listing.
          */
-        trashedChanged: function trashedChanged() {
+        trashedChanged: function trashedChanged(trashedStatus) {
+            this.trashed = trashedStatus;
             this.updateQueryString((0, _defineProperty3.default)({}, this.trashedParameter, this.trashed));
+        },
+
+
+        /**
+         * Update the per page parameter in the query string
+         */
+        updatePerPageChanged: function updatePerPageChanged(perPage) {
+            this.perPage = perPage;
+            this.perPageChanged();
         }
     },
 
     computed: {
+        /**
+         * Determine if the resource has any filters
+         */
+        hasFilters: function hasFilters() {
+            return this.$store.getters[this.resourceName + '/hasFilters'];
+        },
+
+
+        /**
+         * Determine if the resource should show any cards
+         */
         shouldShowCards: function shouldShowCards() {
-            // Don't show cards if this resource is not the main one being shown (e.g. a relation)
+            // Don't show cards if this resource is beings shown via a relations
             return this.cards.length > 0 && this.resourceName == this.$route.params.resourceName;
         },
 
@@ -10415,14 +11600,6 @@ exports.default = {
          */
         cardsEndpoint: function cardsEndpoint() {
             return '/nova-api/' + this.resourceName + '/cards';
-        },
-
-
-        /**
-         * Get the name of the filter query string variable.
-         */
-        filterParameter: function filterParameter() {
-            return this.resourceName + '_filter';
         },
 
 
@@ -10638,26 +11815,10 @@ exports.default = {
 
 
         /**
-         * Determine if there any filters for this resource
-         */
-        hasFilters: function hasFilters() {
-            return Boolean(this.filters.length > 0);
-        },
-
-
-        /**
          * Determine if there any lenses for this resource
          */
         hasLenses: function hasLenses() {
             return Boolean(this.lenses.length > 0);
-        },
-
-
-        /**
-         * Determine whether to show the toolbar for this resource index
-         */
-        shouldShowToolbar: function shouldShowToolbar() {
-            return Boolean(this.shouldShowCheckBoxes || this.hasFilters || this.hasLenses || this.softDeletes);
         },
 
 
@@ -10758,6 +11919,32 @@ exports.default = {
          */
         headingTitle: function headingTitle() {
             return this.isRelation && this.field ? this.field.name : this.resourceResponse.label;
+        },
+
+
+        /**
+         * Return the resource count label
+         */
+        resourceCountLabel: function resourceCountLabel() {
+            var label = this.resources.length > 1 ? this.__('resources') : this.__('resource');
+
+            return this.resources.length && this.resources.length + '/' + this.allMatchingResourceCount + ' ' + label;
+        },
+
+
+        /**
+         * Return the currently encoded filter string from the store
+         */
+        encodedFilters: function encodedFilters() {
+            return this.$store.getters[this.resourceName + '/currentEncodedFilters'];
+        },
+
+
+        /**
+         * Return the initial encoded filters from the query string
+         */
+        initialEncodedFilters: function initialEncodedFilters() {
+            return this.$route.query[this.filterParameter] || '';
         }
     }
 };
@@ -10777,6 +11964,14 @@ Object.defineProperty(exports, "__esModule", {
 var _defineProperty2 = __webpack_require__("./node_modules/babel-runtime/helpers/defineProperty.js");
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _regenerator = __webpack_require__("./node_modules/babel-runtime/regenerator/index.js");
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = __webpack_require__("./node_modules/babel-runtime/helpers/asyncToGenerator.js");
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
 var _laravelNova = __webpack_require__("./node_modules/laravel-nova/dist/index.js");
 
@@ -11002,9 +12197,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
-    mixins: [_laravelNova.Deletable, _laravelNova.Filterable, _laravelNova.Paginatable, _laravelNova.PerPageable, _laravelNova.InteractsWithResourceInformation, _laravelNova.InteractsWithQueryString],
+    mixins: [_laravelNova.HasCards, _laravelNova.Deletable, _laravelNova.Filterable, _laravelNova.Paginatable, _laravelNova.PerPageable, _laravelNova.InteractsWithResourceInformation, _laravelNova.InteractsWithQueryString],
 
     props: {
         resourceName: {
@@ -11024,7 +12232,10 @@ exports.default = {
             type: String,
             default: ''
         },
-        lens: {}
+        lens: {
+            type: String,
+            required: true
+        }
     },
 
     data: function data() {
@@ -11045,8 +12256,6 @@ exports.default = {
             pivotActions: null,
             actionValidationErrors: new _laravelNova.Errors(),
 
-            filters: [],
-
             authorizedToRelate: false,
 
             orderBy: '',
@@ -11058,33 +12267,63 @@ exports.default = {
     /**
      * Mount the component and retrieve its initial data.
      */
-    created: function created() {
-        var _this = this;
+    created: function () {
+        var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
+            var _this = this;
 
-        this.initializeSearchFromQueryString();
-        this.initializePerPageFromQueryString();
-        this.initializeTrashedFromQueryString();
-        this.initializeOrderingFromQueryString();
+            return _regenerator2.default.wrap(function _callee$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            if (!Nova.missingResource(this.resourceName)) {
+                                _context.next = 2;
+                                break;
+                            }
 
-        this.getResources();
-        // this.getAuthorizationToRelate()
-        this.getActions();
-        this.getFilters();
+                            return _context.abrupt('return', this.$router.push({ name: '404' }));
 
-        this.initialLoading = false;
+                        case 2:
 
-        this.$watch(function () {
-            return _this.resourceName + _this.encodedFilters + _this.currentSearch + _this.currentPage + _this.currentPerPage + _this.currentOrderBy + _this.currentOrderByDirection + _this.currentTrashed;
-        }, function () {
-            _this.getResources();
+                            this.initializeSearchFromQueryString();
+                            this.initializePerPageFromQueryString();
+                            this.initializeTrashedFromQueryString();
+                            this.initializeOrderingFromQueryString();
 
-            _this.initializeSearchFromQueryString();
-            _this.initializePerPageFromQueryString();
-            _this.initializeTrashedFromQueryString();
-            _this.initializeOrderingFromQueryString();
-            _this.initializeFilterValuesFromQueryString();
-        });
-    },
+                            _context.next = 8;
+                            return this.initializeFilters(this.lens);
+
+                        case 8:
+                            this.getResources();
+                            // this.getAuthorizationToRelate()
+                            this.getActions();
+
+                            this.initialLoading = false;
+
+                            this.$watch(function () {
+                                return _this.lens + _this.resourceName + _this.encodedFilters + _this.currentSearch + _this.currentPage + _this.currentPerPage + _this.currentOrderBy + _this.currentOrderByDirection + _this.currentTrashed;
+                            }, function () {
+                                _this.getResources();
+
+                                _this.initializeSearchFromQueryString();
+                                _this.initializePerPageFromQueryString();
+                                _this.initializeTrashedFromQueryString();
+                                _this.initializeOrderingFromQueryString();
+                            });
+
+                        case 12:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, _callee, this);
+        }));
+
+        function created() {
+            return _ref.apply(this, arguments);
+        }
+
+        return created;
+    }(),
 
 
     methods: {
@@ -11128,8 +12367,8 @@ exports.default = {
 
                 return (0, _laravelNova.Minimum)(Nova.request().get('/nova-api/' + _this2.resourceName + '/lens/' + _this2.lens, {
                     params: _this2.resourceRequestQueryString
-                })).then(function (_ref) {
-                    var data = _ref.data;
+                })).then(function (_ref2) {
+                    var data = _ref2.data;
 
                     _this2.resources = [];
 
@@ -11139,7 +12378,7 @@ exports.default = {
 
                     _this2.loading = false;
 
-                    // this.getAllMatchingResourceCount()
+                    _this2.getAllMatchingResourceCount();
                 });
             });
         },
@@ -11180,26 +12419,17 @@ exports.default = {
 
             this.actions = [];
             this.pivotActions = null;
-            Nova.request().get('/nova-api/' + this.resourceName + '/actions' + '?viaResource=' + this.viaResource + '&viaResourceId=' + this.viaResourceId + '&viaRelationship=' + this.viaRelationship).then(function (response) {
+            Nova.request().get('/nova-api/' + this.resourceName + '/lens/' + this.lens + '/actions', {
+                params: {
+                    viaResource: this.viaResource,
+                    viaResourceId: this.viaResourceId,
+                    viaRelationship: this.viaRelationship
+                }
+            }).then(function (response) {
                 _this3.actions = _.filter(response.data.actions, function (action) {
                     return !action.onlyOnDetail;
                 });
                 _this3.pivotActions = response.data.pivotActions;
-            });
-        },
-
-
-        /**
-         * Get the filters available for the current resource.
-         */
-        getFilters: function getFilters() {
-            var _this4 = this;
-
-            this.filters = [];
-            this.currentFilters = [];
-            Nova.request().get('/nova-api/' + this.resourceName + '/lens/' + this.lens + '/filters').then(function (response) {
-                _this4.filters = response.data;
-                _this4.initializeFilterValuesFromQueryString();
             });
         },
 
@@ -11217,14 +12447,12 @@ exports.default = {
          * Get the count of all of the matching resources.
          */
         getAllMatchingResourceCount: function getAllMatchingResourceCount() {
-            var _this5 = this;
+            var _this4 = this;
 
             Nova.request().get('/nova-api/' + this.resourceName + '/lens/' + this.lens + '/count', {
                 params: this.resourceRequestQueryString
             }).then(function (response) {
-                console.log('count');
-                console.log(response.data.count);
-                _this5.allMatchingResourceCount = response.data.count;
+                _this4.allMatchingResourceCount = response.data.count;
             });
         },
 
@@ -11271,8 +12499,18 @@ exports.default = {
         /**
          * Update the trashed constraint for the resource listing.
          */
-        trashedChanged: function trashedChanged() {
+        trashedChanged: function trashedChanged(trashedStatus) {
+            this.trashed = trashedStatus;
             this.updateQueryString((0, _defineProperty3.default)({}, this.trashedParameter, this.trashed));
+        },
+
+
+        /**
+         * Update the per page parameter in the query string
+         */
+        updatePerPageChanged: function updatePerPageChanged(perPage) {
+            this.perPage = perPage;
+            this.perPageChanged();
         }
     },
 
@@ -11282,14 +12520,6 @@ exports.default = {
          */
         lensActionEndpoint: function lensActionEndpoint() {
             return '/nova-api/' + this.resourceName + '/lens/' + this.lens + '/action';
-        },
-
-
-        /**
-         * Get the name of the filter query string variable.
-         */
-        filterParameter: function filterParameter() {
-            return this.resourceName + '_filter';
         },
 
 
@@ -11500,18 +12730,18 @@ exports.default = {
 
 
         /**
-         * Determine if there any filters for this resource
+         * Determine if the resource should show any cards
          */
-        hasFilters: function hasFilters() {
-            return Boolean(this.filters.length > 0);
+        shouldShowCards: function shouldShowCards() {
+            return this.cards.length > 0;
         },
 
 
         /**
-         * Determine whether to show the toolbar for this resource index
+         * Get the endpoint for this resource's metrics.
          */
-        shouldShowToolbar: function shouldShowToolbar() {
-            return Boolean(this.shouldShowCheckBoxes || this.hasFilters);
+        cardsEndpoint: function cardsEndpoint() {
+            return '/nova-api/' + this.resourceName + '/lens/' + this.lens + '/cards';
         },
 
 
@@ -11596,6 +12826,22 @@ exports.default = {
          */
         canShowDeleteMenu: function canShowDeleteMenu() {
             return Boolean(this.authorizedToDeleteSelectedResources || this.authorizedToForceDeleteSelectedResources || this.authorizedToDeleteAnyResources || this.authorizedToForceDeleteAnyResources || this.authorizedToRestoreSelectedResources || this.authorizedToRestoreAnyResources);
+        },
+
+
+        /**
+         * Return the currently encoded filter string from the store
+         */
+        encodedFilters: function encodedFilters() {
+            return this.$store.getters[this.resourceName + '/currentEncodedFilters'];
+        },
+
+
+        /**
+         * Return the initial encoded filters from the query string
+         */
+        initialEncodedFilters: function initialEncodedFilters() {
+            return this.$route.query[this.filterParameter] || '';
         }
     }
 };
@@ -11650,6 +12896,8 @@ exports.default = {
         return {
             relationResponse: null,
             loading: true,
+            submittedViaUpdateAndContinueEditing: false,
+            submittedViaUpdateResource: false,
             fields: [],
             validationErrors: new _laravelNova.Errors(),
             lastRetrievedAt: null
@@ -11664,27 +12912,35 @@ exports.default = {
                 while (1) {
                     switch (_context.prev = _context.next) {
                         case 0:
-                            if (!this.isRelation) {
-                                _context.next = 6;
+                            if (!Nova.missingResource(this.resourceName)) {
+                                _context.next = 2;
                                 break;
                             }
 
-                            _context.next = 3;
+                            return _context.abrupt('return', this.$router.push({ name: '404' }));
+
+                        case 2:
+                            if (!this.isRelation) {
+                                _context.next = 8;
+                                break;
+                            }
+
+                            _context.next = 5;
                             return Nova.request('/nova-api/' + this.viaResource + '/field/' + this.viaRelationship);
 
-                        case 3:
+                        case 5:
                             _ref2 = _context.sent;
                             data = _ref2.data;
 
                             this.relationResponse = data;
 
-                        case 6:
+                        case 8:
 
                             this.getFields();
 
                             this.updateLastRetrievedAtTimestamp();
 
-                        case 8:
+                        case 10:
                         case 'end':
                             return _context.stop();
                     }
@@ -11761,13 +13017,17 @@ exports.default = {
                     while (1) {
                         switch (_context3.prev = _context3.next) {
                             case 0:
-                                _context3.prev = 0;
-                                _context3.next = 3;
+                                this.submittedViaUpdateResource = true;
+
+                                _context3.prev = 1;
+                                _context3.next = 4;
                                 return this.updateRequest();
 
-                            case 3:
+                            case 4:
                                 response = _context3.sent;
 
+
+                                this.submittedViaUpdateResource = false;
 
                                 this.$toasted.show(this.__('The :resource was updated!', {
                                     resource: this.resourceInformation.singularLabel.toLowerCase()
@@ -11777,15 +13037,17 @@ exports.default = {
                                     name: 'detail',
                                     params: {
                                         resourceName: this.resourceName,
-                                        resourceId: this.resourceId
+                                        resourceId: response.data.id
                                     }
                                 });
-                                _context3.next = 12;
+                                _context3.next = 15;
                                 break;
 
-                            case 8:
-                                _context3.prev = 8;
-                                _context3.t0 = _context3['catch'](0);
+                            case 10:
+                                _context3.prev = 10;
+                                _context3.t0 = _context3['catch'](1);
+
+                                this.submittedViaUpdateResource = false;
 
                                 if (_context3.t0.response.status == 422) {
                                     this.validationErrors = new _laravelNova.Errors(_context3.t0.response.data.errors);
@@ -11795,12 +13057,12 @@ exports.default = {
                                     this.$toasted.show(this.__('Another user has updated this resource since this page was loaded. Please refresh the page and try again.'), { type: 'error' });
                                 }
 
-                            case 12:
+                            case 15:
                             case 'end':
                                 return _context3.stop();
                         }
                     }
-                }, _callee3, this, [[0, 8]]);
+                }, _callee3, this, [[1, 10]]);
             }));
 
             function updateResource() {
@@ -11821,13 +13083,17 @@ exports.default = {
                     while (1) {
                         switch (_context4.prev = _context4.next) {
                             case 0:
-                                _context4.prev = 0;
-                                _context4.next = 3;
+                                this.submittedViaUpdateAndContinueEditing = true;
+
+                                _context4.prev = 1;
+                                _context4.next = 4;
                                 return this.updateRequest();
 
-                            case 3:
+                            case 4:
                                 response = _context4.sent;
 
+
+                                this.submittedViaUpdateAndContinueEditing = false;
 
                                 this.$toasted.show(this.__('The :resource was updated!', {
                                     resource: this.resourceInformation.singularLabel.toLowerCase()
@@ -11839,12 +13105,14 @@ exports.default = {
                                 this.validationErrors = new _laravelNova.Errors();
 
                                 this.updateLastRetrievedAtTimestamp();
-                                _context4.next = 14;
+                                _context4.next = 17;
                                 break;
 
-                            case 10:
-                                _context4.prev = 10;
-                                _context4.t0 = _context4['catch'](0);
+                            case 12:
+                                _context4.prev = 12;
+                                _context4.t0 = _context4['catch'](1);
+
+                                this.submittedViaUpdateAndContinueEditing = false;
 
                                 if (_context4.t0.response.status == 422) {
                                     this.validationErrors = new _laravelNova.Errors(_context4.t0.response.data.errors);
@@ -11854,12 +13122,12 @@ exports.default = {
                                     this.$toasted.show(this.__('Another user has updated this resource since this page was loaded. Please refresh the page and try again.'), { type: 'error' });
                                 }
 
-                            case 14:
+                            case 17:
                             case 'end':
                                 return _context4.stop();
                         }
                     }
-                }, _callee4, this, [[0, 10]]);
+                }, _callee4, this, [[1, 12]]);
             }));
 
             function updateAndContinueEditing() {
@@ -11911,9 +13179,28 @@ exports.default = {
         },
         isRelation: function isRelation() {
             return Boolean(this.viaResourceId && this.viaRelationship);
+        },
+
+
+        /**
+         * Determine if the form is being processed
+         */
+        isWorking: function isWorking() {
+            return this.submittedViaUpdateResource || this.submittedViaUpdateAndContinueEditing;
         }
     }
 }; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -12040,6 +13327,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     mixins: [_laravelNova.PerformsSearches, _laravelNova.TogglesTrashed],
@@ -12076,6 +13370,8 @@ exports.default = {
     data: function data() {
         return {
             loading: true,
+            submittedViaUpdateAndContinueEditing: false,
+            submittedViaUpdateAttachedResource: false,
             field: null,
             softDeletes: false,
             fields: [],
@@ -12085,6 +13381,11 @@ exports.default = {
             lastRetrievedAt: null
         };
     },
+
+    created: function created() {
+        if (Nova.missingResource(this.resourceName)) return this.$router.push({ name: '404' });
+    },
+
 
     /**
      * Mount the component.
@@ -12289,11 +13590,15 @@ exports.default = {
                     while (1) {
                         switch (_context4.prev = _context4.next) {
                             case 0:
-                                _context4.prev = 0;
-                                _context4.next = 3;
+                                this.submittedViaUpdateAttachedResource = true;
+
+                                _context4.prev = 1;
+                                _context4.next = 4;
                                 return this.updateRequest();
 
-                            case 3:
+                            case 4:
+
+                                this.submittedViaUpdateAttachedResource = false;
 
                                 this.$toasted.show(this.__('The resource was updated!'), { type: 'success' });
 
@@ -12304,14 +13609,15 @@ exports.default = {
                                         resourceId: this.resourceId
                                     }
                                 });
-                                _context4.next = 12;
+                                _context4.next = 14;
                                 break;
 
-                            case 7:
-                                _context4.prev = 7;
-                                _context4.t0 = _context4['catch'](0);
+                            case 9:
+                                _context4.prev = 9;
+                                _context4.t0 = _context4['catch'](1);
 
-                                console.log(_context4.t0);
+                                this.submittedViaUpdateAttachedResource = false;
+
                                 if (_context4.t0.response.status == 422) {
                                     this.validationErrors = new _laravelNova.Errors(_context4.t0.response.data.errors);
                                 }
@@ -12320,12 +13626,12 @@ exports.default = {
                                     this.$toasted.show(this.__('Another user has updated this resource since this page was loaded. Please refresh the page and try again.'), { type: 'error' });
                                 }
 
-                            case 12:
+                            case 14:
                             case 'end':
                                 return _context4.stop();
                         }
                     }
-                }, _callee4, this, [[0, 7]]);
+                }, _callee4, this, [[1, 9]]);
             }));
 
             function updateAttachedResource() {
@@ -12345,24 +13651,29 @@ exports.default = {
                     while (1) {
                         switch (_context5.prev = _context5.next) {
                             case 0:
-                                _context5.prev = 0;
-                                _context5.next = 3;
+                                this.submittedViaUpdateAndContinueEditing = true;
+
+                                _context5.prev = 1;
+                                _context5.next = 4;
                                 return this.updateRequest();
 
-                            case 3:
+                            case 4:
+
+                                this.submittedViaUpdateAndContinueEditing = false;
 
                                 this.$toasted.show(this.__('The resource was updated!'), { type: 'success' });
 
                                 // Reset the form by refetching the fields
                                 this.initializeComponent();
-                                _context5.next = 12;
+                                _context5.next = 14;
                                 break;
 
-                            case 7:
-                                _context5.prev = 7;
-                                _context5.t0 = _context5['catch'](0);
+                            case 9:
+                                _context5.prev = 9;
+                                _context5.t0 = _context5['catch'](1);
 
-                                console.log(_context5.t0);
+                                this.submittedViaUpdateAndContinueEditing = false;
+
                                 if (_context5.t0.response.status == 422) {
                                     this.validationErrors = new _laravelNova.Errors(_context5.t0.response.data.errors);
                                 }
@@ -12371,12 +13682,12 @@ exports.default = {
                                     this.$toasted.show(this.__('Another user has updated this resource since this page was loaded. Please refresh the page and try again.'), { type: 'error' });
                                 }
 
-                            case 12:
+                            case 14:
                             case 'end':
                                 return _context5.stop();
                         }
                     }
-                }, _callee5, this, [[0, 7]]);
+                }, _callee5, this, [[1, 9]]);
             }));
 
             function updateAndContinueEditing() {
@@ -12487,9 +13798,24 @@ exports.default = {
          */
         isSearchable: function isSearchable() {
             return this.field.searchable;
+        },
+
+
+        /**
+         * Determine if the form is being processed
+         */
+        isWorking: function isWorking() {
+            return this.submittedViaUpdateAttachedResource || this.submittedViaUpdateAndContinueEditing;
         }
     }
 };
+
+/***/ }),
+
+/***/ "./node_modules/babel-runtime/core-js/array/from.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = { "default": __webpack_require__("./node_modules/core-js/library/fn/array/from.js"), __esModule: true };
 
 /***/ }),
 
@@ -12760,6 +14086,34 @@ exports.default = function () {
     }
   };
 }();
+
+/***/ }),
+
+/***/ "./node_modules/babel-runtime/helpers/toConsumableArray.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _from = __webpack_require__("./node_modules/babel-runtime/core-js/array/from.js");
+
+var _from2 = _interopRequireDefault(_from);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  } else {
+    return (0, _from2.default)(arr);
+  }
+};
 
 /***/ }),
 
@@ -27075,6 +28429,154 @@ CodeMirror.defineMode("sql", function(config, parserConfig) {
 
 /***/ }),
 
+/***/ "./node_modules/codemirror/mode/twig/twig.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
+(function(mod) {
+  if (true) // CommonJS
+    mod(__webpack_require__("./node_modules/codemirror/lib/codemirror.js"),  __webpack_require__("./node_modules/codemirror/addon/mode/multiplex.js"));
+  else if (typeof define == "function" && define.amd) // AMD
+    define(["../../lib/codemirror", "../../addon/mode/multiplex"], mod);
+  else // Plain browser env
+    mod(CodeMirror);
+})(function(CodeMirror) {
+  "use strict";
+
+  CodeMirror.defineMode("twig:inner", function() {
+    var keywords = ["and", "as", "autoescape", "endautoescape", "block", "do", "endblock", "else", "elseif", "extends", "for", "endfor", "embed", "endembed", "filter", "endfilter", "flush", "from", "if", "endif", "in", "is", "include", "import", "not", "or", "set", "spaceless", "endspaceless", "with", "endwith", "trans", "endtrans", "blocktrans", "endblocktrans", "macro", "endmacro", "use", "verbatim", "endverbatim"],
+        operator = /^[+\-*&%=<>!?|~^]/,
+        sign = /^[:\[\(\{]/,
+        atom = ["true", "false", "null", "empty", "defined", "divisibleby", "divisible by", "even", "odd", "iterable", "sameas", "same as"],
+        number = /^(\d[+\-\*\/])?\d+(\.\d+)?/;
+
+    keywords = new RegExp("((" + keywords.join(")|(") + "))\\b");
+    atom = new RegExp("((" + atom.join(")|(") + "))\\b");
+
+    function tokenBase (stream, state) {
+      var ch = stream.peek();
+
+      //Comment
+      if (state.incomment) {
+        if (!stream.skipTo("#}")) {
+          stream.skipToEnd();
+        } else {
+          stream.eatWhile(/\#|}/);
+          state.incomment = false;
+        }
+        return "comment";
+      //Tag
+      } else if (state.intag) {
+        //After operator
+        if (state.operator) {
+          state.operator = false;
+          if (stream.match(atom)) {
+            return "atom";
+          }
+          if (stream.match(number)) {
+            return "number";
+          }
+        }
+        //After sign
+        if (state.sign) {
+          state.sign = false;
+          if (stream.match(atom)) {
+            return "atom";
+          }
+          if (stream.match(number)) {
+            return "number";
+          }
+        }
+
+        if (state.instring) {
+          if (ch == state.instring) {
+            state.instring = false;
+          }
+          stream.next();
+          return "string";
+        } else if (ch == "'" || ch == '"') {
+          state.instring = ch;
+          stream.next();
+          return "string";
+        } else if (stream.match(state.intag + "}") || stream.eat("-") && stream.match(state.intag + "}")) {
+          state.intag = false;
+          return "tag";
+        } else if (stream.match(operator)) {
+          state.operator = true;
+          return "operator";
+        } else if (stream.match(sign)) {
+          state.sign = true;
+        } else {
+          if (stream.eat(" ") || stream.sol()) {
+            if (stream.match(keywords)) {
+              return "keyword";
+            }
+            if (stream.match(atom)) {
+              return "atom";
+            }
+            if (stream.match(number)) {
+              return "number";
+            }
+            if (stream.sol()) {
+              stream.next();
+            }
+          } else {
+            stream.next();
+          }
+
+        }
+        return "variable";
+      } else if (stream.eat("{")) {
+        if (stream.eat("#")) {
+          state.incomment = true;
+          if (!stream.skipTo("#}")) {
+            stream.skipToEnd();
+          } else {
+            stream.eatWhile(/\#|}/);
+            state.incomment = false;
+          }
+          return "comment";
+        //Open tag
+        } else if (ch = stream.eat(/\{|%/)) {
+          //Cache close tag
+          state.intag = ch;
+          if (ch == "{") {
+            state.intag = "}";
+          }
+          stream.eat("-");
+          return "tag";
+        }
+      }
+      stream.next();
+    };
+
+    return {
+      startState: function () {
+        return {};
+      },
+      token: function (stream, state) {
+        return tokenBase(stream, state);
+      }
+    };
+  });
+
+  CodeMirror.defineMode("twig", function(config, parserConfig) {
+    var twigInner = CodeMirror.getMode(config, "twig:inner");
+    if (!parserConfig || !parserConfig.base) return twigInner;
+    return CodeMirror.multiplexingMode(
+      CodeMirror.getMode(config, parserConfig.base), {
+        open: /\{[{#%]/, close: /[}#%]\}/, mode: twigInner, parseDelimiters: true
+      }
+    );
+  });
+  CodeMirror.defineMIME("text/x-twig", "twig");
+});
+
+
+/***/ }),
+
 /***/ "./node_modules/codemirror/mode/vue/vue.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27769,6 +29271,16 @@ CodeMirror.defineMIME("text/yaml", "yaml");
 
 /***/ }),
 
+/***/ "./node_modules/core-js/library/fn/array/from.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("./node_modules/core-js/library/modules/es6.string.iterator.js");
+__webpack_require__("./node_modules/core-js/library/modules/es6.array.from.js");
+module.exports = __webpack_require__("./node_modules/core-js/library/modules/_core.js").Array.from;
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/library/fn/get-iterator.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27974,6 +29486,22 @@ module.exports = function (it) {
 
 var core = module.exports = { version: '2.5.7' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/library/modules/_create-property.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $defineProperty = __webpack_require__("./node_modules/core-js/library/modules/_object-dp.js");
+var createDesc = __webpack_require__("./node_modules/core-js/library/modules/_property-desc.js");
+
+module.exports = function (object, index, value) {
+  if (index in object) $defineProperty.f(object, index, createDesc(0, value));
+  else object[index] = value;
+};
 
 
 /***/ }),
@@ -29236,6 +30764,51 @@ module.exports = __webpack_require__("./node_modules/core-js/library/modules/_co
 
 /***/ }),
 
+/***/ "./node_modules/core-js/library/modules/es6.array.from.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var ctx = __webpack_require__("./node_modules/core-js/library/modules/_ctx.js");
+var $export = __webpack_require__("./node_modules/core-js/library/modules/_export.js");
+var toObject = __webpack_require__("./node_modules/core-js/library/modules/_to-object.js");
+var call = __webpack_require__("./node_modules/core-js/library/modules/_iter-call.js");
+var isArrayIter = __webpack_require__("./node_modules/core-js/library/modules/_is-array-iter.js");
+var toLength = __webpack_require__("./node_modules/core-js/library/modules/_to-length.js");
+var createProperty = __webpack_require__("./node_modules/core-js/library/modules/_create-property.js");
+var getIterFn = __webpack_require__("./node_modules/core-js/library/modules/core.get-iterator-method.js");
+
+$export($export.S + $export.F * !__webpack_require__("./node_modules/core-js/library/modules/_iter-detect.js")(function (iter) { Array.from(iter); }), 'Array', {
+  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
+  from: function from(arrayLike /* , mapfn = undefined, thisArg = undefined */) {
+    var O = toObject(arrayLike);
+    var C = typeof this == 'function' ? this : Array;
+    var aLen = arguments.length;
+    var mapfn = aLen > 1 ? arguments[1] : undefined;
+    var mapping = mapfn !== undefined;
+    var index = 0;
+    var iterFn = getIterFn(O);
+    var length, result, step, iterator;
+    if (mapping) mapfn = ctx(mapfn, aLen > 2 ? arguments[2] : undefined, 2);
+    // if object isn't iterable or it's array with default iterator - use simple case
+    if (iterFn != undefined && !(C == Array && isArrayIter(iterFn))) {
+      for (iterator = iterFn.call(O), result = new C(); !(step = iterator.next()).done; index++) {
+        createProperty(result, index, mapping ? call(iterator, mapfn, [step.value, index], true) : step.value);
+      }
+    } else {
+      length = toLength(O.length);
+      for (result = new C(length); length > index; index++) {
+        createProperty(result, index, mapping ? mapfn(O[index], index) : O[index]);
+      }
+    }
+    result.length = index;
+    return result;
+  }
+});
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/library/modules/es6.array.iterator.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29779,7 +31352,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "@charset \"UTF-8\";\n/*\nTrix 0.11.4\nCopyright © 2018 Basecamp, LLC\nhttp://trix-editor.org/*/\ntrix-editor {\n  border: 1px solid #bbb;\n  border-radius: 3px;\n  margin: 0;\n  padding: 0.4em 0.6em;\n  min-height: 5em;\n  outline: none; }\ntrix-toolbar * {\n  box-sizing: border-box; }\ntrix-toolbar .trix-button-row {\n  display: flex;\n  flex-wrap: nowrap;\n  justify-content: space-between; }\ntrix-toolbar .trix-button-group {\n  display: flex;\n  margin-bottom: 10px;\n  border: 1px solid #bbb;\n  border-top-color: #ccc;\n  border-bottom-color: #888;\n  border-radius: 3px; }\ntrix-toolbar .trix-button {\n  position: relative;\n  float: left;\n  color: rgba(0, 0, 0, 0.6);\n  font-size: 0.75em;\n  font-weight: 600;\n  white-space: nowrap;\n  padding: 0 0.5em;\n  margin: 0;\n  outline: none;\n  border: none;\n  border-bottom: 1px solid #ddd;\n  border-radius: 0;\n  background: transparent; }\n  trix-toolbar .trix-button:not(:first-child) {\n    border-left: 1px solid #ccc; }\n  trix-toolbar .trix-button.trix-active {\n    background: #cbeefa;\n    color: black; }\n  trix-toolbar .trix-button:not(:disabled) {\n    cursor: pointer; }\n  trix-toolbar .trix-button:disabled {\n    color: rgba(0, 0, 0, 0.125); }\n  @media (max-device-width: 768px) {\n    trix-toolbar .trix-button {\n      letter-spacing: -0.01em;\n      padding: 0 0.3em; } }\ntrix-toolbar .trix-button--icon {\n  font-size: inherit;\n  width: 2.6em;\n  height: 1.6em;\n  max-width: calc(0.8em + 4vw);\n  text-indent: -9999px; }\n  @media (max-device-width: 768px) {\n    trix-toolbar .trix-button--icon {\n      height: 2em;\n      max-width: calc(0.8em + 3.5vw); } }\n  trix-toolbar .trix-button--icon::before {\n    display: inline-block;\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    opacity: 0.6;\n    content: \"\";\n    background-position: center;\n    background-repeat: no-repeat;\n    background-size: contain; }\n    @media (max-device-width: 768px) {\n      trix-toolbar .trix-button--icon::before {\n        right: 6%;\n        left: 6%; } }\n  trix-toolbar .trix-button--icon.trix-active::before {\n    opacity: 1; }\n  trix-toolbar .trix-button--icon:disabled::before {\n    opacity: 0.125; }\ntrix-toolbar .trix-button--icon-bold::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M15.6%2011.8c1-.7%201.6-1.8%201.6-2.8a4%204%200%200%200-4-4H7v14h7c2.1%200%203.7-1.7%203.7-3.8%200-1.5-.8-2.8-2.1-3.4zM10%207.5h3a1.5%201.5%200%201%201%200%203h-3v-3zm3.5%209H10v-3h3.5a1.5%201.5%200%201%201%200%203z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-italic::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M10%205v3h2.2l-3.4%208H6v3h8v-3h-2.2l3.4-8H18V5h-8z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-link::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M9.88%2013.7a4.3%204.3%200%200%201%200-6.07l3.37-3.37a4.26%204.26%200%200%201%206.07%200%204.3%204.3%200%200%201%200%206.06l-1.96%201.72a.91.91%200%201%201-1.3-1.3l1.97-1.71a2.46%202.46%200%200%200-3.48-3.48l-3.38%203.37a2.46%202.46%200%200%200%200%203.48.91.91%200%201%201-1.3%201.3z%22%2F%3E%3Cpath%20d%3D%22M4.25%2019.46a4.3%204.3%200%200%201%200-6.07l1.93-1.9a.91.91%200%201%201%201.3%201.3l-1.93%201.9a2.46%202.46%200%200%200%203.48%203.48l3.37-3.38c.96-.96.96-2.52%200-3.48a.91.91%200%201%201%201.3-1.3%204.3%204.3%200%200%201%200%206.07l-3.38%203.38a4.26%204.26%200%200%201-6.07%200z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-strike::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M12.73%2014l.28.14c.26.15.45.3.57.44.12.14.18.3.18.5%200%20.3-.15.56-.44.75-.3.2-.76.3-1.39.3A13.52%2013.52%200%200%201%207%2014.95v3.37a10.64%2010.64%200%200%200%204.84.88c1.26%200%202.35-.19%203.28-.56.93-.37%201.64-.9%202.14-1.57s.74-1.45.74-2.32c0-.26-.02-.51-.06-.75h-5.21zm-5.5-4c-.08-.34-.12-.7-.12-1.1%200-1.29.52-2.3%201.58-3.02%201.05-.72%202.5-1.08%204.34-1.08%201.62%200%203.28.34%204.97%201l-1.3%202.93c-1.47-.6-2.73-.9-3.8-.9-.55%200-.96.08-1.2.26-.26.17-.38.38-.38.64%200%20.27.16.52.48.74.17.12.53.3%201.05.53H7.23zM3%2013h18v-2H3v2z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-quote::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20version%3D%221%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M6%2017h3l2-4V7H5v6h3zm8%200h3l2-4V7h-6v6h3z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-heading-1::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20version%3D%221%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M12%209v3H9v7H6v-7H3V9h9zM8%204h14v3h-6v12h-3V7H8V4z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-code::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M18.2%2012L15%2015.2l1.4%201.4L21%2012l-4.6-4.6L15%208.8l3.2%203.2zM5.8%2012L9%208.8%207.6%207.4%203%2012l4.6%204.6L9%2015.2%205.8%2012z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-bullet-list::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20version%3D%221%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M4%204a2%202%200%201%200%200%204%202%202%200%200%200%200-4zm0%206a2%202%200%201%200%200%204%202%202%200%200%200%200-4zm0%206a2%202%200%201%200%200%204%202%202%200%200%200%200-4zm4%203h14v-2H8v2zm0-6h14v-2H8v2zm0-8v2h14V5H8z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-number-list::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M2%2017h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1%203h1.8L2%2013.1v.9h3v-1H3.2L5%2010.9V10H2v1zm5-6v2h14V5H7zm0%2014h14v-2H7v2zm0-6h14v-2H7v2z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-undo::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M12.5%208c-2.6%200-5%201-6.9%202.6L2%207v9h9l-3.6-3.6A8%208%200%200%201%2020%2016l2.4-.8a10.5%2010.5%200%200%200-10-7.2z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-redo::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M18.4%2010.6a10.5%2010.5%200%200%200-16.9%204.6L4%2016a8%208%200%200%201%2012.7-3.6L13%2016h9V7l-3.6%203.6z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-decrease-nesting-level::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M3%2019h19v-2H3v2zm7-6h12v-2H10v2zm-8.3-.3l2.8%202.9L6%2014.2%204%2012l2-2-1.4-1.5L1%2012l.7.7zM3%205v2h19V5H3z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-increase-nesting-level::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M3%2019h19v-2H3v2zm7-6h12v-2H10v2zm-6.9-1L1%2014.2l1.4%201.4L6%2012l-.7-.7-2.8-2.8L1%209.9%203.1%2012zM3%205v2h19V5H3z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-dialogs {\n  position: relative; }\ntrix-toolbar .trix-dialog {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  font-size: 0.75em;\n  padding: 15px 10px;\n  background: #fff;\n  box-shadow: 0 0.3em 1em #ccc;\n  border-top: 2px solid #888;\n  border-radius: 5px;\n  z-index: 5; }\ntrix-toolbar .trix-input--dialog {\n  font-size: inherit;\n  font-weight: normal;\n  padding: 0.5em 0.8em;\n  margin: 0 10px 0 0;\n  border-radius: 3px;\n  border: 1px solid #bbb;\n  background-color: #fff;\n  box-shadow: none;\n  outline: none;\n  -webkit-appearance: none;\n  -moz-appearance: none; }\n  trix-toolbar .trix-input--dialog.validate:invalid {\n    box-shadow: #F00 0px 0px 1.5px 1px; }\ntrix-toolbar .trix-button--dialog {\n  font-size: inherit;\n  padding: 0.5em;\n  border-bottom: none; }\ntrix-toolbar .trix-dialog--link {\n  max-width: 600px; }\ntrix-toolbar .trix-dialog__link-fields {\n  display: flex;\n  align-items: baseline; }\n  trix-toolbar .trix-dialog__link-fields .trix-input {\n    flex: 1; }\n  trix-toolbar .trix-dialog__link-fields .trix-button-group {\n    flex: 0 0 content;\n    margin: 0; }\ntrix-editor [data-trix-mutable=true] {\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none; }\n  trix-editor [data-trix-mutable=true] img {\n    box-shadow: 0 0 0 2px highlight; }\n  trix-editor [data-trix-mutable=true].attachment.attachment--file {\n    box-shadow: 0 0 0 2px highlight;\n    border-color: transparent; }\ntrix-editor [data-trix-mutable=true]::-moz-selection,\ntrix-editor [data-trix-cursor-target]::-moz-selection {\n  background: none; }\ntrix-editor [data-trix-mutable=true]::selection,\ntrix-editor [data-trix-cursor-target]::selection {\n  background: none; }\ntrix-editor .attachment {\n  position: relative; }\n  trix-editor .attachment:hover {\n    cursor: default; }\ntrix-editor .attachment--preview .attachment__caption:hover {\n  cursor: text; }\ntrix-editor .attachment__progress {\n  position: absolute;\n  z-index: 1;\n  height: 20px;\n  top: calc(50% - 10px);\n  left: 5%;\n  width: 90%;\n  opacity: 0.9;\n  transition: opacity 200ms ease-in; }\n  trix-editor .attachment__progress[value=\"100\"] {\n    opacity: 0; }\ntrix-editor .attachment__caption-editor {\n  display: inline-block;\n  width: 100%;\n  margin: 0;\n  padding: 0;\n  font-size: inherit;\n  font-family: inherit;\n  line-height: inherit;\n  color: inherit;\n  text-align: center;\n  vertical-align: top;\n  border: none;\n  outline: none;\n  -webkit-appearance: none;\n  -moz-appearance: none; }\ntrix-editor .attachment__remove {\n  cursor: pointer; }\ntrix-editor .attachment__remove--icon {\n  text-indent: -9999px;\n  display: block;\n  position: absolute;\n  z-index: 1;\n  padding: 0;\n  margin: 0;\n  top: -1.1em;\n  left: calc(50% - 0.8em);\n  width: 1.8em;\n  height: 1.8em;\n  line-height: 1.8em;\n  border-radius: 50%;\n  background-color: #fff;\n  border: 2px solid highlight;\n  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.25); }\n  trix-editor .attachment__remove--icon::before {\n    display: inline-block;\n    position: absolute;\n    top: 0.1em;\n    right: 0.1em;\n    bottom: 0.1em;\n    left: 0.1em;\n    opacity: 0.75;\n    content: \"\";\n    background-image: url(data:image/svg+xml,%3Csvg%20height%3D%2224%22%20width%3D%2224%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M19%206.4L17.6%205%2012%2010.6%206.4%205%205%206.4l5.6%205.6L5%2017.6%206.4%2019l5.6-5.6%205.6%205.6%201.4-1.4-5.6-5.6z%22%2F%3E%3Cpath%20d%3D%22M0%200h24v24H0z%22%20fill%3D%22none%22%2F%3E%3C%2Fsvg%3E);\n    background-position: center;\n    background-repeat: no-repeat;\n    background-size: contain; }\n  trix-editor .attachment__remove--icon:hover {\n    border-color: #333; }\n    trix-editor .attachment__remove--icon:hover::before {\n      opacity: 1; }\n@charset \"UTF-8\";\n.trix-content {\n  line-height: 1.5; }\n  .trix-content * {\n    box-sizing: border-box; }\n  .trix-content h1 {\n    font-size: 1.2em;\n    line-height: 1.2;\n    margin: 0; }\n  .trix-content blockquote {\n    margin: 0 0 0 0.3em;\n    padding: 0 0 0 0.6em;\n    border-left: 0.3em solid #ccc; }\n  .trix-content pre {\n    display: inline-block;\n    width: 100%;\n    vertical-align: top;\n    font-family: monospace;\n    font-size: 0.9em;\n    margin: 0;\n    padding: 0.5em;\n    white-space: pre;\n    background-color: #eee;\n    overflow-x: auto; }\n  .trix-content ul, .trix-content ol, .trix-content li {\n    margin: 0;\n    padding: 0; }\n    .trix-content ul li, .trix-content ol li, .trix-content li li {\n      margin-left: 1em; }\n  .trix-content img {\n    max-width: 100%;\n    height: auto; }\n  .trix-content a[data-trix-attachment] {\n    color: inherit;\n    text-decoration: none; }\n    .trix-content a[data-trix-attachment]:hover, .trix-content a[data-trix-attachment]:visited:hover {\n      color: inherit; }\n  .trix-content .attachment {\n    display: inline-block;\n    position: relative;\n    max-width: 100%;\n    margin: 0;\n    padding: 0; }\n  .trix-content .attachment__caption {\n    padding: 0;\n    text-align: center; }\n    .trix-content .attachment__caption .attachment__name + .attachment__size::before {\n      content: ' \\B7   '; }\n  .trix-content .attachment--preview {\n    width: 100%;\n    text-align: center; }\n    .trix-content .attachment--preview .attachment__caption {\n      color: #666;\n      font-size: 0.9em;\n      line-height: 1.2; }\n  .trix-content .attachment--file {\n    color: #333;\n    line-height: 1;\n    margin: 0 2px 2px 0;\n    padding: 0.4em 1em;\n    border: 1px solid #bbb;\n    border-radius: 5px; }\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\n/*\nTrix 1.0.0\nCopyright © 2018 Basecamp, LLC\nhttp://trix-editor.org/*/\ntrix-editor {\n  border: 1px solid #bbb;\n  border-radius: 3px;\n  margin: 0;\n  padding: 0.4em 0.6em;\n  min-height: 5em;\n  outline: none; }\ntrix-toolbar * {\n  box-sizing: border-box; }\ntrix-toolbar .trix-button-row {\n  display: flex;\n  flex-wrap: nowrap;\n  justify-content: space-between; }\ntrix-toolbar .trix-button-group {\n  display: flex;\n  margin-bottom: 10px;\n  border: 1px solid #bbb;\n  border-top-color: #ccc;\n  border-bottom-color: #888;\n  border-radius: 3px; }\n  trix-toolbar .trix-button-group:not(:first-child) {\n    margin-left: 1.5vw; }\n    @media (max-device-width: 768px) {\n      trix-toolbar .trix-button-group:not(:first-child) {\n        margin-left: 0; } }\ntrix-toolbar .trix-button-group-spacer {\n  flex-grow: 1; }\n  @media (max-device-width: 768px) {\n    trix-toolbar .trix-button-group-spacer {\n      display: none; } }\ntrix-toolbar .trix-button {\n  position: relative;\n  float: left;\n  color: rgba(0, 0, 0, 0.6);\n  font-size: 0.75em;\n  font-weight: 600;\n  white-space: nowrap;\n  padding: 0 0.5em;\n  margin: 0;\n  outline: none;\n  border: none;\n  border-bottom: 1px solid #ddd;\n  border-radius: 0;\n  background: transparent; }\n  trix-toolbar .trix-button:not(:first-child) {\n    border-left: 1px solid #ccc; }\n  trix-toolbar .trix-button.trix-active {\n    background: #cbeefa;\n    color: black; }\n  trix-toolbar .trix-button:not(:disabled) {\n    cursor: pointer; }\n  trix-toolbar .trix-button:disabled {\n    color: rgba(0, 0, 0, 0.125); }\n  @media (max-device-width: 768px) {\n    trix-toolbar .trix-button {\n      letter-spacing: -0.01em;\n      padding: 0 0.3em; } }\ntrix-toolbar .trix-button--icon {\n  font-size: inherit;\n  width: 2.6em;\n  height: 1.6em;\n  max-width: calc(0.8em + 4vw);\n  text-indent: -9999px; }\n  @media (max-device-width: 768px) {\n    trix-toolbar .trix-button--icon {\n      height: 2em;\n      max-width: calc(0.8em + 3.5vw); } }\n  trix-toolbar .trix-button--icon::before {\n    display: inline-block;\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    opacity: 0.6;\n    content: \"\";\n    background-position: center;\n    background-repeat: no-repeat;\n    background-size: contain; }\n    @media (max-device-width: 768px) {\n      trix-toolbar .trix-button--icon::before {\n        right: 6%;\n        left: 6%; } }\n  trix-toolbar .trix-button--icon.trix-active::before {\n    opacity: 1; }\n  trix-toolbar .trix-button--icon:disabled::before {\n    opacity: 0.125; }\ntrix-toolbar .trix-button--icon-bold::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M15.6%2011.8c1-.7%201.6-1.8%201.6-2.8a4%204%200%200%200-4-4H7v14h7c2.1%200%203.7-1.7%203.7-3.8%200-1.5-.8-2.8-2.1-3.4zM10%207.5h3a1.5%201.5%200%201%201%200%203h-3v-3zm3.5%209H10v-3h3.5a1.5%201.5%200%201%201%200%203z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-italic::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M10%205v3h2.2l-3.4%208H6v3h8v-3h-2.2l3.4-8H18V5h-8z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-link::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M9.88%2013.7a4.3%204.3%200%200%201%200-6.07l3.37-3.37a4.26%204.26%200%200%201%206.07%200%204.3%204.3%200%200%201%200%206.06l-1.96%201.72a.91.91%200%201%201-1.3-1.3l1.97-1.71a2.46%202.46%200%200%200-3.48-3.48l-3.38%203.37a2.46%202.46%200%200%200%200%203.48.91.91%200%201%201-1.3%201.3z%22%2F%3E%3Cpath%20d%3D%22M4.25%2019.46a4.3%204.3%200%200%201%200-6.07l1.93-1.9a.91.91%200%201%201%201.3%201.3l-1.93%201.9a2.46%202.46%200%200%200%203.48%203.48l3.37-3.38c.96-.96.96-2.52%200-3.48a.91.91%200%201%201%201.3-1.3%204.3%204.3%200%200%201%200%206.07l-3.38%203.38a4.26%204.26%200%200%201-6.07%200z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-strike::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M12.73%2014l.28.14c.26.15.45.3.57.44.12.14.18.3.18.5%200%20.3-.15.56-.44.75-.3.2-.76.3-1.39.3A13.52%2013.52%200%200%201%207%2014.95v3.37a10.64%2010.64%200%200%200%204.84.88c1.26%200%202.35-.19%203.28-.56.93-.37%201.64-.9%202.14-1.57s.74-1.45.74-2.32c0-.26-.02-.51-.06-.75h-5.21zm-5.5-4c-.08-.34-.12-.7-.12-1.1%200-1.29.52-2.3%201.58-3.02%201.05-.72%202.5-1.08%204.34-1.08%201.62%200%203.28.34%204.97%201l-1.3%202.93c-1.47-.6-2.73-.9-3.8-.9-.55%200-.96.08-1.2.26-.26.17-.38.38-.38.64%200%20.27.16.52.48.74.17.12.53.3%201.05.53H7.23zM3%2013h18v-2H3v2z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-quote::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20version%3D%221%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M6%2017h3l2-4V7H5v6h3zm8%200h3l2-4V7h-6v6h3z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-heading-1::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20version%3D%221%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M12%209v3H9v7H6v-7H3V9h9zM8%204h14v3h-6v12h-3V7H8V4z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-code::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M18.2%2012L15%2015.2l1.4%201.4L21%2012l-4.6-4.6L15%208.8l3.2%203.2zM5.8%2012L9%208.8%207.6%207.4%203%2012l4.6%204.6L9%2015.2%205.8%2012z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-bullet-list::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20version%3D%221%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M4%204a2%202%200%201%200%200%204%202%202%200%200%200%200-4zm0%206a2%202%200%201%200%200%204%202%202%200%200%200%200-4zm0%206a2%202%200%201%200%200%204%202%202%200%200%200%200-4zm4%203h14v-2H8v2zm0-6h14v-2H8v2zm0-8v2h14V5H8z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-number-list::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M2%2017h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1%203h1.8L2%2013.1v.9h3v-1H3.2L5%2010.9V10H2v1zm5-6v2h14V5H7zm0%2014h14v-2H7v2zm0-6h14v-2H7v2z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-undo::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M12.5%208c-2.6%200-5%201-6.9%202.6L2%207v9h9l-3.6-3.6A8%208%200%200%201%2020%2016l2.4-.8a10.5%2010.5%200%200%200-10-7.2z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-redo::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M18.4%2010.6a10.5%2010.5%200%200%200-16.9%204.6L4%2016a8%208%200%200%201%2012.7-3.6L13%2016h9V7l-3.6%203.6z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-decrease-nesting-level::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M3%2019h19v-2H3v2zm7-6h12v-2H10v2zm-8.3-.3l2.8%202.9L6%2014.2%204%2012l2-2-1.4-1.5L1%2012l.7.7zM3%205v2h19V5H3z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-button--icon-increase-nesting-level::before {\n  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20d%3D%22M3%2019h19v-2H3v2zm7-6h12v-2H10v2zm-6.9-1L1%2014.2l1.4%201.4L6%2012l-.7-.7-2.8-2.8L1%209.9%203.1%2012zM3%205v2h19V5H3z%22%2F%3E%3C%2Fsvg%3E); }\ntrix-toolbar .trix-dialogs {\n  position: relative; }\ntrix-toolbar .trix-dialog {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  font-size: 0.75em;\n  padding: 15px 10px;\n  background: #fff;\n  box-shadow: 0 0.3em 1em #ccc;\n  border-top: 2px solid #888;\n  border-radius: 5px;\n  z-index: 5; }\ntrix-toolbar .trix-input--dialog {\n  font-size: inherit;\n  font-weight: normal;\n  padding: 0.5em 0.8em;\n  margin: 0 10px 0 0;\n  border-radius: 3px;\n  border: 1px solid #bbb;\n  background-color: #fff;\n  box-shadow: none;\n  outline: none;\n  -webkit-appearance: none;\n  -moz-appearance: none; }\n  trix-toolbar .trix-input--dialog.validate:invalid {\n    box-shadow: #F00 0px 0px 1.5px 1px; }\ntrix-toolbar .trix-button--dialog {\n  font-size: inherit;\n  padding: 0.5em;\n  border-bottom: none; }\ntrix-toolbar .trix-dialog--link {\n  max-width: 600px; }\ntrix-toolbar .trix-dialog__link-fields {\n  display: flex;\n  align-items: baseline; }\n  trix-toolbar .trix-dialog__link-fields .trix-input {\n    flex: 1; }\n  trix-toolbar .trix-dialog__link-fields .trix-button-group {\n    flex: 0 0 content;\n    margin: 0; }\ntrix-editor [data-trix-mutable]:not(.attachment__caption-editor) {\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none; }\n\ntrix-editor [data-trix-mutable]::-moz-selection,\ntrix-editor [data-trix-cursor-target]::-moz-selection, trix-editor [data-trix-mutable] ::-moz-selection {\n  background: none; }\ntrix-editor [data-trix-mutable]::selection,\ntrix-editor [data-trix-cursor-target]::selection, trix-editor [data-trix-mutable] ::selection {\n  background: none; }\n\ntrix-editor [data-trix-mutable].attachment__caption-editor:focus::-moz-selection {\n  background: highlight; }\ntrix-editor [data-trix-mutable].attachment__caption-editor:focus::selection {\n  background: highlight; }\n\ntrix-editor [data-trix-mutable].attachment.attachment--file {\n  box-shadow: 0 0 0 2px highlight;\n  border-color: transparent; }\ntrix-editor [data-trix-mutable].attachment img {\n  box-shadow: 0 0 0 2px highlight; }\ntrix-editor .attachment {\n  position: relative; }\n  trix-editor .attachment:hover {\n    cursor: default; }\ntrix-editor .attachment--preview .attachment__caption:hover {\n  cursor: text; }\ntrix-editor .attachment__progress {\n  position: absolute;\n  z-index: 1;\n  height: 20px;\n  top: calc(50% - 10px);\n  left: 5%;\n  width: 90%;\n  opacity: 0.9;\n  transition: opacity 200ms ease-in; }\n  trix-editor .attachment__progress[value=\"100\"] {\n    opacity: 0; }\ntrix-editor .attachment__caption-editor {\n  display: inline-block;\n  width: 100%;\n  margin: 0;\n  padding: 0;\n  font-size: inherit;\n  font-family: inherit;\n  line-height: inherit;\n  color: inherit;\n  text-align: center;\n  vertical-align: top;\n  border: none;\n  outline: none;\n  -webkit-appearance: none;\n  -moz-appearance: none; }\ntrix-editor .attachment__toolbar {\n  position: absolute;\n  z-index: 1;\n  top: -0.9em;\n  left: 0;\n  width: 100%;\n  text-align: center; }\ntrix-editor .trix-button-group {\n  display: inline-flex; }\ntrix-editor .trix-button {\n  position: relative;\n  float: left;\n  color: #666;\n  white-space: nowrap;\n  font-size: 80%;\n  padding: 0 0.8em;\n  margin: 0;\n  outline: none;\n  border: none;\n  border-radius: 0;\n  background: transparent; }\n  trix-editor .trix-button:not(:first-child) {\n    border-left: 1px solid #ccc; }\n  trix-editor .trix-button.trix-active {\n    background: #cbeefa; }\n  trix-editor .trix-button:not(:disabled) {\n    cursor: pointer; }\ntrix-editor .trix-button--remove {\n  text-indent: -9999px;\n  display: inline-block;\n  padding: 0;\n  outline: none;\n  width: 1.8em;\n  height: 1.8em;\n  line-height: 1.8em;\n  border-radius: 50%;\n  background-color: #fff;\n  border: 2px solid highlight;\n  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.25); }\n  trix-editor .trix-button--remove::before {\n    display: inline-block;\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    opacity: 0.7;\n    content: \"\";\n    background-image: url(data:image/svg+xml,%3Csvg%20height%3D%2224%22%20width%3D%2224%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M19%206.4L17.6%205%2012%2010.6%206.4%205%205%206.4l5.6%205.6L5%2017.6%206.4%2019l5.6-5.6%205.6%205.6%201.4-1.4-5.6-5.6z%22%2F%3E%3Cpath%20d%3D%22M0%200h24v24H0z%22%20fill%3D%22none%22%2F%3E%3C%2Fsvg%3E);\n    background-position: center;\n    background-repeat: no-repeat;\n    background-size: 90%; }\n  trix-editor .trix-button--remove:hover {\n    border-color: #333; }\n    trix-editor .trix-button--remove:hover::before {\n      opacity: 1; }\ntrix-editor .attachment__metadata-container {\n  position: relative; }\ntrix-editor .attachment__metadata {\n  position: absolute;\n  left: 50%;\n  top: 2em;\n  transform: translate(-50%, 0);\n  max-width: 90%;\n  padding: 0.1em 0.6em;\n  font-size: 0.8em;\n  color: #fff;\n  background-color: rgba(0, 0, 0, 0.7);\n  border-radius: 3px; }\n  trix-editor .attachment__metadata .attachment__name {\n    display: inline-block;\n    max-width: 100%;\n    vertical-align: bottom;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap; }\n  trix-editor .attachment__metadata .attachment__size {\n    margin-left: 0.2em;\n    white-space: nowrap; }\n@charset \"UTF-8\";\n.trix-content {\n  line-height: 1.5; }\n  .trix-content * {\n    box-sizing: border-box; }\n  .trix-content h1 {\n    font-size: 1.2em;\n    line-height: 1.2;\n    margin: 0; }\n  .trix-content blockquote {\n    margin: 0 0 0 0.3em;\n    padding: 0 0 0 0.6em;\n    border-left: 0.3em solid #ccc; }\n  .trix-content pre {\n    display: inline-block;\n    width: 100%;\n    vertical-align: top;\n    font-family: monospace;\n    font-size: 0.9em;\n    margin: 0;\n    padding: 0.5em;\n    white-space: pre;\n    background-color: #eee;\n    overflow-x: auto; }\n  .trix-content ul, .trix-content ol, .trix-content li {\n    margin: 0;\n    padding: 0; }\n    .trix-content ul li, .trix-content ol li, .trix-content li li {\n      margin-left: 1em; }\n  .trix-content img {\n    max-width: 100%;\n    height: auto; }\n  .trix-content .attachment {\n    display: inline-block;\n    position: relative;\n    max-width: 100%;\n    margin: 0;\n    padding: 0; }\n    .trix-content .attachment a {\n      color: inherit;\n      text-decoration: none; }\n      .trix-content .attachment a:hover, .trix-content .attachment a:visited:hover {\n        color: inherit; }\n  .trix-content .attachment__caption {\n    padding: 0;\n    text-align: center; }\n    .trix-content .attachment__caption .attachment__name + .attachment__size::before {\n      content: ' \\B7   '; }\n  .trix-content .attachment--preview {\n    width: 100%;\n    text-align: center; }\n    .trix-content .attachment--preview .attachment__caption {\n      color: #666;\n      font-size: 0.9em;\n      line-height: 1.2; }\n  .trix-content .attachment--file {\n    color: #333;\n    line-height: 1;\n    margin: 0 2px 2px 0;\n    padding: 0.4em 1em;\n    border: 1px solid #bbb;\n    border-radius: 5px; }\n  .trix-content .attachment-gallery {\n    display: flex;\n    flex-wrap: wrap;\n    position: relative;\n    margin: 0;\n    padding: 0; }\n    .trix-content .attachment-gallery .attachment {\n      flex: 1 0 33%;\n      padding: 0 0.5em;\n      max-width: 33%; }\n    .trix-content .attachment-gallery.attachment-gallery--2 .attachment, .trix-content .attachment-gallery.attachment-gallery--4 .attachment {\n      flex-basis: 50%;\n      max-width: 50%; }\n", ""]);
 
 // exports
 
@@ -29809,7 +31382,37 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.ico-button {\n    width: 35px;\n    height: 35px;\n}\n.ico-button:hover {\n    color: var(--primary);\n}\n.ico-button:active {\n    color: var(--brand-80);\n}\n.cm-fat-cursor .CodeMirror-cursor {\n    background: #000;\n}\n.cm-s-default .cm-header {\n    color: black;\n}\n.cm-s-default .cm-link {\n    color: var(--primary);\n}\n.CodeMirror-line {\n    color: var(--gray-60);\n}\n.cm-s-default .cm-variable-2 {\n    color: var(--gray-60);\n}\n.cm-s-default .cm-quote {\n    color: var(--gray-60);\n}\n.cm-s-default .cm-comment {\n    color: var(--gray-60);\n}\n.cm-s-default .cm-string {\n    color: var(--gray-40);\n}\n.cm-s-default .cm-url {\n    color: var(--gray-40);\n}\n.CodeMirror {\n    height: auto;\n    min-height: 50px;\n    font: 14px/1.5 Menlo, Consolas, Monaco, 'Andale Mono', monospace;\n    box-sizing: border-box;\n    height: auto;\n    margin: auto;\n    position: relative;\n    z-index: 0;\n}\n.CodeMirror-scroll {\n    height: auto;\n    overflow: visible;\n    box-sizing: border-box;\n}\n\n/* Fullscreen Mode */\n:-webkit-full-screen {\n    width: 100%;\n    height: 100%;\n}\n:-moz-full-screen .CodeMirror-scroll {\n    height: 100%;\n    overflow: scroll;\n}\n:-webkit-full-screen .CodeMirror-scroll {\n    height: 100%;\n    overflow: scroll;\n}\n", ""]);
+exports.push([module.i, "\n.ico-button {\r\n    width: 35px;\r\n    height: 35px;\n}\n.ico-button:hover {\r\n    color: var(--primary);\n}\n.ico-button:active {\r\n    color: var(--brand-80);\n}\n.cm-fat-cursor .CodeMirror-cursor {\r\n    background: #000;\n}\n.cm-s-default .cm-header {\r\n    color: black;\n}\n.cm-s-default .cm-link {\r\n    color: var(--primary);\n}\n.CodeMirror-line {\r\n    color: var(--gray-60);\n}\n.cm-s-default .cm-variable-2 {\r\n    color: var(--gray-60);\n}\n.cm-s-default .cm-quote {\r\n    color: var(--gray-60);\n}\n.cm-s-default .cm-comment {\r\n    color: var(--gray-60);\n}\n.cm-s-default .cm-string {\r\n    color: var(--gray-40);\n}\n.cm-s-default .cm-url {\r\n    color: var(--gray-40);\n}\n.CodeMirror {\r\n    height: auto;\r\n    font: 14px/1.5 Menlo, Consolas, Monaco, 'Andale Mono', monospace;\r\n    box-sizing: border-box;\r\n    width: 100%;\n}\n.markdown-fullscreen .markdown-content {\r\n    height: calc(100vh - 30px);\n}\n.markdown-fullscreen .CodeMirror {\r\n    height: 100%;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e9cebc3\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/CheckboxWithLabel.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\ninput[type='checkbox'] {\r\n    position: absolute;\r\n    left: 0;\r\n    opacity: 0;\r\n    outline: none;\r\n    z-index: -1;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5f5fa236\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/Trix.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\ntrix-editor:empty:not(:focus)::before {\r\n    color: var(--70);\n}\r\n", ""]);
 
 // exports
 
@@ -30664,7 +32267,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.CodeMirror {\n    min-height: 50px;\n    font: 14px/1.5 Menlo, Consolas, Monaco, 'Andale Mono', monospace;\n    box-sizing: border-box;\n    height: auto;\n    margin: auto;\n    position: relative;\n    z-index: 0;\n}\n.CodeMirror-wrap {\n    padding: 0.5rem;\n}\n.CodeMirror-scroll {\n    height: auto;\n    overflow: visible;\n    box-sizing: border-box;\n}\n", ""]);
+exports.push([module.i, "\n.CodeMirror {\r\n    min-height: 50px;\r\n    font: 14px/1.5 Menlo, Consolas, Monaco, 'Andale Mono', monospace;\r\n    box-sizing: border-box;\r\n    height: auto;\r\n    margin: auto;\r\n    position: relative;\r\n    z-index: 0;\r\n    width: 100%;\n}\n.CodeMirror-wrap {\r\n    padding: 0.5rem;\n}\n.CodeMirror-scroll {\r\n    height: auto;\r\n    overflow: visible;\r\n    box-sizing: border-box;\n}\r\n", ""]);
 
 // exports
 
@@ -31519,7 +33122,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.CodeMirror {\n    min-height: 50px;\n    font: 14px/1.5 Menlo, Consolas, Monaco, 'Andale Mono', monospace;\n    box-sizing: border-box;\n    height: auto;\n    margin: auto;\n    position: relative;\n    z-index: 0;\n}\n.CodeMirror-wrap {\n    padding: 0.5rem;\n}\n.CodeMirror-scroll {\n    height: auto;\n    overflow: visible;\n    box-sizing: border-box;\n}\n", ""]);
+exports.push([module.i, "\n.CodeMirror {\r\n    min-height: 50px;\r\n    font: 14px/1.5 Menlo, Consolas, Monaco, 'Andale Mono', monospace;\r\n    box-sizing: border-box;\r\n    height: auto;\r\n    margin: auto;\r\n    position: relative;\r\n    z-index: 0;\r\n    width: 100%;\n}\n.CodeMirror-wrap {\r\n    padding: 0.5rem;\n}\n.CodeMirror-scroll {\r\n    height: auto;\r\n    overflow: visible;\r\n    box-sizing: border-box;\n}\r\n", ""]);
 
 // exports
 
@@ -31534,7 +33137,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.\\!cursor-not-allowed[data-v-b54b2e7e] {\n    cursor: not-allowed !important;\n}\n", ""]);
+exports.push([module.i, "\n.\\!cursor-not-allowed[data-v-b54b2e7e] {\r\n    cursor: not-allowed !important;\n}\r\n", ""]);
 
 // exports
 
@@ -31549,7 +33152,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.card[data-v-efba5374] {\n    padding: 0 !important;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-efba5374] {\r\n    padding: 0 !important;\n}\r\n", ""]);
 
 // exports
 
@@ -31564,7 +33167,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.progress[data-v-fc5ea998] {\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  right: 0px;\n  height: 2px;\n  width: 0%;\n  transition: width 0.2s, opacity 0.4s;\n  opacity: 1;\n  background-color: #efc14e;\n  z-index: 999999;\n}\n", ""]);
+exports.push([module.i, "\n.progress[data-v-fc5ea998] {\r\n    position: fixed;\r\n    top: 0px;\r\n    left: 0px;\r\n    right: 0px;\r\n    height: 2px;\r\n    width: 0%;\r\n    transition: width 0.2s, opacity 0.4s;\r\n    opacity: 1;\r\n    background-color: #efc14e;\r\n    z-index: 999999;\n}\r\n", ""]);
 
 // exports
 
@@ -33097,7 +34700,8 @@ var render = function() {
       attrs: {
         "data-testid": "confirm-action-modal",
         tabindex: "-1",
-        role: "dialog"
+        role: "dialog",
+        "class-whitelist": "flatpickr-calendar"
       },
       on: { "modal-close": _vm.handleClose }
     },
@@ -33107,8 +34711,8 @@ var render = function() {
         {
           staticClass: "bg-white rounded-lg shadow-lg overflow-hidden",
           class: {
-            "w-action-fields": _vm.selectedAction.fields.length > 0,
-            "w-action": _vm.selectedAction.fields.length == 0
+            "w-action-fields": _vm.action.fields.length > 0,
+            "w-action": _vm.action.fields.length == 0
           },
           attrs: { autocomplete: "off" },
           on: {
@@ -33124,11 +34728,16 @@ var render = function() {
           _c(
             "div",
             [
-              _c("heading", { staticClass: "pt-8 px-8", attrs: { level: 2 } }, [
-                _vm._v(_vm._s(_vm.selectedAction.name))
-              ]),
+              _c(
+                "heading",
+                {
+                  staticClass: "border-b border-40 py-8 px-8",
+                  attrs: { level: 2 }
+                },
+                [_vm._v(_vm._s(_vm.action.name))]
+              ),
               _vm._v(" "),
-              _vm.selectedAction.fields.length == 0
+              _vm.action.fields.length == 0
                 ? _c("p", { staticClass: "text-80 px-8 my-8" }, [
                     _vm._v(
                       "\n                " +
@@ -33145,7 +34754,7 @@ var render = function() {
                         attrs: { errors: _vm.errors }
                       }),
                       _vm._v(" "),
-                      _vm._l(_vm.selectedAction.fields, function(field) {
+                      _vm._l(_vm.action.fields, function(field) {
                         return _c(
                           "div",
                           { key: field.attribute, staticClass: "action" },
@@ -33195,10 +34804,11 @@ var render = function() {
               _c(
                 "button",
                 {
+                  ref: "runButton",
                   staticClass: "btn btn-default",
                   class: {
-                    "btn-primary": !_vm.selectedAction.destructive,
-                    "btn-danger": _vm.selectedAction.destructive
+                    "btn-primary": !_vm.action.destructive,
+                    "btn-danger": _vm.action.destructive
                   },
                   attrs: {
                     dusk: "confirm-action-button",
@@ -33384,6 +34994,63 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-03eecd12\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/ProgressButton.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "button",
+    {
+      staticClass:
+        "btn btn-default btn-primary inline-flex items-center relative",
+      attrs: { type: "button" }
+    },
+    [
+      _c(
+        "span",
+        { class: { invisible: _vm.processing } },
+        [_vm._t("default")],
+        2
+      ),
+      _vm._v(" "),
+      _vm.processing
+        ? _c(
+            "span",
+            {
+              staticClass: "absolute",
+              staticStyle: {
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)"
+              }
+            },
+            [
+              _c("loader", {
+                staticClass: "text-white",
+                attrs: { width: "32" }
+              })
+            ],
+            1
+          )
+        : _vm._e()
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-03eecd12", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-04cca878\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Modals/ConfirmUploadRemovalModal.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33434,7 +35101,13 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v(_vm._s(_vm.__("Cancel")))]
+              [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(_vm.__("Cancel")) +
+                    "\n                "
+                )
+              ]
             ),
             _vm._v(" "),
             _c(
@@ -33453,7 +35126,13 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v(_vm._s(_vm.__("Delete")))]
+              [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(_vm.__("Delete")) +
+                    "\n                "
+                )
+              ]
             )
           ])
         ])
@@ -33488,22 +35167,28 @@ var render = function() {
         "template",
         { slot: "value" },
         [
-          _c(
-            "router-link",
-            {
-              staticClass: "no-underline font-bold dim text-primary",
-              attrs: {
-                to: {
-                  name: "detail",
-                  params: {
-                    resourceName: _vm.field.resourceName,
-                    resourceId: _vm.field.morphToId
+          _vm.field.value
+            ? _c(
+                "router-link",
+                {
+                  staticClass: "no-underline font-bold dim text-primary",
+                  attrs: {
+                    to: {
+                      name: "detail",
+                      params: {
+                        resourceName: _vm.field.resourceName,
+                        resourceId: _vm.field.morphToId
+                      }
+                    }
                   }
-                }
-              }
-            },
-            [_vm._v("\n            " + _vm._s(_vm.field.value) + "\n        ")]
-          )
+                },
+                [
+                  _vm._v(
+                    "\n            " + _vm._s(_vm.field.value) + "\n        "
+                  )
+                ]
+              )
+            : _c("p", [_vm._v("—")])
         ],
         1
       )
@@ -33561,6 +35246,7 @@ var render = function() {
                         })
                       ]
                     ),
+                    _vm._v(" "),
                     _c("path", {
                       attrs: {
                         id: "Shape",
@@ -33607,6 +35293,7 @@ var render = function() {
                       })
                     ]
                   ),
+                  _vm._v(" "),
                   _c("rect", {
                     attrs: {
                       id: "Rectangle-path",
@@ -33650,6 +35337,7 @@ var render = function() {
       previous: _vm.previous,
       value: _vm.value,
       ranges: _vm.card.ranges,
+      format: _vm.format,
       prefix: _vm.prefix,
       suffix: _vm.suffix,
       "selected-range-key": _vm.selectedRangeKey,
@@ -33806,206 +35494,225 @@ var render = function() {
       _vm._v(" "),
       _c(
         "loading-card",
-        {
-          class: { "overflow-hidden border border-50": !_vm.shouldShowToolbar },
-          attrs: { loading: _vm.loading }
-        },
+        { attrs: { loading: _vm.loading } },
         [
-          _vm.shouldShowToolbar
-            ? _c(
-                "div",
-                { staticClass: "py-3 flex items-center border-b border-50" },
-                [
-                  _vm.shouldShowCheckBoxes
-                    ? _c(
-                        "div",
-                        { staticClass: "px-3" },
-                        [
-                          _c(
-                            "dropdown",
-                            {
-                              attrs: { dusk: "select-all-dropdown" },
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "default",
-                                  fn: function(ref) {
-                                    var toggle = ref.toggle
-                                    return _c(
-                                      "dropdown-trigger",
-                                      { attrs: { "handle-click": toggle } },
+          _c(
+            "div",
+            { staticClass: "py-3 flex items-center border-b border-50" },
+            [
+              _c("div", { staticClass: "flex items-center" }, [
+                _vm.shouldShowCheckBoxes
+                  ? _c(
+                      "div",
+                      { staticClass: "px-3" },
+                      [
+                        _c(
+                          "dropdown",
+                          {
+                            attrs: { dusk: "select-all-dropdown" },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function(ref) {
+                                  var toggle = ref.toggle
+                                  return _c(
+                                    "dropdown-trigger",
+                                    { attrs: { "handle-click": toggle } },
+                                    [
+                                      _c("fake-checkbox", {
+                                        attrs: { checked: _vm.selectAllChecked }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                }
+                              }
+                            ])
+                          },
+                          [
+                            _c(
+                              "dropdown-menu",
+                              {
+                                attrs: {
+                                  slot: "menu",
+                                  direction: "ltr",
+                                  width: "250"
+                                },
+                                slot: "menu"
+                              },
+                              [
+                                _c("div", { staticClass: "p-4" }, [
+                                  _c("ul", { staticClass: "list-reset" }, [
+                                    _c(
+                                      "li",
+                                      { staticClass: "flex items-center mb-4" },
                                       [
-                                        _c("fake-checkbox", {
-                                          attrs: {
-                                            checked: _vm.selectAllChecked
-                                          }
-                                        })
+                                        _c(
+                                          "checkbox-with-label",
+                                          {
+                                            attrs: {
+                                              checked: _vm.selectAllChecked
+                                            },
+                                            on: { change: _vm.toggleSelectAll }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                            " +
+                                                _vm._s(_vm.__("Select All")) +
+                                                "\n                                        "
+                                            )
+                                          ]
+                                        )
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "li",
+                                      { staticClass: "flex items-center" },
+                                      [
+                                        _c(
+                                          "checkbox-with-label",
+                                          {
+                                            attrs: {
+                                              dusk:
+                                                "select-all-matching-button",
+                                              checked:
+                                                _vm.selectAllMatchingChecked
+                                            },
+                                            on: {
+                                              change:
+                                                _vm.toggleSelectAllMatching
+                                            }
+                                          },
+                                          [
+                                            [
+                                              _c(
+                                                "span",
+                                                { staticClass: "mr-1" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.__(
+                                                        "Select All Matching"
+                                                      )
+                                                    )
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c("span", [
+                                                _vm._v(
+                                                  "(" +
+                                                    _vm._s(
+                                                      _vm.allMatchingResourceCount
+                                                    ) +
+                                                    ")"
+                                                )
+                                              ])
+                                            ]
+                                          ],
+                                          2
+                                        )
                                       ],
                                       1
                                     )
-                                  }
-                                }
-                              ])
+                                  ])
+                                ])
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "flex items-center ml-auto px-3" },
+                [
+                  _vm.selectedResources.length > 0
+                    ? _c("action-selector", {
+                        attrs: {
+                          "resource-name": _vm.resourceName,
+                          actions: _vm.actions,
+                          "pivot-actions": _vm.pivotActions,
+                          "pivot-name": _vm.pivotName,
+                          "query-string": {
+                            currentSearch: _vm.currentSearch,
+                            encodedFilters: _vm.encodedFilters,
+                            currentTrashed: _vm.currentTrashed,
+                            viaResource: _vm.viaResource,
+                            viaResourceId: _vm.viaResourceId,
+                            viaRelationship: _vm.viaRelationship
+                          },
+                          "selected-resources":
+                            _vm.selectedResourcesForActionSelector
+                        },
+                        on: { actionExecuted: _vm.getResources }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.lenses.length > 0
+                    ? _c(
+                        "dropdown",
+                        {
+                          staticClass: "bg-30 hover:bg-40 mr-3 rounded",
+                          scopedSlots: _vm._u([
+                            {
+                              key: "default",
+                              fn: function(ref) {
+                                var toggle = ref.toggle
+                                return _c(
+                                  "dropdown-trigger",
+                                  {
+                                    staticClass: "px-3",
+                                    attrs: { "handle-click": toggle }
+                                  },
+                                  [
+                                    _c(
+                                      "h3",
+                                      {
+                                        staticClass:
+                                          "flex items-center font-normal text-base text-90 h-9",
+                                        attrs: { slot: "default" },
+                                        slot: "default"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                            " +
+                                            _vm._s(_vm.__("Lens")) +
+                                            "\n                        "
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              }
+                            }
+                          ])
+                        },
+                        [
+                          _c(
+                            "dropdown-menu",
+                            {
+                              attrs: {
+                                slot: "menu",
+                                width: "240",
+                                direction: "rtl"
+                              },
+                              slot: "menu"
                             },
                             [
-                              _c(
-                                "dropdown-menu",
-                                {
-                                  attrs: {
-                                    slot: "menu",
-                                    direction: "ltr",
-                                    width: "250"
-                                  },
-                                  slot: "menu"
-                                },
-                                [
-                                  _c("div", { staticClass: "p-4" }, [
-                                    _c("ul", { staticClass: "list-reset" }, [
-                                      _c(
-                                        "li",
-                                        {
-                                          staticClass: "flex items-center mb-4"
-                                        },
-                                        [
-                                          _c(
-                                            "label",
-                                            {
-                                              staticClass: "flex items-center",
-                                              on: {
-                                                input: _vm.toggleSelectAll,
-                                                keydown: function($event) {
-                                                  if (
-                                                    !("button" in $event) &&
-                                                    _vm._k(
-                                                      $event.keyCode,
-                                                      "space",
-                                                      32,
-                                                      $event.key,
-                                                      " "
-                                                    ) &&
-                                                    _vm._k(
-                                                      $event.keyCode,
-                                                      "enter",
-                                                      13,
-                                                      $event.key,
-                                                      "Enter"
-                                                    )
-                                                  ) {
-                                                    return null
-                                                  }
-                                                  $event.preventDefault()
-                                                  return _vm.toggleSelectAll(
-                                                    $event
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("checkbox", {
-                                                attrs: {
-                                                  checked: _vm.selectAllChecked
-                                                }
-                                              }),
-                                              _vm._v(" "),
-                                              _c(
-                                                "span",
-                                                { staticClass: "ml-2" },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                            " +
-                                                      _vm._s(
-                                                        _vm.__("Select All")
-                                                      ) +
-                                                      "\n                                        "
-                                                  )
-                                                ]
-                                              )
-                                            ],
-                                            1
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "li",
-                                        { staticClass: "flex items-center" },
-                                        [
-                                          _c(
-                                            "label",
-                                            {
-                                              staticClass: "flex items-center",
-                                              on: {
-                                                input:
-                                                  _vm.toggleSelectAllMatching,
-                                                keydown: function($event) {
-                                                  if (
-                                                    !("button" in $event) &&
-                                                    _vm._k(
-                                                      $event.keyCode,
-                                                      "space",
-                                                      32,
-                                                      $event.key,
-                                                      " "
-                                                    ) &&
-                                                    _vm._k(
-                                                      $event.keyCode,
-                                                      "enter",
-                                                      13,
-                                                      $event.key,
-                                                      "Enter"
-                                                    )
-                                                  ) {
-                                                    return null
-                                                  }
-                                                  $event.preventDefault()
-                                                  return _vm.toggleSelectAllMatching(
-                                                    $event
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("checkbox", {
-                                                attrs: {
-                                                  dusk:
-                                                    "select-all-matching-button",
-                                                  checked:
-                                                    _vm.selectAllMatchingChecked
-                                                }
-                                              }),
-                                              _vm._v(" "),
-                                              _c(
-                                                "span",
-                                                { staticClass: "ml-2" },
-                                                [
-                                                  _vm._v(
-                                                    "\n                                            " +
-                                                      _vm._s(
-                                                        _vm.__(
-                                                          "Select All Matching"
-                                                        )
-                                                      ) +
-                                                      "\n                                            "
-                                                  ),
-                                                  _c("span", [
-                                                    _vm._v(
-                                                      "(" +
-                                                        _vm._s(
-                                                          _vm.allMatchingResourceCount
-                                                        ) +
-                                                        ")"
-                                                    )
-                                                  ])
-                                                ]
-                                              )
-                                            ],
-                                            1
-                                          )
-                                        ]
-                                      )
-                                    ])
-                                  ])
-                                ]
-                              )
+                              _c("lens-selector", {
+                                attrs: {
+                                  "resource-name": _vm.resourceName,
+                                  lenses: _vm.lenses
+                                }
+                              })
                             ],
                             1
                           )
@@ -34014,401 +35721,66 @@ var render = function() {
                       )
                     : _vm._e(),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "flex items-center ml-auto px-3" },
-                    [
-                      _vm.selectedResources.length > 0
-                        ? _c("action-selector", {
-                            attrs: {
-                              "resource-name": _vm.resourceName,
-                              actions: _vm.actions,
-                              "pivot-actions": _vm.pivotActions,
-                              "pivot-name": _vm.pivotName,
-                              "query-string": {
-                                currentSearch: _vm.currentSearch,
-                                encodedFilters: _vm.encodedFilters,
-                                currentTrashed: _vm.currentTrashed,
-                                viaResource: _vm.viaResource,
-                                viaResourceId: _vm.viaResourceId,
-                                viaRelationship: _vm.viaRelationship
-                              },
-                              "selected-resources":
-                                _vm.selectedResourcesForActionSelector
-                            },
-                            on: { actionExecuted: _vm.getResources }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.lenses.length > 0
-                        ? _c(
-                            "dropdown",
-                            {
-                              staticClass: "bg-30 hover:bg-40 mr-3 rounded",
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "default",
-                                  fn: function(ref) {
-                                    var toggle = ref.toggle
-                                    return _c(
-                                      "dropdown-trigger",
-                                      {
-                                        staticClass: "px-3",
-                                        attrs: { "handle-click": toggle }
-                                      },
-                                      [
-                                        _c(
-                                          "h3",
-                                          {
-                                            staticClass:
-                                              "flex items-center font-normal text-base text-90 h-9",
-                                            attrs: { slot: "default" },
-                                            slot: "default"
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                            " +
-                                                _vm._s(_vm.__("Lens")) +
-                                                "\n                        "
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  }
-                                }
-                              ])
-                            },
-                            [
-                              _c(
-                                "dropdown-menu",
-                                {
-                                  attrs: {
-                                    slot: "menu",
-                                    width: "240",
-                                    direction: "rtl"
-                                  },
-                                  slot: "menu"
-                                },
-                                [
-                                  _c("lens-selector", {
-                                    attrs: {
-                                      "resource-name": _vm.resourceName,
-                                      lenses: _vm.lenses
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.filters.length > 0 ||
-                      _vm.softDeletes ||
-                      !_vm.viaResource
-                        ? _c(
-                            "dropdown",
-                            {
-                              staticClass: "bg-30 hover:bg-40 rounded",
-                              attrs: {
-                                "data-testid": "filter-selector",
-                                dusk: "filter-selector"
-                              },
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "default",
-                                  fn: function(ref) {
-                                    var toggle = ref.toggle
-                                    return _c(
-                                      "dropdown-trigger",
-                                      {
-                                        staticClass: "px-3",
-                                        attrs: { "handle-click": toggle }
-                                      },
-                                      [
-                                        _c("icon", {
-                                          staticClass: "text-80",
-                                          attrs: { type: "filter" }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  }
-                                }
-                              ])
-                            },
-                            [
-                              _c(
-                                "dropdown-menu",
-                                {
-                                  attrs: {
-                                    slot: "menu",
-                                    width: "290",
-                                    direction: "rtl",
-                                    dark: true
-                                  },
-                                  slot: "menu"
-                                },
-                                [
-                                  !_vm.viaHasOne
-                                    ? _c("filter-selector", {
-                                        attrs: {
-                                          filters: _vm.filters,
-                                          "current-filters": _vm.currentFilters
-                                        },
-                                        on: {
-                                          "update:currentFilters": function(
-                                            $event
-                                          ) {
-                                            _vm.currentFilters = $event
-                                          },
-                                          changed: _vm.filterChanged
-                                        }
-                                      })
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _vm.softDeletes
-                                    ? _c("filter-select", [
-                                        _c(
-                                          "h3",
-                                          {
-                                            staticClass:
-                                              "text-sm uppercase tracking-wide text-80 bg-30 p-3",
-                                            attrs: { slot: "default" },
-                                            slot: "default"
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                                " +
-                                                _vm._s(_vm.__("Trashed")) +
-                                                ":\n                            "
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "select",
-                                          {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value: _vm.trashed,
-                                                expression: "trashed"
-                                              }
-                                            ],
-                                            staticClass:
-                                              "block w-full form-control-sm form-select",
-                                            attrs: {
-                                              slot: "select",
-                                              "data-testid": "trashed-select",
-                                              dusk: "trashed-select"
-                                            },
-                                            on: {
-                                              change: [
-                                                function($event) {
-                                                  var $$selectedVal = Array.prototype.filter
-                                                    .call(
-                                                      $event.target.options,
-                                                      function(o) {
-                                                        return o.selected
-                                                      }
-                                                    )
-                                                    .map(function(o) {
-                                                      var val =
-                                                        "_value" in o
-                                                          ? o._value
-                                                          : o.value
-                                                      return val
-                                                    })
-                                                  _vm.trashed = $event.target
-                                                    .multiple
-                                                    ? $$selectedVal
-                                                    : $$selectedVal[0]
-                                                },
-                                                _vm.trashedChanged
-                                              ]
-                                            },
-                                            slot: "select"
-                                          },
-                                          [
-                                            _c(
-                                              "option",
-                                              {
-                                                attrs: {
-                                                  value: "",
-                                                  selected: ""
-                                                }
-                                              },
-                                              [_vm._v("—")]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "option",
-                                              { attrs: { value: "with" } },
-                                              [
-                                                _vm._v(
-                                                  _vm._s(_vm.__("With Trashed"))
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "option",
-                                              { attrs: { value: "only" } },
-                                              [
-                                                _vm._v(
-                                                  _vm._s(_vm.__("Only Trashed"))
-                                                )
-                                              ]
-                                            )
-                                          ]
-                                        )
-                                      ])
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  !_vm.viaResource
-                                    ? _c("filter-select", [
-                                        _c(
-                                          "h3",
-                                          {
-                                            staticClass:
-                                              "text-sm uppercase tracking-wide text-80 bg-30 p-3",
-                                            attrs: { slot: "default" },
-                                            slot: "default"
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                                " +
-                                                _vm._s(_vm.__("Per Page:")) +
-                                                "\n                            "
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "select",
-                                          {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value: _vm.perPage,
-                                                expression: "perPage"
-                                              }
-                                            ],
-                                            staticClass:
-                                              "block w-full form-control-sm form-select",
-                                            attrs: {
-                                              slot: "select",
-                                              dusk: "per-page-select"
-                                            },
-                                            on: {
-                                              change: [
-                                                function($event) {
-                                                  var $$selectedVal = Array.prototype.filter
-                                                    .call(
-                                                      $event.target.options,
-                                                      function(o) {
-                                                        return o.selected
-                                                      }
-                                                    )
-                                                    .map(function(o) {
-                                                      var val =
-                                                        "_value" in o
-                                                          ? o._value
-                                                          : o.value
-                                                      return val
-                                                    })
-                                                  _vm.perPage = $event.target
-                                                    .multiple
-                                                    ? $$selectedVal
-                                                    : $$selectedVal[0]
-                                                },
-                                                _vm.perPageChanged
-                                              ]
-                                            },
-                                            slot: "select"
-                                          },
-                                          [
-                                            _c(
-                                              "option",
-                                              { attrs: { value: "25" } },
-                                              [_vm._v("25")]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "option",
-                                              { attrs: { value: "50" } },
-                                              [_vm._v("50")]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "option",
-                                              { attrs: { value: "100" } },
-                                              [_vm._v("100")]
-                                            )
-                                          ]
-                                        )
-                                      ])
-                                    : _vm._e()
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.shouldShowDeleteMenu
-                        ? _c("delete-menu", {
-                            attrs: {
-                              dusk: "delete-menu",
-                              "soft-deletes": _vm.softDeletes,
-                              resources: _vm.resources,
-                              "selected-resources": _vm.selectedResources,
-                              "via-many-to-many": _vm.viaManyToMany,
-                              "all-matching-resource-count":
-                                _vm.allMatchingResourceCount,
-                              "all-matching-selected":
-                                _vm.selectAllMatchingChecked,
-                              "authorized-to-delete-selected-resources":
-                                _vm.authorizedToDeleteSelectedResources,
-                              "authorized-to-force-delete-selected-resources":
-                                _vm.authorizedToForceDeleteSelectedResources,
-                              "authorized-to-delete-any-resources":
-                                _vm.authorizedToDeleteAnyResources,
-                              "authorized-to-force-delete-any-resources":
-                                _vm.authorizedToForceDeleteAnyResources,
-                              "authorized-to-restore-selected-resources":
-                                _vm.authorizedToRestoreSelectedResources,
-                              "authorized-to-restore-any-resources":
-                                _vm.authorizedToRestoreAnyResources
-                            },
-                            on: {
-                              deleteSelected: _vm.deleteSelectedResources,
-                              deleteAllMatching: _vm.deleteAllMatchingResources,
-                              forceDeleteSelected:
-                                _vm.forceDeleteSelectedResources,
-                              forceDeleteAllMatching:
-                                _vm.forceDeleteAllMatchingResources,
-                              restoreSelected: _vm.restoreSelectedResources,
-                              restoreAllMatching:
-                                _vm.restoreAllMatchingResources,
-                              close: function($event) {
-                                _vm.deleteModalOpen = false
-                              }
-                            }
-                          })
-                        : _vm._e()
-                    ],
-                    1
-                  )
-                ]
+                  _c("filter-menu", {
+                    attrs: {
+                      "resource-name": _vm.resourceName,
+                      "soft-deletes": _vm.softDeletes,
+                      "via-resource": _vm.viaResource,
+                      "via-has-one": _vm.viaHasOne,
+                      trashed: _vm.trashed,
+                      "per-page": _vm.perPage
+                    },
+                    on: {
+                      "clear-selected-filters": _vm.clearSelectedFilters,
+                      "filter-changed": _vm.filterChanged,
+                      "trashed-changed": _vm.trashedChanged,
+                      "per-page-changed": _vm.updatePerPageChanged
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.shouldShowDeleteMenu
+                    ? _c("delete-menu", {
+                        attrs: {
+                          dusk: "delete-menu",
+                          "soft-deletes": _vm.softDeletes,
+                          resources: _vm.resources,
+                          "selected-resources": _vm.selectedResources,
+                          "via-many-to-many": _vm.viaManyToMany,
+                          "all-matching-resource-count":
+                            _vm.allMatchingResourceCount,
+                          "all-matching-selected": _vm.selectAllMatchingChecked,
+                          "authorized-to-delete-selected-resources":
+                            _vm.authorizedToDeleteSelectedResources,
+                          "authorized-to-force-delete-selected-resources":
+                            _vm.authorizedToForceDeleteSelectedResources,
+                          "authorized-to-delete-any-resources":
+                            _vm.authorizedToDeleteAnyResources,
+                          "authorized-to-force-delete-any-resources":
+                            _vm.authorizedToForceDeleteAnyResources,
+                          "authorized-to-restore-selected-resources":
+                            _vm.authorizedToRestoreSelectedResources,
+                          "authorized-to-restore-any-resources":
+                            _vm.authorizedToRestoreAnyResources
+                        },
+                        on: {
+                          deleteSelected: _vm.deleteSelectedResources,
+                          deleteAllMatching: _vm.deleteAllMatchingResources,
+                          forceDeleteSelected: _vm.forceDeleteSelectedResources,
+                          forceDeleteAllMatching:
+                            _vm.forceDeleteAllMatchingResources,
+                          restoreSelected: _vm.restoreSelectedResources,
+                          restoreAllMatching: _vm.restoreAllMatchingResources,
+                          close: function($event) {
+                            _vm.deleteModalOpen = false
+                          }
+                        }
+                      })
+                    : _vm._e()
+                ],
+                1
               )
-            : _vm._e(),
+            ]
+          ),
           _vm._v(" "),
           !_vm.resources.length
             ? _c(
@@ -34475,7 +35847,9 @@ var render = function() {
                               _vm._s(
                                 _vm.__(
                                   "No :resource matched the given criteria.",
-                                  { resource: _vm.singularName.toLowerCase() }
+                                  {
+                                    resource: _vm.singularName.toLowerCase()
+                                  }
                                 )
                               ) +
                               "\n                "
@@ -34485,7 +35859,8 @@ var render = function() {
                       _vm._v(" "),
                       _c("create-resource-button", {
                         attrs: {
-                          classes: "btn btn-sm btn-outline",
+                          classes:
+                            "btn btn-sm btn-outline inline-flex items-center",
                           "singular-name": _vm.singularName,
                           "resource-name": _vm.resourceName,
                           "via-resource": _vm.viaResource,
@@ -34536,17 +35911,31 @@ var render = function() {
           ),
           _vm._v(" "),
           _vm.resourceResponse
-            ? _c("pagination-links", {
-                attrs: {
-                  "resource-name": _vm.resourceName,
-                  resources: _vm.resources,
-                  "resource-response": _vm.resourceResponse
+            ? _c(
+                "pagination-links",
+                {
+                  attrs: {
+                    "resource-name": _vm.resourceName,
+                    resources: _vm.resources,
+                    "resource-response": _vm.resourceResponse
+                  },
+                  on: {
+                    previous: _vm.selectPreviousPage,
+                    next: _vm.selectNextPage
+                  }
                 },
-                on: {
-                  previous: _vm.selectPreviousPage,
-                  next: _vm.selectNextPage
-                }
-              })
+                [
+                  _vm.resourceCountLabel
+                    ? _c("span", { staticClass: "text-sm text-80" }, [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(_vm.resourceCountLabel) +
+                            "\n            "
+                        )
+                      ])
+                    : _vm._e()
+                ]
+              )
             : _vm._e()
         ],
         1
@@ -34648,8 +36037,7 @@ var render = function() {
                 _vm.shouldShowLoader
                   ? [
                       _c("ImageLoader", {
-                        staticClass: "max-w-xs",
-                        attrs: { src: _vm.field.thumbnailUrl },
+                        attrs: { src: _vm.imageUrl, maxWidth: _vm.maxWidth },
                         on: {
                           missing: function(value) {
                             return (_vm.missing = value)
@@ -34659,7 +36047,7 @@ var render = function() {
                     ]
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.field.value && !_vm.field.thumbnailUrl
+                _vm.field.value && !_vm.imageUrl
                   ? [
                       _c(
                         "card",
@@ -34668,11 +36056,10 @@ var render = function() {
                             "flex item-center relative border border-lg border-50 overflow-hidden p-4"
                         },
                         [
-                          _vm._v(
-                            "\n                    " +
-                              _vm._s(_vm.field.value) +
-                              "\n\n                    "
-                          ),
+                          _c("span", { staticClass: "truncate mr-3" }, [
+                            _vm._v(" " + _vm._s(_vm.field.value) + " ")
+                          ]),
+                          _vm._v(" "),
                           _vm.shouldShowRemoveButton
                             ? _c("DeleteButton", {
                                 staticClass: "ml-auto",
@@ -34690,7 +36077,7 @@ var render = function() {
                     ]
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.field.thumbnailUrl
+                _vm.imageUrl
                   ? _c(
                       "p",
                       { staticClass: "mt-3 flex items-center text-sm" },
@@ -34706,11 +36093,7 @@ var render = function() {
                               },
                               [
                                 _c("span", { staticClass: "class ml-2 mt-1" }, [
-                                  _vm._v(
-                                    "\n                        " +
-                                      _vm._s(_vm.__("Delete")) +
-                                      "\n                    "
-                                  )
+                                  _vm._v(" " + _vm._s(_vm.__("Delete")) + " ")
                                 ])
                               ]
                             )
@@ -34777,12 +36160,12 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("span", { staticClass: "text-gray-50" }, [
-          _vm._v("\n            " + _vm._s(_vm.currentLabel) + "\n        ")
+          _vm._v(" " + _vm._s(_vm.currentLabel) + " ")
         ]),
         _vm._v(" "),
         _vm.hasError
           ? _c("p", { staticClass: "text-xs mt-2 text-danger" }, [
-              _vm._v("\n            " + _vm._s(_vm.firstError) + "\n        ")
+              _vm._v(_vm._s(_vm.firstError))
             ])
           : _vm._e()
       ])
@@ -34802,6 +36185,61 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-0de825b3\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Controls/SelectControl.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "select",
+    _vm._g(
+      _vm._b({ domProps: { value: _vm.value } }, "select", _vm.$attrs, false),
+      _vm.inputListeners
+    ),
+    [
+      _vm._t("default"),
+      _vm._v(" "),
+      _vm._l(_vm.groupedOptions, function(options, group) {
+        return [
+          group
+            ? _c(
+                "optgroup",
+                { attrs: { label: group } },
+                _vm._l(options, function(option) {
+                  return _c(
+                    "option",
+                    _vm._b({}, "option", _vm.attrsFor(option), false),
+                    [_vm._v(_vm._s(_vm.labelFor(option)) + "\n            ")]
+                  )
+                })
+              )
+            : _vm._l(options, function(option) {
+                return _c(
+                  "option",
+                  _vm._b({}, "option", _vm.attrsFor(option), false),
+                  [_vm._v(_vm._s(_vm.labelFor(option)) + "\n            ")]
+                )
+              })
+        ]
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0de825b3", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-0fba3c28\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Metrics/TrendMetric.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -34815,6 +36253,7 @@ var render = function() {
       value: _vm.value,
       "chart-data": _vm.data,
       ranges: _vm.card.ranges,
+      format: _vm.format,
       prefix: _vm.prefix,
       suffix: _vm.suffix,
       "selected-range-key": _vm.selectedRangeKey,
@@ -34830,6 +36269,27 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-0fba3c28", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1098898c\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Index/HeadingField.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("span")
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1098898c", module.exports)
   }
 }
 
@@ -35019,6 +36479,49 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-18afa3f7\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Filters/BooleanFilter.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "h3",
+        { staticClass: "text-sm uppercase tracking-wide text-80 bg-30 p-3" },
+        [_vm._v(_vm._s(_vm.filter.name))]
+      ),
+      _vm._v(" "),
+      _vm._l(_vm.options, function(option) {
+        return _c("BooleanOption", {
+          key: option.value,
+          attrs: {
+            "resource-name": _vm.resourceName,
+            filter: _vm.filter,
+            option: option
+          },
+          on: { change: _vm.handleChange }
+        })
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-18afa3f7", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-199b9da8\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/views/Create.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35072,43 +36575,57 @@ var render = function() {
                   )
                 }),
                 _vm._v(" "),
-                _c("div", { staticClass: "bg-30 flex px-8 py-4" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "ml-auto btn btn-default btn-primary mr-3",
-                      attrs: {
-                        dusk: "create-and-add-another-button",
-                        type: "button"
+                _c(
+                  "div",
+                  { staticClass: "bg-30 flex px-8 py-4" },
+                  [
+                    _c(
+                      "progress-button",
+                      {
+                        staticClass: "ml-auto mr-3",
+                        attrs: {
+                          dusk: "create-and-add-another-button",
+                          disabled: _vm.isWorking,
+                          processing: _vm.submittedViaCreateAndAddAnother
+                        },
+                        nativeOn: {
+                          click: function($event) {
+                            return _vm.createAndAddAnother($event)
+                          }
+                        }
                       },
-                      on: { click: _vm.createAndAddAnother }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.__("Create & Add Another")) +
-                          "\n                "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-default btn-primary",
-                      attrs: { dusk: "create-button" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.__("Create")) +
-                          " " +
-                          _vm._s(_vm.singularName) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                ])
+                      [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(_vm.__("Create & Add Another")) +
+                            "\n                "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "progress-button",
+                      {
+                        attrs: {
+                          dusk: "create-button",
+                          type: "submit",
+                          disabled: _vm.isWorking,
+                          processing: _vm.submittedViaCreateResource
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(_vm.__("Create")) +
+                            " " +
+                            _vm._s(_vm.singularName) +
+                            "\n                "
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
               ],
               2
             )
@@ -35205,35 +36722,6 @@ if (false) {
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1d6a01cc\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/FilterSelect.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm._t("default"),
-      _vm._v(" "),
-      _c("div", { staticClass: "p-3" }, [_vm._t("select")], 2)
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1d6a01cc", module.exports)
-  }
-}
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1eb88c2e\",\"hasScoped\":false,\"buble\":{\"transforms\":{\"stripWithFunctional\":true}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Form/FieldWrapper.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -35276,6 +36764,7 @@ var render = function() {
           _c("excerpt", {
             attrs: {
               content: _vm.field.value,
+              "plain-text": true,
               "should-show": _vm.field.shouldShow
             }
           })
@@ -35339,7 +36828,7 @@ var render = function() {
                   " (" +
                   _vm._s(item.value) +
                   " - " +
-                  _vm._s(((item.value * 100) / _vm.formattedTotal).toFixed(2)) +
+                  _vm._s(item.percentage) +
                   "%)\n            "
               )
             ])
@@ -35349,7 +36838,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", {
         ref: "chart",
-        staticClass: "z-40 vertical-center rounded-b-lg ct-chart",
+        class: _vm.chartClasses,
         staticStyle: {
           width: "90px",
           height: "90px",
@@ -35481,7 +36970,8 @@ var render = function() {
           card: _vm.card,
           resource: _vm.resource,
           resourceName: _vm.resourceName,
-          resourceId: _vm.resourceId
+          resourceId: _vm.resourceId,
+          lens: _vm.lens
         }
       })
     ],
@@ -35574,7 +37064,7 @@ var render = function() {
       [
         _vm._t("default", [
           _c("h4", { staticClass: "font-normal text-80" }, [
-            _vm._v("\n                " + _vm._s(_vm.label) + "\n            ")
+            _vm._v(_vm._s(_vm.label))
           ])
         ])
       ],
@@ -35650,10 +37140,14 @@ var render = function() {
           [
             _c("date-time-picker", {
               staticClass: "w-full form-control form-input form-input-bordered",
+              class: _vm.errorClasses,
               attrs: {
-                field: _vm.field,
+                dusk: _vm.field.attribute,
+                name: _vm.field.name,
+                placeholder: _vm.placeholder,
                 value: _vm.localizedValue,
-                "twelve-hour-time": _vm.usesTwelveHourTime
+                "twelve-hour-time": _vm.usesTwelveHourTime,
+                "first-day-of-week": _vm.firstDayOfWeek
               },
               on: { change: _vm.handleChange }
             }),
@@ -35801,8 +37295,20 @@ var render = function() {
             [
               _c(
                 "option",
-                { attrs: { value: "", disabled: "", selected: "" } },
-                [_vm._v(_vm._s(_vm.__("Choose Type")))]
+                {
+                  attrs: {
+                    value: "",
+                    selected: "",
+                    disabled: !_vm.field.nullable
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.__("Choose Type")) +
+                      "\n            "
+                  )
+                ]
               ),
               _vm._v(" "),
               _vm._l(_vm.field.morphToTypes, function(option) {
@@ -35852,6 +37358,7 @@ var render = function() {
                       staticClass: "mb-3",
                       attrs: {
                         "data-testid": _vm.field.attribute + "-search-input",
+                        disabled: !_vm.resourceType || _vm.isLocked,
                         value: _vm.selectedResource,
                         data: _vm.availableResources,
                         trackBy: "value",
@@ -35941,14 +37448,16 @@ var render = function() {
                       _c(
                         "option",
                         {
-                          attrs: { value: "", disabled: "" },
+                          attrs: { value: "", disabled: !_vm.field.nullable },
                           domProps: { selected: _vm.selectedResourceId == "" }
                         },
                         [
                           _vm._v(
-                            _vm._s(_vm.__("Choose")) +
+                            "\n                    " +
+                              _vm._s(_vm.__("Choose")) +
                               " " +
-                              _vm._s(_vm.fieldTypeName)
+                              _vm._s(_vm.fieldTypeName) +
+                              "\n                "
                           )
                         ]
                       ),
@@ -35978,58 +37487,30 @@ var render = function() {
                 : _vm._e(),
               _vm._v(" "),
               _vm.softDeletes && !_vm.isLocked
-                ? _c("div", [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "flex items-center",
-                        on: {
-                          input: _vm.toggleWithTrashed,
-                          keydown: function($event) {
-                            if (
-                              !("button" in $event) &&
-                              _vm._k(
-                                $event.keyCode,
-                                "space",
-                                32,
-                                $event.key,
-                                " "
-                              ) &&
-                              _vm._k(
-                                $event.keyCode,
-                                "enter",
-                                13,
-                                $event.key,
-                                "Enter"
-                              )
-                            ) {
-                              return null
-                            }
-                            $event.preventDefault()
-                            return _vm.toggleWithTrashed($event)
-                          }
-                        }
-                      },
-                      [
-                        _c("checkbox", {
+                ? _c(
+                    "div",
+                    [
+                      _c(
+                        "checkbox-with-label",
+                        {
                           attrs: {
                             dusk:
                               _vm.field.attribute + "-with-trashed-checkbox",
                             checked: _vm.withTrashed
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "ml-2" }, [
+                          },
+                          on: { change: _vm.toggleWithTrashed }
+                        },
+                        [
                           _vm._v(
-                            "\n                        " +
+                            "\n                    " +
                               _vm._s(_vm.__("With Trashed")) +
-                              "\n                    "
+                              "\n                "
                           )
-                        ])
-                      ],
-                      1
-                    )
-                  ])
+                        ]
+                      )
+                    ],
+                    1
+                  )
                 : _vm._e()
             ],
             1
@@ -36106,7 +37587,8 @@ var render = function() {
               size: _vm.size,
               resource: _vm.resource,
               "resource-name": _vm.resourceName,
-              "resource-id": _vm.resourceId
+              "resource-id": _vm.resourceId,
+              lens: _vm.lens
             }
           })
         })
@@ -36185,11 +37667,13 @@ var render = function() {
                     _vm._v(" "),
                     _c("p", { staticClass: "text-80 leading-normal" }, [
                       _vm._v(
-                        _vm._s(
-                          _vm.__(
-                            "Are you sure you want to restore the selected resources?"
-                          )
-                        )
+                        "\n                    " +
+                          _vm._s(
+                            _vm.__(
+                              "Are you sure you want to restore the selected resources?"
+                            )
+                          ) +
+                          "\n                "
                       )
                     ])
                   ],
@@ -36212,7 +37696,13 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v(_vm._s(_vm.__("Cancel")))]
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.__("Cancel")) +
+                          "\n                "
+                      )
+                    ]
                   ),
                   _vm._v(" "),
                   _c(
@@ -36226,7 +37716,13 @@ var render = function() {
                         type: "submit"
                       }
                     },
-                    [_vm._v(_vm._s(_vm.__("Restore")))]
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.__("Restore")) +
+                          "\n                "
+                      )
+                    ]
                   )
                 ])
               ])
@@ -36456,6 +37952,60 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-4685dd1f\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Filters/DateFilter.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "h3",
+      { staticClass: "text-sm uppercase tracking-wide text-80 bg-30 p-3" },
+      [_vm._v(_vm._s(_vm.filter.name))]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "p-2" },
+      [
+        _c("date-time-picker", {
+          staticClass: "w-full form-control form-input form-input-bordered",
+          attrs: {
+            dusk: "date-filter",
+            name: "date-filter",
+            value: _vm.value,
+            dateFormat: "Y-m-d",
+            placeholder: _vm.placeholder,
+            "enable-time": false,
+            "enable-seconds": false,
+            "first-day-of-week": _vm.firstDayOfWeek
+          },
+          on: {
+            input: function($event) {
+              $event.preventDefault()
+            },
+            change: _vm.handleChange
+          }
+        })
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4685dd1f", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-46b9b4f4\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Form/Label.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36494,53 +38044,64 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "bg-20 rounded-b" }, [
     _vm.resources.length > 0
-      ? _c("nav", { staticClass: "flex" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-link py-3 px-4",
-              class: {
-                "text-primary dim": _vm.hasPreviousPages,
-                "text-80 opacity-50": !_vm.hasPreviousPages
-              },
-              attrs: {
-                disabled: !_vm.hasPreviousPages,
-                rel: "prev",
-                dusk: "previous"
-              },
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  _vm.selectPreviousPage()
+      ? _c(
+          "nav",
+          { staticClass: "flex justify-between items-center" },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-link py-3 px-4",
+                class: {
+                  "text-primary dim": _vm.hasPreviousPages,
+                  "text-80 opacity-50": !_vm.hasPreviousPages
+                },
+                attrs: {
+                  disabled: !_vm.hasPreviousPages,
+                  rel: "prev",
+                  dusk: "previous"
+                },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.selectPreviousPage()
+                  }
                 }
-              }
-            },
-            [
-              _vm._v(
-                "\n            " + _vm._s(_vm.__("Previous")) + "\n        "
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "ml-auto btn btn-link py-3 px-4",
-              class: {
-                "text-primary dim": _vm.hasMorePages,
-                "text-80 opacity-50": !_vm.hasMorePages
               },
-              attrs: { disabled: !_vm.hasMorePages, rel: "next", dusk: "next" },
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  _vm.selectNextPage()
+              [
+                _vm._v(
+                  "\n            " + _vm._s(_vm.__("Previous")) + "\n        "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _vm._t("default"),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-link py-3 px-4",
+                class: {
+                  "text-primary dim": _vm.hasMorePages,
+                  "text-80 opacity-50": !_vm.hasMorePages
+                },
+                attrs: {
+                  disabled: !_vm.hasMorePages,
+                  rel: "next",
+                  dusk: "next"
+                },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.selectNextPage()
+                  }
                 }
-              }
-            },
-            [_vm._v("\n            " + _vm._s(_vm.__("Next")) + "\n        ")]
-          )
-        ])
+              },
+              [_vm._v("\n            " + _vm._s(_vm.__("Next")) + "\n        ")]
+            )
+          ],
+          2
+        )
       : _vm._e()
   ])
 }
@@ -36551,93 +38112,6 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-4c5708b7", module.exports)
-  }
-}
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-4cf92da2\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/FilterSelector.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    _vm._l(_vm.filters, function(filter) {
-      return _c("filter-select", { key: filter.name }, [
-        _c(
-          "h3",
-          {
-            staticClass: "text-sm uppercase tracking-wide text-80 bg-30 p-3",
-            attrs: { slot: "default" },
-            slot: "default"
-          },
-          [_vm._v("\n            " + _vm._s(filter.name) + "\n        ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: filter.currentValue,
-                expression: "filter.currentValue"
-              }
-            ],
-            staticClass: "block w-full form-control-sm form-select",
-            attrs: { slot: "select", dusk: filter.name + "-filter-select" },
-            on: {
-              change: [
-                function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    filter,
-                    "currentValue",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                },
-                function($event) {
-                  _vm.filterChanged(filter)
-                }
-              ]
-            },
-            slot: "select"
-          },
-          [
-            _c("option", { attrs: { value: "", selected: "" } }, [_vm._v("—")]),
-            _vm._v(" "),
-            _vm._l(filter.options, function(option) {
-              return _c("option", { domProps: { value: option.value } }, [
-                _vm._v(
-                  "\n                " + _vm._s(option.name) + "\n            "
-                )
-              ])
-            })
-          ],
-          2
-        )
-      ])
-    })
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-4cf92da2", module.exports)
   }
 }
 
@@ -36901,13 +38375,15 @@ var render = function() {
                                     { staticClass: "text-80 leading-normal" },
                                     [
                                       _vm._v(
-                                        _vm._s(
-                                          _vm.__(
-                                            "Are you sure you want to " +
-                                              mode +
-                                              " this resource?"
-                                          )
-                                        )
+                                        "\n                            " +
+                                          _vm._s(
+                                            _vm.__(
+                                              "Are you sure you want to " +
+                                                mode +
+                                                " this resource?"
+                                            )
+                                          ) +
+                                          "\n                        "
                                       )
                                     ]
                                   )
@@ -36952,11 +38428,13 @@ var render = function() {
                                 { staticClass: "text-80 leading-normal" },
                                 [
                                   _vm._v(
-                                    _vm._s(
-                                      _vm.__(
-                                        "Are you sure you want to restore this resource?"
-                                      )
-                                    )
+                                    "\n                            " +
+                                      _vm._s(
+                                        _vm.__(
+                                          "Are you sure you want to restore this resource?"
+                                        )
+                                      ) +
+                                      "\n                        "
                                   )
                                 ]
                               )
@@ -37022,7 +38500,7 @@ var render = function() {
                       "w-8": !_vm.shouldShowCheckboxes
                     }
                   },
-                  [_vm._v(" ")]
+                  [_vm._v("\n                 \n            ")]
                 ),
                 _vm._v(" "),
                 _vm._l(_vm.fields, function(field) {
@@ -37053,11 +38531,7 @@ var render = function() {
                             ]
                           )
                         : _c("span", [
-                            _vm._v(
-                              "\n                    " +
-                                _vm._s(field.indexName) +
-                                "\n                "
-                            )
+                            _vm._v(" " + _vm._s(field.indexName) + " ")
                           ])
                     ],
                     1
@@ -37165,7 +38639,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                        " +
+                          "\n                    " +
                             _vm._s(
                               _vm.__(
                                 _vm.viaManyToMany
@@ -37293,11 +38767,13 @@ var render = function() {
                                 { staticClass: "text-80 leading-normal" },
                                 [
                                   _vm._v(
-                                    _vm._s(
-                                      _vm.__(
-                                        "Are you sure you want to force delete the selected resources?"
-                                      )
-                                    )
+                                    "\n                        " +
+                                      _vm._s(
+                                        _vm.__(
+                                          "Are you sure you want to force delete the selected resources?"
+                                        )
+                                      ) +
+                                      "\n                    "
                                   )
                                 ]
                               )
@@ -37500,7 +38976,7 @@ var render = function() {
                               ]
                             )
                           : _c(
-                              "select",
+                              "select-control",
                               {
                                 staticClass:
                                   "form-control form-select mb-3 w-full",
@@ -37512,7 +38988,10 @@ var render = function() {
                                 attrs: {
                                   dusk: "attachable-select",
                                   "data-testid":
-                                    _vm.field.resourceName + "-select"
+                                    _vm.field.resourceName + "-select",
+                                  options: _vm.availableResources,
+                                  label: "display",
+                                  selected: _vm.selectedResourceId
                                 },
                                 on: {
                                   change: _vm.selectResourceFromSelectControl
@@ -37535,89 +39014,36 @@ var render = function() {
                                         _vm._s(_vm.relatedResourceLabel)
                                     )
                                   ]
-                                ),
-                                _vm._v(" "),
-                                _vm._l(_vm.availableResources, function(
-                                  resource
-                                ) {
-                                  return _c(
-                                    "option",
-                                    {
-                                      key: resource.value,
-                                      domProps: {
-                                        value: resource.value,
-                                        selected:
-                                          _vm.selectedResourceId ==
-                                          resource.value
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                            " +
-                                          _vm._s(resource.display) +
-                                          "\n                        "
-                                      )
-                                    ]
-                                  )
-                                })
-                              ],
-                              2
+                                )
+                              ]
                             ),
                         _vm._v(" "),
                         _vm.softDeletes
-                          ? _c("div", [
-                              _c(
-                                "label",
-                                {
-                                  staticClass: "flex items-center",
-                                  on: {
-                                    input: _vm.toggleWithTrashed,
-                                    keydown: function($event) {
-                                      if (
-                                        !("button" in $event) &&
-                                        _vm._k(
-                                          $event.keyCode,
-                                          "space",
-                                          32,
-                                          $event.key,
-                                          " "
-                                        ) &&
-                                        _vm._k(
-                                          $event.keyCode,
-                                          "enter",
-                                          13,
-                                          $event.key,
-                                          "Enter"
-                                        )
-                                      ) {
-                                        return null
-                                      }
-                                      $event.preventDefault()
-                                      return _vm.toggleWithTrashed($event)
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("checkbox", {
+                          ? _c(
+                              "div",
+                              [
+                                _c(
+                                  "checkbox-with-label",
+                                  {
                                     attrs: {
                                       dusk:
                                         _vm.field.resourceName +
                                         "-with-trashed-checkbox",
                                       checked: _vm.withTrashed
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("span", { staticClass: "ml-2" }, [
+                                    },
+                                    on: { change: _vm.toggleWithTrashed }
+                                  },
+                                  [
                                     _vm._v(
-                                      "\n                                " +
+                                      "\n                            " +
                                         _vm._s(_vm.__("With Trashed")) +
-                                        "\n                            "
+                                        "\n                        "
                                     )
-                                  ])
-                                ],
-                                1
-                              )
-                            ])
+                                  ]
+                                )
+                              ],
+                              1
+                            )
                           : _vm._e()
                       ],
                       1
@@ -37646,43 +39072,57 @@ var render = function() {
                   )
                 }),
                 _vm._v(" "),
-                _c("div", { staticClass: "bg-30 flex px-8 py-4" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "ml-auto btn btn-default btn-primary mr-3",
-                      attrs: {
-                        dusk: "attach-and-attach-another-button",
-                        type: "button"
+                _c(
+                  "div",
+                  { staticClass: "bg-30 flex px-8 py-4" },
+                  [
+                    _c(
+                      "progress-button",
+                      {
+                        staticClass: "ml-auto mr-3",
+                        attrs: {
+                          dusk: "attach-and-attach-another-button",
+                          disabled: _vm.isWorking,
+                          processing: _vm.submittedViaAttachAndAttachAnother
+                        },
+                        nativeOn: {
+                          click: function($event) {
+                            return _vm.attachAndAttachAnother($event)
+                          }
+                        }
                       },
-                      on: { click: _vm.attachAndAttachAnother }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.__("Attach & Attach Another")) +
-                          "\n                "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-default btn-primary",
-                      attrs: { dusk: "attach-button" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.__("Attach")) +
-                          " " +
-                          _vm._s(_vm.relatedResourceLabel) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                ])
+                      [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(_vm.__("Attach & Attach Another")) +
+                            "\n                "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "progress-button",
+                      {
+                        attrs: {
+                          dusk: "attach-button",
+                          type: "submit",
+                          disabled: _vm.isWorking,
+                          processing: _vm.submittedViaAttachResource
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(_vm.__("Attach")) +
+                            " " +
+                            _vm._s(_vm.relatedResourceLabel) +
+                            "\n                "
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
               ],
               2
             )
@@ -37778,7 +39218,7 @@ var render = function() {
             "form-label",
             {
               class: { "mb-2": _vm.field.helpText && _vm.showHelpText },
-              attrs: { for: _vm.field.name }
+              attrs: { "label-for": _vm.field.attribute }
             },
             [
               _vm._v(
@@ -37805,9 +39245,7 @@ var render = function() {
         _vm._v(" "),
         _vm.showHelpText
           ? _c("help-text", { staticClass: "help-text mt-2" }, [
-              _vm._v(
-                "\n            " + _vm._s(_vm.field.helpText) + "\n        "
-              )
+              _vm._v(" " + _vm._s(_vm.field.helpText) + " ")
             ])
           : _vm._e()
       ],
@@ -37838,68 +39276,33 @@ var render = function() {
     "default-field",
     { attrs: { field: _vm.field, errors: _vm.errors } },
     [
-      _c("template", { slot: "field" }, [
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
+      _c(
+        "template",
+        { slot: "field" },
+        [
+          _c(
+            "select-control",
+            {
+              staticClass: "w-full form-control form-select",
+              class: _vm.errorClasses,
+              attrs: { id: _vm.field.attribute, options: _vm.field.options },
+              model: {
                 value: _vm.value,
+                callback: function($$v) {
+                  _vm.value = $$v
+                },
                 expression: "value"
               }
-            ],
-            staticClass: "w-full form-control form-select",
-            class: _vm.errorClasses,
-            attrs: { id: _vm.field.attribute },
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.value = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              }
-            }
-          },
-          [
-            _c("option", { attrs: { value: "", selected: "", disabled: "" } }, [
-              _vm._v(
-                "\n                " +
-                  _vm._s(_vm.__("Choose an option")) +
-                  "\n            "
-              )
-            ]),
-            _vm._v(" "),
-            _vm._l(_vm.field.options, function(option) {
-              return _c(
-                "option",
-                {
-                  domProps: {
-                    value: option.value,
-                    selected: option.value == _vm.value
-                  }
-                },
-                [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(option.label) +
-                      "\n            "
-                  )
-                ]
-              )
-            })
-          ],
-          2
-        )
-      ])
+            },
+            [
+              _c("option", { attrs: { value: "", selected: "" } }, [
+                _vm._v(_vm._s(_vm.__("Choose an option")))
+              ])
+            ]
+          )
+        ],
+        1
+      )
     ],
     2
   )
@@ -38059,8 +39462,9 @@ var render = function() {
           {
             staticClass: "bg-white rounded-lg",
             class: {
-              "fixed pin z-50": _vm.fullScreen,
-              "form-input form-input-bordered px-0": !_vm.fullScreen,
+              "markdown-fullscreen fixed pin z-50": _vm.isFullScreen,
+              "form-input form-input-bordered px-0": !_vm.isFullScreen,
+              "form-control-focus": _vm.isFocused,
               "border-danger": _vm.errors.has("body")
             }
           },
@@ -38093,7 +39497,13 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v(_vm._s(_vm.__("Write")))]
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(_vm.__("Write")) +
+                            "\n                    "
+                        )
+                      ]
                     ),
                     _vm._v(" "),
                     _c(
@@ -38110,7 +39520,13 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v(_vm._s(_vm.__("Preview")))]
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(_vm.__("Preview")) +
+                            "\n                    "
+                        )
+                      ]
                     )
                   ]
                 ),
@@ -38124,7 +39540,7 @@ var render = function() {
                       {
                         key: tool.action,
                         staticClass:
-                          "rounded-none ico-button inline-flex justify-center px-2 text-sm text-80 border-l border-60",
+                          "rounded-none ico-button inline-flex items-center justify-center px-2 text-sm text-80 border-l border-60",
                         on: {
                           click: function($event) {
                             $event.preventDefault()
@@ -38145,29 +39561,28 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "p-4" }, [
-              _c(
-                "div",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.mode == "write",
-                      expression: "mode == 'write'"
-                    }
-                  ]
-                },
-                [_c("textarea", { ref: "theTextarea" })]
-              ),
-              _vm._v(" "),
-              _vm.mode == "preview"
-                ? _c("div", {
-                    staticClass: "markdown",
-                    domProps: { innerHTML: _vm._s(_vm.previewContent) }
-                  })
-                : _vm._e()
-            ])
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.mode == "write",
+                    expression: "mode == 'write'"
+                  }
+                ],
+                staticClass: "flex markdown-content relative p-4"
+              },
+              [_c("textarea", { ref: "theTextarea" })]
+            ),
+            _vm._v(" "),
+            _vm.mode == "preview"
+              ? _c("div", {
+                  staticClass: "markdown overflow-scroll p-4",
+                  domProps: { innerHTML: _vm._s(_vm.previewContent) }
+                })
+              : _vm._e()
           ]
         )
       ])
@@ -38232,13 +39647,15 @@ var render = function() {
                       _vm._v(" "),
                       _c("p", { staticClass: "text-80 leading-normal" }, [
                         _vm._v(
-                          _vm._s(
-                            _vm.__(
-                              "Are you sure you want to " +
-                                _vm.mode +
-                                " the selected resources?"
-                            )
-                          )
+                          "\n                    " +
+                            _vm._s(
+                              _vm.__(
+                                "Are you sure you want to " +
+                                  _vm.mode +
+                                  " the selected resources?"
+                              )
+                            ) +
+                            "\n                "
                         )
                       ])
                     ],
@@ -38267,7 +39684,13 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v(_vm._s(_vm.__("Cancel")))]
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.__("Cancel")) +
+                          "\n                "
+                      )
+                    ]
                   ),
                   _vm._v(" "),
                   _c(
@@ -38281,7 +39704,13 @@ var render = function() {
                         type: "submit"
                       }
                     },
-                    [_vm._v(_vm._s(_vm.__(_vm.uppercaseMode)))]
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.__(_vm.uppercaseMode)) +
+                          "\n                "
+                      )
+                    ]
                   )
                 ])
               ])
@@ -38300,6 +39729,69 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-5e6c67f6", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-5e9cebc3\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/CheckboxWithLabel.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "label",
+    {
+      ref: "label",
+      staticClass: "flex items-center select-none",
+      on: {
+        keydown: function($event) {
+          if (
+            !("button" in $event) &&
+            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter") &&
+            _vm._k($event.keyCode, "space", 32, $event.key, " ")
+          ) {
+            return null
+          }
+          $event.preventDefault()
+          _vm.$refs.label.click()
+        }
+      }
+    },
+    [
+      _c("fake-checkbox", {
+        staticClass: "mr-2",
+        attrs: { checked: _vm.checked }
+      }),
+      _vm._v(" "),
+      _c("input", {
+        attrs: {
+          type: "checkbox",
+          disabled: _vm.disabled,
+          tabindex: _vm.disabled ? false : 0,
+          "aria-checked": _vm.checked
+        },
+        on: {
+          change: function($event) {
+            _vm.$emit("change", $event)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _vm._t("default")
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5e9cebc3", module.exports)
   }
 }
 
@@ -38394,9 +39886,7 @@ var render = function() {
       [
         _vm._t("default", [
           _c("h4", { staticClass: "font-normal text-80" }, [
-            _vm._v(
-              "\n                " + _vm._s(_vm.field.name) + "\n            "
-            )
+            _vm._v(_vm._s(_vm.field.name))
           ])
         ])
       ],
@@ -38429,7 +39919,13 @@ var render = function() {
                       )
                     }
                   },
-                  [_vm._v(_vm._s(_vm.field.value))]
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.field.value) +
+                        "\n                "
+                    )
+                  ]
                 )
               : _c("p", [_vm._v("—")])
           ])
@@ -38486,62 +39982,48 @@ var render = function() {
                   "default-field",
                   { attrs: { field: _vm.field, errors: _vm.validationErrors } },
                   [
-                    _c("template", { slot: "field" }, [
-                      _c(
-                        "select",
-                        {
-                          staticClass: "form-control form-select mb-3 w-full",
-                          class: {
-                            "border-danger": _vm.validationErrors.has(
-                              _vm.field.attribute
-                            )
-                          },
-                          attrs: {
-                            dusk: "attachable-select",
-                            "data-testid": _vm.field.resourceName + "-select",
-                            disabled: ""
-                          },
-                          on: { change: _vm.selectResourceFromSelectControl }
-                        },
-                        [
-                          _c(
-                            "option",
-                            {
-                              attrs: { value: "", disabled: "", selected: "" }
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(_vm.__("Choose")) +
-                                  " " +
-                                  _vm._s(_vm.field.name)
+                    _c(
+                      "template",
+                      { slot: "field" },
+                      [
+                        _c(
+                          "select-control",
+                          {
+                            staticClass: "form-control form-select mb-3 w-full",
+                            class: {
+                              "border-danger": _vm.validationErrors.has(
+                                _vm.field.attribute
                               )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _vm._l(_vm.availableResources, function(resource) {
-                            return _c(
+                            },
+                            attrs: {
+                              dusk: "attachable-select",
+                              "data-testid": _vm.field.resourceName + "-select",
+                              disabled: "",
+                              options: _vm.availableResources,
+                              label: "display",
+                              selected: _vm.selectedResourceId
+                            },
+                            on: { change: _vm.selectResourceFromSelectControl }
+                          },
+                          [
+                            _c(
                               "option",
                               {
-                                key: resource.value,
-                                domProps: {
-                                  value: resource.value,
-                                  selected:
-                                    _vm.selectedResourceId == resource.value
-                                }
+                                attrs: { value: "", disabled: "", selected: "" }
                               },
                               [
                                 _vm._v(
-                                  "\n                            " +
-                                    _vm._s(resource.display) +
-                                    "\n                        "
+                                  _vm._s(_vm.__("Choose")) +
+                                    " " +
+                                    _vm._s(_vm.field.name)
                                 )
                               ]
                             )
-                          })
-                        ],
-                        2
-                      )
-                    ])
+                          ]
+                        )
+                      ],
+                      1
+                    )
                   ],
                   2
                 ),
@@ -38569,43 +40051,57 @@ var render = function() {
                   )
                 }),
                 _vm._v(" "),
-                _c("div", { staticClass: "bg-30 flex px-8 py-4" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "ml-auto btn btn-default btn-primary mr-3",
-                      attrs: {
-                        dusk: "update-and-continue-editing-button",
-                        type: "button"
+                _c(
+                  "div",
+                  { staticClass: "bg-30 flex px-8 py-4" },
+                  [
+                    _c(
+                      "progress-button",
+                      {
+                        staticClass: "ml-auto mr-3",
+                        attrs: {
+                          dusk: "update-and-continue-editing-button",
+                          disabled: _vm.isWorking,
+                          processing: _vm.submittedViaUpdateAndContinueEditing
+                        },
+                        nativeOn: {
+                          click: function($event) {
+                            return _vm.updateAndContinueEditing($event)
+                          }
+                        }
                       },
-                      on: { click: _vm.updateAndContinueEditing }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.__("Update & Continue Editing")) +
-                          "\n                "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-default btn-primary",
-                      attrs: { dusk: "update-button" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.__("Update")) +
-                          " " +
-                          _vm._s(_vm.relatedResourceLabel) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                ])
+                      [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(_vm.__("Update & Continue Editing")) +
+                            "\n                "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "progress-button",
+                      {
+                        attrs: {
+                          dusk: "update-button",
+                          type: "submit",
+                          disabled: _vm.isWorking,
+                          processing: _vm.submittedViaUpdateAttachedResource
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(_vm.__("Update")) +
+                            " " +
+                            _vm._s(_vm.relatedResourceLabel) +
+                            "\n                "
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
               ],
               2
             )
@@ -38827,34 +40323,24 @@ var render = function() {
     "a",
     {
       staticClass:
-        "dropdown-trigger h-9 flex items-center cursor-pointer select-none",
+        "dropdown-trigger h-dropdown-trigger flex items-center cursor-pointer select-none",
       on: { click: _vm.handleClick }
     },
     [
       _vm._t("default"),
       _vm._v(" "),
-      _c(
-        "svg",
-        {
-          staticClass: "ml-2",
-          attrs: {
-            width: "10px",
-            height: "6px",
-            viewBox: "0 0 10 6",
-            version: "1.1",
-            xmlns: "http://www.w3.org/2000/svg",
-            "xmlns:xlink": "http://www.w3.org/1999/xlink"
-          }
-        },
-        [
-          _c(
-            "g",
+      _vm.showArrow
+        ? _c(
+            "svg",
             {
+              staticClass: "ml-2",
               attrs: {
-                stroke: "none",
-                "stroke-width": "1",
-                fill: "none",
-                "fill-rule": "evenodd"
+                width: "10px",
+                height: "6px",
+                viewBox: "0 0 10 6",
+                version: "1.1",
+                xmlns: "http://www.w3.org/2000/svg",
+                "xmlns:xlink": "http://www.w3.org/1999/xlink"
               }
             },
             [
@@ -38862,26 +40348,38 @@ var render = function() {
                 "g",
                 {
                   attrs: {
-                    id: "04-user",
-                    transform: "translate(-385.000000, -573.000000)",
-                    fill: "#35393C",
-                    "fill-rule": "nonzero"
+                    stroke: "none",
+                    "stroke-width": "1",
+                    fill: "none",
+                    "fill-rule": "evenodd"
                   }
                 },
                 [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M393.292893,573.292893 C393.683418,572.902369 394.316582,572.902369 394.707107,573.292893 C395.097631,573.683418 395.097631,574.316582 394.707107,574.707107 L390.707107,578.707107 C390.316582,579.097631 389.683418,579.097631 389.292893,578.707107 L385.292893,574.707107 C384.902369,574.316582 384.902369,573.683418 385.292893,573.292893 C385.683418,572.902369 386.316582,572.902369 386.707107,573.292893 L390,576.585786 L393.292893,573.292893 Z",
-                      id: "Path-2-Copy"
-                    }
-                  })
+                  _c(
+                    "g",
+                    {
+                      attrs: {
+                        id: "04-user",
+                        transform: "translate(-385.000000, -573.000000)",
+                        fill: _vm.activeIconColor,
+                        "fill-rule": "nonzero"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M393.292893,573.292893 C393.683418,572.902369 394.316582,572.902369 394.707107,573.292893 C395.097631,573.683418 395.097631,574.316582 394.707107,574.707107 L390.707107,578.707107 C390.316582,579.097631 389.683418,579.097631 389.292893,578.707107 L385.292893,574.707107 C384.902369,574.316582 384.902369,573.683418 385.292893,573.292893 C385.683418,572.902369 386.316582,572.902369 386.707107,573.292893 L390,576.585786 L393.292893,573.292893 Z",
+                          id: "Path-2-Copy"
+                        }
+                      })
+                    ]
+                  )
                 ]
               )
             ]
           )
-        ]
-      )
+        : _vm._e()
     ],
     2
   )
@@ -39019,12 +40517,12 @@ var render = function() {
                   "data-testid": "action-confirm",
                   dusk: "run-action-button",
                   disabled: !_vm.selectedAction,
-                  title: "Run Action"
+                  title: _vm.__("Run Action")
                 },
                 on: {
                   click: function($event) {
                     $event.preventDefault()
-                    return _vm.openConfirmationModal($event)
+                    return _vm.determineActionStrategy($event)
                   }
                 }
               },
@@ -39045,11 +40543,13 @@ var render = function() {
         { attrs: { name: "fade" } },
         [
           _vm.confirmActionModalOpened
-            ? _c("confirm-action-modal", {
+            ? _c(_vm.selectedAction.component, {
+                tag: "component",
                 attrs: {
                   working: _vm.working,
+                  "selected-resources": _vm.selectedResources,
                   "resource-name": _vm.resourceName,
-                  "selected-action": _vm.selectedAction,
+                  action: _vm.selectedAction,
                   errors: _vm.errors
                 },
                 on: {
@@ -39074,6 +40574,45 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-676deeed", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-67c6bc35\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/BooleanOption.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "checkbox-with-label",
+        {
+          staticClass: "m-2",
+          attrs: { checked: _vm.isChecked },
+          on: {
+            change: function($event) {
+              _vm.updateCheckedState(_vm.option.value, $event)
+            }
+          }
+        },
+        [_vm._v("\n        " + _vm._s(_vm.option.name) + "\n    ")]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-67c6bc35", module.exports)
   }
 }
 
@@ -39371,6 +40910,36 @@ var render = function() {
       attrs: { loading: _vm.initialLoading, dusk: _vm.lens + "-lens-component" }
     },
     [
+      _vm.shouldShowCards
+        ? _c(
+            "div",
+            [
+              _vm.smallCards.length > 0
+                ? _c("cards", {
+                    staticClass: "mb-3",
+                    attrs: {
+                      cards: _vm.smallCards,
+                      "resource-name": _vm.resourceName,
+                      lens: _vm.lens
+                    }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.largeCards.length > 0
+                ? _c("cards", {
+                    attrs: {
+                      cards: _vm.largeCards,
+                      size: "large",
+                      "resource-name": _vm.resourceName,
+                      lens: _vm.lens
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
       _vm.resourceResponse
         ? _c(
             "heading",
@@ -39390,13 +40959,11 @@ var render = function() {
                     "data-testid": "lens-back"
                   }
                 },
-                [_vm._v("\n            ←\n        ")]
+                [_vm._v("←")]
               ),
               _vm._v(" "),
               _c("span", { staticClass: "px-2 text-70" }, [_vm._v("/")]),
-              _vm._v(
-                "\n\n        " + _vm._s(_vm.resourceResponse.name) + "\n    "
-              )
+              _vm._v(" " + _vm._s(_vm.resourceResponse.name) + "\n    ")
             ],
             1
           )
@@ -39404,454 +40971,232 @@ var render = function() {
       _vm._v(" "),
       _c(
         "loading-card",
-        {
-          class: { "overflow-hidden border border-50": !_vm.shouldShowToolbar },
-          attrs: { loading: _vm.loading }
-        },
+        { attrs: { loading: _vm.loading } },
         [
-          _vm.shouldShowToolbar
-            ? _c(
-                "div",
-                { staticClass: "py-3 flex items-center border-b border-50" },
-                [
-                  _vm.shouldShowCheckBoxes
-                    ? _c(
-                        "div",
-                        { staticClass: "px-3" },
+          _c(
+            "div",
+            { staticClass: "py-3 flex items-center border-b border-50" },
+            [
+              _vm.shouldShowCheckBoxes
+                ? _c(
+                    "div",
+                    { staticClass: "px-3" },
+                    [
+                      _c(
+                        "dropdown",
+                        {
+                          staticClass: "h-9 flex items-center",
+                          attrs: {
+                            width: "250",
+                            "active-class": "",
+                            dusk: "select-all-dropdown"
+                          },
+                          scopedSlots: _vm._u([
+                            {
+                              key: "default",
+                              fn: function(ref) {
+                                var toggle = ref.toggle
+                                return _c(
+                                  "dropdown-trigger",
+                                  { attrs: { "handle-click": toggle } },
+                                  [
+                                    _c("fake-checkbox", {
+                                      attrs: { checked: _vm.selectAllChecked }
+                                    })
+                                  ],
+                                  1
+                                )
+                              }
+                            }
+                          ])
+                        },
                         [
                           _c(
-                            "dropdown",
+                            "dropdown-menu",
                             {
-                              staticClass: "h-9 flex items-center",
                               attrs: {
-                                width: "250",
-                                "active-class": "",
-                                dusk: "select-all-dropdown"
+                                slot: "menu",
+                                direction: "ltr",
+                                width: "250"
                               },
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "default",
-                                  fn: function(ref) {
-                                    var toggle = ref.toggle
-                                    return _c(
-                                      "dropdown-trigger",
-                                      { attrs: { "handle-click": toggle } },
-                                      [
-                                        _c("fake-checkbox", {
-                                          attrs: {
-                                            checked: _vm.selectAllChecked
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  }
-                                }
-                              ])
+                              slot: "menu"
                             },
                             [
-                              _c(
-                                "dropdown-menu",
-                                {
-                                  attrs: {
-                                    slot: "menu",
-                                    direction: "ltr",
-                                    width: "250"
-                                  },
-                                  slot: "menu"
-                                },
-                                [
-                                  _c("div", { staticClass: "p-4" }, [
-                                    _c("ul", { staticClass: "list-reset" }, [
+                              _c("div", { staticClass: "p-4" }, [
+                                _c("ul", { staticClass: "list-reset" }, [
+                                  _c(
+                                    "li",
+                                    { staticClass: "flex items-center mb-4" },
+                                    [
                                       _c(
+                                        "checkbox-with-label",
+                                        {
+                                          attrs: {
+                                            checked: _vm.selectAllChecked
+                                          },
+                                          on: { change: _vm.toggleSelectAll }
+                                        },
+                                        [_vm._v(_vm._s(_vm.__("Select All")))]
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _vm.allMatchingResourceCount > 0
+                                    ? _c(
                                         "li",
                                         { staticClass: "flex items-center" },
                                         [
                                           _c(
-                                            "label",
+                                            "checkbox-with-label",
                                             {
-                                              staticClass: "flex items-center",
+                                              attrs: {
+                                                dusk:
+                                                  "select-all-matching-button",
+                                                checked:
+                                                  _vm.selectAllMatchingChecked
+                                              },
                                               on: {
-                                                input: _vm.toggleSelectAll,
-                                                keydown: function($event) {
-                                                  if (
-                                                    !("button" in $event) &&
-                                                    _vm._k(
-                                                      $event.keyCode,
-                                                      "space",
-                                                      32,
-                                                      $event.key,
-                                                      " "
-                                                    ) &&
-                                                    _vm._k(
-                                                      $event.keyCode,
-                                                      "enter",
-                                                      13,
-                                                      $event.key,
-                                                      "Enter"
-                                                    )
-                                                  ) {
-                                                    return null
-                                                  }
-                                                  $event.preventDefault()
-                                                  return _vm.toggleSelectAll(
-                                                    $event
-                                                  )
-                                                }
+                                                change:
+                                                  _vm.toggleSelectAllMatching
                                               }
                                             },
                                             [
-                                              _c("checkbox", {
-                                                attrs: {
-                                                  checked: _vm.selectAllChecked
-                                                }
-                                              }),
-                                              _vm._v(" "),
-                                              _c(
-                                                "span",
-                                                { staticClass: "ml-2" },
-                                                [
+                                              [
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "mr-1" },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                " +
+                                                        _vm._s(
+                                                          _vm.__(
+                                                            "Select All Matching"
+                                                          )
+                                                        ) +
+                                                        "\n                                            "
+                                                    )
+                                                  ]
+                                                ),
+                                                _vm._v(" "),
+                                                _c("span", [
                                                   _vm._v(
-                                                    "\n                                            " +
+                                                    "(" +
                                                       _vm._s(
-                                                        _vm.__("Select All")
+                                                        _vm.allMatchingResourceCount
                                                       ) +
-                                                      "\n                                        "
+                                                      ")"
                                                   )
-                                                ]
-                                              )
+                                                ])
+                                              ]
                                             ],
-                                            1
+                                            2
                                           )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _vm.allMatchingResourceCount > 0
-                                        ? _c(
-                                            "li",
-                                            {
-                                              staticClass: "flex items-center"
-                                            },
-                                            [
-                                              _c(
-                                                "label",
-                                                {
-                                                  staticClass:
-                                                    "flex items-center",
-                                                  on: {
-                                                    input:
-                                                      _vm.toggleSelectAllMatching,
-                                                    keydown: function($event) {
-                                                      if (
-                                                        !("button" in $event) &&
-                                                        _vm._k(
-                                                          $event.keyCode,
-                                                          "space",
-                                                          32,
-                                                          $event.key,
-                                                          " "
-                                                        ) &&
-                                                        _vm._k(
-                                                          $event.keyCode,
-                                                          "enter",
-                                                          13,
-                                                          $event.key,
-                                                          "Enter"
-                                                        )
-                                                      ) {
-                                                        return null
-                                                      }
-                                                      $event.preventDefault()
-                                                      return _vm.toggleSelectAllMatching(
-                                                        $event
-                                                      )
-                                                    }
-                                                  }
-                                                },
-                                                [
-                                                  _c("checkbox", {
-                                                    attrs: {
-                                                      dusk:
-                                                        "select-all-matching-button",
-                                                      checked:
-                                                        _vm.selectAllMatchingChecked
-                                                    }
-                                                  }),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "span",
-                                                    { staticClass: "ml-2" },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                                            " +
-                                                          _vm._s(
-                                                            _vm.__(
-                                                              "Select All Matching"
-                                                            )
-                                                          ) +
-                                                          "\n                                            "
-                                                      ),
-                                                      _c("span", [
-                                                        _vm._v(
-                                                          "(" +
-                                                            _vm._s(
-                                                              _vm.allMatchingResourceCount
-                                                            ) +
-                                                            ")"
-                                                        )
-                                                      ])
-                                                    ]
-                                                  )
-                                                ],
-                                                1
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e()
-                                    ])
-                                  ])
-                                ]
-                              )
-                            ],
-                            1
+                                        ],
+                                        1
+                                      )
+                                    : _vm._e()
+                                ])
+                              ])
+                            ]
                           )
                         ],
                         1
                       )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "flex items-center ml-auto px-3" },
-                    [
-                      _vm.selectedResources.length > 0
-                        ? _c("action-selector", {
-                            attrs: {
-                              "resource-name": _vm.resourceName,
-                              actions: _vm.actions,
-                              "pivot-actions": _vm.pivotActions,
-                              "pivot-name": _vm.pivotName,
-                              errors: _vm.actionValidationErrors,
-                              "selected-resources":
-                                _vm.selectedResourcesForActionSelector,
-                              endpoint: _vm.lensActionEndpoint,
-                              "query-string": {
-                                currentSearch: _vm.currentSearch,
-                                encodedFilters: _vm.encodedFilters,
-                                currentTrashed: _vm.currentTrashed,
-                                viaResource: _vm.viaResource,
-                                viaResourceId: _vm.viaResourceId,
-                                viaRelationship: _vm.viaRelationship
-                              }
-                            },
-                            on: { actionExecuted: _vm.getResources }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.filters.length > 0 ||
-                      _vm.softDeletes ||
-                      !_vm.viaResource
-                        ? _c(
-                            "dropdown",
-                            {
-                              staticClass: "bg-30 hover:bg-40 rounded",
-                              attrs: {
-                                "data-testid": "filter-selector",
-                                dusk: "filter-selector"
-                              },
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "default",
-                                  fn: function(ref) {
-                                    var toggle = ref.toggle
-                                    return _c(
-                                      "dropdown-trigger",
-                                      {
-                                        staticClass: "px-3",
-                                        attrs: { "handle-click": toggle }
-                                      },
-                                      [
-                                        _c("icon", {
-                                          staticClass: "text-80",
-                                          attrs: { type: "filter" }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  }
-                                }
-                              ])
-                            },
-                            [
-                              _c(
-                                "dropdown-menu",
-                                {
-                                  attrs: {
-                                    slot: "menu",
-                                    width: "290",
-                                    direction: "rtl",
-                                    dark: true
-                                  },
-                                  slot: "menu"
-                                },
-                                [
-                                  !_vm.viaHasOne
-                                    ? _c("filter-selector", {
-                                        attrs: {
-                                          filters: _vm.filters,
-                                          "current-filters": _vm.currentFilters
-                                        },
-                                        on: {
-                                          "update:currentFilters": function(
-                                            $event
-                                          ) {
-                                            _vm.currentFilters = $event
-                                          },
-                                          changed: _vm.filterChanged
-                                        }
-                                      })
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  !_vm.viaResource
-                                    ? _c("filter-select", [
-                                        _c(
-                                          "h3",
-                                          {
-                                            staticClass:
-                                              "text-sm uppercase tracking-wide text-80 bg-30 p-3",
-                                            attrs: { slot: "default" },
-                                            slot: "default"
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                                " +
-                                                _vm._s(_vm.__("Per Page:")) +
-                                                "\n                            "
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "select",
-                                          {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value: _vm.perPage,
-                                                expression: "perPage"
-                                              }
-                                            ],
-                                            staticClass:
-                                              "block w-full form-control-sm form-select",
-                                            attrs: {
-                                              slot: "select",
-                                              dusk: "per-page-select"
-                                            },
-                                            on: {
-                                              change: [
-                                                function($event) {
-                                                  var $$selectedVal = Array.prototype.filter
-                                                    .call(
-                                                      $event.target.options,
-                                                      function(o) {
-                                                        return o.selected
-                                                      }
-                                                    )
-                                                    .map(function(o) {
-                                                      var val =
-                                                        "_value" in o
-                                                          ? o._value
-                                                          : o.value
-                                                      return val
-                                                    })
-                                                  _vm.perPage = $event.target
-                                                    .multiple
-                                                    ? $$selectedVal
-                                                    : $$selectedVal[0]
-                                                },
-                                                _vm.perPageChanged
-                                              ]
-                                            },
-                                            slot: "select"
-                                          },
-                                          [
-                                            _c(
-                                              "option",
-                                              { attrs: { value: "25" } },
-                                              [_vm._v("25")]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "option",
-                                              { attrs: { value: "50" } },
-                                              [_vm._v("50")]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "option",
-                                              { attrs: { value: "100" } },
-                                              [_vm._v("100")]
-                                            )
-                                          ]
-                                        )
-                                      ])
-                                    : _vm._e()
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.shouldShowDeleteMenu
-                        ? _c("delete-menu", {
-                            attrs: {
-                              dusk: "delete-menu",
-                              "soft-deletes": _vm.softDeletes,
-                              resources: _vm.resources,
-                              "selected-resources": _vm.selectedResources,
-                              "via-many-to-many": _vm.viaManyToMany,
-                              "all-matching-resource-count":
-                                _vm.allMatchingResourceCount,
-                              "all-matching-selected":
-                                _vm.selectAllMatchingChecked,
-                              "authorized-to-delete-selected-resources":
-                                _vm.authorizedToDeleteSelectedResources,
-                              "authorized-to-force-delete-selected-resources":
-                                _vm.authorizedToForceDeleteSelectedResources,
-                              "authorized-to-delete-any-resources":
-                                _vm.authorizedToDeleteAnyResources,
-                              "authorized-to-force-delete-any-resources":
-                                _vm.authorizedToForceDeleteAnyResources,
-                              "authorized-to-restore-selected-resources":
-                                _vm.authorizedToRestoreSelectedResources,
-                              "authorized-to-restore-any-resources":
-                                _vm.authorizedToRestoreAnyResources
-                            },
-                            on: {
-                              deleteSelected: _vm.deleteSelectedResources,
-                              deleteAllMatching: _vm.deleteAllMatchingResources,
-                              forceDeleteSelected:
-                                _vm.forceDeleteSelectedResources,
-                              forceDeleteAllMatching:
-                                _vm.forceDeleteAllMatchingResources,
-                              restoreSelected: _vm.restoreSelectedResources,
-                              restoreAllMatching:
-                                _vm.restoreAllMatchingResources,
-                              close: function($event) {
-                                _vm.deleteModalOpen = false
-                              }
-                            }
-                          })
-                        : _vm._e()
                     ],
                     1
                   )
-                ]
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "flex items-center ml-auto px-3" },
+                [
+                  _vm.selectedResources.length > 0
+                    ? _c("action-selector", {
+                        attrs: {
+                          "resource-name": _vm.resourceName,
+                          actions: _vm.actions,
+                          "pivot-actions": _vm.pivotActions,
+                          "pivot-name": _vm.pivotName,
+                          "selected-resources":
+                            _vm.selectedResourcesForActionSelector,
+                          endpoint: _vm.lensActionEndpoint,
+                          "query-string": {
+                            currentSearch: _vm.currentSearch,
+                            encodedFilters: _vm.encodedFilters,
+                            currentTrashed: _vm.currentTrashed,
+                            viaResource: _vm.viaResource,
+                            viaResourceId: _vm.viaResourceId,
+                            viaRelationship: _vm.viaRelationship
+                          }
+                        },
+                        on: { actionExecuted: _vm.getResources }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("filter-menu", {
+                    attrs: {
+                      resourceName: _vm.resourceName,
+                      "soft-deletes": _vm.softDeletes,
+                      "via-resource": _vm.viaResource,
+                      "via-has-one": _vm.viaHasOne,
+                      trashed: _vm.trashed,
+                      "per-page": _vm.perPage
+                    },
+                    on: {
+                      "clear-selected-filters": function($event) {
+                        _vm.clearSelectedFilters(_vm.lens)
+                      },
+                      "filter-changed": _vm.filterChanged,
+                      "trashed-changed": _vm.trashedChanged,
+                      "per-page-changed": _vm.updatePerPageChanged
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.shouldShowDeleteMenu
+                    ? _c("delete-menu", {
+                        attrs: {
+                          dusk: "delete-menu",
+                          "soft-deletes": _vm.softDeletes,
+                          resources: _vm.resources,
+                          "selected-resources": _vm.selectedResources,
+                          "via-many-to-many": _vm.viaManyToMany,
+                          "all-matching-resource-count":
+                            _vm.allMatchingResourceCount,
+                          "all-matching-selected": _vm.selectAllMatchingChecked,
+                          "authorized-to-delete-selected-resources":
+                            _vm.authorizedToDeleteSelectedResources,
+                          "authorized-to-force-delete-selected-resources":
+                            _vm.authorizedToForceDeleteSelectedResources,
+                          "authorized-to-delete-any-resources":
+                            _vm.authorizedToDeleteAnyResources,
+                          "authorized-to-force-delete-any-resources":
+                            _vm.authorizedToForceDeleteAnyResources,
+                          "authorized-to-restore-selected-resources":
+                            _vm.authorizedToRestoreSelectedResources,
+                          "authorized-to-restore-any-resources":
+                            _vm.authorizedToRestoreAnyResources
+                        },
+                        on: {
+                          deleteSelected: _vm.deleteSelectedResources,
+                          deleteAllMatching: _vm.deleteAllMatchingResources,
+                          forceDeleteSelected: _vm.forceDeleteSelectedResources,
+                          forceDeleteAllMatching:
+                            _vm.forceDeleteAllMatchingResources,
+                          restoreSelected: _vm.restoreSelectedResources,
+                          restoreAllMatching: _vm.restoreAllMatchingResources,
+                          close: function($event) {
+                            _vm.deleteModalOpen = false
+                          }
+                        }
+                      })
+                    : _vm._e()
+                ],
+                1
               )
-            : _vm._e(),
+            ]
+          ),
           _vm._v(" "),
           !_vm.resources.length
             ? _c(
@@ -40143,6 +41488,44 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-72e4105b\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Detail/HeadingField.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "bg-20 flex border-b border-40" }, [
+    _c(
+      "div",
+      { staticClass: "w-full py-4 px-4" },
+      [
+        _vm._t("value", [
+          _vm.fieldValue && !_vm.shouldDisplayAsHtml
+            ? _c("p", { staticClass: "text-90" }, [
+                _vm._v(_vm._s(_vm.fieldValue))
+              ])
+            : _vm.fieldValue && _vm.shouldDisplayAsHtml
+              ? _c("div", { domProps: { innerHTML: _vm._s(_vm.field.value) } })
+              : _c("p", [_vm._v("—")])
+        ])
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-72e4105b", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-742d77bf\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Icons/Editor/Link.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -40228,7 +41611,7 @@ var render = function() {
           )
         ]
       )
-    : _c("span", [_vm._v("\n    -\n")])
+    : _c("span", [_vm._v(" - ")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -40305,6 +41688,7 @@ var render = function() {
     ? _c("div", [
         _c("div", {
           staticClass: "markdown leading-normal",
+          class: { "whitespace-pre-wrap": _vm.plainText },
           domProps: { innerHTML: _vm._s(_vm.content) }
         })
       ])
@@ -40313,6 +41697,7 @@ var render = function() {
           _vm.expanded
             ? _c("div", {
                 staticClass: "markdown leading-normal",
+                class: { "whitespace-pre-wrap": _vm.plainText },
                 domProps: { innerHTML: _vm._s(_vm.content) }
               })
             : _vm._e(),
@@ -40331,7 +41716,7 @@ var render = function() {
               )
             : _vm._e()
         ])
-      : _c("div", [_vm._v("\n    —\n")])
+      : _c("div", [_vm._v("—")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -40399,6 +41784,7 @@ var render = function() {
                             "M26.03 0h76.9c7.9 0 15.46 3.16 21.04 8.79L145 30l-21.03 21.21A29.62 29.62 0 0 1 102.94 60H26.03V0z"
                         }
                       }),
+                      _vm._v(" "),
                       _c("path", {
                         attrs: {
                           fill: "#FFF",
@@ -40407,6 +41793,7 @@ var render = function() {
                             "M102.62 60c8.2 0 14.87-13.43 14.87-30s-6.66-30-14.87-30"
                         }
                       }),
+                      _vm._v(" "),
                       _c("path", {
                         attrs: {
                           stroke: "#4A90E2",
@@ -40414,6 +41801,7 @@ var render = function() {
                             "M33.46 60c8.22 0 14.87-13.43 14.87-30S41.68 0 33.46 0"
                         }
                       }),
+                      _vm._v(" "),
                       _c("ellipse", {
                         attrs: {
                           cx: "26.03",
@@ -40424,6 +41812,7 @@ var render = function() {
                           ry: "30"
                         }
                       }),
+                      _vm._v(" "),
                       _c("path", {
                         attrs: {
                           fill: "#FFF",
@@ -40432,6 +41821,7 @@ var render = function() {
                             "M12.15 8.92v42.16c6.35-2.3 10.75-4.58 13.2-6.82l1.53-1.4C30.94 39 32.46 36 32.46 30c0-6.42-1.69-9.3-6.8-13.98l-.31-.28c-2.44-2.24-6.84-4.52-13.2-6.82z"
                         }
                       }),
+                      _vm._v(" "),
                       _c("ellipse", {
                         attrs: {
                           cx: "11.15",
@@ -40442,6 +41832,7 @@ var render = function() {
                           ry: "21.5"
                         }
                       }),
+                      _vm._v(" "),
                       _c("ellipse", {
                         attrs: {
                           cx: "79.56",
@@ -40451,6 +41842,7 @@ var render = function() {
                           ry: "18"
                         }
                       }),
+                      _vm._v(" "),
                       _c("ellipse", {
                         attrs: {
                           cx: "79.56",
@@ -40463,6 +41855,7 @@ var render = function() {
                       })
                     ]
                   ),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#DDE4EB",
@@ -40470,6 +41863,7 @@ var render = function() {
                         "M425 74.5A16.5 16.5 0 0 0 441.5 91h44a16.5 16.5 0 0 1 0 33h-143a16.5 16.5 0 0 1 0-33 16.5 16.5 0 0 0 0-33h-66a16.5 16.5 0 0 1 0-33h165a16.5 16.5 0 0 1 0 33A16.5 16.5 0 0 0 425 74.5z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("g", { attrs: { transform: "translate(424 130)" } }, [
                     _c("circle", {
                       attrs: {
@@ -40480,6 +41874,7 @@ var render = function() {
                         "stroke-width": "2"
                       }
                     }),
+                    _vm._v(" "),
                     _c("circle", {
                       attrs: {
                         cx: "45.83",
@@ -40488,6 +41883,7 @@ var render = function() {
                         fill: "#FFF"
                       }
                     }),
+                    _vm._v(" "),
                     _c("circle", {
                       attrs: {
                         cx: "47.5",
@@ -40497,6 +41893,7 @@ var render = function() {
                         "stroke-width": "2"
                       }
                     }),
+                    _vm._v(" "),
                     _c("path", {
                       attrs: {
                         stroke: "#4A90E2",
@@ -40505,6 +41902,7 @@ var render = function() {
                         d: "M48.33 25c4.6 0 8.34-3.73 8.34-8.33"
                       }
                     }),
+                    _vm._v(" "),
                     _c("circle", {
                       attrs: {
                         cx: "70",
@@ -40514,6 +41912,7 @@ var render = function() {
                         "stroke-width": "2"
                       }
                     }),
+                    _vm._v(" "),
                     _c("circle", {
                       attrs: {
                         cx: "19.17",
@@ -40523,6 +41922,7 @@ var render = function() {
                         "stroke-width": "2"
                       }
                     }),
+                    _vm._v(" "),
                     _c("path", {
                       attrs: {
                         stroke: "#4A90E2",
@@ -40532,6 +41932,7 @@ var render = function() {
                           "M26.67 42.5a7.5 7.5 0 0 0-7.5-7.5m-7.5 7.5a7.5 7.5 0 0 0 7.5 7.5"
                       }
                     }),
+                    _vm._v(" "),
                     _c("circle", {
                       attrs: {
                         cx: "53.33",
@@ -40541,6 +41942,7 @@ var render = function() {
                         "stroke-width": "2"
                       }
                     }),
+                    _vm._v(" "),
                     _c("path", {
                       attrs: {
                         stroke: "#4A90E2",
@@ -40549,6 +41951,7 @@ var render = function() {
                         d: "M45 66.67c0 4.6 3.73 8.33 8.33 8.33"
                       }
                     }),
+                    _vm._v(" "),
                     _c("circle", {
                       attrs: {
                         cx: "19.17",
@@ -40557,6 +41960,7 @@ var render = function() {
                         fill: "#4A90E2"
                       }
                     }),
+                    _vm._v(" "),
                     _c("circle", {
                       attrs: {
                         cx: "32.5",
@@ -40566,6 +41970,7 @@ var render = function() {
                       }
                     })
                   ]),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#DDE4EB",
@@ -40573,6 +41978,7 @@ var render = function() {
                         "M309.1 302.8a19.4 19.4 0 0 0-19.4-19.4H177.14a19.4 19.4 0 0 0 0 38.8h11.65a19.4 19.4 0 1 1 0 38.8H63.63a19.4 19.4 0 0 1-19.4-19.4v-.48a18.92 18.92 0 0 1 18.92-18.92 18.92 18.92 0 0 0 18.91-18.92v-.48a19.4 19.4 0 0 0-19.4-19.4H38.4a19.4 19.4 0 0 1 0-38.8h87.33a19.4 19.4 0 0 0 0-38.8h-11.65a19.4 19.4 0 1 1 0-38.8h200.84a19.4 19.4 0 0 1 0 38.8h-36.87a19.4 19.4 0 0 0 0 38.8H390.6a19.4 19.4 0 0 1 0 38.8h-11.65a19.4 19.4 0 0 0-19.4 19.4v.48a18.92 18.92 0 0 0 18.92 18.92 18.92 18.92 0 0 1 18.92 18.92v.48a19.4 19.4 0 0 1-19.4 19.4h-99.94a19.4 19.4 0 0 1 0-38.8h11.65a19.4 19.4 0 0 0 19.4-19.4z"
                     }
                   }),
+                  _vm._v(" "),
                   _c(
                     "g",
                     {
@@ -40593,6 +41999,7 @@ var render = function() {
                           rx: "11.18"
                         }
                       }),
+                      _vm._v(" "),
                       _c("rect", {
                         attrs: {
                           width: "72.05",
@@ -40604,6 +42011,7 @@ var render = function() {
                           rx: "17.27"
                         }
                       }),
+                      _vm._v(" "),
                       _c("ellipse", {
                         staticStyle: { "mix-blend-mode": "multiply" },
                         attrs: {
@@ -40616,6 +42024,7 @@ var render = function() {
                       })
                     ]
                   ),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#E0EEFF",
@@ -40624,6 +42033,7 @@ var render = function() {
                       opacity: ".58"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#0D2B3E",
@@ -40634,6 +42044,7 @@ var render = function() {
                         "M107.4 354.78l20.25 15.12-20.25-15.12zM75.76 332.1l10.12 7.56-10.12-7.56z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#4A90E2",
@@ -40642,6 +42053,7 @@ var render = function() {
                         "M115.52 377.19l46.88 35.6 25.48-14.9-46.89-35.6-25.47 14.9zm58.96 27.99l-46.83-36.54 46.83 36.54zM16.8 304.11l46.88 35.6 25.47-14.9-46.88-35.6L16.8 304.1zm58.96 29.25l-46.84-36.54 46.84 36.54z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#8DDCFF",
@@ -40651,6 +42063,7 @@ var render = function() {
                         "M169.42 329.58a30.3 30.3 0 0 0-30.38-30.24m21.52 31.5a21.47 21.47 0 0 0-21.52-21.42"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#FFF",
@@ -40661,6 +42074,7 @@ var render = function() {
                         "M363.8119003 126.44094699c2.51661541-6.60148066 6.09613872-22.6187686-2.2109135-24.895539-8.3168685-2.2748623-10.42540197 10.4614671-16.03584328 18.70341761-10.59995244 15.53804391-23.66683084 23.41606326-43.2306606 27.21888653-7.11679709 1.38336522-14.27332024 1.40937203-21.21489804.130389-6.98465907-1.29098322-13.7264579 3.27938314-15.03870592 10.20705267a12.7 12.7 0 0 0 10.24523714 14.86828894 82.91 82.91 0 0 0 30.8739962-.17423743c28.42792323-5.5258285 46.57886712-19.68941689 56.611788-46.05825832z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#7ED7FF",
@@ -40668,6 +42082,7 @@ var render = function() {
                       d: "M361.7030833 130.52842676l-17.8049339-7.7449551"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#FFF",
@@ -40678,6 +42093,7 @@ var render = function() {
                         "M266.54686983 241.69757868l16.77256314 26.0176618a41.79 41.79 0 0 1 54.9786567 8.5873516l8.01291943 14.232555 39.8983953-23.55575834-24.11546673-10.38943521a72.65 72.65 0 0 0-95.54897593-14.90219112z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#FFF",
@@ -40688,6 +42104,7 @@ var render = function() {
                         "M237.8794903 217.16687444l-11.75143341 28.63844816a47.76 47.76 0 0 1 29.336647 40.02772592 47.59 47.59 0 0 1-9.23738334 32.6626813l-11.68590493 13.9867518 37.64817267 31.6885988-1.18280452-27.15319085a78.6 78.6 0 0 0 15.2180959-53.88374576 78.74 78.74 0 0 0-48.34538937-65.96726937z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#E5F7FF",
@@ -40695,6 +42112,7 @@ var render = function() {
                         "M212.38792337 148.28534705l-12.63354185 2.45571177 22.40860842 115.28229643 12.63354185-2.45571177z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#7ED7FF",
@@ -40703,6 +42121,7 @@ var render = function() {
                         "M277.14421373 136.00361432l-58.67185675 11.40465366-8.69325783-44.72293448a29.885 29.885 0 1 1 58.67185675-11.40465366l8.69325783 44.72293448z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#FFF",
@@ -40712,6 +42131,7 @@ var render = function() {
                         "M266.45521183 136.46158627l-5.90935459-30.40099387c-1.90427377-9.79663929-11.36964991-16.19817461-21.13684039-14.2996251s-16.13355271 11.38765018-14.23118703 21.1744732l5.90935459 30.40099388"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#0D2B3E",
@@ -40720,6 +42140,7 @@ var render = function() {
                         "M199.41437503 150.51172155l87.71820511-17.05069183 22.52118573 115.86145646-87.71820512 17.05069183-22.52118572-115.86145646z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#FFF",
@@ -40729,6 +42150,7 @@ var render = function() {
                         "M287.13258014 133.46102972l22.52118573 115.86145646-75.09447954 14.59688815-22.52118572-115.86145646 75.09447953-14.59688815z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#FFF",
@@ -40738,6 +42160,7 @@ var render = function() {
                         "M291.89999763 154.8951691l6.86065974 4.63610266 9.58051965 49.28750088-49.1402568 9.55189831-6.86065974-4.63610267-9.58242774-49.29731715 49.1402568-9.55189831z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#FFF",
@@ -40747,6 +42170,7 @@ var render = function() {
                         "M298.87323467 160.1104318l-48.56109676 9.439321 9.46794235 48.70834085 48.56109676-9.439321z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#7ED7FF",
@@ -40754,6 +42178,7 @@ var render = function() {
                       d: "M280.23508038 323.43753826l-27.22702477-17.43517197"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#FFF",
@@ -40764,6 +42189,7 @@ var render = function() {
                         "M172.12419639 259.31801112c2.31538206 6.67076501 9.8636495 21.23813123 17.69252677 17.64835676 7.83678545-3.60149884 1.26419427-14.7216987.27446604-24.63498464-1.87754554-18.72579298 3.06823431-33.16477708 15.6036019-48.65116657a56.95 56.95 0 0 1 16.17568934-13.73888912 12.91 12.91 0 0 0 4.954421-17.48662668 12.7 12.7 0 0 0-17.40510779-4.79708482 82.91 82.91 0 0 0-23.5305555 19.97687308c-18.2294437 22.51194976-23.0325701 45.02200255-13.76504176 71.68352199z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#7ED7FF",
@@ -40771,6 +42197,7 @@ var render = function() {
                       d: "M189.24009043 249.42029566l-19.63254367 3.8161799"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#0D2B3E",
@@ -40779,6 +42206,7 @@ var render = function() {
                         "M275.89003883 328.33662123l-25.60278694-16.41637296m107.79044764-58.64485824l-21.48773566 20.47625982"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#7ED7FF",
@@ -40786,6 +42214,7 @@ var render = function() {
                       d: "M352.8061952 248.16739216l-21.48773565 20.47625982"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#4A90E2",
@@ -40794,6 +42223,7 @@ var render = function() {
                         "M293.81436735 168.98883038l-10.79789902 2.09889895 2.09889895 10.79789902 10.79789901-2.09889895z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#7ED7FF",
@@ -40802,9 +42232,11 @@ var render = function() {
                         "M297.24892926 186.65811968l-4.90813592.95404498.95404498 4.90813592 4.90813592-.95404498zM285.46940306 188.94782763l-4.90813592.95404498.95404498 4.90813591 4.90813592-.95404497zM265.34717903 174.52229125l-4.90813592.95404498 6.48750584 33.37532423 4.90813592-.95404497zM276.14507804 172.4233923l-3.92650873.76323598.38161799 1.96325437 3.92650873-.76323598z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("circle", {
                     attrs: { cx: "401", cy: "44", r: "6", fill: "#9AC2F0" }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#031836",
@@ -40813,9 +42245,11 @@ var render = function() {
                       d: "M398 53a6 6 0 1 0-6-6"
                     }
                   }),
+                  _vm._v(" "),
                   _c("circle", {
                     attrs: { cx: "90", cy: "164", r: "6", fill: "#9AC2F0" }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#031836",
@@ -40824,6 +42258,7 @@ var render = function() {
                       d: "M87 173a6 6 0 1 0-6-6"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#031836",
@@ -40831,9 +42266,11 @@ var render = function() {
                         "M400.75 335h.5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1zM416 349.75v.5a1 1 0 0 1-1 1h-8a1 1 0 0 1-1-1v-.5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1zM401.25 365h-.5a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h.5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1zM386 350.25v-.5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v.5a1 1 0 0 1-1 1h-8a1 1 0 0 1-1-1zM14.75 202h.5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1zM30 216.75v.5a1 1 0 0 1-1 1h-8a1 1 0 0 1-1-1v-.5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1zM15.25 232h-.5a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h.5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1zM0 217.25v-.5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v.5a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zM224.75 7h.5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1zM240 21.75v.5a1 1 0 0 1-1 1h-8a1 1 0 0 1-1-1v-.5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1zM225.25 37h-.5a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h.5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1zM210 22.25v-.5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v.5a1 1 0 0 1-1 1h-8a1 1 0 0 1-1-1z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("circle", {
                     attrs: { cx: "377", cy: "173", r: "4", fill: "#031836" }
                   }),
+                  _vm._v(" "),
                   _c("circle", {
                     attrs: { cx: "255", cy: "403", r: "4", fill: "#031836" }
                   })
@@ -40856,11 +42293,13 @@ var render = function() {
             _vm._v(" "),
             _c("p", { staticClass: "text-error-message mb-8 leading-normal" }, [
               _vm._v(
-                _vm._s(
-                  _vm.__(
-                    "We're lost in space. The page your were trying to view does not exist."
-                  )
-                )
+                "\n                " +
+                  _vm._s(
+                    _vm.__(
+                      "We're lost in space. The page you were trying to view does not exist."
+                    )
+                  ) +
+                  "\n            "
               )
             ]),
             _vm._v(" "),
@@ -40942,6 +42381,7 @@ var render = function() {
                         "M0 185a19.4 19.4 0 0 1 19.4-19.4h37.33a19.4 19.4 0 0 0 0-38.8H45.08a19.4 19.4 0 1 1 0-38.8h170.84a19.4 19.4 0 0 1 0 38.8h-6.87a19.4 19.4 0 0 0 0 38.8h42.55a19.4 19.4 0 0 1 0 38.8H19.4A19.4 19.4 0 0 1 0 185z"
                     }
                   }),
+                  _vm._v(" "),
                   _c(
                     "g",
                     {
@@ -40962,6 +42402,7 @@ var render = function() {
                           rx: "4.6"
                         }
                       }),
+                      _vm._v(" "),
                       _c("rect", {
                         attrs: {
                           width: "32.4",
@@ -40973,6 +42414,7 @@ var render = function() {
                           rx: "7.39"
                         }
                       }),
+                      _vm._v(" "),
                       _c("ellipse", {
                         staticStyle: { "mix-blend-mode": "multiply" },
                         attrs: {
@@ -40985,6 +42427,7 @@ var render = function() {
                       })
                     ]
                   ),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#E0EEFF",
@@ -40993,6 +42436,7 @@ var render = function() {
                       opacity: ".58"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#0D2B3E",
@@ -41002,6 +42446,7 @@ var render = function() {
                       d: "M88 188l9 7-9-7zm-15-11l5 3-5-3z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#4A90E2",
@@ -41010,6 +42455,7 @@ var render = function() {
                         "M92.82 198.36l20.65 15.44 10.71-6.16-20.65-15.44-10.71 6.16zM119 211l-22-17 22 17zm-72.18-46.64l20.65 15.44 10.71-6.16-20.65-15.44-10.71 6.16zM73 178l-22-17 22 17z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#8DDCFF",
@@ -41018,6 +42464,7 @@ var render = function() {
                       d: "M117 176a14 14 0 0 0-14-14m10 15a10 10 0 0 0-10-10"
                     }
                   }),
+                  _vm._v(" "),
                   _c("ellipse", {
                     attrs: {
                       cx: "258",
@@ -41027,6 +42474,7 @@ var render = function() {
                       ry: "90"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#FFF",
@@ -41037,6 +42485,7 @@ var render = function() {
                         "M195.95992276 433.88207738c-.7613033-1.55811337-1.97677352-5.39619.01107483-6.1324365 1.97685786-.72734656 2.77032762 2.34241006 4.31210683 4.22387675 2.92231431 3.57504952 6.28818967 5.22592295 11.14145652 5.73602185 1.77024897.18606067 3.51532102.0376574 5.19229942-.41955529a3.17 3.17 0 0 1 3.89461497 2.16898002 3.12 3.12 0 0 1-2.19463454 3.85169823c-2.43329264.66931826-4.97971626.88432232-7.54558275.61463889-7.06110546-.7421521-11.79595772-3.81390631-14.81133528-10.04322395z"
                     }
                   }),
+                  _vm._v(" "),
                   _c(
                     "g",
                     { attrs: { stroke: "#0D2B3E", "stroke-width": "2" } },
@@ -41049,6 +42498,7 @@ var render = function() {
                             "M228.66635404 453.35751889l3.48444585 6.7411525a11.71 11.71 0 0 0-3.36066168 18.19840799l3.157266 3.1573203-8.52104352 8.55618006-.29468882-6.6673277a19.31 19.31 0 0 1 5.53468217-29.98573315z"
                         }
                       }),
+                      _vm._v(" "),
                       _c("path", {
                         attrs: {
                           d: "M221.75370493 481.33823157l5.9097851-4.56727928"
@@ -41056,6 +42506,7 @@ var render = function() {
                       })
                     ]
                   ),
+                  _vm._v(" "),
                   _c(
                     "g",
                     { attrs: { stroke: "#0D2B3E", "stroke-width": "2" } },
@@ -41068,6 +42519,7 @@ var render = function() {
                             "M217.43675157 454.38903415l-.38056208 7.58726384a10.25 10.25 0 0 0-10.62036709 8.5642456l.04580558 4.00318647-11.36366293-.10613565 3.84834642-5.16425501a17.82 17.82 0 0 1 18.46098491-14.88104957z"
                         }
                       }),
+                      _vm._v(" "),
                       _c("path", {
                         attrs: {
                           d: "M199.40986905 468.0735658l7.07551171 1.72015522"
@@ -41075,6 +42527,7 @@ var render = function() {
                       })
                     ]
                   ),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#E5F7FF",
@@ -41082,6 +42535,7 @@ var render = function() {
                         "M233.41788355 435.98904264l3.14268919.33030994-3.01041974 28.64223059-3.1426892-.33030995z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#7ED7FF",
@@ -41090,6 +42544,7 @@ var render = function() {
                         "M218.1633805 433.70198413l13.07796292 1.37454929 1.09127716-10.38280859a6.575 6.575 0 0 0-13.07796293-1.37454929l-1.09127715 10.38280859z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#FFF",
@@ -41099,6 +42554,7 @@ var render = function() {
                         "M221.02136188 434.25374714l.64389533-6.12625487a3.59 3.59 0 1 1 7.130722.74946908l-.64389534 6.12625488"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#0D2B3E",
@@ -41107,6 +42563,7 @@ var render = function() {
                         "M235.80327328 436.92350283l-20.28824667-2.13238065-2.86721575 27.27973559 20.28824667 2.13238065 2.86721575-27.2797356z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#FFF",
@@ -41116,6 +42573,7 @@ var render = function() {
                         "M215.51502661 434.79112218l-2.86721575 27.27973559 17.1555027 1.80311599 2.86721575-27.2797356-17.1555027-1.80311598z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#FFF",
@@ -41125,6 +42583,7 @@ var render = function() {
                         "M214.36589556 440.07997818l-1.09905036.88999343-1.17489993 11.1784261 11.15853567 1.17280937 1.09905036-.88999344 1.17385464-11.16848088-11.16848088-1.17385464z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#FFF",
@@ -41135,6 +42594,7 @@ var render = function() {
                         "M245.62684398 462.24908175c-.41742893 1.6755456-1.95466376 5.39523768-3.94116941 4.68369338-1.99645087-.71258958-.63076284-3.56546466-.5955535-6.00514913.06313174-4.61870267-1.45795198-8.03642184-4.8492445-11.55015704-1.23234204-1.2858589-2.67505657-2.29217634-4.24858182-3.01059006a3.17 3.17 0 0 1-1.5730205-4.16725407 3.12 3.12 0 0 1 4.14422777-1.54527542c2.29328456 1.04544055 4.3804078 2.52169139 6.1770892 4.36961887 4.93145874 5.12354512 6.58580412 10.52606688 4.87526226 17.2340134z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#233242",
@@ -41143,9 +42603,11 @@ var render = function() {
                         "M518 372.93A1509.66 1509.66 0 0 0 261 351c-87.62 0-173.5 7.51-257 21.93"
                     }
                   }),
+                  _vm._v(" "),
                   _c("circle", {
                     attrs: { cx: "51", cy: "107", r: "6", fill: "#9AC2F0" }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#031836",
@@ -41154,9 +42616,11 @@ var render = function() {
                       d: "M48 116a6 6 0 1 0-6-6"
                     }
                   }),
+                  _vm._v(" "),
                   _c("circle", {
                     attrs: { cx: "501", cy: "97", r: "6", fill: "#9AC2F0" }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#031836",
@@ -41165,6 +42629,7 @@ var render = function() {
                       d: "M498 106a6 6 0 1 0-6-6"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#031836",
@@ -41172,6 +42637,7 @@ var render = function() {
                         "M305.75 0h.5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-.5a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1zM321 14.75v.5a1 1 0 0 1-1 1h-8a1 1 0 0 1-1-1v-.5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1zM306.25 30h-.5a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h.5a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1zM291 15.25v-.5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v.5a1 1 0 0 1-1 1h-8a1 1 0 0 1-1-1z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       fill: "#DDE4EB",
@@ -41179,12 +42645,15 @@ var render = function() {
                         "M446 107.5a16.5 16.5 0 0 0 16.5 16.5h44a16.5 16.5 0 0 1 0 33h-143a16.5 16.5 0 0 1 0-33 16.5 16.5 0 0 0 0-33h-66a16.5 16.5 0 0 1 0-33h165a16.5 16.5 0 0 1 0 33 16.5 16.5 0 0 0-16.5 16.5z"
                     }
                   }),
+                  _vm._v(" "),
                   _c("circle", {
                     attrs: { cx: "458", cy: "186", r: "4", fill: "#031836" }
                   }),
+                  _vm._v(" "),
                   _c("circle", {
                     attrs: { cx: "138", cy: "16", r: "4", fill: "#031836" }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#233242",
@@ -41193,6 +42662,7 @@ var render = function() {
                         "M58 364.86l67.93-67.93a10 10 0 0 1 14.14 0L196 352.86m139-18l36.93-36.93a10 10 0 0 1 14.14 0L451 362.86"
                     }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#233242",
@@ -41201,6 +42671,7 @@ var render = function() {
                         "M176 332.86l70.93-71.84a10 10 0 0 1 14.19-.05L345 344.86"
                     }
                   }),
+                  _vm._v(" "),
                   _c(
                     "g",
                     {
@@ -41220,6 +42691,7 @@ var render = function() {
                           ry: "19.26"
                         }
                       }),
+                      _vm._v(" "),
                       _c("path", {
                         attrs: {
                           fill: "#FFF",
@@ -41228,6 +42700,7 @@ var render = function() {
                             "M25.66 54.03c-7.52 0-13.62-12.1-13.62-27.02S18.14 0 25.66 0H96.1c7.22 0 14.15 2.85 19.26 7.91l19.26 19.1-19.26 19.1a27.35 27.35 0 0 1-19.26 7.92H25.66z"
                         }
                       }),
+                      _vm._v(" "),
                       _c("path", {
                         attrs: {
                           fill: "#FFF",
@@ -41236,6 +42709,7 @@ var render = function() {
                             "M98.09 54.22c-7.52 0-13.62-12.1-13.62-27.02s6.1-27 13.62-27"
                         }
                       }),
+                      _vm._v(" "),
                       _c("ellipse", {
                         attrs: {
                           cx: "59.59",
@@ -41245,6 +42719,7 @@ var render = function() {
                           ry: "16.21"
                         }
                       }),
+                      _vm._v(" "),
                       _c("ellipse", {
                         attrs: {
                           cx: "59.59",
@@ -41257,6 +42732,7 @@ var render = function() {
                       })
                     ]
                   ),
+                  _vm._v(" "),
                   _c(
                     "g",
                     {
@@ -41270,6 +42746,7 @@ var render = function() {
                       _c("ellipse", {
                         attrs: { cx: "30", cy: "10", rx: "20", ry: "10" }
                       }),
+                      _vm._v(" "),
                       _c("path", {
                         attrs: {
                           d:
@@ -41278,6 +42755,7 @@ var render = function() {
                       })
                     ]
                   ),
+                  _vm._v(" "),
                   _c(
                     "g",
                     {
@@ -41291,6 +42769,7 @@ var render = function() {
                       _c("ellipse", {
                         attrs: { cx: "20", cy: "6.67", rx: "13.33", ry: "6.67" }
                       }),
+                      _vm._v(" "),
                       _c("path", {
                         attrs: {
                           d:
@@ -41299,6 +42778,7 @@ var render = function() {
                       })
                     ]
                   ),
+                  _vm._v(" "),
                   _c(
                     "g",
                     {
@@ -41312,6 +42792,7 @@ var render = function() {
                       _c("ellipse", {
                         attrs: { cx: "15", cy: "5", rx: "10", ry: "5" }
                       }),
+                      _vm._v(" "),
                       _c("path", {
                         attrs: {
                           d:
@@ -41320,6 +42801,7 @@ var render = function() {
                       })
                     ]
                   ),
+                  _vm._v(" "),
                   _c("ellipse", {
                     attrs: {
                       cx: "58",
@@ -41329,6 +42811,7 @@ var render = function() {
                       ry: "2"
                     }
                   }),
+                  _vm._v(" "),
                   _c("ellipse", {
                     attrs: {
                       cx: "468",
@@ -41338,6 +42821,7 @@ var render = function() {
                       ry: "2"
                     }
                   }),
+                  _vm._v(" "),
                   _c("ellipse", {
                     attrs: {
                       cx: "388",
@@ -41347,6 +42831,7 @@ var render = function() {
                       ry: "2"
                     }
                   }),
+                  _vm._v(" "),
                   _c("ellipse", {
                     attrs: {
                       cx: "338",
@@ -41356,6 +42841,7 @@ var render = function() {
                       ry: "2"
                     }
                   }),
+                  _vm._v(" "),
                   _c(
                     "g",
                     {
@@ -41374,6 +42860,7 @@ var render = function() {
                           ry: "13.33"
                         }
                       }),
+                      _vm._v(" "),
                       _c("path", {
                         attrs: {
                           d:
@@ -41382,6 +42869,7 @@ var render = function() {
                       })
                     ]
                   ),
+                  _vm._v(" "),
                   _c(
                     "g",
                     { attrs: { stroke: "#0D2B3E", "stroke-width": "2" } },
@@ -41394,6 +42882,7 @@ var render = function() {
                       })
                     ]
                   ),
+                  _vm._v(" "),
                   _c("circle", {
                     attrs: {
                       cx: "341",
@@ -41403,9 +42892,11 @@ var render = function() {
                       "stroke-width": "2"
                     }
                   }),
+                  _vm._v(" "),
                   _c("circle", {
                     attrs: { cx: "342", cy: "156", r: "20", fill: "#FFF" }
                   }),
+                  _vm._v(" "),
                   _c("path", {
                     attrs: {
                       stroke: "#233242",
@@ -41433,11 +42924,13 @@ var render = function() {
             _vm._v(" "),
             _c("p", { staticClass: "text-error-message mb-8 leading-normal" }, [
               _vm._v(
-                _vm._s(
-                  _vm.__(
-                    "The government won't let us show you what's behind these doors"
-                  )
-                ) + "…"
+                "\n                " +
+                  _vm._s(
+                    _vm.__(
+                      "The government won't let us show you what's behind these doors"
+                    )
+                  ) +
+                  "…\n            "
               )
             ]),
             _vm._v(" "),
@@ -41631,104 +43124,60 @@ var render = function() {
           _vm._v(" "),
           !_vm.isSearchable || _vm.isLocked
             ? _c(
-                "select",
+                "select-control",
                 {
                   staticClass: "form-control form-select mb-3 w-full",
                   class: { "border-danger": _vm.hasError },
                   attrs: {
                     "data-testid": _vm.field.resourceName + "-select",
                     dusk: _vm.field.attribute,
-                    disabled: _vm.isLocked
+                    disabled: _vm.isLocked,
+                    options: _vm.availableResources,
+                    selected: _vm.selectedResourceId,
+                    label: "display"
                   },
                   on: { change: _vm.selectResourceFromSelectControl }
                 },
                 [
                   _c(
                     "option",
-                    { attrs: { value: "", disabled: "", selected: "" } },
-                    [
-                      _vm._v(
-                        _vm._s(_vm.__("Choose")) + " " + _vm._s(_vm.field.name)
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm._l(_vm.availableResources, function(resource) {
-                    return _c(
-                      "option",
-                      {
-                        key: resource.value,
-                        domProps: {
-                          value: resource.value,
-                          selected: _vm.selectedResourceId == resource.value
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                " +
-                            _vm._s(resource.display) +
-                            "\n            "
-                        )
-                      ]
-                    )
-                  })
-                ],
-                2
+                    {
+                      attrs: {
+                        value: "",
+                        selected: "",
+                        disabled: !_vm.field.nullable
+                      }
+                    },
+                    [_vm._v("—")]
+                  )
+                ]
               )
             : _vm._e(),
           _vm._v(" "),
           _vm.softDeletes && !_vm.isLocked
-            ? _c("div", [
-                _c(
-                  "label",
-                  {
-                    staticClass: "flex items-center",
-                    on: {
-                      input: _vm.toggleWithTrashed,
-                      keydown: function($event) {
-                        if (
-                          !("button" in $event) &&
-                          _vm._k(
-                            $event.keyCode,
-                            "space",
-                            32,
-                            $event.key,
-                            " "
-                          ) &&
-                          _vm._k(
-                            $event.keyCode,
-                            "enter",
-                            13,
-                            $event.key,
-                            "Enter"
-                          )
-                        ) {
-                          return null
-                        }
-                        $event.preventDefault()
-                        return _vm.toggleWithTrashed($event)
-                      }
-                    }
-                  },
-                  [
-                    _c("checkbox", {
+            ? _c(
+                "div",
+                [
+                  _c(
+                    "checkbox-with-label",
+                    {
                       attrs: {
                         dusk: _vm.field.resourceName + "-with-trashed-checkbox",
                         checked: _vm.withTrashed
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "ml-2" }, [
+                      },
+                      on: { change: _vm.toggleWithTrashed }
+                    },
+                    [
                       _vm._v(
-                        "\n                    " +
+                        "\n                " +
                           _vm._s(_vm.__("With Trashed")) +
-                          "\n                "
+                          "\n            "
                       )
-                    ])
-                  ],
-                  1
-                )
-              ])
+                    ]
+                  )
+                ],
+                1
+              )
             : _vm._e()
         ],
         1
@@ -41744,6 +43193,35 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-7e2aee3b", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-7e782b22\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/ScrollWrap.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "scroll-wrap overflow-x-hidden overflow-y-auto",
+      style: _vm.style
+    },
+    [_vm._t("default")],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7e782b22", module.exports)
   }
 }
 
@@ -41770,20 +43248,27 @@ var render = function() {
         "template",
         { slot: "field" },
         [
-          _c("trix", {
-            class: { "border-danger": _vm.hasError },
-            attrs: {
-              name: "trixman",
-              value: _vm.field.value,
-              placeholder: "",
-              "with-files": _vm.field.withFiles
-            },
-            on: {
-              change: _vm.handleChange,
-              "file-add": _vm.handleFileAdd,
-              "file-remove": _vm.handleFileRemove
-            }
-          })
+          _c(
+            "trix",
+            _vm._b(
+              {
+                class: { "border-danger": _vm.hasError },
+                attrs: {
+                  name: "trixman",
+                  value: _vm.field.value,
+                  "with-files": _vm.field.withFiles
+                },
+                on: {
+                  change: _vm.handleChange,
+                  "file-add": _vm.handleFileAdd,
+                  "file-remove": _vm.handleFileRemove
+                }
+              },
+              "trix",
+              _vm.extraAttributes,
+              false
+            )
+          )
         ],
         1
       )
@@ -41798,6 +43283,247 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-82330366", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-851cb2a2\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/FilterMenu.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.filters.length > 0 || _vm.softDeletes || !_vm.viaResource
+    ? _c(
+        "dropdown",
+        {
+          attrs: {
+            dusk: "filter-selector",
+            "class-whitelist": "flatpickr-calendar"
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "default",
+              fn: function(ref) {
+                var toggle = ref.toggle
+                return _c(
+                  "dropdown-trigger",
+                  {
+                    staticClass: "bg-30 px-3 border-2 border-30 rounded",
+                    class: {
+                      "bg-primary border-primary": _vm.filtersAreApplied
+                    },
+                    attrs: {
+                      "handle-click": toggle,
+                      active: _vm.filtersAreApplied
+                    }
+                  },
+                  [
+                    _c("icon", {
+                      class: _vm.filtersAreApplied ? "text-white" : "text-80",
+                      attrs: { type: "filter" }
+                    }),
+                    _vm._v(" "),
+                    _vm.filtersAreApplied
+                      ? _c(
+                          "span",
+                          { staticClass: "ml-2 font-bold text-white text-80" },
+                          [
+                            _vm._v(
+                              "\n            " +
+                                _vm._s(_vm.activeFilterCount) +
+                                "\n        "
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ],
+                  1
+                )
+              }
+            }
+          ])
+        },
+        [
+          _c(
+            "dropdown-menu",
+            {
+              attrs: {
+                slot: "menu",
+                width: "290",
+                direction: "rtl",
+                dark: true
+              },
+              slot: "menu"
+            },
+            [
+              _c(
+                "scroll-wrap",
+                { attrs: { height: 350 } },
+                [
+                  _vm.filtersAreApplied
+                    ? _c("div", { staticClass: "bg-30 border-b border-60" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "py-2 w-full block text-xs uppercase tracking-wide text-center text-80 dim font-bold focus:outline-none",
+                            on: {
+                              click: function($event) {
+                                _vm.$emit("clear-selected-filters")
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(_vm.__("Reset Filters")) +
+                                "\n                "
+                            )
+                          ]
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm._l(_vm.filters, function(filter) {
+                    return _c(filter.component, {
+                      key: filter.name,
+                      tag: "component",
+                      attrs: {
+                        "resource-name": _vm.resourceName,
+                        "filter-key": filter.class
+                      },
+                      on: {
+                        input: function($event) {
+                          _vm.$emit("filter-changed")
+                        },
+                        change: function($event) {
+                          _vm.$emit("filter-changed")
+                        }
+                      }
+                    })
+                  }),
+                  _vm._v(" "),
+                  _vm.softDeletes && _vm.showTrashedOption
+                    ? _c("div", [
+                        _c(
+                          "h3",
+                          {
+                            staticClass:
+                              "text-sm uppercase tracking-wide text-80 bg-30 p-3",
+                            attrs: { slot: "default" },
+                            slot: "default"
+                          },
+                          [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(_vm.__("Trashed")) +
+                                "\n                "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "p-2" }, [
+                          _c(
+                            "select",
+                            {
+                              staticClass:
+                                "block w-full form-control-sm form-select",
+                              attrs: { slot: "select", dusk: "trashed-select" },
+                              domProps: { value: _vm.trashed },
+                              on: { change: _vm.trashedChanged },
+                              slot: "select"
+                            },
+                            [
+                              _c(
+                                "option",
+                                { attrs: { value: "", selected: "" } },
+                                [_vm._v("—")]
+                              ),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "with" } }, [
+                                _vm._v(_vm._s(_vm.__("With Trashed")))
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "only" } }, [
+                                _vm._v(_vm._s(_vm.__("Only Trashed")))
+                              ])
+                            ]
+                          )
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.viaResource
+                    ? _c("div", [
+                        _c(
+                          "h3",
+                          {
+                            staticClass:
+                              "text-sm uppercase tracking-wide text-80 bg-30 p-3",
+                            attrs: { slot: "default" },
+                            slot: "default"
+                          },
+                          [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(_vm.__("Per Page")) +
+                                "\n                "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "p-2" }, [
+                          _c(
+                            "select",
+                            {
+                              staticClass:
+                                "block w-full form-control-sm form-select",
+                              attrs: {
+                                slot: "select",
+                                dusk: "per-page-select"
+                              },
+                              domProps: { value: _vm.perPage },
+                              on: { change: _vm.perPageChanged },
+                              slot: "select"
+                            },
+                            [
+                              _c("option", { attrs: { value: "25" } }, [
+                                _vm._v("25")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "50" } }, [
+                                _vm._v("50")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "100" } }, [
+                                _vm._v("100")
+                              ])
+                            ]
+                          )
+                        ])
+                      ])
+                    : _vm._e()
+                ],
+                2
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-851cb2a2", module.exports)
   }
 }
 
@@ -41906,7 +43632,12 @@ var render = function() {
             ref: "input",
             staticClass:
               "flex items-center form-control form-input form-input-bordered pr-6",
-            class: { focus: _vm.show, "border-danger": _vm.error },
+            class: {
+              focus: _vm.show,
+              "border-danger": _vm.error,
+              "form-select": _vm.shouldShowDropdownArrow,
+              disabled: _vm.disabled
+            },
             attrs: { tabindex: _vm.show ? -1 : 0 },
             on: {
               click: _vm.open,
@@ -41942,7 +43673,7 @@ var render = function() {
             }
           },
           [
-            _vm.shouldShowDropdownArrow
+            _vm.shouldShowDropdownArrow && !_vm.disabled
               ? _c("div", {
                   staticClass: "search-input-trigger absolute pin select-box"
                 })
@@ -41957,7 +43688,7 @@ var render = function() {
           2
         ),
         _vm._v(" "),
-        _vm.value
+        _vm.value && !_vm.disabled
           ? _c(
               "button",
               {
@@ -42157,76 +43888,6 @@ var render = function() {
       class: _vm.menuClasses
     },
     [
-      _vm.dark
-        ? _c(
-            "svg",
-            {
-              staticClass: "absolute dropdown-arrow z-50",
-              class: _vm.arrowClasses,
-              attrs: {
-                width: "46px",
-                height: "23px",
-                xmlns: "http://www.w3.org/2000/svg",
-                "xmlns:xlink": "http://www.w3.org/1999/xlink",
-                viewBox: "0 0 44 22"
-              }
-            },
-            [
-              _c("defs", [
-                _c("path", { attrs: { id: "a", d: "M0 0h44v22H0z" } }),
-                _c("path", { attrs: { id: "c", d: "M2 22L22 2l20 20z" } })
-              ]),
-              _c("g", { attrs: { fill: "none", "fill-rule": "evenodd" } }, [
-                _c("mask", { attrs: { id: "b", fill: "#fff" } }, [
-                  _c("use", { attrs: { "xlink:href": "#a" } })
-                ]),
-                _c("g", { attrs: { mask: "url(#b)" } }, [
-                  _c("use", { attrs: { fill: "#F6F8FB", "xlink:href": "#c" } }),
-                  _c("path", {
-                    attrs: {
-                      stroke: "#CCD4DB",
-                      d: "M.793 22.5L22 1.293 43.207 22.5H.793z"
-                    }
-                  })
-                ])
-              ])
-            ]
-          )
-        : _c(
-            "svg",
-            {
-              staticClass: "absolute dropdown-arrow z-50",
-              class: _vm.arrowClasses,
-              attrs: {
-                width: "46px",
-                height: "23px",
-                xmlns: "http://www.w3.org/2000/svg",
-                "xmlns:xlink": "http://www.w3.org/1999/xlink",
-                viewBox: "0 0 44 22"
-              }
-            },
-            [
-              _c("defs", [
-                _c("path", { attrs: { id: "a", d: "M0 0h44v22H0z" } }),
-                _c("path", { attrs: { id: "c", d: "M2 22L22 2l20 20z" } })
-              ]),
-              _c("g", { attrs: { fill: "none", "fill-rule": "evenodd" } }, [
-                _c("mask", { attrs: { id: "b", fill: "#fff" } }, [
-                  _c("use", { attrs: { "xlink:href": "#a" } })
-                ]),
-                _c("g", { attrs: { mask: "url(#b)" } }, [
-                  _c("use", { attrs: { fill: "#FFF", "xlink:href": "#c" } }),
-                  _c("path", {
-                    attrs: {
-                      stroke: "#CCD4DB",
-                      d: "M.793 22.5L22 1.293 43.207 22.5H.793z"
-                    }
-                  })
-                ])
-              ])
-            ]
-          ),
-      _vm._v(" "),
       _c(
         "div",
         {
@@ -42306,44 +43967,58 @@ var render = function() {
                       )
                     }),
                     _vm._v(" "),
-                    _c("div", { staticClass: "bg-30 flex px-8 py-4" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "ml-auto btn btn-default btn-primary mr-3",
-                          attrs: {
-                            type: "button",
-                            dusk: "update-and-continue-editing-button"
+                    _c(
+                      "div",
+                      { staticClass: "bg-30 flex px-8 py-4" },
+                      [
+                        _c(
+                          "progress-button",
+                          {
+                            staticClass: "ml-auto mr-3",
+                            attrs: {
+                              dusk: "update-and-continue-editing-button",
+                              disabled: _vm.isWorking,
+                              processing:
+                                _vm.submittedViaUpdateAndContinueEditing
+                            },
+                            nativeOn: {
+                              click: function($event) {
+                                return _vm.updateAndContinueEditing($event)
+                              }
+                            }
                           },
-                          on: { click: _vm.updateAndContinueEditing }
-                        },
-                        [
-                          _vm._v(
-                            "\n                    " +
-                              _vm._s(_vm.__("Update & Continue Editing")) +
-                              "\n                "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-default btn-primary",
-                          attrs: { dusk: "update-button" }
-                        },
-                        [
-                          _vm._v(
-                            "\n                    " +
-                              _vm._s(_vm.__("Update")) +
-                              " " +
-                              _vm._s(_vm.singularName) +
-                              "\n                "
-                          )
-                        ]
-                      )
-                    ])
+                          [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(_vm.__("Update & Continue Editing")) +
+                                "\n                "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "progress-button",
+                          {
+                            attrs: {
+                              dusk: "update-button",
+                              type: "submit",
+                              disabled: _vm.isWorking,
+                              processing: _vm.submittedViaUpdateResource
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(_vm.__("Update")) +
+                                " " +
+                                _vm._s(_vm.singularName) +
+                                "\n                "
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
                   ],
                   2
                 )
@@ -42384,7 +44059,6 @@ var render = function() {
                   class: _vm.classes,
                   attrs: {
                     dusk: "attach-button",
-                    tag: "button",
                     to: {
                       name: "attach",
                       params: {
@@ -42403,11 +44077,11 @@ var render = function() {
                 [
                   _vm._t("default", [
                     _vm._v(
-                      "\n            " +
+                      " " +
                         _vm._s(_vm.__("Attach")) +
                         " " +
                         _vm._s(_vm.singularName) +
-                        "\n        "
+                        " "
                     )
                   ])
                 ],
@@ -42419,7 +44093,6 @@ var render = function() {
                   {
                     class: _vm.classes,
                     attrs: {
-                      tag: "button",
                       dusk: "create-button",
                       to: {
                         name: "create",
@@ -42478,7 +44151,7 @@ var render = function() {
         _vm._v(" "),
         _c("p", { staticClass: "text-90 leading-tight mb-8" }, [
           _vm._v(
-            "Welcome to Nova! Get familiar with Nova and explore it's features in the documentation:"
+            "\n            Welcome to Nova! Get familiar with Nova and explore it's features in the\n            documentation:\n        "
           )
         ]),
         _vm._v(" "),
@@ -42570,7 +44243,7 @@ var render = function() {
                             _vm._v(" "),
                             _c("p", { staticClass: "text-90 leading-normal" }, [
                               _vm._v(
-                                "Nova's resource manager allows you to quickly view and manage your Eloquent model records directly from Nova's intuitive interface."
+                                "\n                                    Nova's resource manager allows you to quickly view and\n                                    manage your Eloquent model records directly from Nova's\n                                    intuitive interface.\n                                "
                               )
                             ])
                           ],
@@ -42657,7 +44330,7 @@ var render = function() {
                             _vm._v(" "),
                             _c("p", { staticClass: "text-90 leading-normal" }, [
                               _vm._v(
-                                "Actions perform tasks on a single record or an entire batch of records. Have an action that takes a while? No problem. Nova can queue them using Laravel's powerful queue system."
+                                "\n                                    Actions perform tasks on a single record or an entire batch\n                                    of records. Have an action that takes a while? No problem.\n                                    Nova can queue them using Laravel's powerful queue system.\n                                "
                               )
                             ])
                           ],
@@ -42748,7 +44421,7 @@ var render = function() {
                             _vm._v(" "),
                             _c("p", { staticClass: "text-90 leading-normal" }, [
                               _vm._v(
-                                "Write custom filters for your resource indexes to offer your users quick glances at different segments of your data."
+                                "\n                                    Write custom filters for your resource indexes to offer your\n                                    users quick glances at different segments of your data.\n                                "
                               )
                             ])
                           ],
@@ -42835,7 +44508,7 @@ var render = function() {
                             _vm._v(" "),
                             _c("p", { staticClass: "text-90 leading-normal" }, [
                               _vm._v(
-                                "Need to customize a resource list a little more than a filter can provider? No problem. Add lenses to your resource to take full control over the entire Eloquent query."
+                                "\n                                    Need to customize a resource list a little more than a\n                                    filter can provider? No problem. Add lenses to your resource\n                                    to take full control over the entire Eloquent query.\n                                "
                               )
                             ])
                           ],
@@ -42926,7 +44599,7 @@ var render = function() {
                             _vm._v(" "),
                             _c("p", { staticClass: "text-90 leading-normal" }, [
                               _vm._v(
-                                "Nova makes it painless to quickly display custom metrics for your application. To put the cherry on top, we’ve included query helpers to make it all easy as pie."
+                                "\n                                    Nova makes it painless to quickly display custom metrics for\n                                    your application. To put the cherry on top, we’ve included\n                                    query helpers to make it all easy as pie.\n                                "
                               )
                             ])
                           ],
@@ -43013,7 +44686,7 @@ var render = function() {
                             _vm._v(" "),
                             _c("p", { staticClass: "text-90 leading-normal" }, [
                               _vm._v(
-                                "Nova offers CLI generators for scaffolding your own custom cards. We’ll give you a Vue component and infinite possibilities."
+                                "\n                                    Nova offers CLI generators for scaffolding your own custom\n                                    cards. We’ll give you a Vue component and infinite\n                                    possibilities.\n                                "
                               )
                             ])
                           ],
@@ -43066,13 +44739,7 @@ var render = function() {
               "ul",
               { staticStyle: { "margin-bottom": "0" } },
               _vm._l(_vm.errors, function(error) {
-                return _c("li", [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(error) +
-                      "\n                "
-                  )
-                ])
+                return _c("li", [_vm._v(_vm._s(error))])
               })
             )
           ])
@@ -43190,8 +44857,7 @@ var render = function() {
         _vm.shouldShowLoader
           ? [
               _c("ImageLoader", {
-                staticClass: "max-w-xs",
-                attrs: { src: _vm.field.thumbnailUrl },
+                attrs: { src: _vm.imageUrl, maxWidth: _vm.maxWidth },
                 on: {
                   missing: function(value) {
                     return (_vm.missing = value)
@@ -43201,38 +44867,17 @@ var render = function() {
             ]
           : _vm._e(),
         _vm._v(" "),
-        _vm.field.value && !_vm.field.thumbnailUrl
-          ? [_vm._v("\n            " + _vm._s(_vm.field.value) + "\n        ")]
+        _vm.field.value && !_vm.imageUrl
+          ? [
+              _c("span", { staticClass: "break-words" }, [
+                _vm._v(" " + _vm._s(_vm.field.value) + " ")
+              ])
+            ]
           : _vm._e(),
         _vm._v(" "),
-        !_vm.field.value && !_vm.field.thumbnailUrl
+        !_vm.field.value && !_vm.imageUrl
           ? _c("span", [_vm._v("—")])
           : _vm._e(),
-        _vm._v(" "),
-        _vm.deleted ? _c("span", [_vm._v("—")]) : _vm._e(),
-        _vm._v(" "),
-        _c(
-          "portal",
-          { attrs: { to: "modals" } },
-          [
-            _c(
-              "transition",
-              { attrs: { name: "fade" } },
-              [
-                _vm.removeModalOpen
-                  ? _c("confirm-upload-removal-modal", {
-                      on: {
-                        confirm: _vm.removeFile,
-                        close: _vm.closeRemoveModal
-                      }
-                    })
-                  : _vm._e()
-              ],
-              1
-            )
-          ],
-          1
-        ),
         _vm._v(" "),
         _vm.shouldShowToolbar
           ? _c("p", { staticClass: "flex items-center text-sm mt-3" }, [
@@ -43281,9 +44926,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("span", { staticClass: "class mt-1" }, [
-                        _vm._v(
-                          "\n                    Download\n                "
-                        )
+                        _vm._v(" Download ")
                       ])
                     ],
                     1
@@ -43365,40 +45008,24 @@ var render = function() {
       attrs: { loading: _vm.loading }
     },
     [
-      _c("div", { staticClass: "flex mb-4" }, [
-        _c("h3", { staticClass: "mr-3 text-base text-80 font-bold" }, [
-          _vm._v(_vm._s(_vm.title))
-        ]),
-        _vm._v(" "),
-        _vm.ranges.length > 0
-          ? _c(
-              "select",
-              {
+      _c(
+        "div",
+        { staticClass: "flex mb-4" },
+        [
+          _c("h3", { staticClass: "mr-3 text-base text-80 font-bold" }, [
+            _vm._v(_vm._s(_vm.title))
+          ]),
+          _vm._v(" "),
+          _vm.ranges.length > 0
+            ? _c("select-control", {
                 staticClass: "ml-auto min-w-24 h-6 text-xs no-appearance bg-40",
+                attrs: { options: _vm.ranges, selected: _vm.selectedRangeKey },
                 on: { change: _vm.handleChange }
-              },
-              _vm._l(_vm.ranges, function(option) {
-                return _c(
-                  "option",
-                  {
-                    key: option.value,
-                    domProps: {
-                      value: option.value,
-                      selected: option.value == _vm.selectedRangeKey
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(option.label) +
-                        "\n            "
-                    )
-                  ]
-                )
               })
-            )
-          : _vm._e()
-      ]),
+            : _vm._e()
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("p", { staticClass: "flex items-center text-4xl mb-4" }, [
         _vm._v("\n        " + _vm._s(_vm.formattedValue) + "\n        "),
@@ -43455,26 +45082,18 @@ var render = function() {
                         "\n                    " +
                           _vm._s(_vm.growthPercentage) +
                           "% " +
-                          _vm._s(_vm.increaseOrDecreaseLabel) +
+                          _vm._s(_vm.__(_vm.increaseOrDecreaseLabel)) +
                           "\n                "
                       )
                     ])
                   : _c("span", [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.__("No Increase")) +
-                          "\n                "
-                      )
+                      _vm._v(" " + _vm._s(_vm.__("No Increase")) + " ")
                     ])
               ])
             : _c("span", [
                 _vm.previous == "0" && _vm.value != "0"
                   ? _c("span", [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.__("No Prior Data")) +
-                          "\n                "
-                      )
+                      _vm._v(" " + _vm._s(_vm.__("No Prior Data")) + " ")
                     ])
                   : _vm._e(),
                 _vm._v(" "),
@@ -43489,13 +45108,7 @@ var render = function() {
                   : _vm._e(),
                 _vm._v(" "),
                 _vm.value == "0" && _vm.previous == "0"
-                  ? _c("span", [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.__("No Data")) +
-                          "\n                "
-                      )
-                    ])
+                  ? _c("span", [_vm._v(" " + _vm._s(_vm.__("No Data")) + " ")])
                   : _vm._e()
               ])
         ])
@@ -43527,8 +45140,6 @@ var render = function() {
     class: { "!cursor-not-allowed": _vm.disabled },
     attrs: {
       disabled: _vm.disabled,
-      dusk: _vm.field.attribute,
-      name: _vm.field.name,
       type: "text",
       placeholder: _vm.placeholder
     },
@@ -43558,40 +45169,24 @@ var render = function() {
     "loading-card",
     { staticClass: "px-6 py-4", attrs: { loading: _vm.loading } },
     [
-      _c("div", { staticClass: "flex mb-4" }, [
-        _c("h3", { staticClass: "mr-3 text-base text-80 font-bold" }, [
-          _vm._v(_vm._s(_vm.title))
-        ]),
-        _vm._v(" "),
-        _vm.ranges.length > 0
-          ? _c(
-              "select",
-              {
+      _c(
+        "div",
+        { staticClass: "flex mb-4" },
+        [
+          _c("h3", { staticClass: "mr-3 text-base text-80 font-bold" }, [
+            _vm._v(_vm._s(_vm.title))
+          ]),
+          _vm._v(" "),
+          _vm.ranges.length > 0
+            ? _c("select-control", {
                 staticClass: "ml-auto min-w-24 h-6 text-xs no-appearance bg-40",
+                attrs: { options: _vm.ranges, selected: _vm.selectedRangeKey },
                 on: { change: _vm.handleChange }
-              },
-              _vm._l(_vm.ranges, function(option) {
-                return _c(
-                  "option",
-                  {
-                    key: option.value,
-                    domProps: {
-                      value: option.value,
-                      selected: option.value == _vm.selectedRangeKey
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(option.label) +
-                        "\n            "
-                    )
-                  ]
-                )
               })
-            )
-          : _vm._e()
-      ]),
+            : _vm._e()
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("p", { staticClass: "flex items-center text-4xl mb-4" }, [
         _vm._v("\n        " + _vm._s(_vm.formattedValue) + "\n        "),
@@ -43604,7 +45199,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", {
         ref: "chart",
-        staticClass: "z-40 absolute pin rounded-b-lg ct-chart",
+        staticClass: "absolute pin rounded-b-lg ct-chart",
         staticStyle: { top: "60%" }
       })
     ]
@@ -43617,6 +45212,36 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-b6c31a5a", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-b8e1ef70\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Form/HeadingField.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("field-wrapper", [
+    _vm.shouldDisplayAsHtml
+      ? _c("div", {
+          class: _vm.classes,
+          domProps: { innerHTML: _vm._s(_vm.field.value) }
+        })
+      : _c("div", { class: _vm.classes }, [
+          _c("p", [_vm._v(_vm._s(_vm.field.value))])
+        ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-b8e1ef70", module.exports)
   }
 }
 
@@ -43743,6 +45368,7 @@ var render = function() {
                                 })
                               ]
                             ),
+                            _vm._v(" "),
                             _c("path", {
                               attrs: {
                                 id: "Shape",
@@ -43800,6 +45426,7 @@ var render = function() {
                               })
                             ]
                           ),
+                          _vm._v(" "),
                           _c("rect", {
                             attrs: {
                               id: "Rectangle-path",
@@ -43877,7 +45504,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("span", { staticClass: "font-bold" }, [
-    _vm._v("\n    ·\n    ·\n    ·\n    ·\n    ·\n    ·\n    ·\n    ·\n")
+    _vm._v("\n    · · · · · · · ·\n")
   ])
 }
 var staticRenderFns = []
@@ -43909,14 +45536,16 @@ var render = function() {
         [
           _c("date-time-picker", {
             staticClass: "w-full form-control form-input form-input-bordered",
+            class: _vm.errorClasses,
             attrs: {
-              field: _vm.field,
+              dusk: _vm.field.attribute,
               name: _vm.field.name,
               value: _vm.value,
               dateFormat: "Y-m-d",
               placeholder: _vm.placeholder,
               "enable-time": false,
-              "enable-seconds": false
+              "enable-seconds": false,
+              "first-day-of-week": _vm.firstDayOfWeek
             },
             on: { change: _vm.handleChange }
           })
@@ -43958,6 +45587,55 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-d06675e4", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-e3bda6a6\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Filters/SelectFilter.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "h3",
+      { staticClass: "text-sm uppercase tracking-wide text-80 bg-30 p-3" },
+      [_vm._v(_vm._s(_vm.filter.name))]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "p-2" },
+      [
+        _c(
+          "select-control",
+          {
+            staticClass: "block w-full form-control-sm form-select",
+            attrs: {
+              dusk: _vm.filter.name + "-filter-select",
+              value: _vm.value,
+              options: _vm.filter.options,
+              label: "name"
+            },
+            on: { change: _vm.handleChange }
+          },
+          [_c("option", { attrs: { value: "", selected: "" } }, [_vm._v("—")])]
+        )
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-e3bda6a6", module.exports)
   }
 }
 
@@ -44160,7 +45838,7 @@ var render = function() {
                             attrs: {
                               resource: _vm.resource,
                               "resource-name": _vm.resourceName,
-                              "resource-id": _vm.resourceName
+                              "resource-id": _vm.resourceId
                             }
                           }),
                           _vm._v(" "),
@@ -44195,7 +45873,7 @@ var render = function() {
                                   attrs: {
                                     "data-testid": "open-delete-modal",
                                     dusk: "open-delete-modal-button",
-                                    title: "Delete"
+                                    title: _vm.__("Delete")
                                   },
                                   on: { click: _vm.openDeleteModal }
                                 },
@@ -44219,7 +45897,7 @@ var render = function() {
                                   attrs: {
                                     "data-testid": "open-restore-modal",
                                     dusk: "open-restore-modal-button",
-                                    title: "Restore"
+                                    title: _vm.__("Restore")
                                   },
                                   on: { click: _vm.openRestoreModal }
                                 },
@@ -44242,7 +45920,7 @@ var render = function() {
                                   attrs: {
                                     "data-testid": "open-force-delete-modal",
                                     dusk: "open-force-delete-modal-button",
-                                    title: "Force Delete"
+                                    title: _vm.__("Force Delete")
                                   },
                                   on: { click: _vm.openForceDeleteModal }
                                 },
@@ -44340,7 +46018,7 @@ var render = function() {
                                       name: "edit",
                                       params: { id: _vm.resource.id }
                                     },
-                                    title: "Edit"
+                                    title: _vm.__("Edit")
                                   }
                                 },
                                 [
@@ -44621,7 +46299,13 @@ var render = function() {
                                   ? _c(
                                       "p",
                                       { staticClass: "text-xs mt-1 text-80" },
-                                      [_vm._v(_vm._s(item.subTitle))]
+                                      [
+                                        _vm._v(
+                                          "\n                                    " +
+                                            _vm._s(item.subTitle) +
+                                            "\n                                "
+                                        )
+                                      ]
                                     )
                                   : _vm._e()
                               ])
@@ -44664,6 +46348,7 @@ var render = function() {
       ref: "card",
       staticClass:
         "card relative border border-lg border-50 overflow-hidden px-0 py-0",
+      class: _vm.cardClasses,
       attrs: { loading: _vm.loading }
     },
     [
@@ -44680,7 +46365,11 @@ var render = function() {
                 },
                 [_vm._v(_vm._s(_vm.__("This image")))]
               ),
-              _vm._v(" " + _vm._s(_vm.__("could not be found.")) + "\n        ")
+              _vm._v(
+                "\n            " +
+                  _vm._s(_vm.__("could not be found.")) +
+                  "\n        "
+              )
             ])
           ])
         : _vm._e()
@@ -44823,6 +46512,60 @@ if(false) {
  if(!content.locals) {
    module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5d7a886a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1!./MarkdownField.vue", function() {
      var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5d7a886a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=1!./MarkdownField.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e9cebc3\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/CheckboxWithLabel.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e9cebc3\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/CheckboxWithLabel.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("5a7c0c84", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e9cebc3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CheckboxWithLabel.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e9cebc3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CheckboxWithLabel.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5f5fa236\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/Trix.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5f5fa236\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/Trix.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("7662963f", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5f5fa236\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Trix.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5f5fa236\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Trix.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -48255,6 +49998,953 @@ module.exports = function listToStyles (parentId, list) {
 
 /***/ }),
 
+/***/ "./node_modules/vuex/dist/vuex.esm.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return Store; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "install", function() { return install; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapState", function() { return mapState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapMutations", function() { return mapMutations; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapGetters", function() { return mapGetters; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapActions", function() { return mapActions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNamespacedHelpers", function() { return createNamespacedHelpers; });
+/**
+ * vuex v3.0.1
+ * (c) 2017 Evan You
+ * @license MIT
+ */
+var applyMixin = function (Vue) {
+  var version = Number(Vue.version.split('.')[0]);
+
+  if (version >= 2) {
+    Vue.mixin({ beforeCreate: vuexInit });
+  } else {
+    // override init and inject vuex init procedure
+    // for 1.x backwards compatibility.
+    var _init = Vue.prototype._init;
+    Vue.prototype._init = function (options) {
+      if ( options === void 0 ) options = {};
+
+      options.init = options.init
+        ? [vuexInit].concat(options.init)
+        : vuexInit;
+      _init.call(this, options);
+    };
+  }
+
+  /**
+   * Vuex init hook, injected into each instances init hooks list.
+   */
+
+  function vuexInit () {
+    var options = this.$options;
+    // store injection
+    if (options.store) {
+      this.$store = typeof options.store === 'function'
+        ? options.store()
+        : options.store;
+    } else if (options.parent && options.parent.$store) {
+      this.$store = options.parent.$store;
+    }
+  }
+};
+
+var devtoolHook =
+  typeof window !== 'undefined' &&
+  window.__VUE_DEVTOOLS_GLOBAL_HOOK__;
+
+function devtoolPlugin (store) {
+  if (!devtoolHook) { return }
+
+  store._devtoolHook = devtoolHook;
+
+  devtoolHook.emit('vuex:init', store);
+
+  devtoolHook.on('vuex:travel-to-state', function (targetState) {
+    store.replaceState(targetState);
+  });
+
+  store.subscribe(function (mutation, state) {
+    devtoolHook.emit('vuex:mutation', mutation, state);
+  });
+}
+
+/**
+ * Get the first item that pass the test
+ * by second argument function
+ *
+ * @param {Array} list
+ * @param {Function} f
+ * @return {*}
+ */
+/**
+ * Deep copy the given object considering circular structure.
+ * This function caches all nested objects and its copies.
+ * If it detects circular structure, use cached copy to avoid infinite loop.
+ *
+ * @param {*} obj
+ * @param {Array<Object>} cache
+ * @return {*}
+ */
+
+
+/**
+ * forEach for object
+ */
+function forEachValue (obj, fn) {
+  Object.keys(obj).forEach(function (key) { return fn(obj[key], key); });
+}
+
+function isObject (obj) {
+  return obj !== null && typeof obj === 'object'
+}
+
+function isPromise (val) {
+  return val && typeof val.then === 'function'
+}
+
+function assert (condition, msg) {
+  if (!condition) { throw new Error(("[vuex] " + msg)) }
+}
+
+var Module = function Module (rawModule, runtime) {
+  this.runtime = runtime;
+  this._children = Object.create(null);
+  this._rawModule = rawModule;
+  var rawState = rawModule.state;
+  this.state = (typeof rawState === 'function' ? rawState() : rawState) || {};
+};
+
+var prototypeAccessors$1 = { namespaced: { configurable: true } };
+
+prototypeAccessors$1.namespaced.get = function () {
+  return !!this._rawModule.namespaced
+};
+
+Module.prototype.addChild = function addChild (key, module) {
+  this._children[key] = module;
+};
+
+Module.prototype.removeChild = function removeChild (key) {
+  delete this._children[key];
+};
+
+Module.prototype.getChild = function getChild (key) {
+  return this._children[key]
+};
+
+Module.prototype.update = function update (rawModule) {
+  this._rawModule.namespaced = rawModule.namespaced;
+  if (rawModule.actions) {
+    this._rawModule.actions = rawModule.actions;
+  }
+  if (rawModule.mutations) {
+    this._rawModule.mutations = rawModule.mutations;
+  }
+  if (rawModule.getters) {
+    this._rawModule.getters = rawModule.getters;
+  }
+};
+
+Module.prototype.forEachChild = function forEachChild (fn) {
+  forEachValue(this._children, fn);
+};
+
+Module.prototype.forEachGetter = function forEachGetter (fn) {
+  if (this._rawModule.getters) {
+    forEachValue(this._rawModule.getters, fn);
+  }
+};
+
+Module.prototype.forEachAction = function forEachAction (fn) {
+  if (this._rawModule.actions) {
+    forEachValue(this._rawModule.actions, fn);
+  }
+};
+
+Module.prototype.forEachMutation = function forEachMutation (fn) {
+  if (this._rawModule.mutations) {
+    forEachValue(this._rawModule.mutations, fn);
+  }
+};
+
+Object.defineProperties( Module.prototype, prototypeAccessors$1 );
+
+var ModuleCollection = function ModuleCollection (rawRootModule) {
+  // register root module (Vuex.Store options)
+  this.register([], rawRootModule, false);
+};
+
+ModuleCollection.prototype.get = function get (path) {
+  return path.reduce(function (module, key) {
+    return module.getChild(key)
+  }, this.root)
+};
+
+ModuleCollection.prototype.getNamespace = function getNamespace (path) {
+  var module = this.root;
+  return path.reduce(function (namespace, key) {
+    module = module.getChild(key);
+    return namespace + (module.namespaced ? key + '/' : '')
+  }, '')
+};
+
+ModuleCollection.prototype.update = function update$1 (rawRootModule) {
+  update([], this.root, rawRootModule);
+};
+
+ModuleCollection.prototype.register = function register (path, rawModule, runtime) {
+    var this$1 = this;
+    if ( runtime === void 0 ) runtime = true;
+
+  if (true) {
+    assertRawModule(path, rawModule);
+  }
+
+  var newModule = new Module(rawModule, runtime);
+  if (path.length === 0) {
+    this.root = newModule;
+  } else {
+    var parent = this.get(path.slice(0, -1));
+    parent.addChild(path[path.length - 1], newModule);
+  }
+
+  // register nested modules
+  if (rawModule.modules) {
+    forEachValue(rawModule.modules, function (rawChildModule, key) {
+      this$1.register(path.concat(key), rawChildModule, runtime);
+    });
+  }
+};
+
+ModuleCollection.prototype.unregister = function unregister (path) {
+  var parent = this.get(path.slice(0, -1));
+  var key = path[path.length - 1];
+  if (!parent.getChild(key).runtime) { return }
+
+  parent.removeChild(key);
+};
+
+function update (path, targetModule, newModule) {
+  if (true) {
+    assertRawModule(path, newModule);
+  }
+
+  // update target module
+  targetModule.update(newModule);
+
+  // update nested modules
+  if (newModule.modules) {
+    for (var key in newModule.modules) {
+      if (!targetModule.getChild(key)) {
+        if (true) {
+          console.warn(
+            "[vuex] trying to add a new module '" + key + "' on hot reloading, " +
+            'manual reload is needed'
+          );
+        }
+        return
+      }
+      update(
+        path.concat(key),
+        targetModule.getChild(key),
+        newModule.modules[key]
+      );
+    }
+  }
+}
+
+var functionAssert = {
+  assert: function (value) { return typeof value === 'function'; },
+  expected: 'function'
+};
+
+var objectAssert = {
+  assert: function (value) { return typeof value === 'function' ||
+    (typeof value === 'object' && typeof value.handler === 'function'); },
+  expected: 'function or object with "handler" function'
+};
+
+var assertTypes = {
+  getters: functionAssert,
+  mutations: functionAssert,
+  actions: objectAssert
+};
+
+function assertRawModule (path, rawModule) {
+  Object.keys(assertTypes).forEach(function (key) {
+    if (!rawModule[key]) { return }
+
+    var assertOptions = assertTypes[key];
+
+    forEachValue(rawModule[key], function (value, type) {
+      assert(
+        assertOptions.assert(value),
+        makeAssertionMessage(path, key, type, value, assertOptions.expected)
+      );
+    });
+  });
+}
+
+function makeAssertionMessage (path, key, type, value, expected) {
+  var buf = key + " should be " + expected + " but \"" + key + "." + type + "\"";
+  if (path.length > 0) {
+    buf += " in module \"" + (path.join('.')) + "\"";
+  }
+  buf += " is " + (JSON.stringify(value)) + ".";
+  return buf
+}
+
+var Vue; // bind on install
+
+var Store = function Store (options) {
+  var this$1 = this;
+  if ( options === void 0 ) options = {};
+
+  // Auto install if it is not done yet and `window` has `Vue`.
+  // To allow users to avoid auto-installation in some cases,
+  // this code should be placed here. See #731
+  if (!Vue && typeof window !== 'undefined' && window.Vue) {
+    install(window.Vue);
+  }
+
+  if (true) {
+    assert(Vue, "must call Vue.use(Vuex) before creating a store instance.");
+    assert(typeof Promise !== 'undefined', "vuex requires a Promise polyfill in this browser.");
+    assert(this instanceof Store, "Store must be called with the new operator.");
+  }
+
+  var plugins = options.plugins; if ( plugins === void 0 ) plugins = [];
+  var strict = options.strict; if ( strict === void 0 ) strict = false;
+
+  var state = options.state; if ( state === void 0 ) state = {};
+  if (typeof state === 'function') {
+    state = state() || {};
+  }
+
+  // store internal state
+  this._committing = false;
+  this._actions = Object.create(null);
+  this._actionSubscribers = [];
+  this._mutations = Object.create(null);
+  this._wrappedGetters = Object.create(null);
+  this._modules = new ModuleCollection(options);
+  this._modulesNamespaceMap = Object.create(null);
+  this._subscribers = [];
+  this._watcherVM = new Vue();
+
+  // bind commit and dispatch to self
+  var store = this;
+  var ref = this;
+  var dispatch = ref.dispatch;
+  var commit = ref.commit;
+  this.dispatch = function boundDispatch (type, payload) {
+    return dispatch.call(store, type, payload)
+  };
+  this.commit = function boundCommit (type, payload, options) {
+    return commit.call(store, type, payload, options)
+  };
+
+  // strict mode
+  this.strict = strict;
+
+  // init root module.
+  // this also recursively registers all sub-modules
+  // and collects all module getters inside this._wrappedGetters
+  installModule(this, state, [], this._modules.root);
+
+  // initialize the store vm, which is responsible for the reactivity
+  // (also registers _wrappedGetters as computed properties)
+  resetStoreVM(this, state);
+
+  // apply plugins
+  plugins.forEach(function (plugin) { return plugin(this$1); });
+
+  if (Vue.config.devtools) {
+    devtoolPlugin(this);
+  }
+};
+
+var prototypeAccessors = { state: { configurable: true } };
+
+prototypeAccessors.state.get = function () {
+  return this._vm._data.$$state
+};
+
+prototypeAccessors.state.set = function (v) {
+  if (true) {
+    assert(false, "Use store.replaceState() to explicit replace store state.");
+  }
+};
+
+Store.prototype.commit = function commit (_type, _payload, _options) {
+    var this$1 = this;
+
+  // check object-style commit
+  var ref = unifyObjectStyle(_type, _payload, _options);
+    var type = ref.type;
+    var payload = ref.payload;
+    var options = ref.options;
+
+  var mutation = { type: type, payload: payload };
+  var entry = this._mutations[type];
+  if (!entry) {
+    if (true) {
+      console.error(("[vuex] unknown mutation type: " + type));
+    }
+    return
+  }
+  this._withCommit(function () {
+    entry.forEach(function commitIterator (handler) {
+      handler(payload);
+    });
+  });
+  this._subscribers.forEach(function (sub) { return sub(mutation, this$1.state); });
+
+  if (
+    "development" !== 'production' &&
+    options && options.silent
+  ) {
+    console.warn(
+      "[vuex] mutation type: " + type + ". Silent option has been removed. " +
+      'Use the filter functionality in the vue-devtools'
+    );
+  }
+};
+
+Store.prototype.dispatch = function dispatch (_type, _payload) {
+    var this$1 = this;
+
+  // check object-style dispatch
+  var ref = unifyObjectStyle(_type, _payload);
+    var type = ref.type;
+    var payload = ref.payload;
+
+  var action = { type: type, payload: payload };
+  var entry = this._actions[type];
+  if (!entry) {
+    if (true) {
+      console.error(("[vuex] unknown action type: " + type));
+    }
+    return
+  }
+
+  this._actionSubscribers.forEach(function (sub) { return sub(action, this$1.state); });
+
+  return entry.length > 1
+    ? Promise.all(entry.map(function (handler) { return handler(payload); }))
+    : entry[0](payload)
+};
+
+Store.prototype.subscribe = function subscribe (fn) {
+  return genericSubscribe(fn, this._subscribers)
+};
+
+Store.prototype.subscribeAction = function subscribeAction (fn) {
+  return genericSubscribe(fn, this._actionSubscribers)
+};
+
+Store.prototype.watch = function watch (getter, cb, options) {
+    var this$1 = this;
+
+  if (true) {
+    assert(typeof getter === 'function', "store.watch only accepts a function.");
+  }
+  return this._watcherVM.$watch(function () { return getter(this$1.state, this$1.getters); }, cb, options)
+};
+
+Store.prototype.replaceState = function replaceState (state) {
+    var this$1 = this;
+
+  this._withCommit(function () {
+    this$1._vm._data.$$state = state;
+  });
+};
+
+Store.prototype.registerModule = function registerModule (path, rawModule, options) {
+    if ( options === void 0 ) options = {};
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if (true) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+    assert(path.length > 0, 'cannot register the root module by using registerModule.');
+  }
+
+  this._modules.register(path, rawModule);
+  installModule(this, this.state, path, this._modules.get(path), options.preserveState);
+  // reset store to update getters...
+  resetStoreVM(this, this.state);
+};
+
+Store.prototype.unregisterModule = function unregisterModule (path) {
+    var this$1 = this;
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if (true) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+  }
+
+  this._modules.unregister(path);
+  this._withCommit(function () {
+    var parentState = getNestedState(this$1.state, path.slice(0, -1));
+    Vue.delete(parentState, path[path.length - 1]);
+  });
+  resetStore(this);
+};
+
+Store.prototype.hotUpdate = function hotUpdate (newOptions) {
+  this._modules.update(newOptions);
+  resetStore(this, true);
+};
+
+Store.prototype._withCommit = function _withCommit (fn) {
+  var committing = this._committing;
+  this._committing = true;
+  fn();
+  this._committing = committing;
+};
+
+Object.defineProperties( Store.prototype, prototypeAccessors );
+
+function genericSubscribe (fn, subs) {
+  if (subs.indexOf(fn) < 0) {
+    subs.push(fn);
+  }
+  return function () {
+    var i = subs.indexOf(fn);
+    if (i > -1) {
+      subs.splice(i, 1);
+    }
+  }
+}
+
+function resetStore (store, hot) {
+  store._actions = Object.create(null);
+  store._mutations = Object.create(null);
+  store._wrappedGetters = Object.create(null);
+  store._modulesNamespaceMap = Object.create(null);
+  var state = store.state;
+  // init all modules
+  installModule(store, state, [], store._modules.root, true);
+  // reset vm
+  resetStoreVM(store, state, hot);
+}
+
+function resetStoreVM (store, state, hot) {
+  var oldVm = store._vm;
+
+  // bind store public getters
+  store.getters = {};
+  var wrappedGetters = store._wrappedGetters;
+  var computed = {};
+  forEachValue(wrappedGetters, function (fn, key) {
+    // use computed to leverage its lazy-caching mechanism
+    computed[key] = function () { return fn(store); };
+    Object.defineProperty(store.getters, key, {
+      get: function () { return store._vm[key]; },
+      enumerable: true // for local getters
+    });
+  });
+
+  // use a Vue instance to store the state tree
+  // suppress warnings just in case the user has added
+  // some funky global mixins
+  var silent = Vue.config.silent;
+  Vue.config.silent = true;
+  store._vm = new Vue({
+    data: {
+      $$state: state
+    },
+    computed: computed
+  });
+  Vue.config.silent = silent;
+
+  // enable strict mode for new vm
+  if (store.strict) {
+    enableStrictMode(store);
+  }
+
+  if (oldVm) {
+    if (hot) {
+      // dispatch changes in all subscribed watchers
+      // to force getter re-evaluation for hot reloading.
+      store._withCommit(function () {
+        oldVm._data.$$state = null;
+      });
+    }
+    Vue.nextTick(function () { return oldVm.$destroy(); });
+  }
+}
+
+function installModule (store, rootState, path, module, hot) {
+  var isRoot = !path.length;
+  var namespace = store._modules.getNamespace(path);
+
+  // register in namespace map
+  if (module.namespaced) {
+    store._modulesNamespaceMap[namespace] = module;
+  }
+
+  // set state
+  if (!isRoot && !hot) {
+    var parentState = getNestedState(rootState, path.slice(0, -1));
+    var moduleName = path[path.length - 1];
+    store._withCommit(function () {
+      Vue.set(parentState, moduleName, module.state);
+    });
+  }
+
+  var local = module.context = makeLocalContext(store, namespace, path);
+
+  module.forEachMutation(function (mutation, key) {
+    var namespacedType = namespace + key;
+    registerMutation(store, namespacedType, mutation, local);
+  });
+
+  module.forEachAction(function (action, key) {
+    var type = action.root ? key : namespace + key;
+    var handler = action.handler || action;
+    registerAction(store, type, handler, local);
+  });
+
+  module.forEachGetter(function (getter, key) {
+    var namespacedType = namespace + key;
+    registerGetter(store, namespacedType, getter, local);
+  });
+
+  module.forEachChild(function (child, key) {
+    installModule(store, rootState, path.concat(key), child, hot);
+  });
+}
+
+/**
+ * make localized dispatch, commit, getters and state
+ * if there is no namespace, just use root ones
+ */
+function makeLocalContext (store, namespace, path) {
+  var noNamespace = namespace === '';
+
+  var local = {
+    dispatch: noNamespace ? store.dispatch : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if ("development" !== 'production' && !store._actions[type]) {
+          console.error(("[vuex] unknown local action type: " + (args.type) + ", global type: " + type));
+          return
+        }
+      }
+
+      return store.dispatch(type, payload)
+    },
+
+    commit: noNamespace ? store.commit : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if ("development" !== 'production' && !store._mutations[type]) {
+          console.error(("[vuex] unknown local mutation type: " + (args.type) + ", global type: " + type));
+          return
+        }
+      }
+
+      store.commit(type, payload, options);
+    }
+  };
+
+  // getters and state object must be gotten lazily
+  // because they will be changed by vm update
+  Object.defineProperties(local, {
+    getters: {
+      get: noNamespace
+        ? function () { return store.getters; }
+        : function () { return makeLocalGetters(store, namespace); }
+    },
+    state: {
+      get: function () { return getNestedState(store.state, path); }
+    }
+  });
+
+  return local
+}
+
+function makeLocalGetters (store, namespace) {
+  var gettersProxy = {};
+
+  var splitPos = namespace.length;
+  Object.keys(store.getters).forEach(function (type) {
+    // skip if the target getter is not match this namespace
+    if (type.slice(0, splitPos) !== namespace) { return }
+
+    // extract local getter type
+    var localType = type.slice(splitPos);
+
+    // Add a port to the getters proxy.
+    // Define as getter property because
+    // we do not want to evaluate the getters in this time.
+    Object.defineProperty(gettersProxy, localType, {
+      get: function () { return store.getters[type]; },
+      enumerable: true
+    });
+  });
+
+  return gettersProxy
+}
+
+function registerMutation (store, type, handler, local) {
+  var entry = store._mutations[type] || (store._mutations[type] = []);
+  entry.push(function wrappedMutationHandler (payload) {
+    handler.call(store, local.state, payload);
+  });
+}
+
+function registerAction (store, type, handler, local) {
+  var entry = store._actions[type] || (store._actions[type] = []);
+  entry.push(function wrappedActionHandler (payload, cb) {
+    var res = handler.call(store, {
+      dispatch: local.dispatch,
+      commit: local.commit,
+      getters: local.getters,
+      state: local.state,
+      rootGetters: store.getters,
+      rootState: store.state
+    }, payload, cb);
+    if (!isPromise(res)) {
+      res = Promise.resolve(res);
+    }
+    if (store._devtoolHook) {
+      return res.catch(function (err) {
+        store._devtoolHook.emit('vuex:error', err);
+        throw err
+      })
+    } else {
+      return res
+    }
+  });
+}
+
+function registerGetter (store, type, rawGetter, local) {
+  if (store._wrappedGetters[type]) {
+    if (true) {
+      console.error(("[vuex] duplicate getter key: " + type));
+    }
+    return
+  }
+  store._wrappedGetters[type] = function wrappedGetter (store) {
+    return rawGetter(
+      local.state, // local state
+      local.getters, // local getters
+      store.state, // root state
+      store.getters // root getters
+    )
+  };
+}
+
+function enableStrictMode (store) {
+  store._vm.$watch(function () { return this._data.$$state }, function () {
+    if (true) {
+      assert(store._committing, "Do not mutate vuex store state outside mutation handlers.");
+    }
+  }, { deep: true, sync: true });
+}
+
+function getNestedState (state, path) {
+  return path.length
+    ? path.reduce(function (state, key) { return state[key]; }, state)
+    : state
+}
+
+function unifyObjectStyle (type, payload, options) {
+  if (isObject(type) && type.type) {
+    options = payload;
+    payload = type;
+    type = type.type;
+  }
+
+  if (true) {
+    assert(typeof type === 'string', ("Expects string as the type, but found " + (typeof type) + "."));
+  }
+
+  return { type: type, payload: payload, options: options }
+}
+
+function install (_Vue) {
+  if (Vue && _Vue === Vue) {
+    if (true) {
+      console.error(
+        '[vuex] already installed. Vue.use(Vuex) should be called only once.'
+      );
+    }
+    return
+  }
+  Vue = _Vue;
+  applyMixin(Vue);
+}
+
+var mapState = normalizeNamespace(function (namespace, states) {
+  var res = {};
+  normalizeMap(states).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedState () {
+      var state = this.$store.state;
+      var getters = this.$store.getters;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapState', namespace);
+        if (!module) {
+          return
+        }
+        state = module.context.state;
+        getters = module.context.getters;
+      }
+      return typeof val === 'function'
+        ? val.call(this, state, getters)
+        : state[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+var mapMutations = normalizeNamespace(function (namespace, mutations) {
+  var res = {};
+  normalizeMap(mutations).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedMutation () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      var commit = this.$store.commit;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapMutations', namespace);
+        if (!module) {
+          return
+        }
+        commit = module.context.commit;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [commit].concat(args))
+        : commit.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+var mapGetters = normalizeNamespace(function (namespace, getters) {
+  var res = {};
+  normalizeMap(getters).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    val = namespace + val;
+    res[key] = function mappedGetter () {
+      if (namespace && !getModuleByNamespace(this.$store, 'mapGetters', namespace)) {
+        return
+      }
+      if ("development" !== 'production' && !(val in this.$store.getters)) {
+        console.error(("[vuex] unknown getter: " + val));
+        return
+      }
+      return this.$store.getters[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+var mapActions = normalizeNamespace(function (namespace, actions) {
+  var res = {};
+  normalizeMap(actions).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedAction () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      var dispatch = this.$store.dispatch;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapActions', namespace);
+        if (!module) {
+          return
+        }
+        dispatch = module.context.dispatch;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [dispatch].concat(args))
+        : dispatch.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+var createNamespacedHelpers = function (namespace) { return ({
+  mapState: mapState.bind(null, namespace),
+  mapGetters: mapGetters.bind(null, namespace),
+  mapMutations: mapMutations.bind(null, namespace),
+  mapActions: mapActions.bind(null, namespace)
+}); };
+
+function normalizeMap (map) {
+  return Array.isArray(map)
+    ? map.map(function (key) { return ({ key: key, val: key }); })
+    : Object.keys(map).map(function (key) { return ({ key: key, val: map[key] }); })
+}
+
+function normalizeNamespace (fn) {
+  return function (namespace, map) {
+    if (typeof namespace !== 'string') {
+      map = namespace;
+      namespace = '';
+    } else if (namespace.charAt(namespace.length - 1) !== '/') {
+      namespace += '/';
+    }
+    return fn(namespace, map)
+  }
+}
+
+function getModuleByNamespace (store, helper, namespace) {
+  var module = store._modulesNamespaceMap[namespace];
+  if ("development" !== 'production' && !module) {
+    console.error(("[vuex] module namespace not found in " + helper + "(): " + namespace));
+  }
+  return module
+}
+
+var index_esm = {
+  Store: Store,
+  install: install,
+  version: '3.0.1',
+  mapState: mapState,
+  mapMutations: mapMutations,
+  mapGetters: mapGetters,
+  mapActions: mapActions,
+  createNamespacedHelpers: createNamespacedHelpers
+};
+
+
+/* harmony default export */ __webpack_exports__["default"] = (index_esm);
+
+
+/***/ }),
+
 /***/ "./resources/css/app.css":
 /***/ (function(module, exports) {
 
@@ -48284,6 +50974,10 @@ var _vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
 
 var _vue2 = _interopRequireDefault(_vue);
 
+var _store = __webpack_require__("./resources/js/store/index.js");
+
+var _store2 = _interopRequireDefault(_store);
+
 var _vueToasted = __webpack_require__("./node_modules/vue-toasted/dist/vue-toasted.min.js");
 
 var _vueToasted2 = _interopRequireDefault(_vueToasted);
@@ -48307,6 +51001,10 @@ var _Loading2 = _interopRequireDefault(_Loading);
 var _vueAsyncComputed = __webpack_require__("./node_modules/vue-async-computed/dist/vue-async-computed.js");
 
 var _vueAsyncComputed2 = _interopRequireDefault(_vueAsyncComputed);
+
+var _resources = __webpack_require__("./resources/js/store/resources.js");
+
+var _resources2 = _interopRequireDefault(_resources);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48349,10 +51047,21 @@ var Nova = function () {
         key: 'boot',
         value: function boot() {
             this.bootingCallbacks.forEach(function (callback) {
-                return callback(_vue2.default, _router2.default);
+                return callback(_vue2.default, _router2.default, _store2.default);
             });
-
             this.bootingCallbacks = [];
+        }
+
+        /**
+         * Register the built-in Vuex modules for each resource
+         */
+
+    }, {
+        key: 'registerStoreModules',
+        value: function registerStoreModules() {
+            this.config.resources.forEach(function (resource) {
+                _store2.default.registerModule(resource.uriKey, _resources2.default);
+            });
         }
 
         /**
@@ -48366,10 +51075,12 @@ var Nova = function () {
             var _this = this;
 
             this.boot();
+            this.registerStoreModules();
 
             this.app = new _vue2.default({
                 el: '#nova',
                 router: _router2.default,
+                store: _store2.default,
                 components: { Loading: _Loading2.default },
                 mounted: function mounted() {
                     var _this2 = this;
@@ -48378,6 +51089,19 @@ var Nova = function () {
 
                     _this.$on('error', function (message) {
                         _this2.$toasted.show(message, { type: 'error' });
+                    });
+
+                    _this.$on('token-expired', function () {
+                        _this2.$toasted.show(_this2.__('Sorry, your session has expired.'), {
+                            action: {
+                                onClick: function onClick() {
+                                    return location.reload();
+                                },
+                                text: _this2.__('Reload')
+                            },
+                            duration: null,
+                            type: 'error'
+                        });
                     });
                 }
             });
@@ -48444,6 +51168,18 @@ var Nova = function () {
             var _bus4;
 
             (_bus4 = this.bus).$emit.apply(_bus4, arguments);
+        }
+
+        /**
+         * Determine if Nova is missing the requested resource with the given uri key
+         */
+
+    }, {
+        key: 'missingResource',
+        value: function missingResource(uriKey) {
+            return _.find(this.config.resources, function (r) {
+                return r.uriKey == uriKey;
+            }) == undefined;
         }
     }]);
     return Nova;
@@ -48548,13 +51284,13 @@ var _ValueMetric = __webpack_require__("./resources/js/components/Metrics/Base/V
 
 var _ValueMetric2 = _interopRequireDefault(_ValueMetric);
 
+var _Bold = __webpack_require__("./resources/js/components/Icons/Editor/Bold.vue");
+
+var _Bold2 = _interopRequireDefault(_Bold);
+
 var _Card = __webpack_require__("./resources/js/components/Card.vue");
 
 var _Card2 = _interopRequireDefault(_Card);
-
-var _HelpCard = __webpack_require__("./resources/js/components/Cards/HelpCard.vue");
-
-var _HelpCard2 = _interopRequireDefault(_HelpCard);
 
 var _Cards = __webpack_require__("./resources/js/components/Cards.vue");
 
@@ -48568,6 +51304,10 @@ var _Checkbox = __webpack_require__("./resources/js/components/Index/Checkbox.vu
 
 var _Checkbox2 = _interopRequireDefault(_Checkbox);
 
+var _CheckboxWithLabel = __webpack_require__("./resources/js/components/CheckboxWithLabel.vue");
+
+var _CheckboxWithLabel2 = _interopRequireDefault(_CheckboxWithLabel);
+
 var _ConfirmActionModal = __webpack_require__("./resources/js/components/Modals/ConfirmActionModal.vue");
 
 var _ConfirmActionModal2 = _interopRequireDefault(_ConfirmActionModal);
@@ -48580,21 +51320,25 @@ var _CreateResourceButton = __webpack_require__("./resources/js/components/Creat
 
 var _CreateResourceButton2 = _interopRequireDefault(_CreateResourceButton);
 
-var _CustomIndexToolbar = __webpack_require__("./resources/js/components/CustomIndexToolbar.vue");
+var _CustomDetailHeader = __webpack_require__("./resources/js/components/CustomDetailHeader.vue");
 
-var _CustomIndexToolbar2 = _interopRequireDefault(_CustomIndexToolbar);
-
-var _CustomIndexHeader = __webpack_require__("./resources/js/components/CustomIndexHeader.vue");
-
-var _CustomIndexHeader2 = _interopRequireDefault(_CustomIndexHeader);
+var _CustomDetailHeader2 = _interopRequireDefault(_CustomDetailHeader);
 
 var _CustomDetailToolbar = __webpack_require__("./resources/js/components/CustomDetailToolbar.vue");
 
 var _CustomDetailToolbar2 = _interopRequireDefault(_CustomDetailToolbar);
 
-var _CustomDetailHeader = __webpack_require__("./resources/js/components/CustomDetailHeader.vue");
+var _CustomIndexHeader = __webpack_require__("./resources/js/components/CustomIndexHeader.vue");
 
-var _CustomDetailHeader2 = _interopRequireDefault(_CustomDetailHeader);
+var _CustomIndexHeader2 = _interopRequireDefault(_CustomIndexHeader);
+
+var _CustomIndexToolbar = __webpack_require__("./resources/js/components/CustomIndexToolbar.vue");
+
+var _CustomIndexToolbar2 = _interopRequireDefault(_CustomIndexToolbar);
+
+var _Delete = __webpack_require__("./resources/js/components/Icons/Delete.vue");
+
+var _Delete2 = _interopRequireDefault(_Delete);
 
 var _DeleteMenu = __webpack_require__("./resources/js/components/DeleteMenu.vue");
 
@@ -48603,6 +51347,10 @@ var _DeleteMenu2 = _interopRequireDefault(_DeleteMenu);
 var _DeleteResourceModal = __webpack_require__("./resources/js/components/Modals/DeleteResourceModal.vue");
 
 var _DeleteResourceModal2 = _interopRequireDefault(_DeleteResourceModal);
+
+var _Download = __webpack_require__("./resources/js/components/Icons/Download.vue");
+
+var _Download2 = _interopRequireDefault(_Download);
 
 var _Dropdown = __webpack_require__("./resources/js/components/Dropdown.vue");
 
@@ -48616,11 +51364,15 @@ var _DropdownTrigger = __webpack_require__("./resources/js/components/DropdownTr
 
 var _DropdownTrigger2 = _interopRequireDefault(_DropdownTrigger);
 
-var _Error = __webpack_require__("./resources/js/views/Error404.vue");
+var _Edit = __webpack_require__("./resources/js/components/Icons/Edit.vue");
+
+var _Edit2 = _interopRequireDefault(_Edit);
+
+var _Error = __webpack_require__("./resources/js/views/Error403.vue");
 
 var _Error2 = _interopRequireDefault(_Error);
 
-var _Error3 = __webpack_require__("./resources/js/views/Error403.vue");
+var _Error3 = __webpack_require__("./resources/js/views/Error404.vue");
 
 var _Error4 = _interopRequireDefault(_Error3);
 
@@ -48628,9 +51380,21 @@ var _Excerpt = __webpack_require__("./resources/js/components/Excerpt.vue");
 
 var _Excerpt2 = _interopRequireDefault(_Excerpt);
 
-var _Bold = __webpack_require__("./resources/js/components/Icons/Editor/Bold.vue");
+var _FakeCheckbox = __webpack_require__("./resources/js/components/Index/FakeCheckbox.vue");
 
-var _Bold2 = _interopRequireDefault(_Bold);
+var _FakeCheckbox2 = _interopRequireDefault(_FakeCheckbox);
+
+var _Filter = __webpack_require__("./resources/js/components/Icons/Filter.vue");
+
+var _Filter2 = _interopRequireDefault(_Filter);
+
+var _FilterMenu = __webpack_require__("./resources/js/components/FilterMenu.vue");
+
+var _FilterMenu2 = _interopRequireDefault(_FilterMenu);
+
+var _ForceDelete = __webpack_require__("./resources/js/components/Icons/ForceDelete.vue");
+
+var _ForceDelete2 = _interopRequireDefault(_ForceDelete);
 
 var _FullScreen = __webpack_require__("./resources/js/components/Icons/Editor/FullScreen.vue");
 
@@ -48640,37 +51404,13 @@ var _GlobalSearch = __webpack_require__("./resources/js/components/GlobalSearch.
 
 var _GlobalSearch2 = _interopRequireDefault(_GlobalSearch);
 
-var _Image = __webpack_require__("./resources/js/components/Icons/Editor/Image.vue");
-
-var _Image2 = _interopRequireDefault(_Image);
-
-var _Italic = __webpack_require__("./resources/js/components/Icons/Editor/Italic.vue");
-
-var _Italic2 = _interopRequireDefault(_Italic);
-
-var _Link = __webpack_require__("./resources/js/components/Icons/Editor/Link.vue");
-
-var _Link2 = _interopRequireDefault(_Link);
-
-var _FakeCheckbox = __webpack_require__("./resources/js/components/Index/FakeCheckbox.vue");
-
-var _FakeCheckbox2 = _interopRequireDefault(_FakeCheckbox);
-
-var _FilterSelect = __webpack_require__("./resources/js/components/FilterSelect.vue");
-
-var _FilterSelect2 = _interopRequireDefault(_FilterSelect);
-
-var _FilterSelector = __webpack_require__("./resources/js/components/FilterSelector.vue");
-
-var _FilterSelector2 = _interopRequireDefault(_FilterSelector);
-
-var _Label = __webpack_require__("./resources/js/components/Form/Label.vue");
-
-var _Label2 = _interopRequireDefault(_Label);
-
 var _Heading = __webpack_require__("./resources/js/components/Heading.vue");
 
 var _Heading2 = _interopRequireDefault(_Heading);
+
+var _HelpCard = __webpack_require__("./resources/js/components/Cards/HelpCard.vue");
+
+var _HelpCard2 = _interopRequireDefault(_HelpCard);
 
 var _HelpText = __webpack_require__("./resources/js/components/Form/HelpText.vue");
 
@@ -48680,45 +51420,21 @@ var _Icon = __webpack_require__("./resources/js/components/Icons/Icon.vue");
 
 var _Icon2 = _interopRequireDefault(_Icon);
 
-var _ForceDelete = __webpack_require__("./resources/js/components/Icons/ForceDelete.vue");
+var _Image = __webpack_require__("./resources/js/components/Icons/Editor/Image.vue");
 
-var _ForceDelete2 = _interopRequireDefault(_ForceDelete);
+var _Image2 = _interopRequireDefault(_Image);
 
-var _Delete = __webpack_require__("./resources/js/components/Icons/Delete.vue");
+var _Index = __webpack_require__("./resources/js/views/Index.vue");
 
-var _Delete2 = _interopRequireDefault(_Delete);
+var _Index2 = _interopRequireDefault(_Index);
 
-var _Download = __webpack_require__("./resources/js/components/Icons/Download.vue");
+var _Italic = __webpack_require__("./resources/js/components/Icons/Editor/Italic.vue");
 
-var _Download2 = _interopRequireDefault(_Download);
+var _Italic2 = _interopRequireDefault(_Italic);
 
-var _Edit = __webpack_require__("./resources/js/components/Icons/Edit.vue");
+var _Label = __webpack_require__("./resources/js/components/Form/Label.vue");
 
-var _Edit2 = _interopRequireDefault(_Edit);
-
-var _Filter = __webpack_require__("./resources/js/components/Icons/Filter.vue");
-
-var _Filter2 = _interopRequireDefault(_Filter);
-
-var _Play = __webpack_require__("./resources/js/components/Icons/Play.vue");
-
-var _Play2 = _interopRequireDefault(_Play);
-
-var _Restore = __webpack_require__("./resources/js/components/Icons/Restore.vue");
-
-var _Restore2 = _interopRequireDefault(_Restore);
-
-var _Refresh = __webpack_require__("./resources/js/components/Icons/Refresh.vue");
-
-var _Refresh2 = _interopRequireDefault(_Refresh);
-
-var _Search = __webpack_require__("./resources/js/components/Icons/Search.vue");
-
-var _Search2 = _interopRequireDefault(_Search);
-
-var _View = __webpack_require__("./resources/js/components/Icons/View.vue");
-
-var _View2 = _interopRequireDefault(_View);
+var _Label2 = _interopRequireDefault(_Label);
 
 var _Lens = __webpack_require__("./resources/js/views/Lens.vue");
 
@@ -48728,6 +51444,14 @@ var _LensSelector = __webpack_require__("./resources/js/components/LensSelector.
 
 var _LensSelector2 = _interopRequireDefault(_LensSelector);
 
+var _Link = __webpack_require__("./resources/js/components/Icons/Editor/Link.vue");
+
+var _Link2 = _interopRequireDefault(_Link);
+
+var _Loader = __webpack_require__("./resources/js/components/Icons/Loader.vue");
+
+var _Loader2 = _interopRequireDefault(_Loader);
+
 var _LoadingCard = __webpack_require__("./resources/js/components/LoadingCard.vue");
 
 var _LoadingCard2 = _interopRequireDefault(_LoadingCard);
@@ -48735,10 +51459,6 @@ var _LoadingCard2 = _interopRequireDefault(_LoadingCard);
 var _LoadingView = __webpack_require__("./resources/js/components/LoadingView.vue");
 
 var _LoadingView2 = _interopRequireDefault(_LoadingView);
-
-var _Loader = __webpack_require__("./resources/js/components/Icons/Loader.vue");
-
-var _Loader2 = _interopRequireDefault(_Loader);
 
 var _Modal = __webpack_require__("./resources/js/components/Modal.vue");
 
@@ -48756,9 +51476,17 @@ var _PartitionMetric3 = __webpack_require__("./resources/js/components/Metrics/P
 
 var _PartitionMetric4 = _interopRequireDefault(_PartitionMetric3);
 
-var _Index = __webpack_require__("./resources/js/views/Index.vue");
+var _Play = __webpack_require__("./resources/js/components/Icons/Play.vue");
 
-var _Index2 = _interopRequireDefault(_Index);
+var _Play2 = _interopRequireDefault(_Play);
+
+var _ProgressButton = __webpack_require__("./resources/js/components/ProgressButton.vue");
+
+var _ProgressButton2 = _interopRequireDefault(_ProgressButton);
+
+var _Refresh = __webpack_require__("./resources/js/components/Icons/Refresh.vue");
+
+var _Refresh2 = _interopRequireDefault(_Refresh);
 
 var _ResourceTable = __webpack_require__("./resources/js/components/ResourceTable.vue");
 
@@ -48768,9 +51496,21 @@ var _ResourceTableRow = __webpack_require__("./resources/js/components/Index/Res
 
 var _ResourceTableRow2 = _interopRequireDefault(_ResourceTableRow);
 
+var _Restore = __webpack_require__("./resources/js/components/Icons/Restore.vue");
+
+var _Restore2 = _interopRequireDefault(_Restore);
+
 var _RestoreResourceModal = __webpack_require__("./resources/js/components/Modals/RestoreResourceModal.vue");
 
 var _RestoreResourceModal2 = _interopRequireDefault(_RestoreResourceModal);
+
+var _ScrollWrap = __webpack_require__("./resources/js/components/ScrollWrap.vue");
+
+var _ScrollWrap2 = _interopRequireDefault(_ScrollWrap);
+
+var _Search = __webpack_require__("./resources/js/components/Icons/Search.vue");
+
+var _Search2 = _interopRequireDefault(_Search);
 
 var _SearchInput = __webpack_require__("./resources/js/components/SearchInput.vue");
 
@@ -48792,24 +51532,50 @@ var _ValueMetric3 = __webpack_require__("./resources/js/components/Metrics/Value
 
 var _ValueMetric4 = _interopRequireDefault(_ValueMetric3);
 
+var _View = __webpack_require__("./resources/js/components/Icons/View.vue");
+
+var _View2 = _interopRequireDefault(_View);
+
+var _SelectFilter = __webpack_require__("./resources/js/components/Filters/SelectFilter.vue");
+
+var _SelectFilter2 = _interopRequireDefault(_SelectFilter);
+
+var _BooleanFilter = __webpack_require__("./resources/js/components/Filters/BooleanFilter.vue");
+
+var _BooleanFilter2 = _interopRequireDefault(_BooleanFilter);
+
+var _DateFilter = __webpack_require__("./resources/js/components/Filters/DateFilter.vue");
+
+var _DateFilter2 = _interopRequireDefault(_DateFilter);
+
+var _SelectControl = __webpack_require__("./resources/js/components/Controls/SelectControl.vue");
+
+var _SelectControl2 = _interopRequireDefault(_SelectControl);
+
+var _DateTimePicker = __webpack_require__("./resources/js/components/DateTimePicker.vue");
+
+var _DateTimePicker2 = _interopRequireDefault(_DateTimePicker);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_vue2.default.config.ignoredElements = ['trix-editor'];
 
 _vue2.default.component('action-selector', _ActionSelector2.default);
 _vue2.default.component('base-partition-metric', _PartitionMetric2.default);
 _vue2.default.component('base-trend-metric', _TrendMetric2.default);
 _vue2.default.component('base-value-metric', _ValueMetric2.default);
 _vue2.default.component('card', _Card2.default);
-_vue2.default.component('help', _HelpCard2.default);
-_vue2.default.component('cards', _Cards2.default);
 _vue2.default.component('card-wrapper', _CardWrapper2.default);
+_vue2.default.component('cards', _Cards2.default);
 _vue2.default.component('checkbox', _Checkbox2.default);
+_vue2.default.component('checkbox-with-label', _CheckboxWithLabel2.default);
 _vue2.default.component('confirm-action-modal', _ConfirmActionModal2.default);
 _vue2.default.component('confirm-upload-removal-modal', _ConfirmUploadRemovalModal2.default);
 _vue2.default.component('create-resource-button', _CreateResourceButton2.default);
-_vue2.default.component('custom-index-toolbar', _CustomIndexToolbar2.default);
-_vue2.default.component('custom-index-header', _CustomIndexHeader2.default);
-_vue2.default.component('custom-detail-toolbar', _CustomDetailToolbar2.default);
 _vue2.default.component('custom-detail-header', _CustomDetailHeader2.default);
+_vue2.default.component('custom-detail-toolbar', _CustomDetailToolbar2.default);
+_vue2.default.component('custom-index-header', _CustomIndexHeader2.default);
+_vue2.default.component('custom-index-toolbar', _CustomIndexToolbar2.default);
 _vue2.default.component('delete-menu', _DeleteMenu2.default);
 _vue2.default.component('delete-resource-modal', _DeleteResourceModal2.default);
 _vue2.default.component('dropdown', _Dropdown2.default);
@@ -48820,45 +51586,54 @@ _vue2.default.component('editor-fullscreen', _FullScreen2.default);
 _vue2.default.component('editor-image', _Image2.default);
 _vue2.default.component('editor-italic', _Italic2.default);
 _vue2.default.component('editor-link', _Link2.default);
-_vue2.default.component('error-403', _Error4.default);
-_vue2.default.component('error-404', _Error2.default);
+_vue2.default.component('error-403', _Error2.default);
+_vue2.default.component('error-404', _Error4.default);
 _vue2.default.component('excerpt', _Excerpt2.default);
 _vue2.default.component('fake-checkbox', _FakeCheckbox2.default);
-_vue2.default.component('filter-select', _FilterSelect2.default);
-_vue2.default.component('filter-selector', _FilterSelector2.default);
+_vue2.default.component('filter-menu', _FilterMenu2.default);
 _vue2.default.component('form-label', _Label2.default);
-_vue2.default.component('heading', _Heading2.default);
-_vue2.default.component('help-text', _HelpText2.default);
 _vue2.default.component('global-search', _GlobalSearch2.default);
+_vue2.default.component('heading', _Heading2.default);
+_vue2.default.component('help', _HelpCard2.default);
+_vue2.default.component('help-text', _HelpText2.default);
 _vue2.default.component('icon', _Icon2.default);
-_vue2.default.component('icon-force-delete', _ForceDelete2.default);
 _vue2.default.component('icon-delete', _Delete2.default);
 _vue2.default.component('icon-download', _Download2.default);
 _vue2.default.component('icon-edit', _Edit2.default);
 _vue2.default.component('icon-filter', _Filter2.default);
+_vue2.default.component('icon-force-delete', _ForceDelete2.default);
 _vue2.default.component('icon-play', _Play2.default);
-_vue2.default.component('icon-restore', _Restore2.default);
 _vue2.default.component('icon-refresh', _Refresh2.default);
+_vue2.default.component('icon-restore', _Restore2.default);
 _vue2.default.component('icon-search', _Search2.default);
 _vue2.default.component('icon-view', _View2.default);
 _vue2.default.component('lens', _Lens2.default);
 _vue2.default.component('lens-selector', _LensSelector2.default);
+_vue2.default.component('loader', _Loader2.default);
 _vue2.default.component('loading-card', _LoadingCard2.default);
 _vue2.default.component('loading-view', _LoadingView2.default);
-_vue2.default.component('loader', _Loader2.default);
 _vue2.default.component('modal', _Modal2.default);
 _vue2.default.component('pagination-links', _PaginationLinks2.default);
 _vue2.default.component('panel-item', _PanelItem2.default);
 _vue2.default.component('partition-metric', _PartitionMetric4.default);
+_vue2.default.component('progress-button', _ProgressButton2.default);
 _vue2.default.component('resource-index', _Index2.default);
 _vue2.default.component('resource-table', _ResourceTable2.default);
 _vue2.default.component('resource-table-row', _ResourceTableRow2.default);
 _vue2.default.component('restore-resource-modal', _RestoreResourceModal2.default);
+_vue2.default.component('scroll-wrap', _ScrollWrap2.default);
 _vue2.default.component('search-input', _SearchInput2.default);
 _vue2.default.component('sortable-icon', _SortableIcon2.default);
 _vue2.default.component('trend-metric', _TrendMetric4.default);
 _vue2.default.component('validation-errors', _ValidationErrors2.default);
 _vue2.default.component('value-metric', _ValueMetric4.default);
+
+_vue2.default.component('date-filter', _DateFilter2.default);
+_vue2.default.component('select-filter', _SelectFilter2.default);
+_vue2.default.component('boolean-filter', _BooleanFilter2.default);
+
+_vue2.default.component('select-control', _SelectControl2.default);
+_vue2.default.component('date-time-picker', _DateTimePicker2.default);
 
 /***/ }),
 
@@ -48899,6 +51674,54 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-676deeed", Component.options)
   } else {
     hotAPI.reload("data-v-676deeed", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/js/components/BooleanOption.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/BooleanOption.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-67c6bc35\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/BooleanOption.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\js\\components\\BooleanOption.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-67c6bc35", Component.options)
+  } else {
+    hotAPI.reload("data-v-67c6bc35", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -49091,6 +51914,106 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-9b047abc", Component.options)
   } else {
     hotAPI.reload("data-v-9b047abc", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/js/components/CheckboxWithLabel.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e9cebc3\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/CheckboxWithLabel.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/CheckboxWithLabel.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-5e9cebc3\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/CheckboxWithLabel.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\js\\components\\CheckboxWithLabel.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5e9cebc3", Component.options)
+  } else {
+    hotAPI.reload("data-v-5e9cebc3", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Controls/SelectControl.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Controls/SelectControl.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-0de825b3\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Controls/SelectControl.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\js\\components\\Controls\\SelectControl.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0de825b3", Component.options)
+  } else {
+    hotAPI.reload("data-v-0de825b3", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -49982,6 +52905,54 @@ module.exports = Component.exports
 
 /***/ }),
 
+/***/ "./resources/js/components/Detail/HeadingField.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Detail/HeadingField.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-72e4105b\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Detail/HeadingField.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\js\\components\\Detail\\HeadingField.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-72e4105b", Component.options)
+  } else {
+    hotAPI.reload("data-v-72e4105b", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Detail/MarkdownField.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -50702,15 +53673,15 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ "./resources/js/components/FilterSelect.vue":
+/***/ "./resources/js/components/FilterMenu.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
 /* script */
-var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/FilterSelect.vue")
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/FilterMenu.vue")
 /* template */
-var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1d6a01cc\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/FilterSelect.vue")
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-851cb2a2\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/FilterMenu.vue")
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -50727,7 +53698,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\js\\components\\FilterSelect.vue"
+Component.options.__file = "resources\\js\\components\\FilterMenu.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -50736,9 +53707,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1d6a01cc", Component.options)
+    hotAPI.createRecord("data-v-851cb2a2", Component.options)
   } else {
-    hotAPI.reload("data-v-1d6a01cc", Component.options)
+    hotAPI.reload("data-v-851cb2a2", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -50750,15 +53721,15 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ "./resources/js/components/FilterSelector.vue":
+/***/ "./resources/js/components/Filters/BooleanFilter.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
 /* script */
-var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/FilterSelector.vue")
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Filters/BooleanFilter.vue")
 /* template */
-var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-4cf92da2\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/FilterSelector.vue")
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-18afa3f7\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Filters/BooleanFilter.vue")
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -50775,7 +53746,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\js\\components\\FilterSelector.vue"
+Component.options.__file = "resources\\js\\components\\Filters\\BooleanFilter.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -50784,9 +53755,105 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4cf92da2", Component.options)
+    hotAPI.createRecord("data-v-18afa3f7", Component.options)
   } else {
-    hotAPI.reload("data-v-4cf92da2", Component.options)
+    hotAPI.reload("data-v-18afa3f7", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Filters/DateFilter.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Filters/DateFilter.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-4685dd1f\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Filters/DateFilter.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\js\\components\\Filters\\DateFilter.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4685dd1f", Component.options)
+  } else {
+    hotAPI.reload("data-v-4685dd1f", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Filters/SelectFilter.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Filters/SelectFilter.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-e3bda6a6\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Filters/SelectFilter.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\js\\components\\Filters\\SelectFilter.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e3bda6a6", Component.options)
+  } else {
+    hotAPI.reload("data-v-e3bda6a6", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -51231,6 +54298,54 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-0bb805de", Component.options)
   } else {
     hotAPI.reload("data-v-0bb805de", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Form/HeadingField.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Form/HeadingField.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-b8e1ef70\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Form/HeadingField.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\js\\components\\Form\\HeadingField.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-b8e1ef70", Component.options)
+  } else {
+    hotAPI.reload("data-v-b8e1ef70", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -53075,6 +56190,54 @@ module.exports = Component.exports
 
 /***/ }),
 
+/***/ "./resources/js/components/Index/HeadingField.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Index/HeadingField.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-1098898c\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Index/HeadingField.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\js\\components\\Index\\HeadingField.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1098898c", Component.options)
+  } else {
+    hotAPI.reload("data-v-1098898c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Index/MorphToActionTargetField.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -54231,6 +57394,54 @@ module.exports = Component.exports
 
 /***/ }),
 
+/***/ "./resources/js/components/ProgressButton.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/ProgressButton.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-03eecd12\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/ProgressButton.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\js\\components\\ProgressButton.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-03eecd12", Component.options)
+  } else {
+    hotAPI.reload("data-v-03eecd12", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
 /***/ "./resources/js/components/ResourceTable.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -54268,6 +57479,54 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-4e15f058", Component.options)
   } else {
     hotAPI.reload("data-v-4e15f058", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ScrollWrap.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/ScrollWrap.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-7e782b22\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/ScrollWrap.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\js\\components\\ScrollWrap.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7e782b22", Component.options)
+  } else {
+    hotAPI.reload("data-v-7e782b22", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -54331,6 +57590,10 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5f5fa236\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/Trix.vue")
+}
 var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
 /* script */
 var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\"]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-runtime\",\"transform-vue-jsx\",\"syntax-jsx\",\"transform-object-rest-spread\"],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Trix.vue")
@@ -54339,7 +57602,7 @@ var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/templa
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -54441,6 +57704,11 @@ _vue2.default.component('field-wrapper', __webpack_require__("./resources/js/com
 // Panels...
 _vue2.default.component('panel', __webpack_require__("./resources/js/components/Detail/Panel.vue"));
 _vue2.default.component('relationship-panel', __webpack_require__("./resources/js/components/Detail/RelationshipPanel.vue"));
+
+// Info Field...
+_vue2.default.component('index-heading-field', __webpack_require__("./resources/js/components/Index/HeadingField.vue"));
+_vue2.default.component('detail-heading-field', __webpack_require__("./resources/js/components/Detail/HeadingField.vue"));
+_vue2.default.component('form-heading-field', __webpack_require__("./resources/js/components/Form/HeadingField.vue"));
 
 // Text Field...
 _vue2.default.component('index-text-field', __webpack_require__("./resources/js/components/Index/TextField.vue"));
@@ -54601,6 +57869,73 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Set Moment as a global so you don't have to import it
  */
 window.moment = _momentTimezone2.default;
+
+/***/ }),
+
+/***/ "./resources/js/polyfills/composedPath.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = composedPath;
+/**
+ * Returns an array with all DOM elements affected by an event.
+ * The function serves as a polyfill for
+ * [`Event.composedPath()`](https://dom.spec.whatwg.org/#dom-event-composedpath).
+ *
+ * @category Event
+ * @param {Event} evt The triggered event.
+ * @return {Array.<HTMLElement>} The DOM elements affected by the event.
+ *
+ * @example
+ * let domChild = document.createElement("div"),
+ *  domParent = document.createElement("div"),
+ *  domGrandparent = document.createElement("div"),
+ *  body = document.body,
+ *  html = document.querySelector("html");
+ *
+ * domParent.appendChild(domChild);
+ * domGrandparent.appendChild(domParent);
+ * body.appendChild(domGrandparent);
+ *
+ * domChild.addEventListener("click", dealWithClick);
+ * const dealWithClick = evt => getEventPath(evt);
+ *
+ * // when domChild is clicked:
+ * // => [domChild, domParent, domGrandparent, body, html, document, window]
+ */
+
+function composedPath(evt) {
+    var path = evt.composedPath && evt.composedPath() || evt.path,
+        target = evt.target;
+
+    if (path != null) {
+        // Safari doesn't include Window, and it should.
+        path = path.indexOf(window) < 0 ? path.concat([window]) : path;
+        return path;
+    }
+
+    if (target === window) {
+        return [window];
+    }
+
+    function getParents(node, memo) {
+        memo = memo || [];
+        var parentNode = node.parentNode;
+
+        if (!parentNode) {
+            return memo;
+        } else {
+            return getParents(parentNode, memo.concat([parentNode]));
+        }
+    }
+
+    return [target].concat(getParents(target)).concat([window]);
+}
 
 /***/ }),
 
@@ -54996,6 +58331,336 @@ exports.default = {
 
 /***/ }),
 
+/***/ "./resources/js/store/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _vuex = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
+
+var _vuex2 = _interopRequireDefault(_vuex);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_vue2.default.use(_vuex2.default);
+
+exports.default = new _vuex2.default.Store();
+
+/***/ }),
+
+/***/ "./resources/js/store/resources.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _regenerator = __webpack_require__("./node_modules/babel-runtime/regenerator/index.js");
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = __webpack_require__("./node_modules/babel-runtime/helpers/asyncToGenerator.js");
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+var _stringify = __webpack_require__("./node_modules/babel-runtime/core-js/json/stringify.js");
+
+var _stringify2 = _interopRequireDefault(_stringify);
+
+var _lodash = __webpack_require__("./node_modules/lodash/lodash.js");
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+    namespaced: true,
+
+    state: function state() {
+        return {
+            filters: [],
+            originalFilters: []
+        };
+    },
+
+    getters: {
+        /**
+         * The filters for the resource
+         */
+        filters: function filters(state) {
+            return state.filters;
+        },
+
+        /**
+         * The original filters for the resource
+         */
+        originalFilters: function originalFilters(state) {
+            return state.originalFilters;
+        },
+
+        /**
+         * Determine if there are any filters for the resource.
+         */
+        hasFilters: function hasFilters(state) {
+            return Boolean(state.filters.length > 0);
+        },
+
+        /**
+         * The current unencoded filter value payload
+         */
+        currentFilters: function currentFilters(state, getters) {
+            return _lodash2.default.map(state.filters, function (f) {
+                return {
+                    class: f.class,
+                    value: f.currentValue
+                };
+            });
+        },
+
+        /**
+         * Return the current filters encoded to a string.
+         */
+        currentEncodedFilters: function currentEncodedFilters(state, getters) {
+            return btoa((0, _stringify2.default)(getters.currentFilters));
+        },
+
+        /**
+         * Determine whether any filters are applied
+         */
+        filtersAreApplied: function filtersAreApplied(state, getters) {
+            return getters.activeFilterCount > 0;
+        },
+
+        /**
+         * Return the number of filters that are non-default
+         */
+        activeFilterCount: function activeFilterCount(state, getters) {
+            return _lodash2.default.reduce(state.filters, function (result, f) {
+                var originalFilter = getters.getOriginalFilter(f.class);
+                var originalFilterCloneValue = (0, _stringify2.default)(originalFilter.currentValue);
+                var currentFilterCloneValue = (0, _stringify2.default)(f.currentValue);
+                return currentFilterCloneValue == originalFilterCloneValue ? result : result + 1;
+            }, 0);
+        },
+
+        /**
+         * Get a single filter from the list of filters.
+         */
+        getFilter: function getFilter(state) {
+            return function (filterKey) {
+                return _lodash2.default.find(state.filters, function (filter) {
+                    return filter.class == filterKey;
+                });
+            };
+        },
+
+        getOriginalFilter: function getOriginalFilter(state) {
+            return function (filterKey) {
+                return _lodash2.default.find(state.originalFilters, function (filter) {
+                    return filter.class == filterKey;
+                });
+            };
+        },
+
+        /**
+         * Get the options for a single filter.
+         */
+        getOptionsForFilter: function getOptionsForFilter(state, getters) {
+            return function (filterKey) {
+                var filter = getters.getFilter(filterKey);
+                return filter ? filter.options : [];
+            };
+        },
+
+        /**
+         * Get the current value for a given filter at the provided key.
+         */
+        filterOptionValue: function filterOptionValue(state, getters) {
+            return function (filterKey, optionKey) {
+                var filter = getters.getFilter(filterKey);
+
+                return _lodash2.default.find(filter.currentValue, function (value, key) {
+                    return key == optionKey;
+                });
+            };
+        }
+    },
+    actions: {
+        /**
+         * Fetch the current filters for the given resource name.
+         */
+        fetchFilters: function () {
+            var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(_ref, options) {
+                var commit = _ref.commit,
+                    state = _ref.state;
+
+                var resourceName, _options$lens, lens, _ref3, data;
+
+                return _regenerator2.default.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                resourceName = options.resourceName, _options$lens = options.lens, lens = _options$lens === undefined ? false : _options$lens;
+
+                                if (!lens) {
+                                    _context.next = 7;
+                                    break;
+                                }
+
+                                _context.next = 4;
+                                return Nova.request().get('/nova-api/' + resourceName + '/lens/' + lens + '/filters');
+
+                            case 4:
+                                _context.t0 = _context.sent;
+                                _context.next = 10;
+                                break;
+
+                            case 7:
+                                _context.next = 9;
+                                return Nova.request().get('/nova-api/' + resourceName + '/filters');
+
+                            case 9:
+                                _context.t0 = _context.sent;
+
+                            case 10:
+                                _ref3 = _context.t0;
+                                data = _ref3.data;
+
+
+                                commit('storeFilters', data);
+
+                            case 13:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
+
+            function fetchFilters(_x, _x2) {
+                return _ref2.apply(this, arguments);
+            }
+
+            return fetchFilters;
+        }(),
+
+
+        /**
+         * Reset the default filter state to the original filter settings.
+         */
+        resetFilterState: function () {
+            var _ref5 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(_ref4) {
+                var commit = _ref4.commit,
+                    getters = _ref4.getters;
+                return _regenerator2.default.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                _lodash2.default.each(getters.originalFilters, function (filter) {
+                                    commit('updateFilterState', {
+                                        filterClass: filter.class,
+                                        value: filter.currentValue
+                                    });
+                                });
+
+                            case 1:
+                            case 'end':
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this);
+            }));
+
+            function resetFilterState(_x3) {
+                return _ref5.apply(this, arguments);
+            }
+
+            return resetFilterState;
+        }(),
+
+
+        /**
+         * Initialize the current filter values from the decoded query string.
+         */
+        initializeCurrentFilterValuesFromQueryString: function () {
+            var _ref7 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3(_ref6, encodedFilters) {
+                var commit = _ref6.commit,
+                    getters = _ref6.getters;
+                var initialFilters;
+                return _regenerator2.default.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                if (encodedFilters) {
+                                    initialFilters = JSON.parse(atob(encodedFilters));
+
+                                    _lodash2.default.each(initialFilters, function (f) {
+                                        commit('updateFilterState', { filterClass: f.class, value: f.value });
+                                    });
+                                }
+
+                            case 1:
+                            case 'end':
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this);
+            }));
+
+            function initializeCurrentFilterValuesFromQueryString(_x4, _x5) {
+                return _ref7.apply(this, arguments);
+            }
+
+            return initializeCurrentFilterValuesFromQueryString;
+        }()
+    },
+
+    mutations: {
+        updateFilterState: function updateFilterState(state, _ref8) {
+            var filterClass = _ref8.filterClass,
+                value = _ref8.value;
+
+            var filter = (0, _lodash2.default)(state.filters).find(function (f) {
+                return f.class == filterClass;
+            });
+
+            filter.currentValue = value;
+        },
+
+
+        /**
+         * Store the mutable filter settings
+         */
+        storeFilters: function storeFilters(state, data) {
+            state.filters = data;
+            state.originalFilters = _lodash2.default.cloneDeep(data);
+        },
+
+
+        /**
+         * Clear the filters for this resource
+         */
+        clearFilters: function clearFilters(state) {
+            state.filters = [];
+            state.originalFilters = [];
+        }
+    }
+};
+
+/***/ }),
+
 /***/ "./resources/js/util/axios.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -55044,6 +58709,11 @@ instance.interceptors.response.use(function (response) {
     // Handle Forbidden
     if (status === 403) {
         _router2.default.push({ name: '403' });
+    }
+
+    // Handle Token Timeouts
+    if (status === 419) {
+        Nova.$emit('token-expired');
     }
 
     return _promise2.default.reject(error);

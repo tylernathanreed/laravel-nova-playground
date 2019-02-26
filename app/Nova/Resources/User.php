@@ -159,9 +159,10 @@ class User extends Resource
     public function actions(Request $request)
     {
         return [
-            new \App\Nova\Actions\DownloadAsCsv,
+            // new \App\Nova\Actions\DownloadAsCsv,
             new \App\Nova\Actions\MarkAsActive,
-            new \App\Nova\Actions\Sleep,
+            // new \App\Nova\Actions\Sleep,
+            // new \App\Nova\Actions\RedirectToSite,
         ];
     }
 }

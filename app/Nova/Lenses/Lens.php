@@ -2,9 +2,9 @@
 
 namespace App\Nova\Lenses;
 
-use Laravel\Nova\Lenses\Lens as NovaLens;
+use NovaComponents\ActionGearbox\Lenses\Lens as ActionGearboxLens;
 
-abstract class Lens extends NovaLens
+abstract class Lens extends ActionGearboxLens
 {
-    //
+
 }

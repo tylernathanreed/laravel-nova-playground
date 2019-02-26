@@ -9,8 +9,8 @@ Nova.booting((Vue, router) => {
     Vue.component('action-item', require('./components/ActionItem'));
     Vue.component('action-group', require('./components/ActionGroup'));
 
-    Vue.component('icon-actions-gearbox', require('./components/Icons/Actions'));
-    Vue.component('icon-resource', require('./components/Icons/Resource'));
+    Vue.component('icon-actions-gearbox', require('./components/icons/Actions'));
+    Vue.component('icon-resource', require('./components/icons/Resource'));
 
     Vue.component('subdropdown', require('./components/Subdropdown'));
     Vue.component('subdropdown-trigger', require('./components/SubdropdownTrigger'));

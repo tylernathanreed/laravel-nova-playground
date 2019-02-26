@@ -6,10 +6,7 @@ let colors = {
     'black-70%': 'var(--black-70)',
     transparent: 'var(--transparent)',
     white: 'var(--white)',
-    'white-10%': 'var(--white-10)',
-    'white-25%': 'var(--white-25)',
     'white-50%': 'var(--white-50)',
-    'white-75%': 'var(--white-75)',
     primary: 'var(--primary)',
     'primary-dark': 'var(--primary-dark)',
     'primary-70%': 'var(--primary-70)',
@@ -39,10 +36,10 @@ module.exports = {
     colors: colors,
 
     screens: {
-        sm: '576px',
-        md: '768px',
-        lg: '992px',
-        xl: '1200px',
+        // sm: '576px',
+        // md: '768px',
+        // lg: '992px',
+        // xl: '1200px',
     },
 
     fonts: {
@@ -183,6 +180,7 @@ module.exports = {
         '4': '1rem',
         '6': '1.5rem',
         '8': '2rem',
+        'dropdown-trigger': '2.25rem',
         '9': '2.25rem',
         // '10': '2.5rem',
         '12': '3rem',

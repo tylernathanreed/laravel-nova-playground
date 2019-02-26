@@ -20,6 +20,7 @@
                     :is="action.actions ? 'action-group' : 'action-item'"
                     :testId="testId"
                     :resource="resource"
+                    :selected-resources="selectedResources"
                     :resource-name="resourceName"
                     :pivot-name="pivotName"
                     :action="action"
@@ -28,7 +29,7 @@
                     :via-resource="viaResource"
                     :via-resource-id="viaResourceId"
                     :via-many-to-many="viaManyToMany"
-                    @onActionSelected="onActionSelected(action)"
+                    @onActionSelected="onActionSelected"
                 />
             </div>
         </subdropdown-menu>
@@ -40,31 +41,39 @@ import { InteractsWithResourceInformation } from 'laravel-nova'
 
 export default {
 
-	props: [
-		'testId',
-        'depth',
-		'action',
-		'resource',
-		'resourceName',
-        'pivotName',
-        'relationshipType',
-		'viaRelationship',
-		'viaResource',
-		'viaResourceId',
-        'viaManyToMany'
-	],
+	props: {
+		testId: String,
+        depth: Number,
+		action: Object,
+		resource: Object,
+        selectedResources: {
+            type: [Array, String],
+            default: () => [],
+        },
+		resourceName: String,
+        pivotName: String,
+        relationshipType: {
+            type: String,
+            default: null,
+        },
+		viaRelationship: String,
+		viaResource: String,
+		viaResourceId: String,
+        viaManyToMany: Boolean
+    },
 
     methods: {
 
     	/**
     	 * Propagates the action selected event.
     	 *
-         * @param  {Object}  action
+         * @param  {Object}   action
+         * @param  {boolean}  isPivotAction
          *
     	 * @return void
     	 */
-    	onActionSelected: function(action) {
-    		this.$emit('onActionSelected', action);
+    	onActionSelected: function(action, isPivotAction) {
+    		this.$emit('onActionSelected', action, isPivotAction);
     	}
 
     },

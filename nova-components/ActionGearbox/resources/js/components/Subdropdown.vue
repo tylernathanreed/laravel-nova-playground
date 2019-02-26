@@ -28,7 +28,7 @@
             },
 
             showParentOverflow() {
-                this.dropdown.$el.children[1].classList.remove('overflow-hidden');
+                this.dropdown.$el.children[0].classList.remove('overflow-hidden');
             },
 
             putParentBehindModalSplash() {

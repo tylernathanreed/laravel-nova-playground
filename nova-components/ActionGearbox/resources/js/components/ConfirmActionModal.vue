@@ -12,17 +12,17 @@
             @submit.prevent.stop="handleConfirm"
             class="bg-white rounded-lg shadow-lg overflow-hidden"
             :class="{
-                'w-action-fields': selectedAction.fields.length > 0,
-                'w-action': selectedAction.fields.length == 0,
+                'w-action-fields': action.fields.length > 0,
+                'w-action': action.fields.length == 0,
             }"
         >
             <div>
                 <heading :level="2" class="border-b border-40 py-8 px-8">{{
-                    selectedAction.heading || selectedAction.name
+                    action.heading || action.name
                 }}</heading>
 
-                <p v-if="selectedAction.fields.length == 0" class="text-80 px-8 my-8">
-                    {{ __(selectedAction.prompt || 'Are you sure you want to run this action?') }}
+                <p v-if="action.fields.length == 0" class="text-80 px-8 my-8">
+                    {{ __(action.prompt || 'Are you sure you want to run this action?') }}
                 </p>
 
                 <div v-else>
@@ -32,7 +32,7 @@
                     <!-- Action Fields -->
                     <div
                         class="action"
-                        v-for="field in selectedAction.fields"
+                        v-for="field in action.fields"
                         :key="field.attribute"
                     >
                         <component
@@ -53,7 +53,7 @@
                         @click.prevent="handleClose"
                         class="btn text-80 font-normal h-9 px-3 mr-3 btn-link"
                     >
-                        {{ __(selectedAction.cancelButtonText || 'Cancel') }}
+                        {{ __(action.cancelButtonText || 'Cancel') }}
                     </button>
 
                     <button
@@ -63,12 +63,12 @@
                         type="submit"
                         class="btn btn-default"
                         :class="{
-                            'btn-primary': !selectedAction.destructive,
-                            'btn-danger': selectedAction.destructive,
+                            'btn-primary': !action.destructive,
+                            'btn-danger': action.destructive,
                         }"
                     >
                         <loader v-if="working" width="30"></loader>
-                        <span v-else>{{ __(selectedAction.submitButtonText || 'Run Action') }}</span>
+                        <span v-else>{{ __(action.submitButtonText || 'Run Action') }}</span>
                     </button>
                 </div>
             </div>
@@ -81,7 +81,7 @@ export default {
     props: {
         working: Boolean,
         resourceName: { type: String, required: true },
-        selectedAction: { type: Object, required: true },
+        action: { type: Object, required: true },
         selectedResources: { type: Array, required: true },
         errors: { type: Object, required: true },
     },
