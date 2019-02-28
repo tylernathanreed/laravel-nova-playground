@@ -15,6 +15,11 @@
             viaResourceId,
             viaRelationship,
         }"
+        :relationship-type="relationshipType"
+        :via-relationship="viaRelationship"
+        :via-resource="viaResource"
+        :via-resource-id="viaResourceId"
+        :via-many-to-many="viaManyToMany"
         :selected-resources="selectedResourcesForActionSelector"
         @actionExecuted="getResources"
     />

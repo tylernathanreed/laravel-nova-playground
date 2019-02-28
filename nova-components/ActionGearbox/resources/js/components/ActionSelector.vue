@@ -4,27 +4,30 @@
             <dropdown-trigger
                 class="px-3 border rounded"
                 :class="{
-                    'bg-30 hover:bg-40 border-50 hover:border-60': !active,
-                    'bg-primary border-primary': active
+                    'bg-30 hover:bg-40 border-30 hover:border-40': isForResourceRow && !isResourceRowHovered,
+                    'bg-40 hover:bg-50 border-40 hover:border-50': isForResourceRow && isResourceRowHovered,
+                    // 'bg-30 hover:bg-40 border-50 hover:border-60': isForResourceRow,
+                    'bg-primary border-primary': isForResourcePanel,
+                    'btn btn-default btn-icon btn-white border-white': isForDetail
                 }"
                 slot-scope="{toggle}"
                 :handle-click="toggle"
-                :active="active"
+                :active="isActive"
             >
                 <icon
                     type="actions-gearbox"
                     :class="{
-                        'text-80': !active,
-                        'text-white': active
+                        'text-80': !isActive,
+                        'text-white': isActive
                     }"
                 />
 
                 <span
-                    v-if="!resource"
+                    v-if="isForResourcePanel"
                     class="ml-2 font-bold"
                     :class="{
-                        'text-80': !active,
-                        'text-white': active
+                        'text-80': !isActive,
+                        'text-white': isActive
                     }"
                 >
                     {{ selectedResourceCount }}
@@ -57,21 +60,21 @@
         </dropdown>
 
         <!-- Action Confirmation Modal -->
-        <!-- <portal to="modals"> -->
-        <transition name="fade">
-            <component
-                :is="selectedAction.component"
-                :working="working"
-                v-if="confirmActionModalOpened"
-                :selected-resources="selectedResources"
-                :resource-name="resourceName"
-                :action="selectedAction"
-                :errors="errors"
-                @confirm="executeAction"
-                @close="confirmActionModalOpened = false"
-            />
-        </transition>
-        <!-- </portal> -->
+        <portal to="modals">
+            <transition name="fade">
+                <component
+                    :is="selectedAction.component"
+                    :working="working"
+                    v-if="confirmActionModalOpened"
+                    :selected-resources="selectedResources"
+                    :resource-name="resourceName"
+                    :action="selectedAction"
+                    :errors="errors"
+                    @confirm="executeAction"
+                    @close="confirmActionModalOpened = false"
+                />
+            </transition>
+        </portal>
     </div>
 </template>
 
@@ -104,6 +107,9 @@ export default {
             type: String,
             default: null,
         },
+        viaRelationship: String,
+        viaResource: String,
+        viaResourceId: String,
         queryString: {
             type: Object,
             default: () => ({
@@ -168,6 +174,40 @@ export default {
             })
         },
 
+        hasRelationshipPanelForParent() {
+
+            // Walk up the parent tree
+            for(let parent = this.$parent; typeof parent !== 'undefined'; parent = parent.$parent) {
+
+                // Check if the parent is the resource index
+                if(parent.$options._componentTag == 'resource-index') {
+                    return true;
+                }
+
+            }
+
+            // Failed to find parent
+            return null;
+
+        },
+
+        getResourceTableRowComponent() {
+
+            // Walk up the parent tree
+            for(let parent = this.$parent; typeof parent !== 'undefined'; parent = parent.$parent) {
+
+                // Check if the parent is the resource table row
+                if(parent.$options._componentTag == 'resource-table-row') {
+                    return parent;
+                }
+
+            }
+
+            // Failed to find parent
+            return null;
+
+        }
+
     },
 
     computed: {
@@ -190,7 +230,90 @@ export default {
             }
 
             return this.selectedResources.length
-        }
+        },
+
+        /**
+         * Returns whether or not this action selector is active.
+         *
+         * @return {boolean}
+         */
+        isActive() {
+
+            if(this.isForResourcePanel) {
+                return true;
+            }
+
+            if(this.selectedResources == 'all') {
+                return true;
+            }
+
+            if(this.selectedResources.length > 1) {
+                return true;
+            }
+
+            return false;
+
+        },
+
+        /**
+         * Returns whether or not the resource row is being hovered.
+         *
+         * @return {boolean}
+         */
+        isResourceRowHovered() {
+
+            if(!this.isForResourceRow) {
+                return false;
+            }
+
+            let row = this.getResourceTableRowComponent();
+
+            if(!row) {
+                return false;
+            }
+
+            return row.hovered;
+
+        },
+
+        /**
+         * Returns whether or not this action selector is appearing on the index page.
+         *
+         * @return {boolean}
+         */
+        index() {
+            return this.$route.name == 'index';
+        },
+
+        /**
+         * Returns whether or not this action selector is appearing on the lens page.
+         *
+         * @return {boolean}
+         */
+        lens() {
+            return this.$route.name == 'lens';
+        },
+
+        /**
+         * Returns whether or not this action selector is appearing on the detail page.
+         *
+         * @return {boolean}
+         */
+        detail() {
+            return this.$route.name == 'detail';
+        },
+
+        isForResourceRow() {
+            return !! this.resource;
+        },
+
+        isForResourcePanel() {
+            return !this.isForResourceRow && (this.lens || this.hasRelationshipPanelForParent());
+        },
+
+        isForDetail() {
+            return !this.isForResourceRow && !this.isForResourcePanel && this.detail;
+        },
 
     },
 }

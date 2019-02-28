@@ -10382,33 +10382,6 @@ module.exports = g;
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -27520,17 +27493,44 @@ module.exports = g;
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(16)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(16)(module)))
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
 
 /***/ }),
 /* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__HasActions__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__InteractsWithResourceActions__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ObtainsActionsFromParentComponent__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ObtainsQueryStringFromRoute__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__HasActions__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__InteractsWithResourceActions__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ObtainsActionsFromParentComponent__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ObtainsQueryStringFromRoute__ = __webpack_require__(19);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__HasActions__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__InteractsWithResourceActions__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_2__ObtainsActionsFromParentComponent__["a"]; });
@@ -27547,7 +27547,7 @@ module.exports = g;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(6);
-module.exports = __webpack_require__(50);
+module.exports = __webpack_require__(51);
 
 
 /***/ }),
@@ -27560,19 +27560,19 @@ Nova.booting(function (Vue, router) {
     Vue.component('resource-table-row', __webpack_require__(10));
     Vue.component('resource-table-row-actions', __webpack_require__(13));
 
-    Vue.component('action-selector', __webpack_require__(20));
+    Vue.component('action-selector', __webpack_require__(21));
 
-    Vue.component('action-item', __webpack_require__(23));
-    Vue.component('action-group', __webpack_require__(26));
+    Vue.component('action-item', __webpack_require__(24));
+    Vue.component('action-group', __webpack_require__(27));
 
-    Vue.component('icon-actions-gearbox', __webpack_require__(29));
-    Vue.component('icon-resource', __webpack_require__(31));
+    Vue.component('icon-actions-gearbox', __webpack_require__(30));
+    Vue.component('icon-resource', __webpack_require__(32));
 
-    Vue.component('subdropdown', __webpack_require__(33));
-    Vue.component('subdropdown-trigger', __webpack_require__(41));
-    Vue.component('subdropdown-menu', __webpack_require__(44));
+    Vue.component('subdropdown', __webpack_require__(34));
+    Vue.component('subdropdown-trigger', __webpack_require__(42));
+    Vue.component('subdropdown-menu', __webpack_require__(45));
 
-    Vue.component('confirm-action-modal', __webpack_require__(47));
+    Vue.component('confirm-action-modal', __webpack_require__(48));
 });
 
 /***/ }),
@@ -28036,51 +28036,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['testId', 'deleteResource', 'restoreResource', 'resource', 'resourcesSelected', 'resourceName', 'relationshipType', 'viaRelationship', 'viaResource', 'viaResourceId', 'viaManyToMany', 'checked', 'actionsAreAvailable', 'shouldShowCheckboxes', 'updateSelectionStatus'],
 
     data: function data() {
         return {
-            deleteModalOpen: false,
-            restoreModalOpen: false
+            hovered: false
         };
     },
 
     methods: {
+
         /**
          * Select the resource in the parent component
          */
         toggleSelection: function toggleSelection() {
             this.updateSelectionStatus(this.resource);
-        },
-        openDeleteModal: function openDeleteModal() {
-            this.deleteModalOpen = true;
-        },
-        confirmDelete: function confirmDelete() {
-            this.deleteResource(this.resource);
-            this.closeDeleteModal();
-        },
-        closeDeleteModal: function closeDeleteModal() {
-            this.deleteModalOpen = false;
-        },
-        openRestoreModal: function openRestoreModal() {
-            this.restoreModalOpen = true;
-        },
-        confirmRestore: function confirmRestore() {
-            this.restoreResource(this.resource);
-            this.closeRestoreModal();
-        },
-        closeRestoreModal: function closeRestoreModal() {
-            this.restoreModalOpen = false;
-        },
-
-
-        /**
-         * Handle the actionExecuted event and pass it up the chain.
-         */
-        actionExecuted: function actionExecuted() {
-            this.$emit('actionExecuted');
         }
     }
 });
@@ -28095,7 +28071,17 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "tr",
-    { attrs: { dusk: _vm.resource["id"].value + "-row" } },
+    {
+      attrs: { dusk: _vm.resource["id"].value + "-row" },
+      on: {
+        mouseover: function($event) {
+          _vm.hovered = true
+        },
+        mouseleave: function($event) {
+          _vm.hovered = false
+        }
+      }
+    },
     [
       _c(
         "td",
@@ -28182,7 +28168,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(14)
 /* template */
-var __vue_template__ = __webpack_require__(19)
+var __vue_template__ = __webpack_require__(20)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -28229,6 +28215,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_nova__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_mixins__ = __webpack_require__(4);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -28354,7 +28345,197 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+
+    methods: {
+
+        /**
+         * Orders the specified actions by the given priority map.
+         *
+         * @param  {Array}       actions
+         * @param  {Array|null}  priorityMap
+         *
+         * @return {Array}
+         */
+        orderActionsByPriority: function orderActionsByPriority(actions) {
+            var priorityMap = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+
+            // If a priority map was not provided, use the default priority
+            if (priorityMap === null) {
+                priorityMap = Nova.config.actionPriority;
+            }
+
+            // Initialize the the last index
+            var lastIndex = 0;
+
+            // Initialize the last priority index
+            var lastPriorityIndex = undefined;
+
+            // Iterate through the actions
+            for (var index = 0; index < actions.length; index++) {
+
+                // Determine the current action
+                var action = actions[index];
+
+                // Determine the action index within the priority map
+                var priorityIndex = priorityMap.indexOf(action.class);
+
+                // If the action is not listed in the priority map, skip it
+                if (priorityIndex == -1) {
+                    continue;
+                }
+
+                // This action is in the priority map. If we have encountered another action
+                // that was also in the priority map, but it was at a lower priority, then
+                // we will move this action to be above the previously encountered one.
+
+                // Check if we've previously encountered an action lower in the priority map
+                if (lastPriorityIndex !== undefined && priorityIndex < lastPriorityIndex) {
+
+                    // Move the action action above the previously encountered action, then resort
+                    return this.orderActionsByPriority(__WEBPACK_IMPORTED_MODULE_0_lodash___default.a.tap(actions, function () {
+                        return actions.splice(lastIndex, 0, actions.splice(index, 1)[0]);
+                    }), priorityMap);
+                }
+
+                // This action is in the priority map; but, this is the first action we have
+                // encountered from the map thus far. We'll save its current index and its
+                // index from the priority map, so we can compare against them later on.
+
+                // Remember the last index and last priority index
+                lastIndex = index;
+                lastPriorityIndex = priorityIndex;
+            }
+
+            // Return the sorted actions
+            return actions;
+        }
+    },
+
+    computed: {
+
+        allActions: function allActions() {
+
+            // Determine the resource actions
+            var resourceActions = this.actions;
+
+            // Flag each resource action as a non-pivot action
+            __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.each(resourceActions, function (action) {
+                action.isPivotAction = false;
+            });
+
+            // Determine the pivot actions
+            var pivotActions = this.pivotActions != null ? this.pivotActions.actions : [];
+
+            // Flag each pivot action as a pivot action
+            __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.each(pivotActions, function (action) {
+                action.isPivotAction = true;
+            });
+
+            // Merge the two action lists together
+            var actions = resourceActions.concat(pivotActions);
+
+            // Order the actions based on the action priority
+            return this.orderActionsByPriority(actions);
+        },
+
+        /**
+         * Determine if the resource has any pivot actions available.
+         */
+        hasPivotActions: function hasPivotActions() {
+            return this.pivotActions && this.pivotActions.actions.length > 0;
+        },
+
+
+        /**
+         * Determine if the resource has any actions available.
+         */
+        actionsAreAvailable: function actionsAreAvailable() {
+            return this.allActions.length > 0;
+        },
+
+
+        /**
+         * Get the name of the pivot model for the resource.
+         */
+        pivotName: function pivotName() {
+            return this.pivotActions ? this.pivotActions.name : '';
+        },
+
+
+        /**
+         * Get all of the available non-pivot actions for the resource.
+         */
+        availableActions: function availableActions() {
+            var _this = this;
+
+            return __WEBPACK_IMPORTED_MODULE_0_lodash___default()(this.actions).filter(function (action) {
+                if (_this.selectedResources != 'all') {
+                    return true;
+                }
+
+                return action.availableForEntireResource;
+            }).value();
+        },
+
+
+        /**
+         * Get all of the available pivot actions for the resource.
+         */
+        availablePivotActions: function availablePivotActions() {
+            var _this2 = this;
+
+            return __WEBPACK_IMPORTED_MODULE_0_lodash___default()(this.pivotActions ? this.pivotActions.actions : []).filter(function (action) {
+                if (_this2.selectedResources != 'all') {
+                    return true;
+                }
+
+                return action.availableForEntireResource;
+            }).value();
+        }
+    }
+
+});
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_laravel_nova__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_laravel_nova__);
@@ -28590,35 +28771,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 16 */
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28691,7 +28844,7 @@ module.exports = function(module) {
 });
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28779,7 +28932,7 @@ module.exports = function(module) {
 });
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -28803,6 +28956,11 @@ var render = function() {
             viaResourceId: _vm.viaResourceId,
             viaRelationship: _vm.viaRelationship
           },
+          "relationship-type": _vm.relationshipType,
+          "via-relationship": _vm.viaRelationship,
+          "via-resource": _vm.viaResource,
+          "via-resource-id": _vm.viaResourceId,
+          "via-many-to-many": _vm.viaManyToMany,
           "selected-resources": _vm.selectedResourcesForActionSelector
         },
         on: { actionExecuted: _vm.getResources }
@@ -28820,15 +28978,15 @@ if (false) {
 }
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(21)
+var __vue_script__ = __webpack_require__(22)
 /* template */
-var __vue_template__ = __webpack_require__(22)
+var __vue_template__ = __webpack_require__(23)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -28867,16 +29025,19 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_laravel_nova__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_laravel_nova___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_laravel_nova__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_mixins__ = __webpack_require__(4);
+//
+//
+//
 //
 //
 //
@@ -28985,6 +29146,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             type: String,
             default: null
         },
+        viaRelationship: String,
+        viaResource: String,
+        viaResourceId: String,
         queryString: {
             type: Object,
             default: function _default() {
@@ -29053,6 +29217,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     };
                 });
             });
+        },
+        hasRelationshipPanelForParent: function hasRelationshipPanelForParent() {
+
+            // Walk up the parent tree
+            for (var parent = this.$parent; typeof parent !== 'undefined'; parent = parent.$parent) {
+
+                // Check if the parent is the resource index
+                if (parent.$options._componentTag == 'resource-index') {
+                    return true;
+                }
+            }
+
+            // Failed to find parent
+            return null;
+        },
+        getResourceTableRowComponent: function getResourceTableRowComponent() {
+
+            // Walk up the parent tree
+            for (var parent = this.$parent; typeof parent !== 'undefined'; parent = parent.$parent) {
+
+                // Check if the parent is the resource table row
+                if (parent.$options._componentTag == 'resource-table-row') {
+                    return parent;
+                }
+            }
+
+            // Failed to find parent
+            return null;
         }
     },
 
@@ -29075,12 +29267,95 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
             return this.selectedResources.length;
+        },
+
+
+        /**
+         * Returns whether or not this action selector is active.
+         *
+         * @return {boolean}
+         */
+        isActive: function isActive() {
+
+            if (this.isForResourcePanel) {
+                return true;
+            }
+
+            if (this.selectedResources == 'all') {
+                return true;
+            }
+
+            if (this.selectedResources.length > 1) {
+                return true;
+            }
+
+            return false;
+        },
+
+
+        /**
+         * Returns whether or not the resource row is being hovered.
+         *
+         * @return {boolean}
+         */
+        isResourceRowHovered: function isResourceRowHovered() {
+
+            if (!this.isForResourceRow) {
+                return false;
+            }
+
+            var row = this.getResourceTableRowComponent();
+
+            if (!row) {
+                return false;
+            }
+
+            return row.hovered;
+        },
+
+
+        /**
+         * Returns whether or not this action selector is appearing on the index page.
+         *
+         * @return {boolean}
+         */
+        index: function index() {
+            return this.$route.name == 'index';
+        },
+
+
+        /**
+         * Returns whether or not this action selector is appearing on the lens page.
+         *
+         * @return {boolean}
+         */
+        lens: function lens() {
+            return this.$route.name == 'lens';
+        },
+
+
+        /**
+         * Returns whether or not this action selector is appearing on the detail page.
+         *
+         * @return {boolean}
+         */
+        detail: function detail() {
+            return this.$route.name == 'detail';
+        },
+        isForResourceRow: function isForResourceRow() {
+            return !!this.resource;
+        },
+        isForResourcePanel: function isForResourcePanel() {
+            return !this.isForResourceRow && (this.lens || this.hasRelationshipPanelForParent());
+        },
+        isForDetail: function isForDetail() {
+            return !this.isForResourceRow && !this.isForResourcePanel && this.detail;
         }
     }
 });
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -29105,28 +29380,34 @@ var render = function() {
                       {
                         staticClass: "px-3 border rounded",
                         class: {
-                          "bg-30 hover:bg-40 border-50 hover:border-60": !_vm.active,
-                          "bg-primary border-primary": _vm.active
+                          "bg-30 hover:bg-40 border-30 hover:border-40":
+                            _vm.isForResourceRow && !_vm.isResourceRowHovered,
+                          "bg-40 hover:bg-50 border-40 hover:border-50":
+                            _vm.isForResourceRow && _vm.isResourceRowHovered,
+                          // 'bg-30 hover:bg-40 border-50 hover:border-60': isForResourceRow,
+                          "bg-primary border-primary": _vm.isForResourcePanel,
+                          "btn btn-default btn-icon btn-white border-white":
+                            _vm.isForDetail
                         },
-                        attrs: { "handle-click": toggle, active: _vm.active }
+                        attrs: { "handle-click": toggle, active: _vm.isActive }
                       },
                       [
                         _c("icon", {
                           class: {
-                            "text-80": !_vm.active,
-                            "text-white": _vm.active
+                            "text-80": !_vm.isActive,
+                            "text-white": _vm.isActive
                           },
                           attrs: { type: "actions-gearbox" }
                         }),
                         _vm._v(" "),
-                        !_vm.resource
+                        _vm.isForResourcePanel
                           ? _c(
                               "span",
                               {
                                 staticClass: "ml-2 font-bold",
                                 class: {
-                                  "text-80": !_vm.active,
-                                  "text-white": _vm.active
+                                  "text-80": !_vm.isActive,
+                                  "text-white": _vm.isActive
                                 }
                               },
                               [
@@ -29188,27 +29469,34 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _c(
-        "transition",
-        { attrs: { name: "fade" } },
+        "portal",
+        { attrs: { to: "modals" } },
         [
-          _vm.confirmActionModalOpened
-            ? _c(_vm.selectedAction.component, {
-                tag: "component",
-                attrs: {
-                  working: _vm.working,
-                  "selected-resources": _vm.selectedResources,
-                  "resource-name": _vm.resourceName,
-                  action: _vm.selectedAction,
-                  errors: _vm.errors
-                },
-                on: {
-                  confirm: _vm.executeAction,
-                  close: function($event) {
-                    _vm.confirmActionModalOpened = false
-                  }
-                }
-              })
-            : _vm._e()
+          _c(
+            "transition",
+            { attrs: { name: "fade" } },
+            [
+              _vm.confirmActionModalOpened
+                ? _c(_vm.selectedAction.component, {
+                    tag: "component",
+                    attrs: {
+                      working: _vm.working,
+                      "selected-resources": _vm.selectedResources,
+                      "resource-name": _vm.resourceName,
+                      action: _vm.selectedAction,
+                      errors: _vm.errors
+                    },
+                    on: {
+                      confirm: _vm.executeAction,
+                      close: function($event) {
+                        _vm.confirmActionModalOpened = false
+                      }
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
         ],
         1
       )
@@ -29227,15 +29515,15 @@ if (false) {
 }
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(24)
+var __vue_script__ = __webpack_require__(25)
 /* template */
-var __vue_template__ = __webpack_require__(25)
+var __vue_template__ = __webpack_require__(26)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -29274,12 +29562,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -29498,7 +29786,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -29553,15 +29841,15 @@ if (false) {
 }
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(27)
+var __vue_script__ = __webpack_require__(28)
 /* template */
-var __vue_template__ = __webpack_require__(28)
+var __vue_template__ = __webpack_require__(29)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -29600,7 +29888,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29721,7 +30009,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -29816,7 +30104,7 @@ if (false) {
 }
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -29824,7 +30112,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(30)
+var __vue_template__ = __webpack_require__(31)
 /* template functional */
 var __vue_template_functional__ = true
 /* styles */
@@ -29863,7 +30151,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function(_h, _vm) {
@@ -29886,7 +30174,7 @@ if (false) {
 }
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -29894,7 +30182,7 @@ var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(32)
+var __vue_template__ = __webpack_require__(33)
 /* template functional */
 var __vue_template_functional__ = true
 /* styles */
@@ -29933,7 +30221,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function(_h, _vm) {
@@ -29956,15 +30244,15 @@ if (false) {
 }
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(34)
+var __vue_script__ = __webpack_require__(35)
 /* template */
-var __vue_template__ = __webpack_require__(40)
+var __vue_template__ = __webpack_require__(41)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -30003,12 +30291,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_clickaway__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_clickaway__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_clickaway___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_clickaway__);
 //
 //
@@ -30085,13 +30373,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Vue = __webpack_require__(36);
+var Vue = __webpack_require__(37);
 Vue = 'default' in Vue ? Vue['default'] : Vue;
 
 var version = '2.2.2';
@@ -30174,7 +30462,7 @@ exports.directive = directive;
 exports.mixin = mixin;
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41137,10 +41425,10 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(37).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(38).setImmediate))
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
@@ -41196,7 +41484,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(38);
+__webpack_require__(39);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -41207,10 +41495,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -41400,10 +41688,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(39)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(40)))
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -41593,7 +41881,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -41637,15 +41925,15 @@ if (false) {
 }
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(42)
+var __vue_script__ = __webpack_require__(43)
 /* template */
-var __vue_template__ = __webpack_require__(43)
+var __vue_template__ = __webpack_require__(44)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -41684,7 +41972,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -41727,7 +42015,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -41808,15 +42096,15 @@ if (false) {
 }
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(45)
+var __vue_script__ = __webpack_require__(46)
 /* template */
-var __vue_template__ = __webpack_require__(46)
+var __vue_template__ = __webpack_require__(47)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -41855,7 +42143,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -41913,7 +42201,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -41951,15 +42239,15 @@ if (false) {
 }
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(48)
+var __vue_script__ = __webpack_require__(49)
 /* template */
-var __vue_template__ = __webpack_require__(49)
+var __vue_template__ = __webpack_require__(50)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -41998,7 +42286,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -42136,7 +42424,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -42299,176 +42587,10 @@ if (false) {
 }
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 51 */,
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
-
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-
-    methods: {
-
-        /**
-         * Orders the specified actions by the given priority map.
-         *
-         * @param  {Array}       actions
-         * @param  {Array|null}  priorityMap
-         *
-         * @return {Array}
-         */
-        orderActionsByPriority: function orderActionsByPriority(actions) {
-            var priorityMap = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-
-
-            // If a priority map was not provided, use the default priority
-            if (priorityMap === null) {
-                priorityMap = Nova.config.actionPriority;
-            }
-
-            // Initialize the the last index
-            var lastIndex = 0;
-
-            // Initialize the last priority index
-            var lastPriorityIndex = undefined;
-
-            // Iterate through the actions
-            for (var index = 0; index < actions.length; index++) {
-
-                // Determine the current action
-                var action = actions[index];
-
-                // Determine the action index within the priority map
-                var priorityIndex = priorityMap.indexOf(action.class);
-
-                // If the action is not listed in the priority map, skip it
-                if (priorityIndex == -1) {
-                    continue;
-                }
-
-                // This action is in the priority map. If we have encountered another action
-                // that was also in the priority map, but it was at a lower priority, then
-                // we will move this action to be above the previously encountered one.
-
-                // Check if we've previously encountered an action lower in the priority map
-                if (lastPriorityIndex !== undefined && priorityIndex < lastPriorityIndex) {
-
-                    // Move the action action above the previously encountered action, then resort
-                    return this.orderActionsByPriority(__WEBPACK_IMPORTED_MODULE_0_lodash___default.a.tap(actions, function () {
-                        return actions.splice(lastIndex, 0, actions.splice(index, 1)[0]);
-                    }), priorityMap);
-                }
-
-                // This action is in the priority map; but, this is the first action we have
-                // encountered from the map thus far. We'll save its current index and its
-                // index from the priority map, so we can compare against them later on.
-
-                // Remember the last index and last priority index
-                lastIndex = index;
-                lastPriorityIndex = priorityIndex;
-            }
-
-            // Return the sorted actions
-            return actions;
-        }
-    },
-
-    computed: {
-
-        allActions: function allActions() {
-
-            // Determine the resource actions
-            var resourceActions = this.actions;
-
-            // Flag each resource action as a non-pivot action
-            __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.each(resourceActions, function (action) {
-                action.isPivotAction = false;
-            });
-
-            // Determine the pivot actions
-            var pivotActions = this.pivotActions != null ? this.pivotActions.actions : [];
-
-            // Flag each pivot action as a pivot action
-            __WEBPACK_IMPORTED_MODULE_0_lodash___default.a.each(pivotActions, function (action) {
-                action.isPivotAction = true;
-            });
-
-            // Merge the two action lists together
-            var actions = resourceActions.concat(pivotActions);
-
-            // Order the actions based on the action priority
-            return this.orderActionsByPriority(actions);
-        },
-
-        /**
-         * Determine if the resource has any pivot actions available.
-         */
-        hasPivotActions: function hasPivotActions() {
-            return this.pivotActions && this.pivotActions.actions.length > 0;
-        },
-
-
-        /**
-         * Determine if the resource has any actions available.
-         */
-        actionsAreAvailable: function actionsAreAvailable() {
-            return this.allActions.length > 0;
-        },
-
-
-        /**
-         * Get the name of the pivot model for the resource.
-         */
-        pivotName: function pivotName() {
-            return this.pivotActions ? this.pivotActions.name : '';
-        },
-
-
-        /**
-         * Get all of the available non-pivot actions for the resource.
-         */
-        availableActions: function availableActions() {
-            var _this = this;
-
-            return __WEBPACK_IMPORTED_MODULE_0_lodash___default()(this.actions).filter(function (action) {
-                if (_this.selectedResources != 'all') {
-                    return true;
-                }
-
-                return action.availableForEntireResource;
-            }).value();
-        },
-
-
-        /**
-         * Get all of the available pivot actions for the resource.
-         */
-        availablePivotActions: function availablePivotActions() {
-            var _this2 = this;
-
-            return __WEBPACK_IMPORTED_MODULE_0_lodash___default()(this.pivotActions ? this.pivotActions.actions : []).filter(function (action) {
-                if (_this2.selectedResources != 'all') {
-                    return true;
-                }
-
-                return action.availableForEntireResource;
-            }).value();
-        }
-    }
-
-});
 
 /***/ })
 /******/ ]);

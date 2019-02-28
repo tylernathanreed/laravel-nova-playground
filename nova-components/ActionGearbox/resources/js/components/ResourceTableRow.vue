@@ -1,5 +1,9 @@
 <template>
-    <tr :dusk="resource['id'].value + '-row'">
+    <tr
+        :dusk="resource['id'].value + '-row'"
+        @mouseover="hovered = true"
+        @mouseleave="hovered = false"
+    >
         <!-- Resource Selection Checkbox -->
         <td :class="{
             'w-16' : shouldShowCheckboxes,
@@ -64,49 +68,16 @@ export default {
     ],
 
     data: () => ({
-        deleteModalOpen: false,
-        restoreModalOpen: false,
+        hovered: false
     }),
 
     methods: {
+
         /**
          * Select the resource in the parent component
          */
         toggleSelection() {
             this.updateSelectionStatus(this.resource)
-        },
-
-        openDeleteModal() {
-            this.deleteModalOpen = true
-        },
-
-        confirmDelete() {
-            this.deleteResource(this.resource)
-            this.closeDeleteModal()
-        },
-
-        closeDeleteModal() {
-            this.deleteModalOpen = false
-        },
-
-        openRestoreModal() {
-            this.restoreModalOpen = true
-        },
-
-        confirmRestore() {
-            this.restoreResource(this.resource)
-            this.closeRestoreModal()
-        },
-
-        closeRestoreModal() {
-            this.restoreModalOpen = false
-        },
-
-        /**
-         * Handle the actionExecuted event and pass it up the chain.
-         */
-        actionExecuted() {
-            this.$emit('actionExecuted')
         }
 
     },
