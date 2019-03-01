@@ -54,6 +54,28 @@ class EditAttached extends Action
     ];
 
     /**
+     * Determine if the action should be available for the given request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return boolean
+     */
+    public function authorizedToSee(Request $request)
+    {
+        // Inject the required request parameters
+        $this->injectRelationshipType($request);
+        $this->injectViaManyToMany($request);
+
+        // Make sure the relationship is a pivot
+        if(!$request->viaManyToMany) {
+            return false;
+        }
+
+        // Return the parent result
+        return parent::authorizedToSee($request);
+    }
+
+    /**
      * Determine if the action is executable for the given request.
      *
      * @param  \Illuminate\Http\Request             $request

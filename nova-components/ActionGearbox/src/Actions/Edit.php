@@ -55,8 +55,12 @@ class Edit extends Action
      */
     public function authorizedToSee(Request $request)
     {
+        // Inject the required request parameters
+        $this->injectRelationshipType($request);
+        $this->injectViaManyToMany($request);
+
         // Make sure the relationship is not a pivot
-        if($request->relationshipType == 'belongsToMany' || $request->relationshipType == 'morphToMany') {
+        if($request->viaManyToMany) {
             return false;
         }
 

@@ -29346,7 +29346,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return !!this.resource;
         },
         isForResourcePanel: function isForResourcePanel() {
-            return !this.isForResourceRow && (this.lens || this.hasRelationshipPanelForParent());
+            return !this.isForResourceRow && (this.index || this.lens || this.hasRelationshipPanelForParent());
         },
         isForDetail: function isForDetail() {
             return !this.isForResourceRow && !this.isForResourcePanel && this.detail;

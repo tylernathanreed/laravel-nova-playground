@@ -7,6 +7,10 @@ use Laravel\Nova\Actions\Action as NovaAction;
 
 class Action extends NovaAction
 {
+    use Concerns\AuthorizesIndividualUsingRequest,
+        Concerns\InjectsRelationshipType,
+        Concerns\InjectsViaManyToMany;
+
     /**
      * The dusk name of the action.
      *

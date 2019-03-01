@@ -72,8 +72,17 @@ class ForceDelete extends Action
      */
     public function authorizedToSee(Request $request)
     {
-        // Make sure the relationship is not many to many
-        if($request->relationshipType == 'belongsToMany' || $request->relationshipType == 'morphToMany') {
+        // Inject the required request parameters
+        $this->injectRelationshipType($request);
+        $this->injectViaManyToMany($request);
+
+        // Make sure the relationship is not a pivot
+        if($request->viaManyToMany) {
+            return false;
+        }
+
+        // Check if the request is for a single resource
+        if($this->authorizedToSeeIndividualUsingRequest($request) === false) {
             return false;
         }
 

@@ -308,7 +308,7 @@ export default {
         },
 
         isForResourcePanel() {
-            return !this.isForResourceRow && (this.lens || this.hasRelationshipPanelForParent());
+            return !this.isForResourceRow && (this.index || this.lens || this.hasRelationshipPanelForParent());
         },
 
         isForDetail() {
